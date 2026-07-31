@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oddz — 자잘한 것들의 모음</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  @font-face{
+    font-family:'Binggrae';
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight:400;
+    font-display:swap;
+  }
+  @font-face{
+    font-family:'Binggrae';
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Binggrae-Bold.woff2') format('woff2');
+    font-weight:700;
+    font-display:swap;
+  }
+  :root{
+    --twilight-deep:#221934;
+    --twilight-mid:#4c3966;
+    --dusk-coral:#e8896d;
+    --dusk-peach:#f3c9ab;
+    --firefly:#8fe3d0;
+    --firefly-soft:#c9f2e6;
+    --paper:#f3ead9;
+    --line:rgba(243,234,217,0.26);
+    --line-strong:rgba(243,234,217,0.5);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Pretendard Variable', 'Pretendard', sans-serif;
+    color:var(--paper);
+    background:var(--twilight-deep);
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+
+  /* ---------- animated twilight backdrop ---------- */
+  .sky{
+    position:fixed; inset:0; z-index:-3;
+    background:
+      radial-gradient(ellipse 70% 50% at 78% 8%, rgba(243,201,171,0.32), transparent 60%),
+      linear-gradient(165deg, #2a2040 0%, #4c3966 32%, #7a5a8a 55%, #c17c72 78%, #e8896d 100%);
+    background-size:140% 140%;
+    animation:driftSky 26s ease-in-out infinite alternate;
+  }
+  @keyframes driftSky{
+    0%{background-position:0% 0%;}
+    100%{background-position:60% 40%;}
+  }
+  .haze{
+    position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(circle at 12% 88%, rgba(34,25,52,0.55), transparent 55%),
+      radial-gradient(circle at 92% 92%, rgba(34,25,52,0.4), transparent 50%);
+    pointer-events:none;
+  }
+  .fireflies{ position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+  .firefly{
+    position:absolute; bottom:-5%; width:6px; height:6px; border-radius:50%;
+    background:var(--firefly);
+    box-shadow:0 0 8px 3px var(--firefly-soft);
+    opacity:0; animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translate(0,0) scale(0.6); opacity:0; }
+    8%{ opacity:0.85; }
+    50%{ transform:translate(var(--drift,20px), -55vh) scale(1); }
+    92%{ opacity:0.65; }
+    100%{ transform:translate(calc(var(--drift,20px) * 1.6), -105vh) scale(0.5); opacity:0; }
+  }
+
+  /* ---------- header ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:30px 6vw 0;
+  }
+  .wordmark{
+    font-family:'Binggrae', sans-serif;
+    font-weight:700; font-style:italic;
+    font-size:1.5rem; color:var(--paper); letter-spacing:0.01em;
+  }
+  .wordmark span{color:var(--firefly);}
+  nav{display:flex; gap:30px;}
+  nav a{
+    color:rgba(243,234,217,0.65); text-decoration:none;
+    font-size:0.85rem; font-weight:500; letter-spacing:0.02em;
+    transition:color 0.2s ease;
+  }
+  nav a:hover{color:var(--firefly-soft);}
+
+  main{position:relative; z-index:1;}
+
+  /* ---------- specimen tag (signature element) ---------- */
+  .tag-label{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--dusk-peach);
+    border:1px dashed var(--line-strong);
+    border-radius:100px;
+    padding:5px 12px 5px 8px;
+  }
+  .tag-label::before{
+    content:'';
+    width:9px; height:9px; border-radius:50%;
+    border:1.5px solid var(--dusk-peach);
+    flex-shrink:0;
+  }
+
+  /* ---------- hero, no card — text lives directly on the sky ---------- */
+  .hero{
+    min-height:46vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:14vh 6vw 6vh;
+    max-width:760px;
+  }
+  .hero .tag-label{ margin-bottom:26px; width:fit-content; }
+  h1{
+    font-family:'Binggrae', sans-serif;
+    font-weight:700;
+    font-size:clamp(2.4rem, 5.6vw, 4rem);
+    line-height:1.32;
+    letter-spacing:-0.01em;
+    color:var(--paper);
+    text-shadow:0 4px 30px rgba(20,14,32,0.35);
+    margin-bottom:26px;
+  }
+  h1 em{ font-style:normal; color:var(--firefly); }
+  .hero-desc{
+    font-size:1.02rem; line-height:1.8;
+    color:rgba(243,234,217,0.82);
+    max-width:480px;
+    margin-bottom:36px;
+  }
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    color:var(--paper); text-decoration:none;
+    font-size:0.94rem; font-weight:600;
+    padding-bottom:6px;
+    width:fit-content;
+    border-bottom:1px solid var(--line-strong);
+    transition:gap 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+  .cta:hover{ gap:16px; border-color:var(--firefly); color:var(--firefly-soft); }
+  .cta svg{width:14px; height:14px;}
+
+  /* ---------- section shared ---------- */
+  section{padding:4vw 6vw;}
+  .section-head{ max-width:640px; margin:0 auto 44px; }
+  .section-head h2{
+    font-family:'Binggrae', sans-serif; font-weight:700;
+    font-size:clamp(1.5rem, 2.8vw, 2rem);
+    color:var(--paper); margin:16px 0 10px;
+  }
+  .section-head p{ color:rgba(243,234,217,0.68); font-size:0.95rem; line-height:1.7; }
+
+  /* ---------- catalog list (replaces card grid) ---------- */
+  .catalog{ max-width:840px; margin:0 auto; }
+  .entry{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:20px;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+    transition:padding-left 0.3s ease;
+  }
+  .catalog .entry:last-child{ border-bottom:1px solid var(--line); }
+  .entry:hover{ padding-left:10px; }
+  .entry-no{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--dusk-peach);
+    padding-top:4px;
+  }
+  .entry-meta{
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .entry-cat{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--firefly-soft);
+  }
+  .dot-sep{ width:3px; height:3px; border-radius:50%; background:rgba(243,234,217,0.4); }
+  .entry-status{ font-size:0.72rem; color:var(--dusk-coral); font-weight:600; }
+  .entry h3{
+    font-family:'Binggrae', sans-serif; font-weight:700;
+    font-size:1.3rem; color:var(--paper); margin-bottom:10px;
+  }
+  .entry p{ font-size:0.92rem; line-height:1.75; color:rgba(243,234,217,0.72); max-width:560px; }
+  .entry.pending h3, .entry.pending p{ color:rgba(243,234,217,0.45); }
+
+  /* ---------- footer ---------- */
+  footer{ padding:70px 6vw 50px; text-align:center; }
+  footer .wordmark{ display:block; margin-bottom:10px; }
+  footer p{ color:rgba(243,234,217,0.55); font-size:0.85rem; margin-bottom:20px; }
+  .contact-link{
+    color:var(--firefly-soft); text-decoration:none; font-size:0.9rem;
+    border-bottom:1px solid rgba(143,227,208,0.4); padding-bottom:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){ .sky, .firefly{animation:none !important;} }
+
+  @media (max-width:640px){
+    header{padding:22px 5vw 0;}
+    nav{gap:16px;}
+    .entry{ grid-template-columns:1fr; gap:8px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sky"></div>
+  <div class="haze"></div>
+  <div class="fireflies" id="fireflies"></div>
+
+  <header>
+    <div class="wordmark">odd<span>z</span></div>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="#about">소개</a>
+      <a href="#contact">연락</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <!--
+        ↓ 여기 4곳을 직접 채워서 쓰면 돼. 스타일(폰트/크기/색/간격)은 이미 적용되어 있어서
+        텍스트만 넣으면 자동으로 맞춰짐.
+      -->
+      <!-- 1) 작은 라벨 태그 -->
+      <span class="tag-label">라벨 텍스트</span>
+
+      <!-- 2) 큰 헤드라인. <em>으로 감싼 부분만 포인트 색(민트)이 적용됨 -->
+      <h1>헤드라인 첫 줄,<br><em>강조하고 싶은 둘째 줄.</em></h1>
+
+      <!-- 3) 짧은 설명 문단 -->
+      <p class="hero-desc">여기에 소개 문구를 적으면 됨.</p>
+
+      <!-- 4) 버튼 링크. href만 원하는 섹션/주소로 바꾸면 됨 -->
+      <a class="cta" href="#work">
+        버튼 텍스트
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">catalogue</span>
+        <h2>모아둔 것들</h2>
+        <p>완성보다 만드는 과정에 가까운, 진행 중인 자잘한 프로젝트들입니다.</p>
+      </div>
+
+      <div class="catalog">
+        <article class="entry">
+          <div class="entry-no">No.01</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">PWA</span>
+              <span class="dot-sep"></span>
+              <span class="entry-status">프로토타입</span>
+            </div>
+            <h3>내리는 문 방향 앱</h3>
+            <p>지하철에서 어느 문으로 내려야 할지 헷갈릴 때, GPS 기반 나침반 화살표로 직관적으로 알려주는 앱입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="entry-no">No.02</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Web Game</span>
+              <span class="dot-sep"></span>
+              <span class="entry-status">개발 중 · v7</span>
+            </div>
+            <h3>랜덤게임</h3>
+            <p>낙서 스타일 캐릭터와 1인칭 원탁 시점으로 즐기는 술게임 웹사이트. 10개의 게임과 나만의 룰이 담겨 있습니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="entry-no">No.03</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Short Film</span>
+              <span class="dot-sep"></span>
+              <span class="entry-status">출품 준비 중</span>
+            </div>
+            <h3>나도 누군가의 29</h3>
+            <p>제13회 박카스 29초영화제 출품작. 서로를 부러워하는 순환고리 속, 힘듦을 알아주는 마음을 담았습니다.</p>
+          </div>
+        </article>
+
+        <article class="entry pending">
+          <div class="entry-no">No.04</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">TBD</span>
+            </div>
+            <h3>그리고, 계속</h3>
+            <p>다음 자잘한 것은 아직 이름이 없습니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <span class="tag-label">about</span>
+        <h2>oddz는</h2>
+        <p>크고 완벽한 것보다, 필요할 때 슬쩍 쓸모 있는 것들을 만듭니다. 완성도보다 "일단 만들어본다"는 태도에 가깝습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span style="color:var(--firefly)">z</span></span>
+    <p>오늘도 자잘하게.</p>
+    <a class="contact-link" href="mailto:hello@oddz.site">hello@oddz.site</a>
+  </footer>
+
+  <script>
+    const container = document.getElementById('fireflies');
+    const count = 22;
+    for(let i=0;i<count;i++){
+      const f = document.createElement('div');
+      f.className = 'firefly';
+      const left = Math.random()*100;
+      const delay = Math.random()*22;
+      const duration = 16 + Math.random()*14;
+      const drift = (Math.random()*80 - 40) + 'px';
+      const size = 3 + Math.random()*4;
+      f.style.left = left + 'vw';
+      f.style.animationDelay = delay + 's';
+      f.style.animationDuration = duration + 's';
+      f.style.setProperty('--drift', drift);
+      f.style.width = size + 'px';
+      f.style.height = size + 'px';
+      container.appendChild(f);
+    }
+  </script>
+
+</body>
+</html>
