@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oddz — 심심하면 만드는 것들</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A2A40'/%3E%3Crect x='40' y='20' width='20' height='20' fill='%238FE8F2'/%3E%3Crect x='30' y='40' width='40' height='20' fill='%236B6FC4'/%3E%3Crect x='40' y='60' width='20' height='20' fill='%23A6ABE8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  @font-face{
+    font-family:'DungGeunMo';
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight:normal;
+    font-display:swap;
+  }
+</style>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  :root{
+    --night-water:#0A2A40;
+    --water-mid:#123F5C;
+    --water-deep:#071B2B;
+    --cascade-cyan:#8FE8F2;
+    --cascade-white:#F0FCFF;
+    --spirit-indigo:#6B6FC4;
+    --spirit-light:#A6ABE8;
+    --shrine-red:#D9553F;
+    --paper:#EAF7FB;
+    --paper-soft:rgba(234,247,251,0.68);
+    --paper-faint:rgba(234,247,251,0.36);
+    --panel:rgba(18,63,92,0.5);
+    --panel-line:rgba(143,232,242,0.28);
+    --ink:#071B2B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Pretendard Variable','Pretendard',sans-serif;
+    color:var(--paper);
+    background:var(--night-water);
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+
+  /* ---------- waterfall backdrop ---------- */
+  .water{
+    position:fixed; inset:0; z-index:-5;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 78%, rgba(240,252,255,0.14), transparent 65%),
+      linear-gradient(180deg, var(--water-deep) 0%, var(--night-water) 40%, var(--water-mid) 78%, var(--water-deep) 100%);
+  }
+  .cascade{
+    position:fixed; inset:0; z-index:-4; pointer-events:none; opacity:0.16;
+    background-image:repeating-linear-gradient(180deg, transparent 0 6px, var(--cascade-cyan) 6px 9px, transparent 9px 40px);
+    background-size:100% 220px;
+    animation:fall 5s linear infinite;
+    mask-image:linear-gradient(180deg, transparent 0%, #000 20%, #000 68%, transparent 100%);
+  }
+  @keyframes fall{ from{ background-position-y:0; } to{ background-position-y:220px; } }
+  .scanlines{
+    position:fixed; inset:0; z-index:-3; pointer-events:none; opacity:0.05;
+    background-image:repeating-linear-gradient(180deg, #000 0 1px, transparent 1px 3px);
+  }
+  .stars{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+  .star{ position:absolute; color:var(--cascade-white); animation:twinkle ease-in-out infinite; }
+  @keyframes twinkle{ 0%,100%{ opacity:0.15; transform:scale(0.7);} 50%{ opacity:0.95; transform:scale(1.2);} }
+
+  .shore{ position:fixed; left:0; right:0; bottom:0; z-index:-2; height:60px; pointer-events:none; }
+  .shore svg{ width:100%; height:100%; display:block; }
+
+  .gem{
+    position:absolute; right:8vw; top:16vh; width:150px; height:auto;
+    filter:drop-shadow(0 0 26px rgba(107,111,196,0.55));
+    animation:bob 5s ease-in-out infinite;
+    z-index:0;
+  }
+  @keyframes bob{ 0%,100%{ transform:translateY(0px); } 50%{ transform:translateY(-14px); } }
+
+  /* ---------- header ---------- */
+  header{ display:flex; align-items:center; justify-content:space-between; padding:30px 6vw 0; position:relative; z-index:2; }
+  .wordmark{ font-family:'DungGeunMo', monospace; font-size:1.3rem; color:var(--paper); letter-spacing:0.02em; }
+  .wordmark span{ color:var(--cascade-cyan); }
+  nav{ display:flex; gap:10px; }
+  nav a{
+    color:var(--paper-soft); text-decoration:none;
+    font-family:'DungGeunMo', monospace;
+    font-size:0.82rem;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    padding:8px 14px;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  nav a:hover{ border-color:var(--cascade-cyan); color:var(--cascade-cyan); }
+
+  main{ position:relative; z-index:1; }
+
+  /* ---------- tag label ---------- */
+  .tag-label{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'DungGeunMo', monospace;
+    font-size:0.72rem; letter-spacing:0.02em;
+    color:var(--cascade-cyan);
+    border:1px solid var(--panel-line);
+    padding:7px 14px;
+    background:var(--panel);
+  }
+  .tag-label svg{ width:14px; height:14px; }
+
+  /* ---------- hero ---------- */
+  .hero{ min-height:50vh; display:flex; flex-direction:column; justify-content:center; padding:14vh 6vw 8vh; max-width:760px; position:relative; }
+  .hero .tag-label{ margin-bottom:26px; width:fit-content; }
+  h1{
+    font-family:'DungGeunMo', monospace;
+    font-size:clamp(1.9rem, 4.6vw, 3.1rem);
+    line-height:1.55;
+    color:var(--paper);
+    text-shadow:0 2px 20px rgba(7,27,43,0.8);
+    margin-bottom:26px;
+  }
+  h1 em{ font-style:normal; color:var(--cascade-cyan); text-shadow:0 0 18px rgba(143,232,242,0.6); }
+  .hero-desc{ font-size:1.02rem; line-height:1.8; color:var(--paper-soft); max-width:480px; margin-bottom:38px; }
+
+  /* ---------- CTA: pixel button ---------- */
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    color:var(--ink); text-decoration:none;
+    font-family:'DungGeunMo', monospace;
+    font-size:0.92rem;
+    background:var(--cascade-cyan);
+    padding:14px 24px;
+    width:fit-content;
+    box-shadow:4px 0 0 var(--spirit-indigo), 0 4px 0 var(--spirit-indigo), 4px 4px 0 var(--spirit-indigo);
+    transition:transform 0.12s ease;
+  }
+  .cta:hover{ transform:translate(2px,2px); box-shadow:2px 0 0 var(--spirit-indigo), 0 2px 0 var(--spirit-indigo), 2px 2px 0 var(--spirit-indigo); }
+  .cta svg{ width:14px; height:14px; }
+
+  /* ---------- section shared ---------- */
+  section{ padding:4vw 6vw; }
+  .section-head{ max-width:640px; margin:0 auto 44px; }
+  .section-head h2{ font-family:'DungGeunMo', monospace; font-size:clamp(1.3rem, 2.4vw, 1.7rem); color:var(--paper); margin:16px 0 10px; }
+  .section-head p{ color:var(--paper-soft); font-size:0.95rem; line-height:1.7; }
+
+  /* ---------- catalog: observation records ---------- */
+  .catalog{ max-width:840px; margin:0 auto; }
+  .entry{
+    display:grid; grid-template-columns:60px 1fr; gap:22px;
+    padding:28px 24px;
+    margin-bottom:14px;
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .entry:hover{ border-color:var(--cascade-cyan); transform:translateY(-2px); }
+
+  .gem-tag{ width:50px; height:46px; }
+  .gem-tag svg{ width:100%; height:100%; }
+
+  .entry-meta{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .entry-cat{
+    font-family:'DungGeunMo', monospace; font-size:0.68rem; color:var(--cascade-cyan);
+    border:1px solid var(--panel-line); padding:3px 9px;
+  }
+  .entry-status{ font-family:'DungGeunMo', monospace; font-size:0.68rem; color:var(--paper-faint); }
+  .entry h3{ font-family:'DungGeunMo', monospace; font-size:1.05rem; color:var(--paper); margin-bottom:9px; line-height:1.5; }
+  .entry p{ font-size:0.91rem; line-height:1.75; color:var(--paper-soft); max-width:560px; }
+  .entry.pending{ opacity:0.55; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:74px 6vw 54px; text-align:center; position:relative; z-index:2; }
+  footer .wordmark{ display:block; margin-bottom:14px; }
+  footer p{ font-family:'DungGeunMo', monospace; color:var(--paper-soft); font-size:0.78rem; margin-bottom:20px; line-height:1.8; }
+  .contact-link{
+    font-family:'DungGeunMo', monospace;
+    color:var(--cascade-cyan); text-decoration:none; font-size:0.85rem;
+    border-bottom:1px solid var(--panel-line); padding-bottom:2px;
+  }
+  .contact-link:hover{ border-color:var(--cascade-cyan); }
+
+  @media (prefers-reduced-motion: reduce){ .cascade, .star, .gem{ animation:none !important; } }
+
+  @media (max-width:640px){
+    header{ padding:22px 5vw 0; }
+    nav{ gap:8px; }
+    .entry{ grid-template-columns:1fr; gap:12px; }
+    .gem{ width:100px; right:4vw; top:8vh; opacity:0.7; }
+  }
+</style>
+<style>:root{--picker-bg:#102d43;--picker-menu:#133c55;--picker-text:#eaf7fb;--picker-line:rgba(143,232,242,.44);--picker-hover:rgba(143,232,242,.14);--picker-accent:#8FE8F2}</style>
+<link rel="stylesheet" href="../assets/theme-switcher.css">
+</head>
+<body>
+
+  <div class="water"></div>
+  <div class="cascade"></div>
+  <div class="scanlines"></div>
+  <div class="stars" id="stars"></div>
+  <div class="shore">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <polygon points="30,60 60,30 90,60" fill="#0F3550"/>
+      <polygon points="210,60 245,24 280,60" fill="#0F3550"/>
+      <polygon points="430,60 460,34 490,60" fill="#0F3550"/>
+      <polygon points="650,60 690,20 730,60" fill="#0F3550"/>
+      <polygon points="880,60 910,32 940,60" fill="#0F3550"/>
+      <polygon points="1080,60 1115,26 1150,60" fill="#0F3550"/>
+    </svg>
+  </div>
+
+  <svg class="gem" viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+    <rect x="50" y="0"  width="20" height="10" fill="#A6ABE8"/>
+    <rect x="40" y="10" width="40" height="10" fill="#8489D6"/>
+    <rect x="30" y="20" width="60" height="10" fill="#8489D6"/>
+    <rect x="20" y="30" width="80" height="10" fill="#6B6FC4"/>
+    <rect x="20" y="40" width="80" height="10" fill="#6B6FC4"/>
+    <rect x="10" y="50" width="100" height="10" fill="#5C60B0"/>
+    <rect x="10" y="60" width="100" height="10" fill="#5C60B0"/>
+    <rect x="20" y="70" width="80" height="10" fill="#4B4F98"/>
+    <rect x="30" y="80" width="60" height="10" fill="#4B4F98"/>
+    <rect x="40" y="90" width="40" height="10" fill="#3E4180"/>
+    <rect x="50" y="100" width="20" height="10" fill="#3E4180"/>
+    <rect x="35" y="15" width="10" height="10" fill="#F0FCFF" opacity="0.8"/>
+  </svg>
+
+  <header>
+    <div class="wordmark">odd<span>z</span></div>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="#contact">연락</a>
+    
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반짝이</a>
+          <a href="../themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>기계</a>
+          <a href="../themes/game-water.html" data-theme-path="themes/game-water.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
+          <a href="../themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
+          <a href="../themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21h16M6 21V10M18 21V10M3 10l9-6 9 6M9 10v11M15 10v11"/></svg>
+        oddz · dev journal
+      </span>
+      <h1>Oddz,<br><em>심심하면 만들어요.</em></h1>
+      <p class="hero-desc">개발자가 되고 싶었던 사람의 끄적임.</p>
+      <a class="cta" href="#work">
+        만든 것들 보기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">catalogue</span>
+        <h2>만든 것들</h2>
+        <p>웹·앱·스크립트로 만들어본 것들의 기록입니다.</p>
+      </div>
+
+      <div class="catalog">
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#8FE8F2"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Web · 3D</span><span class="entry-status">개발 완료</span></div>
+            <h3>물병 던지기</h3>
+            <p>Three.js·Cannon-es·MediaPipe로 만든 3D 손 인식 물병 던지기 게임. 웹캠으로 손가락 마디를 추적해 실제로 물병을 잡고 던집니다.</p>
+          </div>
+        </article>
+
+        <article class="entry pending">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#6B6FC4"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Desktop · Python</span><span class="entry-status">기획 중</span></div>
+            <h3>커피 카운터 위젯</h3>
+            <p>오늘 마신 커피 잔 수에 따라 다람쥐 캐릭터 상태가 변하는 바탕화면 위젯. PyQt6 기반 투명 배경 위젯입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry pending">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#A6ABE8"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Web · Supabase</span><span class="entry-status">기획 중</span></div>
+            <h3>연쇄 가위바위보</h3>
+            <p>무작위 컴퓨터 대신, 직전 접속자가 낸 값을 DB에서 불러와 겨루는 실시간 연쇄형 가위바위보입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#5C60B0"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Note</span><span class="entry-status">정리 완료</span></div>
+            <h3>자취생 청소 루틴</h3>
+            <p>매일·매주·매달, 계절별로 나눈 자취방 청소·유지보수 체크리스트입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#8FE8F2"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Data · AI</span><span class="entry-status">파이프라인 구축 완료</span></div>
+            <h3>단단 — AI 어휘 사전</h3>
+            <p>국립국어원 데이터 120만 건 중 68만 건을 정제해, Gemini API로 자소서 어휘 사전을 자동 구축하는 파이프라인입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#6B6FC4"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Script</span><span class="entry-status">완성</span></div>
+            <h3>LMS 자동 다음강의</h3>
+            <p>인천대 LMS 영상이 끝나면 자동으로 다음 강의로 넘어가는 브라우저 콘솔 스크립트입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#A6ABE8"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Web Game</span><span class="entry-status">개발 중 · v7</span></div>
+            <h3>랜덤게임</h3>
+            <p>낙서 스타일 캐릭터와 1인칭 원탁 시점으로 즐기는 술게임 웹사이트. 10개의 게임과 나만의 룰이 담겨 있습니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#5C60B0"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">PWA</span><span class="entry-status">프로토타입</span></div>
+            <h3>내리는 문 방향 앱</h3>
+            <p>지하철에서 어느 문으로 내려야 할지 헷갈릴 때, GPS 기반 나침반 화살표로 직관적으로 알려주는 앱입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="gem-tag"><svg viewBox="0 0 60 60"><polygon points="30,4 50,24 30,56 10,24" fill="#8FE8F2"/></svg></div>
+          <div>
+            <div class="entry-meta"><span class="entry-cat">Desktop · Electron</span><span class="entry-status">v1.8</span></div>
+            <h3>나의 일기장</h3>
+            <p>오프라인에서도 쓰는 데스크톱 일기장. 캘린더, 테마, 리치 텍스트 에디터, PDF 내보내기를 지원합니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span style="color:var(--cascade-cyan)">z</span></span>
+    <p>오늘도 심심해서 뭘 만듭니다.</p>
+    <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
+  </footer>
+
+  <script>
+    const container = document.getElementById('stars');
+    for(let i=0;i<34;i++){
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.innerHTML = '<svg width="8" height="8" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg>';
+      s.style.left = (Math.random()*100) + 'vw';
+      s.style.top = (Math.random()*70) + 'vh';
+      s.style.animationDuration = (2 + Math.random()*3) + 's';
+      s.style.animationDelay = (Math.random()*4) + 's';
+      container.appendChild(s);
+    }
+  </script>
+
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>

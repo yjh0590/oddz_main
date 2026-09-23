@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oddz — 심심하면 만드는 것들</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2315181B'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23F5B921' stroke-width='8'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23F5B921'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  :root{
+    --steel-900:#15181B;
+    --steel-800:#1E2226;
+    --steel-700:#292F34;
+    --steel-600:#3E464C;
+    --steel-500:#5B6469;
+    --grid-line:rgba(140,164,184,0.10);
+    --paper:#ECE6D8;
+    --paper-soft:rgba(236,230,216,0.62);
+    --paper-faint:rgba(236,230,216,0.34);
+    --safety-yellow:#F5B921;
+    --safety-yellow-soft:rgba(245,185,33,0.14);
+    --hazard-orange:#E8622C;
+    --rivet:#8A939B;
+    --blueprint-blue:#6FA3D8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Pretendard Variable','Pretendard',sans-serif;
+    color:var(--paper);
+    background:var(--steel-900);
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  svg.sprite-defs{ position:absolute; width:0; height:0; overflow:hidden; }
+
+  /* ---------- backdrop: blueprint grid + slow gears ---------- */
+  .backdrop{ position:fixed; inset:0; z-index:-3; background:var(--steel-900); }
+  .grid-layer{
+    position:fixed; inset:0; z-index:-2;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(ellipse 80% 70% at 50% 20%, #000 40%, transparent 85%);
+  }
+  .gear-wash{ position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+  .gear-wash use{ fill:var(--steel-700); transform-origin:center; }
+  .g-a{ width:520px; height:520px; top:-160px; right:-160px; position:absolute; animation:spin 90s linear infinite; opacity:0.55; }
+  .g-b{ width:340px; height:340px; bottom:-100px; left:-90px; position:absolute; animation:spinRev 70s linear infinite; opacity:0.45; }
+  .g-c{ width:220px; height:220px; bottom:12%; right:6%; position:absolute; animation:spin 55s linear infinite; opacity:0.35; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes spinRev{ to{ transform:rotate(-360deg); } }
+
+  .hexbits{ position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+  .hexbit{ position:absolute; bottom:-6%; opacity:0; animation:rise linear infinite; }
+  .hexbit use{ fill:none; stroke:var(--rivet); stroke-width:6; }
+  @keyframes rise{
+    0%{ transform:translate(0,0) rotate(0deg) scale(0.7); opacity:0; }
+    12%{ opacity:0.5; }
+    50%{ transform:translate(var(--drift,20px), -55vh) rotate(140deg) scale(1); }
+    88%{ opacity:0.35; }
+    100%{ transform:translate(calc(var(--drift,20px) * 1.6), -105vh) rotate(260deg) scale(0.6); opacity:0; }
+  }
+
+  /* ---------- header ---------- */
+  header{ display:flex; align-items:center; justify-content:space-between; padding:30px 6vw 0; }
+  .wordmark{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Black Han Sans', sans-serif;
+    font-size:1.4rem; color:var(--paper); letter-spacing:0.02em;
+    background:var(--steel-800);
+    border:1.5px solid var(--steel-600);
+    border-radius:6px;
+    padding:8px 14px;
+  }
+  .wordmark::before{
+    content:'';
+    width:9px; height:9px; border-radius:50%;
+    background:var(--safety-yellow);
+    box-shadow:0 0 6px 1px rgba(245,185,33,0.6);
+  }
+  .wordmark span{ color:var(--safety-yellow); }
+  nav{ display:flex; gap:10px; }
+  nav a{
+    color:var(--paper-soft); text-decoration:none;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;
+    background:var(--steel-800);
+    border:1.5px solid var(--steel-600);
+    border-radius:4px;
+    padding:8px 14px;
+    transition:border-color 0.18s ease, color 0.18s ease;
+  }
+  nav a:hover{ border-color:var(--safety-yellow); color:var(--safety-yellow); }
+
+  main{ position:relative; z-index:1; }
+
+  /* ---------- tag label: warning plate ---------- */
+  .tag-label{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--steel-900);
+    background:var(--safety-yellow);
+    border-radius:3px;
+    padding:6px 12px;
+    position:relative;
+    padding-left:20px;
+  }
+  .tag-label::before{
+    content:'';
+    position:absolute; left:0; top:0; bottom:0; width:10px;
+    background:repeating-linear-gradient(135deg, var(--steel-900) 0 4px, transparent 4px 8px);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ min-height:44vh; display:flex; flex-direction:column; justify-content:center; padding:13vh 6vw 6vh; max-width:760px; }
+  .hero .tag-label{ margin-bottom:26px; width:fit-content; }
+  h1{
+    font-family:'Black Han Sans', sans-serif;
+    font-size:clamp(2.2rem, 5.2vw, 3.6rem);
+    line-height:1.35;
+    color:var(--paper);
+    margin-bottom:26px;
+  }
+  h1 em{
+    font-style:normal;
+    color:var(--safety-yellow);
+    position:relative;
+    display:inline-block;
+  }
+  h1 em::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:2px; height:6px;
+    background:repeating-linear-gradient(135deg, var(--safety-yellow) 0 8px, var(--steel-900) 8px 16px);
+    opacity:0.9; z-index:-1;
+  }
+  .hero-desc{ font-size:1.02rem; line-height:1.8; color:var(--paper-soft); max-width:480px; margin-bottom:36px; }
+
+  /* ---------- puzzle-piece CTA, re-skinned as riveted panel ---------- */
+  .cta{
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    width:272px; aspect-ratio:340/108;
+    text-decoration:none;
+    filter:drop-shadow(0 6px 0 rgba(0,0,0,0.35));
+    transition:transform 0.15s ease, filter 0.15s ease;
+  }
+  .cta:hover{ transform:translateY(2px); filter:drop-shadow(0 3px 0 rgba(0,0,0,0.35)); }
+  .cta:active{ transform:translateY(5px); filter:drop-shadow(0 0 0 rgba(0,0,0,0.35)); }
+  .cta-piece{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .cta-label{
+    position:relative; z-index:1;
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--steel-900); font-weight:700; font-size:0.92rem;
+    font-family:'JetBrains Mono', monospace; letter-spacing:0.02em; text-transform:uppercase;
+    padding-right:16px;
+    pointer-events:none;
+  }
+  .cta-label svg{ width:14px; height:14px; }
+  .cta-rivet{ fill:var(--steel-800); stroke:var(--steel-600); stroke-width:2; }
+
+  /* ---------- section shared ---------- */
+  section{ padding:4vw 6vw; }
+  .section-head{ max-width:640px; margin:0 auto 44px; }
+  .section-head h2{
+    font-family:'Black Han Sans', sans-serif;
+    font-size:clamp(1.4rem, 2.6vw, 1.9rem);
+    color:var(--paper); margin:16px 0 10px;
+  }
+  .section-head p{ color:var(--paper-soft); font-size:0.95rem; line-height:1.7; }
+
+  /* ---------- catalog: spec plates ---------- */
+  .catalog{ max-width:840px; margin:0 auto; }
+  .entry{
+    position:relative;
+    display:grid; grid-template-columns:74px 1fr; gap:22px;
+    padding:28px 22px;
+    margin-bottom:14px;
+    background:var(--steel-800);
+    border:1.5px solid var(--steel-600);
+    border-radius:8px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .entry:hover{ border-color:var(--safety-yellow); transform:translateY(-2px); }
+  .entry::before, .entry::after{
+    content:''; position:absolute; top:10px; width:6px; height:6px; border-radius:50%;
+    background:var(--rivet); box-shadow:0 0 0 2px var(--steel-800), 0 0 0 3px var(--steel-600);
+  }
+  .entry::before{ left:10px; }
+  .entry::after{ right:10px; }
+
+  .part-tag{
+    width:62px; height:62px; border-radius:6px;
+    border:1.5px solid var(--steel-600);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:0.78rem;
+    color:var(--paper);
+    background:var(--steel-700);
+  }
+  .entry.warn .part-tag{ background:var(--safety-yellow-soft); border-color:var(--safety-yellow); color:var(--safety-yellow); }
+
+  .entry-meta{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .entry-cat{
+    font-family:'JetBrains Mono', monospace; font-size:0.66rem; font-weight:700;
+    letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--blueprint-blue);
+    border:1px solid rgba(111,163,216,0.4);
+    border-radius:3px; padding:3px 8px;
+  }
+  .entry-status{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--paper-faint); font-weight:700; letter-spacing:0.02em; }
+  .entry h3{ font-family:'Black Han Sans', sans-serif; font-size:1.22rem; color:var(--paper); margin-bottom:9px; }
+  .entry p{ font-size:0.91rem; line-height:1.75; color:var(--paper-soft); max-width:560px; }
+  .entry.pending{ opacity:0.58; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:70px 6vw 50px; text-align:center; }
+  footer .wordmark{ display:inline-flex; margin-bottom:14px; }
+  footer p{ color:var(--paper-soft); font-size:0.85rem; margin-bottom:20px; }
+  .contact-link{
+    display:inline-flex; align-items:center;
+    color:var(--paper); text-decoration:none;
+    font-family:'JetBrains Mono', monospace; font-size:0.82rem; font-weight:700;
+    background:var(--steel-800);
+    border:1.5px solid var(--steel-600);
+    border-radius:4px;
+    padding:9px 16px;
+    transition:border-color 0.18s ease, color 0.18s ease;
+  }
+  .contact-link:hover{ border-color:var(--safety-yellow); color:var(--safety-yellow); }
+
+  @media (prefers-reduced-motion: reduce){ .g-a,.g-b,.g-c,.hexbit{ animation:none !important; } }
+
+  @media (max-width:640px){
+    header{ padding:22px 5vw 0; }
+    nav{ gap:8px; }
+    .entry{ grid-template-columns:1fr; gap:12px; }
+    .cta{ width:min(272px, 84vw); }
+  }
+</style>
+<style>:root{--picker-bg:#1e2226;--picker-menu:#292f34;--picker-text:#ece6d8;--picker-line:#5b6469;--picker-hover:rgba(245,185,33,.15);--picker-accent:#F5B921}</style>
+<link rel="stylesheet" href="../assets/theme-switcher.css">
+</head>
+<body>
+
+  <svg class="sprite-defs" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="gear12" viewBox="0 0 200 200"><path fill-rule="evenodd" d="M 100.0,28.0 L 111.5,12.8 L 133.7,18.7 L 136.0,37.6 L 136.0,37.6 L 153.6,30.2 L 169.8,46.4 L 162.4,64.0 L 162.4,64.0 L 181.3,66.3 L 187.2,88.5 L 172.0,100.0 L 172.0,100.0 L 187.2,111.5 L 181.3,133.7 L 162.4,136.0 L 162.4,136.0 L 169.8,153.6 L 153.6,169.8 L 136.0,162.4 L 136.0,162.4 L 133.7,181.3 L 111.5,187.2 L 100.0,172.0 L 100.0,172.0 L 88.5,187.2 L 66.3,181.3 L 64.0,162.4 L 64.0,162.4 L 46.4,169.8 L 30.2,153.6 L 37.6,136.0 L 37.6,136.0 L 18.7,133.7 L 12.8,111.5 L 28.0,100.0 L 28.0,100.0 L 12.8,88.5 L 18.7,66.3 L 37.6,64.0 L 37.6,64.0 L 30.2,46.4 L 46.4,30.2 L 64.0,37.6 L 64.0,37.6 L 66.3,18.7 L 88.5,12.8 L 100.0,28.0 Z M 134.0,100.0 A 34.0,34.0 0 1,0 66.0,100.0 A 34.0,34.0 0 1,0 134.0,100.0 Z"/></symbol>
+      <symbol id="gear8" viewBox="0 0 200 200"><path fill-rule="evenodd" d="M 100.0,32.0 L 117.2,13.7 L 148.9,26.8 L 148.1,51.9 L 148.1,51.9 L 173.2,51.1 L 186.3,82.8 L 168.0,100.0 L 168.0,100.0 L 186.3,117.2 L 173.2,148.9 L 148.1,148.1 L 148.1,148.1 L 148.9,173.2 L 117.2,186.3 L 100.0,168.0 L 100.0,168.0 L 82.8,186.3 L 51.1,173.2 L 51.9,148.1 L 51.9,148.1 L 26.8,148.9 L 13.7,117.2 L 32.0,100.0 L 32.0,100.0 L 13.7,82.8 L 26.8,51.1 L 51.9,51.9 L 51.9,51.9 L 51.1,26.8 L 82.8,13.7 L 100.0,32.0 Z M 130.0,100.0 A 30.0,30.0 0 1,0 70.0,100.0 A 30.0,30.0 0 1,0 130.0,100.0 Z"/></symbol>
+      <symbol id="hexnut" viewBox="0 0 200 200"><path fill-rule="evenodd" d="M 100.0,40.0 L 152.0,70.0 L 152.0,130.0 L 100.0,160.0 L 48.0,130.0 L 48.0,70.0 Z M 126.0,100.0 A 26.0,26.0 0 1,0 74.0,100.0 A 26.0,26.0 0 1,0 126.0,100.0 Z"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="backdrop"></div>
+  <div class="grid-layer"></div>
+  <div class="gear-wash">
+    <use class="g-a" href="#gear12"/>
+    <use class="g-b" href="#gear8"/>
+    <use class="g-c" href="#gear12"/>
+  </div>
+  <div class="hexbits" id="hexbits"></div>
+
+  <header>
+    <div class="wordmark">odd<span>z</span></div>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="#contact">연락</a>
+    
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반짝이</a>
+          <a href="../themes/machine.html" data-theme-path="themes/machine.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>기계</a>
+          <a href="../themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
+          <a href="../themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
+          <a href="../themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-label">oddz · dev journal</span>
+      <h1>Oddz,<br><em>심심하면 만들어요.</em></h1>
+      <p class="hero-desc">개발자가 되고 싶었던 사람의 끄적임.</p>
+      <a class="cta" href="#work" aria-label="만든 것들 보기">
+        <svg class="cta-piece" viewBox="0 0 340 108" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 14,0 L 306,0 A 14,14 0 0 1 320,14 L 320,41 L 340,54 L 320,67 L 320,94 A 14,14 0 0 1 306,108 L 14,108 A 14,14 0 0 1 0,94 L 0,67 L 8,54 L 0,41 L 0,14 A 14,14 0 0 1 14,0 Z"
+                fill="var(--safety-yellow)" stroke="var(--steel-600)" stroke-width="3"/>
+          <circle class="cta-rivet" cx="26" cy="20" r="4"/>
+          <circle class="cta-rivet" cx="294" cy="20" r="4"/>
+          <circle class="cta-rivet" cx="26" cy="88" r="4"/>
+          <circle class="cta-rivet" cx="294" cy="88" r="4"/>
+        </svg>
+        <span class="cta-label">
+          만든 것들 보기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">catalogue</span>
+        <h2>만든 것들</h2>
+        <p>웹·앱·스크립트로 만들어본 것들의 기록입니다.</p>
+      </div>
+
+      <div class="catalog">
+        <article class="entry warn">
+          <div class="part-tag">PN·01</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Web · 3D</span>
+              <span class="entry-status">개발 완료</span>
+            </div>
+            <h3>물병 던지기</h3>
+            <p>Three.js·Cannon-es·MediaPipe로 만든 3D 손 인식 물병 던지기 게임. 웹캠으로 손가락 마디를 추적해 실제로 물병을 잡고 던집니다.</p>
+          </div>
+        </article>
+
+        <article class="entry pending">
+          <div class="part-tag">PN·02</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Desktop · Python</span>
+              <span class="entry-status">기획 중</span>
+            </div>
+            <h3>커피 카운터 위젯</h3>
+            <p>오늘 마신 커피 잔 수에 따라 다람쥐 캐릭터 상태가 변하는 바탕화면 위젯. PyQt6 기반 투명 배경 위젯입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry pending">
+          <div class="part-tag">PN·03</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Web · Supabase</span>
+              <span class="entry-status">기획 중</span>
+            </div>
+            <h3>연쇄 가위바위보</h3>
+            <p>무작위 컴퓨터 대신, 직전 접속자가 낸 값을 DB에서 불러와 겨루는 실시간 연쇄형 가위바위보입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="part-tag">PN·04</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Note</span>
+              <span class="entry-status">정리 완료</span>
+            </div>
+            <h3>자취생 청소 루틴</h3>
+            <p>매일·매주·매달, 계절별로 나눈 자취방 청소·유지보수 체크리스트입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry warn">
+          <div class="part-tag">PN·05</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Data · AI</span>
+              <span class="entry-status">파이프라인 구축 완료</span>
+            </div>
+            <h3>단단 — AI 어휘 사전</h3>
+            <p>국립국어원 데이터 120만 건 중 68만 건을 정제해, Gemini API로 자소서 어휘 사전을 자동 구축하는 파이프라인입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="part-tag">PN·06</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Script</span>
+              <span class="entry-status">완성</span>
+            </div>
+            <h3>LMS 자동 다음강의</h3>
+            <p>인천대 LMS 영상이 끝나면 자동으로 다음 강의로 넘어가는 브라우저 콘솔 스크립트입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="part-tag">PN·07</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Web Game</span>
+              <span class="entry-status">개발 중 · v7</span>
+            </div>
+            <h3>랜덤게임</h3>
+            <p>낙서 스타일 캐릭터와 1인칭 원탁 시점으로 즐기는 술게임 웹사이트. 10개의 게임과 나만의 룰이 담겨 있습니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="part-tag">PN·08</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">PWA</span>
+              <span class="entry-status">프로토타입</span>
+            </div>
+            <h3>내리는 문 방향 앱</h3>
+            <p>지하철에서 어느 문으로 내려야 할지 헷갈릴 때, GPS 기반 나침반 화살표로 직관적으로 알려주는 앱입니다.</p>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="part-tag">PN·09</div>
+          <div>
+            <div class="entry-meta">
+              <span class="entry-cat">Desktop · Electron</span>
+              <span class="entry-status">v1.8</span>
+            </div>
+            <h3>나의 일기장</h3>
+            <p>오프라인에서도 쓰는 데스크톱 일기장. 캘린더, 테마, 리치 텍스트 에디터, PDF 내보내기를 지원합니다.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span style="color:var(--safety-yellow)">z</span></span>
+    <p>오늘도 심심해서 뭘 만듭니다.</p>
+    <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
+  </footer>
+
+  <script>
+    const container = document.getElementById('hexbits');
+    const count = 16;
+    for(let i=0;i<count;i++){
+      const wrap = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      wrap.setAttribute('viewBox','0 0 200 200');
+      const use = document.createElementNS('http://www.w3.org/2000/svg','use');
+      use.setAttribute('href','#hexnut');
+      wrap.appendChild(use);
+      wrap.classList.add('hexbit');
+      const left = Math.random()*100;
+      const delay = Math.random()*22;
+      const duration = 18 + Math.random()*14;
+      const drift = (Math.random()*70 - 35) + 'px';
+      const size = 10 + Math.random()*14;
+      wrap.style.left = left + 'vw';
+      wrap.style.width = size + 'px';
+      wrap.style.height = size + 'px';
+      wrap.style.animationDelay = delay + 's';
+      wrap.style.animationDuration = duration + 's';
+      wrap.style.setProperty('--drift', drift);
+      container.appendChild(wrap);
+    }
+  </script>
+
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>
