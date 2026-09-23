@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>oddz — 심심하면 만드는 것들</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23221934'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%238fe3d0'/%3E%3Ccircle cx='50' cy='50' r='28' fill='%238fe3d0' opacity='0.25'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -217,6 +218,16 @@
     .entry{ grid-template-columns:1fr; gap:8px; }
   }
 </style>
+<style>:root{--picker-bg:#241b38;--picker-menu:#302442;--picker-text:#f3ead9;--picker-line:rgba(243,234,217,.45);--picker-hover:rgba(143,227,208,.16);--picker-accent:#8fe3d0}</style>
+<link rel="stylesheet" href="assets/theme-switcher.css">
+<script>
+  // Opening oddz.click again returns to the visitor's last selected theme.
+  try {
+    const saved = localStorage.getItem('oddz-theme');
+    const allowed = ['themes/machine.html', 'themes/game-water.html', 'themes/game-sunset.html', 'themes/bubbles.html'];
+    if (allowed.includes(saved)) location.replace(new URL(saved + location.hash, location.href));
+  } catch (_) { /* Stay on the default design when storage is unavailable. */ }
+</script>
 </head>
 <body>
 
@@ -229,6 +240,17 @@
     <nav>
       <a href="#work">프로젝트</a>
       <a href="#contact">연락</a>
+    
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="index.html" data-theme-path="" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반짝이</a>
+          <a href="themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>기계</a>
+          <a href="themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
+          <a href="themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
+          <a href="themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+        </div>
+      </details>
     </nav>
   </header>
 
@@ -410,5 +432,6 @@
     }
   </script>
 
+<script src="assets/theme-switcher.js" defer></script>
 </body>
 </html>
