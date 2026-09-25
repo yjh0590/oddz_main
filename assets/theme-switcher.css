@@ -48,3 +48,6 @@ header .theme-picker__swatch {
   header nav { gap: 8px; }
   header .theme-picker__list { width: 175px; }
 }
+/* Keep the new journal link usable alongside the theme picker on narrow screens. */
+header nav { flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+@media (max-width: 640px) { header { gap: 12px; flex-wrap: wrap; } header nav { row-gap: 8px; } }

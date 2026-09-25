@@ -1,0 +1,28 @@
+/* The catalogue and journal pages share the current oddz theme variables. */
+.journal-intro { margin-bottom: 46px; }
+.journal-intro h1 { margin-bottom: 16px; }
+.journal-intro .lead { margin: 0; }
+.journal-group { margin-top: 44px; }
+.journal-group > h2 { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin: 0 0 18px; font-size: 1.35rem; }
+.journal-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+.journal-card { display: block; padding: 24px; border: 1px solid var(--line); border-radius: 14px; color: var(--paper); background: rgba(18,21,36,.22); text-decoration: none; transition: transform .18s, border-color .18s; }
+.journal-card:hover { transform: translateY(-3px); border-color: var(--mint); }
+.journal-card:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+.journal-card__meta { display: block; color: var(--mint); font-size: .78rem; font-weight: 700; letter-spacing: .02em; }
+.journal-card__title { display: block; font-family: Binggrae,sans-serif; font-weight: 700; font-size: 1.25rem; margin: 12px 0 9px; }
+.journal-card__summary { display: block; color: var(--muted); font-size: .94rem; line-height: 1.65; }
+.journal-card__arrow { display: block; color: var(--mint); margin-top: 18px; font-size: .88rem; font-weight: 700; }
+.journal-article { max-width: 760px; }
+.journal-article header { padding: 0; display: block; }
+.journal-article .article-date { margin-top: 15px; color: var(--muted); font-size: .86rem; }
+.journal-section { border-top: 1px solid var(--line); padding-top: 27px; margin-top: 41px; }
+.journal-section h2 { margin: 0 0 17px; font-size: clamp(1.2rem,3.2vw,1.55rem); }
+.journal-section p { margin: 0 0 17px; color: var(--muted); line-height: 1.9; word-break: keep-all; overflow-wrap: anywhere; }
+.journal-article .end-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 54px; }
+.journal-article .end-links a:not(.button) { display: inline-flex; align-items: center; min-height: 48px; color: var(--paper); text-decoration: underline; text-underline-offset: 5px; }
+html[data-theme="machine"] .journal-card { border-radius: 3px; }
+html[data-theme="bubbles"] .journal-card { border-radius: 24px; }
+@media (max-width: 680px) {
+  .journal-list { grid-template-columns: 1fr; }
+  .journal-card { padding: 20px; }
+}
