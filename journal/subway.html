@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="oddz 개발일지 — 지하철 하차 방향 표시">
+  <title>지하철 하차 방향 표시 · 개발일지 · oddz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css">
+  <link rel="stylesheet" href="journal.css">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav>
+  </header>
+  <main>
+    <article class="journal-article">
+      <header class="journal-intro">
+        <span class="eyebrow">PWA · 진행 중</span>
+        <h1>지하철 하차 방향 표시</h1>
+        <p class="lead">‘왼쪽 문’이라는 안내를 실제 방향 화살표로 바꾸려다 위치와 데이터의 한계를 마주한 과정.</p>
+        <p class="article-date">기록 시기 · 2026.07.30 · 08.12</p>
+      </header>
+      <section class="journal-section"><h2>2026.07.30 · 화살표 하나로 풀고 싶었던 문제</h2><p>‘내리실 문은 왼쪽입니다’라는 말을 들어도 내 몸이 돌아가 있으면 바로 방향이 와닿지 않았다. 안내방송을 놓치는 일도 있다. 그래서 휴대전화 화면에 화살표가 실제 열릴 문을 가리키게 해 보고 싶었다.</p><p>처음에는 방면과 내릴 역을 고르는 전광판 형태로 시작했다. 다음에는 GPS로 진행 방향을 추정하고 나침반 센서로 화면이 향하는 방향을 파악해 화살표를 돌리는 화면을 만들었다. GPS는 위치, 나침반은 기기가 향하는 방향을 맡는다는 차이를 실감했다.</p><p>역을 직접 고르지 않아도 되도록 정차·출발·도착 상태를 감지하는 자동 추적도 실험했다. 하지만 지하에서는 위치 신호가 끊기거나 한 정거장 늦게 반영됐다. 당시에는 실시간 데이터, 네트워크 위치, 마지막 역을 바탕으로 한 시간 추정을 함께 쓰는 방향을 검토했다.</p></section><section class="journal-section"><h2>2026.08.12 · 비슷한 서비스와 비교해 다시 생각하기</h2><p>비슷한 하차 알림 서비스를 보면서 내가 만든 위치 추정 방식의 약점을 다시 봤다. 신호 갱신이 늦고 여러 번 확인한 뒤 상태를 바꾸면 표시가 한 박자씩 밀릴 수 있었다. 역까지의 단순 거리만 보는 방식도 정확한 구간 판정에는 한계가 있었다.</p><p>그래서 실제 열차 정보를 사용할 수 있는지 살펴보고, 가능하면 이를 우선으로 쓰되 지원하지 않는 경우에는 다른 위치 정보와 추정으로 보완하는 구조를 생각했다. 여러 실험용 탭과 로그는 숨기고, 실제 사용 화면에는 역과 내리는 문 방향을 한눈에 보이게 남기기로 했다.</p><p>이 글은 그때의 설계 기록이다. 문 열림 방향과 실시간 데이터가 정확히 들어오는지 검증하기 전에는 추정한 결과를 확정된 안내처럼 표시하면 안 된다고 판단했다.</p></section>
+      <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a></div>
+    </article>
+    </main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

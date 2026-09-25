@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="oddz 개발일지 — 카메라 트래킹 3D 큐브">
+  <title>카메라 트래킹 3D 큐브 · 개발일지 · oddz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css">
+  <link rel="stylesheet" href="journal.css">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav>
+  </header>
+  <main>
+    <article class="journal-article">
+      <header class="journal-intro">
+        <span class="eyebrow">3D · 실험</span>
+        <h1>카메라 트래킹 3D 큐브</h1>
+        <p class="lead">여러 회전축을 가진 큐브를 카메라로 움직여 보려던 인터랙션 실험.</p>
+        <p class="article-date">기록 시기 · 2026.05.04</p>
+      </header>
+      <section class="journal-section"><h2>물병 다음으로 시도한 움직임</h2><p>실제 카메라 입력으로 3D 큐브의 회전과 방향을 제어하고 싶었다. 단순히 손의 이동 경로를 좇는 것보다 객체의 방향까지 안정적으로 감지해야 해서 첫 좌표계와 감도 설정부터 고민이 많았다.</p></section><section class="journal-section"><h2>구조가 예민했다</h2><p>물리 연산이 서로 연결된 부분에서는 작은 값을 바꿔도 전체 움직임이 예상과 다르게 변했다. 사용자의 동작을 정확히 인식하도록 조건을 조정하는 일도 어려웠다. 아직은 안정적인 버전을 만들기 위해 로직과 사용 경험을 더 다듬어야 한다.</p></section>
+      <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a></div>
+    </article>
+    </main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
