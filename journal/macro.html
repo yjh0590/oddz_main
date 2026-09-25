@@ -19,17 +19,22 @@
   <main>
     <article class="journal-article">
       <header class="journal-intro">
-        <span class="eyebrow">Automation · 완성</span>
+        <div class="journal-topline">
+          <span class="eyebrow">Automation · 완성</span>
+          <nav class="journal-pager" aria-label="개발일지 이전 글과 다음 글"><a class="journal-pager__link" data-journal-detail href="transcript-guide.html">
+              <span class="journal-pager__label">← 이전 글</span>
+              <span class="journal-pager__title">강의 영상 대본화 가이드 — 강의 영상에서 공부 자료까지</span>
+            </a><a class="journal-pager__link" data-journal-detail href="subway.html">
+              <span class="journal-pager__label">→ 다음 글</span>
+              <span class="journal-pager__title">지하철 하차 방향 표시</span>
+            </a></nav>
+        </div>
         <h1>자료 정리 매크로</h1>
         <p class="lead">부처별 HWPX 문서 수백 개를 사업별로 나누면서 실패 항목까지 확인하도록 만든 자동화 도구.</p>
         <p class="article-date">기록 시기 · 2026.09.22</p>
       </header>
       <section class="journal-section"><h2>500개가 넘는 문서를 손으로 나눌 수 있을까</h2><p>한국재정정보원의 세부사업설명자료를 사업별로 분리해야 했다. 통합 한글 문서를 열어 엑셀의 세부사업명에 맞는 내용만 남기고, 사업코드로 저장한 뒤 작업 결과를 기록하는 방식이었다. 부처 한 곳만 해도 약 500개 파일이어서 자동화가 필요했다.</p></section><section class="journal-section"><h2>첫 시도와 방향 전환</h2><p>처음에는 HWPX 압축파일 안의 문서 내용을 직접 수정해 보았다. 그러나 결과가 원본 전체 분량으로 남거나, 한글에서 손상된 문서로 보이거나, 표와 그림이 깨졌다. HWPX는 본문뿐 아니라 여러 개체와 연결 정보가 얽혀 있어서 단순하게 잘라낼 수 없었다.</p><p>이후 한컴오피스 한글이 직접 문서를 열고 저장하도록 방식을 바꿨다. 현재 사업 제목부터 다음 사업 제목 직전까지를 한 문서로 판단했다. ‘5. 기타 추가자료’ 뒤에 이어지는 참고자료도 함께 남겨야 했다.</p></section><section class="journal-section"><h2>만들어졌다고 끝은 아니었다</h2><p>파일이 생성되어도 내용이 잘못되거나 손상될 수 있었다. 현재 사업명은 있는지, 다음 사업 내용이 남아 있지는 않은지, 참고자료와 기타 추가자료는 유지됐는지 등을 검사하고 실패 원인을 작업 결과에 남겼다.</p><p>첫 페이지에 반복되는 표제를 글자뿐 아니라 표 개체까지 제거하고, 지출계획·사업 설명·결산내역·기타 추가자료와 참고자료가 새 페이지에서 시작하도록 다듬었다. 사업코드 파일과 사업명 파일을 각각 모으는 폴더도 만들었다.</p></section><section class="journal-section"><h2>v17에서 얻은 결론</h2><p>여러 번의 수정 끝에 v17을 최종 버전으로 정했다. 샘플 결과물이 생성되고 자동 검사도 통과했지만, 모든 부처의 원본 구조가 같다고 검증한 것은 아니다. 새로운 문서를 처음 처리할 때는 한 건을 먼저 열어 첫 장과 마지막 장, 표·그림·참고자료까지 직접 확인해야 한다.</p></section>
       <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a> <a class="button" href="../projects/document-macro.html">자료 정리 매크로 소개 ↗</a></div>
-      <nav class="journal-pager" aria-label="개발일지 이전 글과 다음 글"><a class="journal-pager__link" data-journal-detail href="subway.html">
-              <span class="journal-pager__label">→ 다음 글</span>
-              <span class="journal-pager__title">지하철 하차 방향 표시</span>
-            </a></nav>
     </article>
     </main>
   <footer>oddz · 심심하면 만들어요.</footer>
