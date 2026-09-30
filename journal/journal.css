@@ -46,3 +46,6 @@ html[data-theme="bubbles"] .journal-pager__link { border-radius: 24px; }
 @media (max-width: 340px) {
   .journal-article h1.journal-title--long span:last-child { font-size: .85rem; }
 }
+
+.journal-section li { color:var(--muted); line-height:1.9; margin-bottom:7px; word-break:keep-all; overflow-wrap:anywhere; }
+.journal-section strong { color:var(--paper); }
