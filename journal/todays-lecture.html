@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="oddz 개발일지 — 오늘의 강의 — 인천대 LMS 재생 도우미">
+  <title>오늘의 강의 — 인천대 LMS 재생 도우미 · 개발일지 · oddz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css">
+  <link rel="stylesheet" href="journal.css?v=20260926-1">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav>
+  </header>
+  <main><article class="journal-article">
+      <header class="journal-intro">
+        <div class="journal-topline"><span class="eyebrow">Chrome Extension · 배포 준비</span>
+          <nav class="journal-pager" aria-label="개발일지 이전 글과 다음 글"><a class="journal-pager__link" data-journal-detail href="transcript-guide.html" aria-label="다음 글: 강의 영상 대본화 가이드"><span class="journal-pager__label">→ 다음 글</span><span class="journal-pager__title">강의 영상 대본화 가이드</span></a></nav>
+        </div>
+        <h1 class="journal-title--long"><span>오늘의 강의</span><span>— 인천대 LMS 재생 도우미</span></h1>
+        <p class="lead">선택한 여러 과목의 강의를 이어서 재생하는 확장프로그램을 만들고, 목록과 화면을 다듬은 기록.</p>
+        <p class="article-date">기록 시기 · 2026.09.30</p>
+      </header>
+      <section class="journal-section"><p>온라인 강의를 듣다 보면 영상이 끝날 때마다 다음 강의를 열고 재생 버튼을 눌러야 한다. 여러 과목의 강의를 듣는 날에는 과목 페이지를 오가는 작업도 반복된다.</p><p>이 과정을 조금 편하게 만들고 싶어서 <strong>인천대 LMS에서 선택한 강의 영상을 순서대로 재생하는 크롬 확장프로그램, ‘오늘의 강의’</strong>를 만들었다.</p></section>
+      <section class="journal-section"><h2>영상이 끝났다는 걸 어떻게 알 수 있을까?</h2><p>처음에는 두 가지 방식을 생각했다. 페이지 내부에서 영상 정보를 읽는 확장프로그램과, 화면의 재생시간을 인식해 버튼을 누르는 매크로였다.</p>
+<p>LMS 화면을 확인하면서 주의할 점을 발견했다. 이미 수강한 영상은 다시 재생하는 중에도 ‘진도율 100% · 완료’로 표시됐다. 따라서 완료 표시만 보고 다음 영상으로 이동하면, 이번 재생이 끝나기도 전에 넘어갈 수 있었다.</p>
+<p>그래서 <strong>수강 완료 표시 대신 현재 영상의 실제 종료를 감지하는 방식</strong>으로 방향을 잡았다.</p>
+<p>개발자 도구로 확인한 결과, 영상의 현재 시간과 전체 길이, 일시정지 여부, 종료 여부를 직접 읽을 수 있었다. 다음 영상 링크도 찾을 수 있어 첫 시험판은 다음 흐름으로 만들었다.</p>
+<p><strong>영상 종료 → 5초 대기 → 다음 강의 이동 → 재생 시도</strong></p>
+<p>화면 인식 매크로도 시험판으로 만들었지만, 이후 여러 과목을 연결하는 기능은 페이지 정보를 직접 읽을 수 있는 확장프로그램을 중심으로 확장했다.</p></section>
+      <section class="journal-section"><h2>‘다음 영상’에서 ‘오늘 들을 목록’으로</h2><p>첫 버전이 실제 LMS에서 작동하는 것을 확인한 뒤, 원하는 기능이 더 명확해졌다. 한 과목 안에서 다음 영상을 재생하는 것보다, <strong>오늘 들을 여러 과목의 영상을 미리 골라두고 순서대로 실행하는 기능</strong>이 필요했다.</p>
+<p>예를 들어 A과목에서 영상 두 개, B과목에서 세 개를 선택했다면 A과목의 선택 영상을 마친 뒤 B과목으로 넘어가는 방식이다.</p>
+<p>이를 위해 LMS 홈페이지의 과목 링크, 주차별 ‘자세히 보기’ 링크, 영상 링크를 확인했다. 같은 영상이 제목 링크와 아이콘 링크로 중복해서 나타나는 경우는 영상 번호를 기준으로 합쳤다.</p>
+<p>사용 흐름은 다음과 같이 구성했다.</p>
+<ol><li>과목을 열어 원하는 영상을 선택한다.</li><li>‘오늘 목록’에 추가한다.</li><li>다른 과목에서도 같은 방식으로 영상을 담는다.</li><li>목록과 순서를 확인하고 ‘전체 시작’을 누른다.</li></ol>
+<p>선택하지 않은 영상은 건너뛰고, 과목이 바뀔 때는 LMS 홈페이지를 거쳐 다음 영상으로 이동하도록 했다. 마지막 영상이 끝나면 홈페이지로 돌아와 전체 재생을 마쳤다는 팝업을 표시하게 만들었다.</p>
+<p>페이지가 바뀌어도 실행이 이어지도록 선택 목록과 진행 상황은 확장프로그램의 로컬 저장소에 저장했다. 중지·재개와 순서 변경 기능도 추가했고, 여러 과목을 선택해 실행하는 흐름은 실제 사용으로 동작을 확인했다.</p></section>
+      <section class="journal-section"><h2>기능만큼 중요했던 화면 정리</h2><p>기능이 작동한 뒤에는 UI를 여러 차례 수정했다. 처음 화면은 목록과 버튼이 몰려 있어 읽기 불편했다.</p>
+<p>펼친 상태에서는 화면 중앙에 넉넉한 크기의 창을 띄우고, ‘영상 선택’과 ‘오늘 재생할 목록’을 나란히 배치했다. 접으면 오른쪽의 작은 패널로 바뀌어 강의 화면을 덜 가리도록 했다. 페이지가 바뀌어도 접힌 상태는 유지된다.</p>
+<p>목록에 표시되는 정보도 정리했다.</p>
+<ul><li>과목은 교수님 전체 성함을 앞에 표시하도록 수정했다.</li><li>영상 제목에서 반복되는 제목과 ‘선택’ 문구를 제거했다.</li><li>제목, 수강 기간, 상태를 각각 나눠 표시했다.</li><li>제목은 굵게, 기간은 파란색, 완료 상태는 초록색으로 구분했다.</li><li>마감 여부는 선택 전에 확인할 수 있도록 작은 주황색 표시로 남겼다.</li></ul>
+<p>마지막으로 바깥 창을 위아래로 스크롤해야 하는 불편을 줄였다. 불필요한 대기 안내 상자를 없애고, <strong>목록 안에서만 스크롤하도록</strong> 높이와 비율을 조정했다. 추가·시작 버튼은 항상 보이도록 배치했다.</p></section>
+      <section class="journal-section"><h2>아이콘과 최종 파일</h2><p>아이콘도 몇 차례 바꿨다. 표정이 있는 얼굴과 캐릭터 사진을 시도했지만, 배포용으로는 단순한 디자인이 더 적절하다고 판단했다.</p>
+<p>최종적으로 <strong>파란색 둥근 사각형 안에 흰색 재생 버튼이 있는 아이콘</strong>을 선택했다. 작은 크롬 도구 모음에서도 기능을 알아보기 쉽도록 글자와 세부 장식을 줄였다.</p>
+<p>설치 목록과 도구 모음에 필요한 16·32·48·128픽셀 아이콘을 넣고, <strong>v0.2.6 최종 ZIP</strong>으로 정리했다. ZIP 파일, 아이콘 크기와 설정 연결, 코드 문법 검사를 마쳤다.</p></section>
+      <section class="journal-section"><h2>홈페이지 배포 준비</h2><p>배포는 oddz 홈페이지에서 ZIP을 내려받고 설치 방법을 확인하는 방식으로 준비하고 있다. 프로젝트 페이지에는 소개, 화면 예시, 다운로드, 설치·사용 방법, 업데이트 안내를 담을 계획이다.</p>
+<p>현재는 개발자 모드에서 압축을 푼 확장프로그램을 직접 불러오는 방식이다. 처음 사용하는 사람도 설치할 수 있도록 <code>extension</code> 폴더 선택 과정과 업데이트 방법을 쉽게 안내하는 것이 다음 작업이다.</p>
+<p>이번 프로젝트를 만들면서 느낀 점은, 자동으로 작동하는 것만큼 <strong>사용자가 무엇을 선택했고 지금 어디까지 진행됐는지 쉽게 확인할 수 있는 화면</strong>이 중요하다는 것이다. 실제로 사용해보며 고친 목록 표시와 스크롤 구조가 프로그램의 사용성을 크게 바꿨다.</p>
+<p>기본 재생과 여러 과목 실행은 실제 사용으로 확인했다. 다만 다양한 과목의 화면 구조, 자동 재생 차단 상황, LMS 진도 기록이 정상적으로 남는지는 계속 확인할 필요가 있다. 프로그램의 전체 재생 완료 안내와 LMS의 수강 완료 판정은 구분해서 봐야 한다.</p></section>
+      <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a> <a class="button" data-journal-detail href="../projects/todays-lecture.html">오늘의 강의 다운로드 · 사용법 ↗</a></div>
+    </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
