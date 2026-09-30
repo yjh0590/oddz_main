@@ -1,0 +1,21 @@
+oddz 홈페이지 업데이트 — 오늘의 강의
+
+적용 방법
+1. ZIP을 압축 해제합니다.
+2. 안의 index.html, assets, downloads, projects, themes, journal을 홈페이지 저장소의 같은 위치에 덮어쓴 뒤 커밋·배포합니다. ZIP 자체를 사이트에 올리는 것이 아닙니다.
+3. 배포 후 /projects/todays-lecture.html?theme=bubbles 에서 다운로드와 사용법을 확인합니다.
+
+이번 변경
+- 기존 LMS 강의 재생 프로그램 카드를 오늘의 강의로 교체하고 완성 영역에서 배포 중으로 표시했습니다.
+- 기본 페이지와 4가지 테마에서 다운로드·사용법 페이지로 연결했습니다.
+- projects/todays-lecture.html: 다운로드 / 사용법 탭, 설치·사용·업데이트 안내
+- downloads/oddz-todays-lecture-v0.2.6.zip: 최신 원본 확장프로그램 ZIP
+- assets/todays-lecture*: 아이콘, 스타일, 예시 데이터로 만든 화면 미리 보기
+- 대본화 가이드의 기존 탭 기능과 테마를 그대로 재사용합니다.
+
+검증
+- 5가지 테마, 탭 전환·키보드 조작·#guide 직접 링크 확인
+- PC·390px 모바일에서 가로 넘침 없음
+- 다운로드한 ZIP과 원본 바이트 일치, manifest 버전 0.2.4 확인
+- 실제 로그인한 LMS에서의 설치·여러 과목 재생은 이번 작업에서 검증하지 않았습니다.
+- 공개 홈페이지에는 아직 배포하지 않았습니다.
