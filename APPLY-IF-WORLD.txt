@@ -1,0 +1,16 @@
+IF 세계 홈페이지 추가 · 2026.10.13
+
+ZIP을 풀고 기존 oddz_main 저장소 최상위에 같은 경로로 덮어쓰세요.
+기존 파일과 폴더를 삭제하지 말고 병합하세요. CNAME은 그대로 유지하세요.
+커밋 후 GitHub Pages 배포가 끝나면 홈페이지를 새로고침하세요.
+
+추가: projects/if-world.html, journal/if-world.html
+수정: index.html, themes/*.html(4개), journal/index.html, journal/todays-lecture.html
+
+완성 카테고리 → 만약에 로또에 당첨된다면? → 게임 시작하기
+게임 주소: https://lotto.oddz.click/
+개발일지 본문은 전달받은 글을 중복 없이 한 번 수록했습니다.
+
+확인: 5개 테마의 완성 카테고리·신규 링크·원문 12개 문단·최신 글 순서.
+브라우저 실행 환경이 없어 실제 PC·모바일 화면 검사는 수행하지 못했습니다.
+게임 접속 상태와 개발일지의 게임 기능·테스트 수치는 별도로 검증하지 않았습니다.
