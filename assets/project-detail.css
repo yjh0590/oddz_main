@@ -69,3 +69,13 @@ html[data-theme="bubbles"] {
     radial-gradient(ellipse at 75% 12%,rgba(232,196,104,.17),transparent 57%);
 }
 html[data-theme="bubbles"] .eyebrow,html[data-theme="bubbles"] .button { border-radius:50px; }
+
+/* Keep this project title on one line within the available content width. */
+.if-world-project { container-type:inline-size; }
+.if-world-project h1 {
+  max-width:none;
+  font-size:min(2.25rem,4.7cqw);
+  line-height:1.4;
+  white-space:nowrap;
+  letter-spacing:-.025em;
+}
