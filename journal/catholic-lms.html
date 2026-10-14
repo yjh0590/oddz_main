@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="오늘의 강의 — 가톨릭대 LMS 자동재생 버전 개발일지">
+  <title>오늘의 강의 — 가톨릭대 LMS 자동재생 버전 · 개발일지 · oddz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css">
+  <link rel="stylesheet" href="journal.css?v=20260926-1">
+  <script defer src="journal.js"></script>
+  <link rel="stylesheet" href="catholic-lms-journal.css">
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav>
+  </header>
+  <main><article class="journal-article">
+    <header class="journal-intro">
+      <div class="journal-topline"><span class="eyebrow">Chrome Extension · v0.6.6</span><nav class="journal-pager" aria-label="개발일지 이전 글과 다음 글"><a class="journal-pager__link" data-journal-detail href="if-world.html"><span class="journal-pager__label">→ 다음 글</span><span class="journal-pager__title">IF 세계</span></a></nav></div>
+      <h1 class="journal-title--long"><span>오늘의 강의</span><span>— 가톨릭대 LMS 자동재생 버전</span></h1>
+      <p class="lead">다른 학교의 LMS에서 다음 강의 이동과 자동재생을 구현하며, iframe과 플레이어 이벤트를 하나씩 확인한 기록.</p>
+      <p class="article-date">기록 시기 · 2026.10.14</p>
+    </header>
+    <section class="journal-section"><p>기존에 만들었던 LMS 강의 재생 도우미를 다른 학교 LMS에서도 사용할 수 있도록 확장해보고 싶었다.</p>
+<p>이번에는 가톨릭대 LMS를 대상으로, 사용자가 선택한 여러 강의를 순서대로 재생하고 강의가 끝나면 다음 강의로 자동 이동하는 구조를 만들었다.</p>
+<p>처음에는 기존 프로그램의 구조를 조금만 수정하면 될 거라고 생각했다.<br>강의 목록을 읽고, 강의를 클릭하고, 영상이 끝나면 다음 강의를 누르면 되는 단순한 흐름처럼 보였기 때문이다.</p>
+<p>하지만 실제로 개발해보니 가장 어려운 부분은 <strong>강의 이동이 아니라 영상 재생 자체</strong>였다.</p>
+</section><section class="journal-section"><h2>강의 목록과 다음 강의 이동</h2>
+<p>가톨릭대 LMS는 Canvas를 기반으로 하고 있었고, 실제 강의/출결 화면은 별도의 LearningX 도구가 iframe 안에서 동작하는 구조였다.</p>
+<p>강의 항목은 다음과 같은 요소로 구성되어 있었다.</p>
+<pre><code>.xnlal-attendance-list-item</code></pre>
+<p>각 강의는 별도의 링크가 있는 것이 아니라, 목록 요소 자체에 클릭 이벤트가 연결되어 있었다.</p>
+<p>콘솔에서 직접:</p>
+<pre><code>lectures[1].click()</code></pre>
+<p>을 실행했을 때 두 번째 강의가 정상적으로 열리는 것을 확인했고, 이를 기준으로 자동 이동 구조를 만들었다.</p>
+<p>강의가 끝나면 현재 과목의 목록 화면으로 돌아간 뒤 다음 강의를 선택하도록 구성했고, 다른 과목의 강의가 이어지는 경우에는 해당 과목의 강의/출결 페이지로 이동한 뒤 저장해 둔 강의를 다시 열도록 만들었다.</p>
+<p>이 과정에서 같은 과목의 다음 강의로 넘어가지 못하는 문제가 있었다.</p>
+<p>원인은 단순했다.</p>
+<p>영상이 끝난 뒤에도 화면은 강의 상세 화면에 있었는데, 프로그램은 곧바로 다음 강의 목록 요소를 찾으려고 하고 있었다.</p>
+<p>그래서 다음 순서로 변경했다.</p>
+<pre><code>영상 종료
+→ 목록으로 이동
+→ 강의 목록이 다시 나타날 때까지 대기
+→ 다음 강의 클릭</code></pre>
+<p>이후에는 수동으로 영상을 끝까지 재생했을 때 다음 강의로 정상 이동하는 것을 확인할 수 있었다.</p>
+</section><section class="journal-section"><h2>첫 번째 영상은 재생되는데 다음 영상은 재생되지 않는 문제</h2>
+<p>가장 오래 걸린 문제였다.</p>
+<p>처음에는 재생 버튼을 직접 클릭하는 방식으로 구현했다.</p>
+<p>가톨릭대 영상 플레이어에는 다음 요소가 있었다.</p>
+<pre><code>&lt;div class=&quot;vc-front-screen-play-btn&quot; title=&quot;재생&quot;&gt;&lt;/div&gt;</code></pre>
+<p>그래서 이 요소에 <code>.click()</code>을 실행하면 영상이 재생될 거라고 생각했다.</p>
+<p>실제로 첫 번째 강의에서는 잘 작동했다.</p>
+<p>하지만 영상이 끝난 뒤 다음 강의로 이동하면 문제가 생겼다.</p>
+<p>다음 강의 화면까지는 정상적으로 들어가는데, 영상이 자동으로 시작되지 않았다.</p>
+<p>처음에는 영상 시작 전에 나오는 짧은 오프닝 화면 때문이라고 생각했다.</p>
+<p>화면이 검게 멈추거나, 오프닝이 반복되는 현상도 있었기 때문에 오프닝과 본편을 따로 구분해서 처리하려고 했다.</p>
+</section><section class="journal-section"><h2>preloader의 발견</h2>
+<p>플레이어 내부를 직접 확인해보니 재미있는 구조가 보였다.</p>
+<p>강의 화면에 처음 들어갔을 때는 실제 본편 영상이 바로 존재하는 것이 아니었다.</p>
+<p>처음에는 약 1초 길이의 파일만 로드되어 있었다.</p>
+<pre><code>preloader.mp4
+duration ≈ 1.06초</code></pre>
+<p>그리고 나머지 video 요소들은 아직 영상 정보가 없는 상태였다.</p>
+<p>처음에는 이 preloader를 재생한 뒤 본편이 생성되는 구조라고 판단해 다음과 같이 구현했다.</p>
+<pre><code>preloader 감지
+→ 재생 버튼 클릭
+→ 본편 영상이 나타날 때까지 대기
+→ 본편 재생</code></pre>
+<p>하지만 이 방식도 완전히 해결되지는 않았다.</p>
+<p>DOM의 재생 버튼을 클릭하거나 <code>video.play()</code>를 직접 호출해도 다음 강의에서는 여전히 재생이 되지 않는 경우가 있었다.</p>
+</section><section class="journal-section"><h2>UniPlayer 내부 구조 확인</h2>
+<p>더 이상 화면 요소만 보고 해결하기 어려워서 실제 플레이어 내부 객체를 확인했다.</p>
+<p>가톨릭대 LMS는 <code>UniPlayer</code>라는 플레이어를 사용하고 있었고, 내부에는 다양한 이벤트가 등록되어 있었다.</p>
+<p>대표적으로 다음과 같은 이벤트들이 있었다.</p>
+<pre><code>play
+pctrl_play
+pctrl_pause
+vc-front-screen-play-selected</code></pre>
+<p>특히 실제 재생 버튼의 이벤트 핸들러를 확인해보니 다음과 같은 구조였다.</p>
+<pre><code>function(b){
+  var a = bcFrontScreen.getVCFrontScreen();
+  a._eventTarget.fire(VCFrontScreenEvent.PLAY_SELECTED)
+}</code></pre>
+<p>즉 재생 버튼을 눌렀을 때 단순히 <code>&lt;video&gt;</code> 태그를 재생하는 것이 아니라, UniPlayer 내부에서 <code>PLAY_SELECTED</code> 이벤트를 발생시키고 있었다.</p>
+<p>그래서 CMS 플레이어 콘솔에서 직접 다음 코드를 실행해봤다.</p>
+<pre><code>uniPlayer._uniPlayerEventTarget.fire(
+  &quot;vc-front-screen-play-selected&quot;
+)</code></pre>
+<p>그러자 영상이 정상적으로 재생됐다.</p>
+<p>이 시점에서 실제 플레이어를 재생하는 방법 자체는 찾은 셈이었다.</p>
+</section><section class="journal-section"><h2>그런데 확장프로그램에서는 왜 안 될까?</h2>
+<p>문제는 여기서 끝나지 않았다.</p>
+<p>콘솔에서 직접 위 코드를 실행하면 재생되는데, 확장프로그램이 같은 코드를 자동으로 실행하면 재생이 되지 않았다.</p>
+<p>콘솔에는 다음 오류가 표시됐다.</p>
+<pre><code>NotAllowedError:
+play() failed because the user didn&#x27;t interact with the document first.</code></pre>
+<p>원인은 Chrome의 자동재생 정책이었다.</p>
+<p>첫 강의는 사용자가 직접 <strong>전체 시작</strong> 버튼을 누른 직후 실행되기 때문에 사용자 입력과 연결된 흐름으로 처리될 수 있었다.</p>
+<p>하지만 다음 강의는 영상의 <code>ended</code> 이벤트 이후 프로그램이 자동으로 이동한 화면이다.</p>
+<p>브라우저 입장에서는 다음과 같은 차이가 있었다.</p>
+<pre><code>첫 강의
+사용자 클릭
+→ 강의 입장
+→ 영상 재생</code></pre>
+<p>반면 다음 강의는:</p>
+<pre><code>영상 종료
+→ 프로그램이 다음 강의로 이동
+→ 프로그램이 재생 요청</code></pre>
+<p>이기 때문에 새로운 CMS 문서에서는 실제 사용자 입력이 없는 자동재생으로 판단됐다.</p>
+<p>결국 첫 강의와 다음 강의가 같은 코드로 실행돼도 브라우저 정책상 결과가 달랐다.</p>
+</section><section class="journal-section"><h2>Chrome debugger를 이용한 해결</h2>
+<p>일반적인 <code>.click()</code>이나 <code>dispatchEvent()</code>로는 실제 사용자의 클릭으로 인정받을 수 없었다.</p>
+<p>그래서 마지막으로 Chrome DevTools Protocol을 사용했다.</p>
+<p>확장프로그램에 <code>debugger</code> 권한을 추가하고, CMS 플레이어가 준비되면 background script에서 실제 CMS 실행 컨텍스트를 찾도록 했다.</p>
+<p>그 뒤 다음 UniPlayer 명령을:</p>
+<pre><code>uniPlayer._uniPlayerEventTarget.fire(
+  &quot;vc-front-screen-play-selected&quot;
+)</code></pre>
+<p>Chrome DevTools Protocol의:</p>
+<pre><code>Runtime.evaluate
+userGesture: true</code></pre>
+<p>옵션을 이용해 실행했다.</p>
+<p>이 방식으로 실행하자 다음 강의에서도 UniPlayer의 재생 요청이 정상적으로 허용됐다.</p>
+<p>최종 구조는 다음과 같다.</p>
+<pre><code>강의 선택
+→ 강의 입장
+→ CMS 플레이어 준비
+→ Chrome debugger 연결
+→ CMS 실행 컨텍스트 확인
+→ userGesture=true 상태에서
+   UniPlayer PLAY_SELECTED 이벤트 실행
+→ 오프닝
+→ 본편 재생
+→ 영상 종료 감지
+→ 다음 강의 이동
+→ 반복</code></pre>
+<p>이후 여러 강의를 연속으로 재생했을 때 다음 강의 이동과 자동재생이 정상적으로 이어지는 것을 확인했다.</p>
+</section><section class="journal-section"><h2>화면 구성도 함께 수정</h2>
+<p>기능을 개발하면서 사용 화면도 계속 수정했다.</p>
+<p>처음에는 확장프로그램 아이콘을 눌러 사용하는 작은 팝업 형태였지만, 강의와 과목을 여러 개 선택하기에는 불편했다.</p>
+<p>그래서 LMS 페이지 위에 직접 표시되는 형태로 변경했다.</p>
+<p>현재는 다음 순서로 사용할 수 있다.</p>
+<pre><code>1. 과목 선택
+2. 영상 선택
+3. 오늘 재생할 목록 구성
+4. 전체 시작</code></pre>
+<p>여러 과목의 강의를 한 목록에 섞어서 추가할 수도 있다.</p>
+<p>화면이 너무 크면 접을 수 있도록 했고, 접은 뒤에는 화면 오른쪽의 작은 <code>▶</code> 버튼으로 다시 열 수 있도록 했다.</p>
+<p>또 새로고침이나 확장프로그램 재로드 후 화면이 작은 상태로 남아 있는 문제도 수정해, 페이지를 다시 열면 항상 전체 화면으로 시작하도록 변경했다.</p>
+</section><section class="journal-section"><h2>현재 버전</h2>
+<p>현재 친구에게 전달할 최종 테스트 버전은:</p>
+<pre><code>v0.6.6</code></pre>
+<p>이다.</p>
+<p>현재 가능한 기능은 다음과 같다.</p>
+<ul><li>LMS 강의 목록 자동 인식</li><li>과목 선택</li><li>여러 강의 선택</li><li>여러 과목의 강의를 하나의 재생 목록으로 구성</li><li>첫 강의 자동 진입</li><li>영상 자동 재생</li><li>강의 종료 감지</li><li>다음 강의 자동 이동</li><li>다른 과목으로 자동 이동</li><li>영상 플레이어 자동 재생</li><li>전체 시작 / 중지</li><li>화면 접기 / 펼치기</li><li>강의 목록 수동 새로고침</li></ul>
+</section><section class="journal-section"><h2>개발하면서 느낀 점</h2>
+<p>이번 작업에서 가장 어려웠던 부분은 단순히 “재생 버튼을 자동으로 누르는 것”이 아니었다.</p>
+<p>웹페이지에서 버튼을 클릭하는 것과 사람이 실제로 버튼을 클릭하는 것은 브라우저 입장에서 완전히 같은 행동이 아니었다.</p>
+<p>처음에는 DOM 구조와 영상 태그만 확인하면 해결할 수 있을 거라고 생각했지만, 실제로는:</p>
+<pre><code>Canvas
+→ LearningX
+→ CMS
+→ UniPlayer
+→ HTML5 video
+→ Chrome autoplay policy</code></pre>
+<p>까지 여러 계층을 이해해야 했다.</p>
+<p>특히 다음 강의 화면까지 정상적으로 이동하면서도 영상만 재생되지 않는 현상 때문에 강의 선택 로직, iframe 전환, preloader, UniPlayer 이벤트 등을 하나씩 분리해서 확인해야 했다.</p>
+<p>결국 화면의 재생 버튼을 억지로 클릭하는 대신, <strong>플레이어가 실제로 사용하는 내부 이벤트와 브라우저의 사용자 입력 정책을 확인한 뒤 그 흐름에 맞춰 구현한 것</strong>이 해결의 핵심이었다.</p>
+<p>처음에는 단순한 자동재생 프로그램으로 시작했지만, 이번 작업을 통해 iframe 구조, 이벤트 시스템, Chrome 확장프로그램의 실행 영역, 브라우저 자동재생 정책까지 직접 다뤄볼 수 있었다.</p>
+<p>현재 버전은 실제 강의를 정상적으로 재생하면서 강의가 끝났을 때 다음 강의로 이동하는 방식으로 동작한다.</p>
+<p>아직 Chrome의 <code>debugger</code> 기능을 사용하기 때문에 자동재생 중 브라우저 상단에 디버깅 안내가 표시된다는 점은 남아 있다. 다만 현재 구조에서는 다음 강의까지 완전 자동으로 재생하기 위해 필요한 방식으로 판단해 그대로 유지하기로 했다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a></div>
+  </article></main><footer>oddz · 심심하면 만들어요.</footer>
+</body></html>
