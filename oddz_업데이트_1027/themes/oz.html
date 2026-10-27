@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="oddz — 심심하면 만드는 것들. 오즈의 작은 여정처럼 이어지는 프로젝트 기록.">
+<title>oddz — 오즈 테마</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='23' fill='%23F8F5EC'/%3E%3Cpath d='M13 75h16V59h16V43h16V27h26' stroke='%23E7B64C' stroke-width='14' fill='none'/%3E%3Cpath d='M70 18l6-11 6 11 11 6-11 6-6 11-6-11-11-6Z' fill='%233C927D'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css">
+<script src="../assets/oddz-projects-data.js" defer></script>
+<script src="../assets/oddz-projects-catalog.js" defer></script>
+<style>
+@font-face{font-family:Binggrae;src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');font-display:swap}
+:root{--page:#f8f7f2;--paper:#fffefa;--ink:#283842;--muted:#6d797b;--gold:#e9b94f;--gold-deep:#b78b32;--mint:#3c927d;--line:#dedfd7;--body:'Pretendard Variable','Pretendard',system-ui,sans-serif;--display:'Binggrae','Pretendard Variable',sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--body);overflow-x:hidden}
+button,a{font:inherit}a{color:inherit}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
+.wrap{width:min(100% - 44px,1000px);margin-inline:auto}
+header{border-bottom:1px solid #e6e5dc;background:rgba(248,247,242,.94)}
+.header-inner{min-height:88px;display:flex;align-items:center;gap:28px;justify-content:space-between}
+.wordmark{font-family:var(--display);font-size:28px;letter-spacing:-.055em;text-decoration:none;color:#2b4346;white-space:nowrap}
+.wordmark .z{color:var(--mint)}.wordmark .star{font-family:serif;color:var(--gold-deep);font-size:16px;vertical-align:super;margin-left:3px}
+.nav-links{display:flex;gap:8px;align-items:center;margin-left:auto}
+.nav-links>a,.theme-menu summary{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;color:#526365;font-size:13px;font-weight:700;padding:9px 13px;border-radius:999px;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.nav-links>a:hover,.theme-menu summary:hover{background:#fffdf9;border-color:#dedfd7;color:#2f6560}
+.theme-menu{position:relative}
+.theme-menu summary{list-style:none;background:#fffdf9;border-color:#dddccf}
+.theme-menu summary::-webkit-details-marker{display:none}
+.theme-options{position:absolute;z-index:20;right:0;top:calc(100% + 10px);width:172px;background:#fffefa;padding:8px;border:1px solid #e1dfd2;border-radius:16px;box-shadow:0 20px 45px rgba(35,50,44,.14)}
+.theme-options a{display:block;padding:10px 12px;text-decoration:none;font-size:13px;border-radius:9px;color:#526365}
+.theme-options a:hover{background:#f5f1e5}.theme-options a[aria-current="page"]{background:#f1e8cb;color:#624b1c;font-weight:800}
+.hero{padding:92px 0 88px;display:grid;grid-template-columns:1fr 290px;align-items:center;gap:45px;min-height:425px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:#648078}
+.eyebrow:before{content:"";width:9px;height:9px;border-radius:50%;background:#d9c887;box-shadow:0 0 0 4px #efebd9}
+.hero h1{font-family:var(--display);font-size:clamp(36px,4.7vw,56px);letter-spacing:-.055em;line-height:1.37;margin:23px 0 17px;font-weight:400}
+.hero h1 em{font-style:normal;color:#347967;position:relative;white-space:nowrap}
+.hero h1 em:after{content:"";position:absolute;height:5px;left:0;right:1%;bottom:-6px;background:repeating-linear-gradient(90deg,#eec962 0 14px,transparent 14px 19px);border-radius:4px;opacity:.72}
+.hero-desc{max-width:550px;margin:0;color:#657474;font-size:16px;line-height:1.85}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:14px 24px;border-radius:11px;background:#e9bb52;border:1px solid #d7aa43;text-decoration:none;color:#473b25;font-weight:800;font-size:14px;box-shadow:0 7px 0 #efe5c8;transition:transform .24s,box-shadow .24s}
+.cta:hover,.cta:focus-visible{transform:translateY(-3px);box-shadow:0 10px 0 #eee1bc}
+.cta-road{display:flex;gap:3px;margin-top:14px;opacity:0;transform:translateX(-16px);transition:opacity .3s,transform .5s;pointer-events:none;width:max-content}
+.cta-road i{display:block;width:21px;height:9px;border-radius:2px;background:#e9bb52;border:1px solid #d2a341}.cta-road i:nth-child(2n){transform:translateY(11px)}.hero:has(.cta:hover) .cta-road{opacity:1;transform:translateX(15px)}
+.postcard{width:100%;height:240px;position:relative;border:1px solid #d6dccd;border-radius:21px;background:linear-gradient(160deg,#f0f6f4 0%,#f3f6ec 62%,#faf3dd 100%);box-shadow:0 16px 35px rgba(48,71,55,.07);overflow:hidden}
+.postcard::before{content:"";position:absolute;width:120px;height:120px;right:-40px;top:-54px;background:repeating-conic-gradient(#83acd3 0% 25%,#f5f9f8 0% 50%) 50%/23px 23px;transform:rotate(17deg);opacity:.65}
+.postcard::after{content:"✦";position:absolute;top:24px;left:30px;color:#e6bc55;font-size:25px;animation:twinkle 4s ease-in-out infinite}
+.postcard svg{position:absolute;inset:0;width:100%;height:100%}
+.postcard-label{position:absolute;bottom:19px;left:21px;font-family:var(--display);font-size:12px;color:#687d75;letter-spacing:-.02em}
+.postcard-pin{position:absolute;top:26px;right:26px;font-size:10px;font-weight:800;letter-spacing:.16em;color:#527f75}
+.section-heading{margin-bottom:37px;padding:0 2px}.section-heading .eyebrow{color:#b1853a}
+.section-heading h2{font-family:var(--display);font-size:27px;letter-spacing:-.045em;margin:12px 0 8px;font-weight:400}
+.section-heading p{font-size:14px;line-height:1.8;color:var(--muted);margin:0}
+.catalog-group{margin:0 0 45px}.entry{--accent:#7da6bc;--soft:#edf3f3;position:relative;display:grid;grid-template-columns:53px minmax(0,1fr) 125px;align-items:center;gap:21px;background:var(--paper);border:1px solid #e1e2da;border-radius:17px;box-shadow:0 2px 8px rgba(50,60,51,.02);min-height:136px;padding:24px 23px;margin:0 0 13px;overflow:hidden;isolation:isolate;transition:transform .26s cubic-bezier(.2,.7,.2,1),border-color .28s,box-shadow .28s}
+.entry:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent);opacity:.35}.entry:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(50,60,51,.075)}
+.entry[data-mood=journey]{--accent:#719bd0;--soft:#ecf3fb}.entry[data-mood=company]{--accent:#8c9e52;--soft:#f1f5e4}.entry[data-mood=wisdom]{--accent:#c79b39;--soft:#fcf3de}.entry[data-mood=heart]{--accent:#ce7885;--soft:#f8e9ec}.entry[data-mood=courage]{--accent:#d98b3f;--soft:#fff0df}.entry[data-mood=trial]{--accent:#8970ac;--soft:#f1edf9}.entry[data-mood=wish]{--accent:#cd8eb3;--soft:#fceefa}.entry[data-mood=fantasy]{--accent:#48a38d;--soft:#e9f6f0}
+.number{width:47px;height:47px;border:1px dashed #d8d8cb;border-radius:12px;font-size:12px;font-weight:800;letter-spacing:.02em;display:grid;place-items:center;color:#8e978e;background:#f8f8f3}
+.entry-meta{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap}.entry-cat{font-size:11px;font-weight:750;color:#687977;border:1px solid #e2e5dc;border-radius:100px;padding:4px 10px}.entry-status{font-size:11px;font-weight:650;color:#518777}
+.entry h3{font-family:var(--display);font-size:17px;line-height:1.5;margin:0 0 5px;letter-spacing:-.032em;font-weight:400}
+.entry p{font-size:13px;color:#74807c;line-height:1.7;margin:0;max-width:600px;word-break:keep-all}
+.entry-link{display:inline-flex;align-items:center;margin-top:12px;font-size:12px;color:#486c64;font-weight:800;text-decoration:none;gap:5px;border-bottom:1px solid transparent;padding-bottom:3px}.entry-link:hover{border-bottom-color:currentColor}
+.entry-scene{align-self:stretch;display:grid;place-items:center;position:relative;min-width:0}.mood-name{font-size:10px;color:var(--accent);font-weight:800;letter-spacing:.1em;position:absolute;top:0;right:4px}.motif{width:96px;height:77px;position:relative;display:grid;place-items:center}
+.motif:before{content:"";position:absolute;inset:8px 12px 2px;border-radius:17px;background:var(--soft);opacity:.75;transform:rotate(-4deg);transition:transform .35s}
+.entry:hover .motif:before{transform:rotate(1deg) scale(1.05)}.motif svg{position:relative;width:80px;height:72px;overflow:visible}.motif .draw{stroke:var(--accent);fill:none;stroke-linejoin:round;stroke-linecap:round;stroke-width:2.3}
+@keyframes twinkle{0%,100%{opacity:.28;transform:scale(.75)}50%{opacity:1;transform:scale(1.25)}}
+.site-footer{margin-top:70px;padding:53px 0 70px;border-top:1px solid #e1e3d8;text-align:center}.site-footer .wordmark{font-size:23px}.site-footer p{font-size:13px;color:var(--muted);margin:14px 0}.contact-link{font-size:13px;color:#497d72;font-weight:700;text-decoration:none}.contact-link:hover{text-decoration:underline}.footer-bricks{margin:17px auto 0;width:70px;height:5px;background:repeating-linear-gradient(90deg,#e3b44b 0 11px,transparent 11px 15px);border-radius:4px;opacity:.7}
+@media(max-width:750px){.wrap{width:min(100% - 32px,1000px)}.header-inner{min-height:76px;gap:10px;flex-wrap:wrap;padding:14px 0}.nav-links{gap:1px;justify-content:flex-end}.nav-links>a,.theme-menu summary{font-size:12px;padding:8px 9px}.hero{grid-template-columns:minmax(0,1fr);gap:15px;padding:68px 0 45px}.hero h1{font-size:clamp(33px,7vw,47px)}.postcard{display:none}.entry{grid-template-columns:42px minmax(0,1fr) 88px;gap:12px;padding:19px 15px}.entry h3{font-size:15px}}
+@media(max-width:410px){.wordmark{font-size:24px}.nav-links>a,.theme-menu summary{font-size:11px;padding:7px}.hero-desc{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap header-inner">
+<a class="wordmark" href="../index.html" aria-label="oddz 홈">odd<span class="z">z</span><span class="star">✦</span></a>
+<nav class="nav-links" aria-label="주 메뉴">
+<a href="#work">프로젝트</a><a href="../journal/index.html?theme=sparkle">개발일지</a><a href="#contact">연락</a>
+<details class="theme-menu"><summary>테마 ▾</summary><div class="theme-options">
+<a href="../index.html">반짝이</a><a href="machine.html">기계</a><a href="game-water.html">게임 · 물빛</a><a href="game-sunset.html">게임 · 노을</a><a href="bubbles.html">비눗방울</a><a href="oz.html" aria-current="page">오즈 ✦</a>
+</div></details></nav></div></header>
+<main>
+<section class="hero wrap"><div><span class="eyebrow">oddz · dev journal · oz edition</span>
+<h1>Oddz,<br><em>심심하면 만들어요.</em></h1><p class="hero-desc">개발자가 되고 싶었던 사람의 끄적임.<br>작은 아이디어에서 시작된 여러 길을 모아두었습니다.</p>
+<a class="cta" href="#work">만든 것들 보기 <span aria-hidden="true">↗</span></a><div class="cta-road" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+<div class="postcard" aria-hidden="true"><span class="postcard-pin">ODDZ ✦</span><svg viewBox="0 0 300 240" fill="none" aria-hidden="true"><path d="M-14 188Q70 172 128 192T314 173" stroke="#b6d4b3" stroke-width="2"/><path d="M25 242C84 204 103 207 131 173C149 148 119 145 128 115C137 88 199 100 218 73" stroke="#e6c468" stroke-width="24" stroke-linecap="round"/><path d="M25 242C84 204 103 207 131 173C149 148 119 145 128 115C137 88 199 100 218 73" stroke="#c69c44" stroke-width="1.5" stroke-dasharray="2 8"/><path d="M201 62 223 31 245 62 245 100 201 100Z" fill="#83c2b5" opacity=".65"/><path d="m223 13 15 21-15 21-15-21Z" fill="#50a58e"/><path d="m223 22 7 12-7 12-7-12Z" fill="#d9eee5"/><path d="M182 110 182 91m-7 12h14M253 145v-17m-8 9h16" stroke="#83a99a" stroke-width="2"/></svg>
+<span class="postcard-label">작은 길이 모여 만들어지는 이야기</span></div></section>
+<section class="wrap" id="work" aria-labelledby="catalog-title"><div class="section-heading"><span class="eyebrow">catalogue</span><h2 id="catalog-title">만든 것들</h2><p>웹·앱·스크립트로 만들어본 것들의 기록입니다. 카드에 마우스를 올리면 작은 이야기가 나타나요.</p></div>
+<div class="catalog-group" aria-hidden="true"><article class="entry" data-mood="journey"><div class="entry-scene"><span class="mood-name">여정</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><path class="draw" d="M7 58h21m34 0h11M27 52h24M14 66h47"/><path d="M17 48h20v9H17zM39 48h19v9H39zM27 37h17v9H27zM34 27h13v8H34z" fill="#e7c369" stroke="#b49a50" stroke-width="1"/><path class="draw" d="M63 20v17m-8-8h16"/></svg></div></div></article>
+<article class="entry" data-mood="company"><div class="entry-scene"><span class="mood-name">동행</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><path class="draw" d="M11 57h58M14 56V33l16-12 16 12v23M24 56V41c0-9 14-9 14 0v15M14 34h32"/><g fill="var(--accent)"><ellipse cx="58" cy="56" rx="6" ry="5"/><circle cx="51" cy="49" r="2.7"/><circle cx="57" cy="46" r="2.7"/><circle cx="64" cy="49" r="2.7"/></g></svg></div></div></article>
+<article class="entry" data-mood="wisdom"><div class="entry-scene"><span class="mood-name">지혜</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><path class="draw" d="M40 65V18M40 54c-8-3-13-8-14-13 7-2 11 0 14 5M40 44c8-3 12-8 14-14-7-1-11 1-14 6M40 34c-7-4-10-8-10-14 6 0 9 3 10 7M40 26c6-5 8-10 7-16-5 1-7 6-7 10M23 64h36"/><path d="M40 13c-3 6-3 7 0 12 3-5 3-7 0-12" fill="#d9ac4f"/></svg></div></div></article>
+<article class="entry" data-mood="heart"><div class="entry-scene"><span class="mood-name">마음</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="54" cy="45" r="22" fill="none" stroke="#a6b1b3" stroke-width="3" stroke-dasharray="7 4"/><path fill="#d97886" d="M40 40c-6-10-19-1-10 9l16 14 16-14c9-10-4-19-10-9l-6 7Z" transform="translate(7 -3) scale(.9)"/><path class="draw" d="M10 47h10m-5-5v10M68 14v10m-5-5h10"/></svg></div></div></article>
+<article class="entry" data-mood="courage"><div class="entry-scene"><span class="mood-name">용기</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="42" cy="36" r="19" fill="#f2be61" opacity=".6"/><path class="draw" d="M9 57h62M13 57l15-11 12 7 15-19 15 23M42 7V14M68 26l-6 3M17 28l6 3M60 12l-5 6M23 13l5 6"/></svg></div></div></article>
+<article class="entry" data-mood="trial"><div class="entry-scene"><span class="mood-name">시련</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><path class="draw" d="M39 62V26m-11 11 11-11 11 11M25 62h29"/><path class="draw" d="M13 69C22 52 10 41 21 27S21 15 17 9M14 46l-8-4m15-12 9-5m-9 33-10-3M66 69C58 53 72 40 60 26S60 15 64 9M67 46l8-4m-14-11-9-5m9 32 10-3"/></svg></div></div></article>
+<article class="entry" data-mood="wish"><div class="entry-scene"><span class="mood-name">소망</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><path class="draw" d="M18 60c11-17 32-18 45-8"/><path fill="var(--accent)" d="m37 12 4 9 9 4-9 4-4 9-4-9-9-4 9-4Zm24 15 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/><circle fill="#ecc7d7" cx="22" cy="61" r="6"/><circle fill="#ecc7d7" cx="33" cy="58" r="6"/></svg></div></div></article>
+<article class="entry" data-mood="fantasy"><div class="entry-scene"><span class="mood-name">환상</span><div class="motif"><svg viewBox="0 0 80 80" aria-hidden="true"><path class="draw" d="M17 63V19h46v44M23 63h34"/><path d="m40 28 13 12-13 17-13-17Z" fill="#61b69d"/><path d="M40 28v29M27 40h26" stroke="#d7f3e5" stroke-width="2"/><path d="M17 19h23C36 37 27 42 23 63h-6Z" fill="#a6cfbf"/><path d="M63 19H40c5 18 13 23 17 44h6Z" fill="#79b6a3"/></svg></div></div></article></div></section></main>
+<footer class="site-footer" id="contact"><a class="wordmark" href="../index.html">odd<span class="z">z</span><span class="star">✦</span></a><p>오늘도 심심해서 뭘 만듭니다.</p><a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a><div class="footer-bricks" aria-hidden="true"></div></footer>
+<script>document.addEventListener('click',e=>{const menu=document.querySelector('.theme-menu');if(menu?.open&&!menu.contains(e.target))menu.open=false;});document.addEventListener('keydown',e=>{const menu=document.querySelector('.theme-menu');if(e.key==='Escape'&&menu?.open)menu.open=false;});</script>
+</body></html>
