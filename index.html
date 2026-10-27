@@ -257,6 +257,17 @@
 .catalog .entry:has(.project-action):focus-within { outline:2px solid currentColor; outline-offset:3px; }
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
+<link rel="stylesheet" href="assets/oddz-projects-catalog.css?v=20261027b">
+<script src="assets/oddz-projects-data.js?v=20261027b" defer></script>
+<script src="assets/oddz-projects-catalog.js?v=20261027b" defer></script>
+<style id="oddz-static-fallback-css">
+#work .oddz-static-catalog .oddz-fallback-main{min-width:0;text-align:left}
+#work .oddz-static-catalog .entry h3,#work .oddz-static-catalog .entry p{word-break:keep-all;overflow-wrap:anywhere;text-align:left}
+#work .oddz-static-catalog .entry .oddz-fallback-date{font-size:11px;opacity:.67;margin:5px 0 7px;line-height:1.4}
+#work .oddz-static-catalog .entry .project-action{position:relative;display:inline-block;margin-top:12px}
+#work .oddz-static-catalog .gem-tag{position:relative;display:grid;place-items:center}
+#work .oddz-static-catalog .oddz-fallback-num{position:absolute;font-size:10px;font-weight:800;color:#123c4a}
+</style>
 </head>
 <body>
 
@@ -279,6 +290,7 @@
           <a href="themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
           <a href="themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
           <a href="themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+          <a href="themes/oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
         </div>
       </details>
     </nav>
@@ -313,166 +325,32 @@
         <p>웹·앱·스크립트로 만들어본 것들의 기록입니다.</p>
       </div>
 
-      <div class="catalog">
-        <div class="catalog-phase" role="heading" aria-level="3" style="--phase-accent:#8fe3d0">완성</div>
-
-        <article class="entry">
-          <div class="entry-no">No.01</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Web</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">완성</span>
-            </div>
-            <h3>수강신청 연습사이트</h3>
-            <p>수강신청 과정을 미리 익혀볼 수 있도록 만든 연습 사이트입니다.</p>
-            <a class="project-action" href="projects/enrollment.html?theme=sparkle" aria-label="수강신청 연습사이트 자세히 보기">자세히 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="entry">
-          <div class="entry-no">No.02</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Desktop · Electron</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">완성</span>
-            </div>
-            <h3>나의 일기장</h3>
-            <p>오프라인에서도 쓸 수 있는 데스크톱 일기장입니다.</p>
-            <a class="project-action" href="projects/diary.html?theme=sparkle" aria-label="나의 일기장 자세히 보기">자세히 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="entry">
-          <div class="entry-no">No.03</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Automation</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">완성</span>
-            </div>
-            <h3>자료 정리 매크로</h3>
-            <p>반복되는 자료 정리 작업을 줄이기 위해 만든 자동화 도구입니다.</p>
-            <a class="project-action" href="projects/document-macro.html?theme=sparkle" aria-label="자료 정리 매크로 자세히 보기">자세히 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="entry">
-          <div class="entry-no">No.11</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Chrome Extension</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">배포 중</span>
-            </div>
-            <h3>오늘의 강의 — LMS 재생 도우미</h3>
-            <p>선택한 여러 과목의 강의 영상을 원하는 순서로 이어서 재생하는 크롬 확장프로그램입니다.</p>
-            <a class="project-action" href="projects/todays-lecture.html?theme=sparkle" aria-label="오늘의 강의 다운로드와 사용법 보기">다운로드 · 사용법 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="entry">
-          <div class="entry-no">No.12</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Web Game</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">완성</span>
-            </div>
-            <h3>만약에 로또에 당첨된다면?</h3>
-            <p>로또 당첨이나 출생부터 시작해 시대의 사건을 만나고, 생활과 자산을 선택하는 한국 경제사 학습 게임입니다.</p>
-            <a class="project-action" href="projects/if-world.html?theme=sparkle" aria-label="만약에 로또에 당첨된다면? 자세히 보기">자세히 보기 <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <div class="catalog-phase" role="heading" aria-level="3" style="--phase-accent:#8fe3d0">진행 중</div>
-
-
-        <article class="entry">
-          <div class="entry-no">No.05</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">PWA</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">진행 중</span>
-            </div>
-            <h3>지하철 문 방향 표시</h3>
-            <p>지하철에서 내릴 때 문이 열리는 방향을 보여주는 앱을 개발하고 있습니다.</p>
-          </div>
-        </article>
-
-        <article class="entry">
-          <div class="entry-no">No.06</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Web Game</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">진행 중</span>
-            </div>
-            <h3>랜덤게임 모음집</h3>
-            <p>여러 간단한 게임을 한곳에서 즐길 수 있도록 만드는 웹사이트입니다.</p>
-          </div>
-        </article>
-
-        <div class="catalog-phase" role="heading" aria-level="3" style="--phase-accent:#8fe3d0">진행 중인 작업이 끝나면</div>
-
-        <article class="entry pending">
-          <div class="entry-no">No.07</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Web Game</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">다음 작업</span>
-            </div>
-            <h3>연쇄 가위바위보</h3>
-            <p>참가자의 결과가 이어지는 가위바위보 게임을 만들 계획입니다.</p>
-          </div>
-        </article>
-
-        <article class="entry pending">
-          <div class="entry-no">No.08</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Web · 3D</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">다음 작업</span>
-            </div>
-            <h3>물병 던지기</h3>
-            <p>손 동작으로 물병을 잡고 던지는 3D 게임을 만들 계획입니다.</p>
-          </div>
-        </article>
-
-        <article class="entry pending">
-          <div class="entry-no">No.09</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Data · AI</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">다음 작업</span>
-            </div>
-            <h3>단단 — AI 어휘 사전</h3>
-            <p>AI를 활용하는 어휘 사전을 다음 작업으로 계획하고 있습니다.</p>
-          </div>
-        </article>
-
-        <div class="catalog-phase" role="heading" aria-level="3" style="--phase-accent:#8fe3d0">언젠가 할 것</div>
-
-        <article class="entry pending">
-          <div class="entry-no">No.10</div>
-          <div>
-            <div class="entry-meta">
-              <span class="entry-cat">Desktop</span>
-              <span class="dot-sep"></span>
-              <span class="entry-status">구상 중</span>
-            </div>
-            <h3>커피 카운터 위젯</h3>
-            <p>오늘 마신 커피를 기록하는 바탕화면 위젯을 구상해 두었습니다.</p>
-          </div>
-        </article>
-
-        
-      </div>
+      <div class="catalog oddz-static-catalog">
+<div class="catalog-phase" role="heading" aria-level="3">완성</div>
+<article class="entry" data-mood="company"><div class="entry-no">PJ 02</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web</span><span class="dot-sep"></span><span class="entry-status">완성</span></div><h3>수강신청 연습사이트</h3><p class="oddz-fallback-date">2026.05.04</p><p>수강신청 과정을 미리 체험할 수 있도록 만든 연습 페이지.</p><a class="project-action" href="projects/enrollment.html?theme=sparkle">프로젝트 보기 ↗</a></div></article>
+<article class="entry" data-mood="wisdom"><div class="entry-no">PJ 03</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Desktop</span><span class="dot-sep"></span><span class="entry-status">완성</span></div><h3>나의 일기장</h3><p class="oddz-fallback-date">2026.05.04</p><p>인터넷 없이 사용할 수 있는 Electron 기반 개인 일기장.</p><a class="project-action" href="projects/diary.html?theme=sparkle">프로젝트 보기 ↗</a></div></article>
+<article class="entry" data-mood="courage"><div class="entry-no">PJ 05</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Chrome Extension</span><span class="dot-sep"></span><span class="entry-status">완성</span></div><h3>오늘의 강의 · LMS 재생 도우미</h3><p class="oddz-fallback-date">2026.07</p><p>선택한 온라인 강의를 순서대로 이어서 재생하는 크롬 확장프로그램.</p><a class="project-action" href="projects/todays-lecture.html?theme=sparkle">다운로드·사용법 ↗</a></div></article>
+<article class="entry" data-mood="fantasy"><div class="entry-no">PJ 08</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Automation</span><span class="dot-sep"></span><span class="entry-status">완성</span></div><h3>자료 정리 매크로</h3><p class="oddz-fallback-date">2026.09.22</p><p>반복적인 보고서 자료 정리 작업을 줄이기 위한 자동화 도구.</p><a class="project-action" href="projects/document-macro.html?theme=sparkle">프로젝트 보기 ↗</a></div></article>
+<article class="entry" data-mood="wisdom"><div class="entry-no">PJ 11</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web Guide</span><span class="dot-sep"></span><span class="entry-status">완성</span></div><h3>강의 영상 대본화 가이드</h3><p class="oddz-fallback-date">2026.09.23</p><p>강의 영상의 음성을 MP3로 준비하고 대본화 작업으로 이어가는 과정을 안내하는 도구.</p><a class="project-action" href="projects/transcript-guide.html?theme=sparkle">사용 가이드 ↗</a></div></article>
+<article class="entry" data-mood="trial"><div class="entry-no">PJ 14</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web Game</span><span class="dot-sep"></span><span class="entry-status">완성</span></div><h3>IF 세계 · 만약에 로또에 당첨된다면?</h3><p class="oddz-fallback-date">2026.10.12</p><p>한국의 경제·사회·역사적 사건 속에서 선택하며 삶을 시뮬레이션하는 웹 게임.</p><a class="project-action" href="projects/if-world.html?theme=sparkle">프로젝트 보기 ↗</a></div></article>
+<div class="catalog-phase" role="heading" aria-level="3">진행 중</div>
+<article class="entry" data-mood="trial"><div class="entry-no">PJ 06</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web Game</span><span class="dot-sep"></span><span class="entry-status">진행 중</span></div><h3>랜덤게임 모음집</h3><p class="oddz-fallback-date">2026.07.30</p><p>짧게 즐길 수 있는 여러 게임을 한곳에 모으는 웹 프로젝트.</p></div></article>
+<article class="entry" data-mood="wish"><div class="entry-no">PJ 07</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web App</span><span class="dot-sep"></span><span class="entry-status">진행 중</span></div><h3>내리는 문 · 지하철 하차 방향</h3><p class="oddz-fallback-date">2026.08.12</p><p>사용자가 어느 방향을 바라보더라도 다음 역의 하차 문 방향을 안내하는 웹앱.</p></div></article>
+<article class="entry" data-mood="wish"><div class="entry-no">PJ 15</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web Game</span><span class="dot-sep"></span><span class="entry-status">진행 중</span></div><h3>페이지 키우기</h3><p class="oddz-fallback-date">2026.10.14</p><p>글과 상호작용에 반응해 점·선·면, 1D·2D·3D로 성장하는 캐릭터 게임.</p></div></article>
+<div class="catalog-phase" role="heading" aria-level="3">끝나면 할 것</div>
+<article class="entry pending" data-mood="journey"><div class="entry-no">PJ 01</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web Game</span><span class="dot-sep"></span><span class="entry-status">끝나면 할 것</span></div><h3>연쇄 가위바위보</h3><p class="oddz-fallback-date">2025.10.02</p><p>참가자들의 승패 결과가 연속적으로 이어지는 게임.</p></div></article>
+<article class="entry pending" data-mood="heart"><div class="entry-no">PJ 04</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Web · 3D</span><span class="dot-sep"></span><span class="entry-status">끝나면 할 것</span></div><h3>물병 던지기</h3><p class="oddz-fallback-date">2026.05.04</p><p>손 동작을 사용해 물병을 잡고 던지는 3D 게임.</p></div></article>
+<article class="entry pending" data-mood="company"><div class="entry-no">PJ 10</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Data · AI</span><span class="dot-sep"></span><span class="entry-status">끝나면 할 것</span></div><h3>단단 · AI 어휘 사전</h3><p class="oddz-fallback-date">2026.09.23 이전</p><p>단어를 더 쉽고 깊이 이해하도록 돕는 AI 기반 어휘 탐색 서비스.</p></div></article>
+<article class="entry pending" data-mood="company"><div class="entry-no">PJ 18</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">2D Game</span><span class="dot-sep"></span><span class="entry-status">끝나면 할 것</span></div><h3>글자 전투</h3><p class="oddz-fallback-date">2026.10.23</p><p>입력하거나 그린 글자가 살아 움직여 서로 싸우는 게임.</p></div></article>
+<article class="entry pending" data-mood="wisdom"><div class="entry-no">PJ 19</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Desktop Utility</span><span class="dot-sep"></span><span class="entry-status">끝나면 할 것</span></div><h3>PC 명령어 도구</h3><p class="oddz-fallback-date">2026.10.23</p><p>Windows 명령어를 몰라도 일상적인 컴퓨터 동작을 버튼으로 실행하는 프로그램.</p></div></article>
+<div class="catalog-phase" role="heading" aria-level="3">언젠가 할 것</div>
+<article class="entry pending" data-mood="journey"><div class="entry-no">PJ 09</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Desktop Widget</span><span class="dot-sep"></span><span class="entry-status">언젠가 할 것</span></div><h3>커피 카운터 위젯</h3><p class="oddz-fallback-date">2026.09.23 이전</p><p>오늘 마신 커피를 빠르게 기록하는 바탕화면 위젯.</p></div></article>
+<article class="entry pending" data-mood="heart"><div class="entry-no">PJ 12</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Search Platform</span><span class="dot-sep"></span><span class="entry-status">언젠가 할 것</span></div><h3>광고 레퍼런스 검색기</h3><p class="oddz-fallback-date">2026.09.27</p><p>업종·분위기·촬영·편집·타깃·목적에 따라 광고를 탐색하는 검색 서비스.</p></div></article>
+<article class="entry pending" data-mood="courage"><div class="entry-no">PJ 13</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Roblox Game</span><span class="dot-sep"></span><span class="entry-status">언젠가 할 것</span></div><h3>랜덤 월드 · Random World</h3><p class="oddz-fallback-date">2026.10.02</p><p>로블록스에서 무작위 사건과 미니게임을 즐기는 멀티플레이 게임.</p></div></article>
+<article class="entry pending" data-mood="fantasy"><div class="entry-no">PJ 16</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Life Simulation</span><span class="dot-sep"></span><span class="entry-status">언젠가 할 것</span></div><h3>일기장 키우기</h3><p class="oddz-fallback-date">2026.10.14</p><p>일기를 쓸수록 캐릭터가 달라지고 이야기가 쌓이는 기록형 성장 서비스.</p></div></article>
+<article class="entry pending" data-mood="journey"><div class="entry-no">PJ 17</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Routine Utility</span><span class="dot-sep"></span><span class="entry-status">언젠가 할 것</span></div><h3>나만의 괄사·마사지 타이머</h3><p class="oddz-fallback-date">2026.10.23</p><p>마사지 동작과 시간을 나만의 루틴으로 묶고 따라 하는 타이머.</p></div></article>
+<article class="entry pending" data-mood="heart"><div class="entry-no">PJ 20</div><div class="oddz-fallback-main"><div class="entry-meta"><span class="entry-cat">Practice Game</span><span class="dot-sep"></span><span class="entry-status">언젠가 할 것</span></div><h3>콘서트 티켓팅 연습장</h3><p class="oddz-fallback-date">2026.10.23</p><p>공연장 좌석 선택을 실제 티켓팅처럼 반복 연습하는 웹 시뮬레이터.</p></div></article>
+</div>
     </section>
   </main>
 
