@@ -84,3 +84,55 @@ html[data-oddz-theme=oz] #work .oddz-catalog .oddz-project-card.pending{opacity:
  html[data-oddz-theme=oz] #work .oddz-catalog .oddz-project-card .oddz-project-desc{min-height:0}
 }
 @media(prefers-reduced-motion:reduce){#work .oddz-catalog .oddz-project-card{transition:none!important}}
+
+/* 2026-10-27: 펼침형 '계획과 진행 내용'이 작은 카드 바깥으로 넘치는 문제 수정.
+   특히 오즈의 세로 flex 레이아웃에서 details의 자동 intrinsic width와
+   flex-basis:100%가 조합되면 grid 내용이 카드 너비 밖으로 배치될 수 있습니다. */
+#work .oddz-catalog .oddz-project-card .oddz-project-main,
+#work .oddz-catalog .oddz-project-card .entry-main,
+#work .oddz-catalog .oddz-project-lower,
+#work .oddz-catalog .oddz-project-details,
+#work .oddz-catalog .oddz-project-facts,
+#work .oddz-catalog .oddz-project-fact {
+  min-width:0;
+  max-width:100%;
+}
+#work .oddz-catalog .oddz-project-lower {
+  width:100%;
+}
+#work .oddz-catalog .oddz-project-details {
+  display:block;
+  width:100%;
+  overflow-wrap:anywhere;
+}
+#work .oddz-catalog .oddz-project-facts {
+  width:100%;
+  overflow:visible;
+}
+#work .oddz-catalog .oddz-project-fact {
+  width:100%;
+  grid-template-columns:minmax(0,62px) minmax(0,1fr);
+}
+#work .oddz-catalog .oddz-project-fact dt,
+#work .oddz-catalog .oddz-project-fact dd {
+  min-width:0;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+/* 전체 행을 덮는 구형 링크 레이어가 펼침 버튼의 클릭을 가로채지 않게 합니다. */
+#work .oddz-catalog .oddz-project-card .project-action::after {
+  content:none!important;
+  display:none!important;
+}
+/* 오즈 테마에서는 '100%' flex basis가 높이로 해석되므로 auto로 조정. */
+html[data-oddz-theme="oz"] #work .oddz-catalog .oddz-project-card .oddz-project-details[open] {
+  flex:0 0 auto;
+  width:100%;
+}
+@media (max-width:560px){
+  #work .oddz-catalog .oddz-project-fact {
+    grid-template-columns:minmax(0,60px) minmax(0,1fr);
+  }
+}
