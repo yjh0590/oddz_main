@@ -4,7 +4,8 @@
     machine: '../themes/machine.html',
     'game-water': '../themes/game-water.html',
     'game-sunset': '../themes/game-sunset.html',
-    bubbles: '../themes/bubbles.html'
+    bubbles: '../themes/bubbles.html',
+    oz: '../themes/oz.html'
   };
   const requested = new URLSearchParams(location.search).get('theme');
   let theme = 'sparkle';
@@ -23,6 +24,7 @@
     } catch (_) { /* Default theme is available without storage. */ }
   }
   document.documentElement.dataset.theme = theme;
+  document.documentElement.dataset.oddzTheme = theme;
   document.addEventListener('DOMContentLoaded', () => {
     for (const link of document.querySelectorAll('[data-home-link]')) {
       link.href = home[theme] + (link.dataset.homeLink === 'work' ? '#work' : '');

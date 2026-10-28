@@ -64,7 +64,15 @@
     const description=mk('p','oddz-project-desc',item.desc);
     main.append(meta,title,when,description);
     const lower=mk('div','oddz-project-lower');
-    if(item.url){const href=urlFor(item.url);if(href){const link=mk('a',oz?'entry-link':'project-action',item.link||'프로젝트 보기');link.href=href;link.setAttribute('aria-label',item.name+' 페이지 열기');link.append(mk('span','oddz-outbound','↗'));lower.append(link)}}
+    // The card has exactly one accessible full-surface action. A separately
+    // stacked <details> control remains interactive above that surface.
+    const href=item.url?urlFor(item.url):null;
+    if(href){
+      const action=mk('span',oz?'entry-link':'project-action',item.link||'프로젝트 보기');
+      action.append(mk('span','oddz-outbound','↗'));
+      action.setAttribute('aria-hidden','true');
+      lower.append(action);
+    }
     const details=mk('details','oddz-project-details');
     const summary=mk('summary','', '계획과 진행 내용');
     const dl=mk('dl','oddz-project-facts');
@@ -74,6 +82,22 @@
     }
     details.append(summary,dl);lower.append(details);main.append(lower);
     card.append(main);
+    const surface=mk(href?'a':'button','oddz-card-surface');
+    surface.setAttribute('aria-label',href?item.name+' 상세 페이지 열기':item.name+' 계획과 진행 내용 펼치기');
+    surface.setAttribute('title',href?'프로젝트 상세 페이지 열기':'계획과 진행 내용 펼치기');
+    if(href){
+      surface.href=href;
+    }else{
+      surface.type='button';
+      surface.setAttribute('aria-expanded','false');
+      surface.setAttribute('aria-controls',item.id+'-details');
+      details.id=item.id+'-details';
+      surface.addEventListener('click',()=>{details.open=!details.open;});
+      details.addEventListener('toggle',()=>{
+        surface.setAttribute('aria-expanded',String(details.open));
+        surface.setAttribute('aria-label',item.name+(details.open?' 계획과 진행 내용 접기':' 계획과 진행 내용 펼치기'));
+      });
+    }
     if(oz){
       const scene=mk('div','entry-scene');
       const sample=sceneSamples[index%Math.max(1,sceneSamples.length)];
@@ -81,6 +105,8 @@
       else scene.innerHTML='<div class="motif" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M12 60Q40 15 68 60" fill="none" stroke="currentColor" stroke-width="3"/></svg></div>';
       card.append(scene);
     }
+    // Added last for stacking, but the existing details sit above it.
+    card.append(surface);
     return card;
   }
   const container=mk('div','catalog oddz-catalog');
@@ -139,5 +165,5 @@
   }
   picker.addEventListener('click',e=>{const tab=e.target.closest('button[data-filter]');if(!tab)return;filter=tab.dataset.filter;update()});
   input.addEventListener('input',update);update();
-  work.dataset.catalogVersion='shared-v1';
+  work.dataset.catalogVersion='shared-v2-card-surface';
 })();
