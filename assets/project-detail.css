@@ -79,3 +79,22 @@ html[data-theme="bubbles"] .eyebrow,html[data-theme="bubbles"] .button { border-
   white-space:nowrap;
   letter-spacing:-.025em;
 }
+
+/* Oz theme: the project detail page follows the selected Oz catalogue. */
+html[data-theme="oz"] {
+  color-scheme:light;
+  --paper:#30474b; --muted:#607475; --mint:#337f6a;
+  --line:rgba(80,123,111,.22);--button-text:#fffdfa;--button-hover:#256953;
+  --bg:linear-gradient(160deg,#f8f7f2 0%,#f7f8f2 52%,#f2f6ee 100%);
+  --bg-art:radial-gradient(circle at 88% 19%,rgba(124,166,198,.17),transparent 29%),
+    radial-gradient(circle at 12% 78%,rgba(233,185,79,.13),transparent 38%);
+}
+html[data-theme="oz"] .wordmark{font-style:normal;letter-spacing:-.03em}
+html[data-theme="oz"] .wordmark span{color:var(--mint)}
+html[data-theme="oz"] .eyebrow{background:rgba(255,253,247,.8);border-style:solid;border-radius:99px}
+html[data-theme="oz"] main{background:rgba(255,254,251,.48);border-radius:24px;padding-top:7vh}
+html[data-theme="oz"] .button{border-radius:11px;box-shadow:0 4px 0 rgba(90,132,113,.15)}
+html[data-theme="oz"] .notice{background:#fffdf7;border-color:var(--line);color:var(--muted)}
+html[data-theme="oz"] .info{border-color:var(--line)}
+html[data-theme="oz"] a:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
+@media(max-width:600px){html[data-theme="oz"] main{border-radius:16px;}}
