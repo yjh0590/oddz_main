@@ -381,5 +381,27 @@ window.ODDZ_PROJECTS = Object.freeze([
     "date": "2026.10.23",
     "dateBasis": "아이디어 제안",
     "oldNumber": "PJ 10"
+  },
+  {
+    "id": "pj-21",
+    "no": "PJ 21",
+    "stage": "done",
+    "type": "Windows App",
+    "name": "쓱-싹 · 파일 정리 도우미",
+    "desc": "쌓인 파일을 검사하고, 정리할 항목을 골라 휴지통이나 보관함으로 옮기는 Windows 도구.",
+    "feat": "복사본·정리 후보 검사, 정크 파일 확인, 폴더 용량, 보관·복원, Chrome 다운로드 기록 정리",
+    "current": "v0.7.1 · Chrome 앱 창 버전 제작, Windows 실기기 실행 확인 필요",
+    "next": "Windows 실행·화면 검증과 배포 서명 검토",
+    "tags": [
+      "쓱싹",
+      "파일 정리",
+      "다운로드",
+      "Windows",
+      "Chrome"
+    ],
+    "url": "/projects/sseuk-ssak.html",
+    "link": "다운로드·사용법",
+    "date": "2026.11.03",
+    "dateBasis": "개발 및 배포본 제작 기록"
   }
 ]);

@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded',()=>{const theme=document.documentElement.dataset.theme||'sparkle';for(const a of document.querySelectorAll('[data-theme-link]')){const u=new URL(a.getAttribute('href'),location.href);u.searchParams.set('theme',theme);a.href=u.href;}});
