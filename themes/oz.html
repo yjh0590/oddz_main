@@ -2,10 +2,19 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="description" content="oddz — 심심하면 만드는 것들. 오즈의 작은 여정처럼 이어지는 프로젝트 기록.">
 <title>oddz — 오즈 테마</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='23' fill='%23F8F5EC'/%3E%3Cpath d='M13 75h16V59h16V43h16V27h26' stroke='%23E7B64C' stroke-width='14' fill='none'/%3E%3Cpath d='M70 18l6-11 6 11 11 6-11 6-6 11-6-11-11-6Z' fill='%233C927D'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261103">
@@ -131,5 +140,5 @@ header{border-bottom:1px solid #e6e5dc;background:rgba(248,247,242,.94)}
 <article class="entry pending" data-mood="heart"><div class="number">PJ 20</div><div class="entry-main"><div class="entry-meta"><span class="entry-cat">Practice Game</span><span class="entry-status">언젠가 할 것</span></div><h3>콘서트 티켓팅 연습장</h3><p class="oddz-fallback-date">2026.10.23</p><p>공연장 좌석 선택을 실제 티켓팅처럼 반복 연습하는 웹 시뮬레이터.</p></div><div class="entry-scene"><span class="mood-name">마음</span><div class="motif"><svg aria-hidden="true" viewbox="0 0 80 80"><circle cx="54" cy="45" fill="none" r="22" stroke="#a6b1b3" stroke-dasharray="7 4" stroke-width="3"></circle><path d="M40 40c-6-10-19-1-10 9l16 14 16-14c9-10-4-19-10-9l-6 7Z" fill="#d97886" transform="translate(7 -3) scale(.9)"></path><path class="draw" d="M10 47h10m-5-5v10M68 14v10m-5-5h10"></path></svg></div></div></article>
 </div></div></section></main>
 <footer class="site-footer" id="contact"><a class="wordmark" href="../index.html">odd<span class="z">z</span><span class="star">✦</span></a><p>오늘도 심심해서 뭘 만듭니다.</p><a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a><div class="footer-bricks" aria-hidden="true"></div></footer>
-<script>document.addEventListener('click',e=>{const menu=document.querySelector('.theme-menu');if(menu?.open&&!menu.contains(e.target))menu.open=false;});document.addEventListener('keydown',e=>{const menu=document.querySelector('.theme-menu');if(e.key==='Escape'&&menu?.open)menu.open=false;});</script>
+<script src="../assets/oz-menu.js"></script>
 </body></html>

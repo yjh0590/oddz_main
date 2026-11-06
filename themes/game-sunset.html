@@ -2,8 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>oddz — 심심하면 만드는 것들</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2312181B'/%3E%3Cpolygon points='50,18 76,50 50,82 24,50' fill='none' stroke='%23D8A94A' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='7' fill='%23D8A94A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -352,26 +362,7 @@
     <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
   </footer>
 
-  <script>
-    const container = document.getElementById('embers');
-    const count = 22;
-    for(let i=0;i<count;i++){
-      const e = document.createElement('div');
-      e.className = 'ember';
-      const left = Math.random()*100;
-      const delay = Math.random()*20;
-      const duration = 14 + Math.random()*14;
-      const drift = (Math.random()*70 - 35) + 'px';
-      const size = 3 + Math.random()*4;
-      e.style.left = left + 'vw';
-      e.style.width = size + 'px';
-      e.style.height = size + 'px';
-      e.style.animationDelay = delay + 's';
-      e.style.animationDuration = duration + 's';
-      e.style.setProperty('--drift', drift);
-      container.appendChild(e);
-    }
-  </script>
+  <script src="../assets/ambient.js"></script>
 
 <script src="../assets/theme-switcher.js" defer></script>
 </body>

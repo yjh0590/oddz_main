@@ -2,8 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>oddz — 심심하면 만드는 것들</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231B1030'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23E8C468' stroke-width='5'/%3E%3Ccircle cx='38' cy='38' r='6' fill='%23FFFFFF' opacity='0.8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -314,41 +324,7 @@
     <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
   </footer>
 
-  <script>
-    const bColors = ['#F5A9C9', '#8FD8E8', '#B79EE8', '#9EE8C8'];
-    const bContainer = document.getElementById('bubbles');
-    for(let i=0;i<20;i++){
-      const b = document.createElement('div');
-      b.className = 'bubble';
-      const left = Math.random()*100;
-      const delay = Math.random()*22;
-      const duration = 16 + Math.random()*14;
-      const drift = (Math.random()*80 - 40) + 'px';
-      const size = 10 + Math.random()*22;
-      const color = bColors[Math.floor(Math.random()*bColors.length)];
-      b.style.left = left + 'vw';
-      b.style.width = size + 'px';
-      b.style.height = size + 'px';
-      b.style.background = `radial-gradient(circle at 30% 26%, rgba(255,255,255,0.9), transparent 40%), ${color}33`;
-      b.style.border = `1px solid ${color}88`;
-      b.style.animationDelay = delay + 's';
-      b.style.animationDuration = duration + 's';
-      b.style.setProperty('--drift', drift);
-      bContainer.appendChild(b);
-    }
-
-    const sContainer = document.getElementById('sparkles');
-    for(let i=0;i<26;i++){
-      const s = document.createElement('div');
-      s.className = 'spark';
-      s.innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0 L6 4 L10 5 L6 6 L5 10 L4 6 L0 5 L4 4 Z" fill="currentColor"/></svg>';
-      s.style.left = (Math.random()*100) + 'vw';
-      s.style.top = (Math.random()*100) + 'vh';
-      s.style.animationDuration = (2 + Math.random()*3) + 's';
-      s.style.animationDelay = (Math.random()*4) + 's';
-      sContainer.appendChild(s);
-    }
-  </script>
+  <script src="../assets/ambient.js"></script>
 
 <script src="../assets/theme-switcher.js" defer></script>
 </body>

@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="oddz 프로젝트 — 오늘의 강의 — 가톨릭대 LMS 자동재생 도우미">
   <title>오늘의 강의 — 가톨릭대 LMS 자동재생 도우미 · oddz</title>
@@ -33,6 +34,7 @@
         <h2 id="download-title">가톨릭대 LMS 확장프로그램 다운로드</h2>
         <a class="button" href="../downloads/catholic-lms-autoplay-v0.6.9.zip" download>확장프로그램 다운로드 · v0.6.9 <span aria-hidden="true">↓</span></a>
         <p class="small">PC Chrome용 · 직접 설치 필요 · 가톨릭대 LMS 전용</p>
+        <p class="small hash">SHA-256: <code>b6e8405523d4e4ebb34fa7e131ba5c300a9ec68be63faae95dbdb060cc3791fb</code><br>PowerShell에서 <code>Get-FileHash 파일이름.zip</code>으로 받은 파일이 원본인지 확인할 수 있습니다.</p>
         <p>설치 방법: ZIP 압축 해제 → <code>chrome://extensions</code> → 개발자 모드 → <strong>압축해제된 확장 프로그램을 로드합니다</strong></p>
         <p>압축을 푼 폴더에서 <code>manifest.json</code>이 보이는 폴더를 선택하세요. 자세한 설치·사용 순서는 위의 사용법 탭에서 확인할 수 있습니다.</p>
       </section>
@@ -40,6 +42,21 @@
         <h2 id="features-title">지원하는 기능</h2>
         <ul><li>여러 과목·강의 선택 가능</li><li>강의 종료 후 다음 강의 자동 이동</li><li>다음 강의 자동 재생</li><li>전체 시작 / 중지 지원</li><li>Chrome 확장프로그램 형태로 설치</li></ul>
         <p class="notice">자동재생을 위해 Chrome의 디버깅 기능을 사용하므로 실행 중 브라우저 상단에 디버깅 안내가 표시될 수 있습니다.</p>
+      </section>
+      <section class="info" aria-labelledby="permission-title">
+        <h2 id="permission-title">debugger 권한을 쓰는 이유</h2>
+        <p>설치할 때 Chrome이 <strong>‘디버거에 액세스’</strong> 권한을 요청합니다. 다른 웹페이지까지 제어할 수 있는 강한 권한이라, 이 확장프로그램이 실제로 무엇에 쓰는지 정리해 둡니다.</p>
+        <ul>
+          <li><strong>필요한 이유</strong>: Chrome은 사용자가 직접 누르지 않은 영상 재생을 막습니다. 첫 강의는 직접 눌러 시작하지만, 다음 강의는 프로그램이 이동하므로 일반적인 클릭 코드로는 재생이 차단됩니다. 그래서 Chrome DevTools Protocol의 <code>userGesture</code> 옵션으로 플레이어의 재생 명령 하나만 실행합니다.</li>
+          <li><strong>연결 범위</strong>: 자동 실행 중인 LMS 탭에만 연결하고, 그 안에서도 <code>cms.catholic.ac.kr</code> 플레이어 화면에서만 명령을 실행합니다. 다른 탭이나 사이트에는 연결하지 않습니다.</li>
+          <li><strong>하지 않는 일</strong>: 페이지 내용·쿠키·비밀번호·네트워크 요청을 읽거나 외부 서버로 보내지 않습니다. 확장프로그램 코드에는 외부로 데이터를 전송하는 코드가 없습니다.</li>
+          <li><strong>연결 해제</strong>: 중지를 누르거나 탭을 닫으면 디버깅 연결이 해제되고 상단 안내도 사라집니다.</li>
+        </ul>
+        <p class="small">코드는 ZIP 안의 <code>background.js</code>에서 직접 확인할 수 있습니다. 출처가 확실하지 않은 다른 확장프로그램에는 이 권한을 허용하지 마세요.</p>
+      </section>
+      <section class="info" aria-labelledby="disclaimer-title">
+        <h2 id="disclaimer-title">사용 전 확인할 점</h2>
+        <p>개인 학습 편의를 위해 만든 실험용 도구이며, 학교나 LMS 운영 측과 무관합니다. 강의 자동 재생이 수강·출석 규정에 어긋나지 않는지는 사용자가 직접 확인해 주세요. 사용으로 생기는 출석·진도 인정 문제에 대한 책임은 사용자에게 있습니다.</p>
       </section>
     </div>
     <div id="guide-panel" role="tabpanel" aria-labelledby="guide-tab" tabindex="0">

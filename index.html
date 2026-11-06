@@ -2,8 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>oddz — 심심하면 만드는 것들</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23221934'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%238fe3d0'/%3E%3Ccircle cx='50' cy='50' r='28' fill='%238fe3d0' opacity='0.25'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,14 +230,7 @@
 </style>
 <style>:root{--picker-bg:#241b38;--picker-menu:#302442;--picker-text:#f3ead9;--picker-line:rgba(243,234,217,.45);--picker-hover:rgba(143,227,208,.16);--picker-accent:#8fe3d0}</style>
 <link rel="stylesheet" href="assets/theme-switcher.css">
-<script>
-  // Opening oddz.click again returns to the visitor's last selected theme.
-  try {
-    const saved = localStorage.getItem('oddz-theme');
-    const allowed = ['themes/machine.html', 'themes/game-water.html', 'themes/game-sunset.html', 'themes/bubbles.html'];
-    if (allowed.includes(saved)) location.replace(new URL(saved + location.hash, location.href));
-  } catch (_) { /* Stay on the default design when storage is unavailable. */ }
-</script>
+<script src="assets/theme-restore.js"></script>
 <style>
 /* Project index grouped by the owner's current progress. */
 .catalog .catalog-phase {
@@ -362,26 +365,7 @@
     <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
   </footer>
 
-  <script>
-    const container = document.getElementById('fireflies');
-    const count = 22;
-    for(let i=0;i<count;i++){
-      const f = document.createElement('div');
-      f.className = 'firefly';
-      const left = Math.random()*100;
-      const delay = Math.random()*22;
-      const duration = 16 + Math.random()*14;
-      const drift = (Math.random()*80 - 40) + 'px';
-      const size = 3 + Math.random()*4;
-      f.style.left = left + 'vw';
-      f.style.animationDelay = delay + 's';
-      f.style.animationDuration = duration + 's';
-      f.style.setProperty('--drift', drift);
-      f.style.width = size + 'px';
-      f.style.height = size + 'px';
-      container.appendChild(f);
-    }
-  </script>
+  <script src="assets/ambient.js"></script>
 
 <script src="assets/theme-switcher.js" defer></script>
 </body>

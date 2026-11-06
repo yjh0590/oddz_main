@@ -98,3 +98,6 @@ html[data-theme="oz"] .notice{background:#fffdf7;border-color:var(--line);color:
 html[data-theme="oz"] .info{border-color:var(--line)}
 html[data-theme="oz"] a:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
 @media(max-width:600px){html[data-theme="oz"] main{border-radius:16px;}}
+
+/* 다운로드 SHA-256 해시: 좁은 화면에서도 줄바꿈 */
+.hash code { word-break: break-all; }
