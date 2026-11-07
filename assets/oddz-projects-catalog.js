@@ -60,7 +60,6 @@
     meta.append(mk('span','entry-status',stageDefs.find(s=>s.key===item.stage).title));
     const title=mk('h3','',item.name);
     const when=mk('p','oddz-project-date',item.date||'기록 날짜 미확인');
-    if(item.dateBasis)when.title='날짜 기준: '+item.dateBasis;
     const description=mk('p','oddz-project-desc',item.desc);
     main.append(meta,title,when,description);
     const lower=mk('div','oddz-project-lower');
