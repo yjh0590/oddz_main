@@ -5,7 +5,8 @@
     'game-water': '../themes/game-water.html',
     'game-sunset': '../themes/game-sunset.html',
     bubbles: '../themes/bubbles.html',
-    oz: '../themes/oz.html'
+    oz: '../themes/oz.html',
+    hum: '../themes/hum.html'
   };
   const requested = new URLSearchParams(location.search).get('theme');
   let theme = 'sparkle';

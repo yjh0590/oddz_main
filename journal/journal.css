@@ -38,6 +38,9 @@ html[data-theme="machine"] .journal-card { border-radius: 3px; }
 html[data-theme="machine"] .journal-pager__link { border-radius: 3px; }
 html[data-theme="bubbles"] .journal-card { border-radius: 24px; }
 html[data-theme="bubbles"] .journal-pager__link { border-radius: 24px; }
+html[data-theme="hum"] .journal-card { border-radius: 24px; border-color: var(--line); background: oklch(98.8% 0.007 95); box-shadow: 0 12px 28px -14px oklch(20% 0.014 255 / 0.22); }
+html[data-theme="hum"] .journal-card:hover { border-color: oklch(72% 0.16 92); }
+html[data-theme="hum"] .journal-pager__link { border-style: solid; border-radius: 14px; background: oklch(98.8% 0.007 95); }
 @media (max-width: 680px) {
   .journal-list { grid-template-columns: 1fr; }
   .journal-card { padding: 20px; }

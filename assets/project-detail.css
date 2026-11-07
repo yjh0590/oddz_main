@@ -99,5 +99,23 @@ html[data-theme="oz"] .info{border-color:var(--line)}
 html[data-theme="oz"] a:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
 @media(max-width:600px){html[data-theme="oz"] main{border-radius:16px;}}
 
+/* Hum (종이 공작): cream paper, blue-black ink, pear card-stock buttons. */
+html[data-theme="hum"] {
+  color-scheme:light;
+  --paper:oklch(20% 0.014 255); --muted:oklch(40% 0.014 255); --mint:oklch(50% 0.17 250);
+  --line:oklch(85% 0.02 95); --button-text:oklch(20% 0.014 255); --button-hover:oklch(90% 0.16 96);
+  --bg:oklch(97% 0.012 95);
+  --bg-art:linear-gradient(transparent,transparent);
+}
+html[data-theme="hum"] .wordmark{font-style:normal;letter-spacing:-.03em}
+html[data-theme="hum"] .wordmark span{color:oklch(72% 0.16 92)}
+html[data-theme="hum"] .eyebrow{color:var(--muted);border-style:solid;border-radius:99px;background:oklch(94.5% 0.018 95);letter-spacing:0}
+html[data-theme="hum"] .button{border:0;border-radius:16px;background:oklch(87% 0.175 96);box-shadow:0 5px 0 0 oklch(72% 0.16 92);transition:translate .12s,box-shadow .12s}
+html[data-theme="hum"] .button:hover{background:var(--button-hover);translate:0 -2px;box-shadow:0 7px 0 0 oklch(72% 0.16 92)}
+html[data-theme="hum"] .button:active{translate:0 4px;box-shadow:0 1px 0 0 oklch(72% 0.16 92)}
+html[data-theme="hum"] .notice{background:oklch(94.5% 0.018 95);border-color:var(--line);color:var(--muted);border-radius:14px}
+html[data-theme="hum"] a:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){html[data-theme="hum"] .button{transition:none}}
+
 /* 다운로드 SHA-256 해시: 좁은 화면에서도 줄바꿈 */
 .hash code { word-break: break-all; }

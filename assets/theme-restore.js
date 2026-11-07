@@ -8,7 +8,8 @@
       'themes/game-water.html',
       'themes/game-sunset.html',
       'themes/bubbles.html',
-      'themes/oz.html'
+      'themes/oz.html',
+      'themes/hum.html'
     ];
     if (allowed.includes(saved)) location.replace(new URL(saved + location.hash, location.href));
   } catch (_) { /* Stay on the default design when storage is unavailable. */ }
