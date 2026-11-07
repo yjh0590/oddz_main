@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="종료 예약 프로그램 하나에서 시작해, cmd 명령어 13가지를 버튼으로 모은 명령어 도구함을 만들고 다듬은 기록.">
+  <title>명령어 도구함 · 개발일지 · oddz</title>
+  <link rel="canonical" href="https://oddz.click/journal/cmd-toolbox.html">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css">
+  <link rel="stylesheet" href="journal.css?v=20260926-1">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav>
+  </header>
+  <main><article class="journal-article">
+    <header class="journal-intro">
+      <div class="journal-topline"><span class="eyebrow">Windows App · v1.0.0</span><nav class="journal-pager" aria-label="개발일지 이전 글과 다음 글"><a class="journal-pager__link" data-journal-detail href="sseuk-ssak.html" aria-label="다음 글: 쓱-싹"><span class="journal-pager__label">→ 다음 글</span><span class="journal-pager__title">쓱-싹</span></a></nav></div>
+      <h1>명령어 도구함</h1>
+      <p class="lead">종료 예약 프로그램 하나에서 시작해, 자주 검색하던 cmd 명령어 13가지를 버튼으로 모은 기록.</p>
+      <p class="article-date">2026.11.07 ~ 2026.11.08</p>
+    </header>
+
+    <section class="journal-section"><h2>종료 예약 하나에서 시작</h2>
+      <p>영상을 틀어 놓고 자거나 큰 파일을 내려받을 때 <code>shutdown -s -t 3600</code> 같은 명령을 자주 썼다. 그런데 매번 cmd를 열고, 1시간 30분이 몇 초인지 계산해서 입력하는 게 번거로웠다. 바탕화면에서 더블클릭 한 번으로 쓰고 싶었다.</p>
+      <p>처음에는 시간을 고르고 예약 버튼을 누르는 작은 프로그램 하나만 만들었다. 만들다 보니 IP 확인(<code>ipconfig</code>), DNS 비우기(<code>ipconfig /flushdns</code>), 와이파이 비밀번호 보기처럼 가끔 쓰는데 매번 명령어를 검색하게 되는 것들이 떠올랐다. 그래서 이런 명령을 한곳에 모은 <strong>명령어 도구함</strong>으로 범위를 넓혔다.</p>
+    </section>
+
+    <section class="journal-section"><h2>설치 없이 빌드되게</h2>
+      <p>Windows에는 .NET Framework와 C# 컴파일러(<code>csc.exe</code>)가 기본으로 들어 있다. 이걸 쓰면 Visual Studio 같은 개발 도구를 설치하지 않아도 <code>build.bat</code> 하나로 exe를 만들 수 있다. 소스도 <code>CmdToolbox.cs</code> 파일 하나로 끝냈다. 사용 기술은 C#과 WinForms(.NET Framework 4)이고, AI 코딩 도구(Claude Code)를 활용해 만들었다.</p>
+      <p>기본 WinForms 화면은 오래된 Windows 프로그램처럼 보여서 직접 그렸다. 어두운 테마에 왼쪽 메뉴와 오른쪽 내용 화면으로 나누고, 둥근 버튼과 카드, 다크 모드 제목 표시줄을 넣었다. 종료 예약은 남은 시간이 줄어드는 원형 카운트다운으로 보여 준다.</p>
+      <figure class="shot">
+        <img src="../assets/cmd-toolbox-shutdown.png" width="826" height="589" alt="명령어 도구함의 종료 예약 화면: 왼쪽에 기능 13개 메뉴, 가운데 원형 카운트다운, 오른쪽에 시각을 고르는 버튼" loading="lazy">
+        <figcaption>종료 예약 화면. 기능 설명 아래에 실제로 실행되는 cmd 명령어가 함께 표시된다.</figcaption>
+      </figure>
+    </section>
+
+    <section class="journal-section"><h2>다시 읽으며 찾은 위험한 문제</h2>
+      <p>GitHub에 올린 다음 날, 완성된 앱을 처음부터 다시 읽으며 문제점을 찾았다.</p>
+      <p><strong>앱이 종료 예약을 기억하지 못했다.</strong> 예약을 걸고 앱을 껐다 켜면 "예약 없음"으로 나왔지만, Windows에는 예약이 그대로 걸려 있었다. 예약이 없는 줄 알고 있다가 갑자기 PC가 꺼질 수 있는, 가장 위험한 문제였다. 예약 시각을 <code>%APPDATA%\CmdToolbox</code>에 저장해서 앱을 다시 열어도 카운트다운이 이어지게 했다. PC를 재부팅했다면 예약도 사라지므로 저장된 기록을 버린다.</p>
+      <p><strong>임시 파일 정리가 너무 공격적이었다.</strong> 방금 만든 파일까지 지워서, 설치 프로그램이 실행 중일 때 누르면 설치가 깨질 수 있었다. 임시 폴더 안에 다른 폴더를 가리키는 링크(정션)가 있으면 그 너머의 파일까지 지울 수도 있었다. 24시간이 안 된 파일은 남기고, 링크 폴더는 따라 들어가지 않게 했다.</p>
+      <p><strong>오래 걸리는 명령은 멈춘 것처럼 보였다.</strong> 경로 추적(<code>tracert</code>)은 몇 분 걸리기도 하는데, 그동안 "실행 중..."만 떠 있었다. 결과가 나오는 대로 한 줄씩 보여 주고, 실행 중에는 버튼이 <strong>[중지]</strong>로 바뀌게 했다.</p>
+      <p>편의 기능도 더했다. 종료 예약에 "밤 11시 30분에 끄기" 같은 시각 지정을 넣었고, 와이파이 비밀번호를 한꺼번에 조회해 복사할 수 있게 했다. 화면 배율이 125%, 150%인 노트북에서도 글자가 흐리지 않게 했다.</p>
+    </section>
+
+    <section class="journal-section"><h2>직접 눌러 보고 알게 된 것</h2>
+      <p>앱을 직접 띄우고 버튼을 눌러 화면을 확인하다가 예전부터 있던 버그 두 개를 찾았다. 숫자 입력 칸의 위아래 화살표를 숨겼는데 그 자리가 흰 네모로 남아 있었다. 와이파이 화면에서는 글자가 깨졌다. 한국어 Windows의 cmd 명령은 보통 CP949로 출력하는데 <code>netsh</code>만 UTF-8로 출력하고 있었다. 지금은 줄마다 어느 인코딩인지 판별해서 읽는다.</p>
+      <p>반대로 내가 잘못 알고 있던 것도 있었다. DNS 캐시 비우기는 관리자 권한이 필요 없다고 생각했는데, 실제로 실행해 보니 권한 오류가 났다. 그래서 그 부분은 고치지 않고 그대로 두었다. 직접 실행해서 확인하는 게 중요하다는 걸 다시 느꼈다.</p>
+    </section>
+
+    <section class="journal-section"><h2>11개에서 13개 메뉴로</h2>
+      <p>자주 쓰는 명령을 더 넣었다.</p>
+      <ul>
+        <li>포트·프로세스: "이미 3000번 포트를 사용 중" 같은 오류가 날 때 그 포트를 쓰는 프로그램을 찾아 종료 (<code>netstat -ano</code>, <code>taskkill</code>)</li>
+        <li>프로그램 업데이트: 새 버전이 있는 프로그램을 한 번에 업데이트 (<code>winget upgrade --all</code>)</li>
+        <li>공인 IP 확인 (<code>curl ifconfig.me</code>)</li>
+        <li>IP 다시 받기, 네트워크 초기화 (<code>ipconfig /renew</code>, <code>netsh winsock reset</code>)</li>
+        <li>휴지통 비우기, 최대 절전 끄기 (<code>powercfg /h off</code>)</li>
+        <li>시간 맞추기, 파일 해시 확인, 디스크 검사 (<code>w32tm /resync</code>, <code>certutil</code>, <code>chkdsk</code>)</li>
+      </ul>
+      <p>그리고 v1.0.0을 GitHub Release로 배포했다. 설치 없이 exe 하나, 또는 exe와 안내문을 묶은 ZIP을 내려받아 실행하면 된다.</p>
+    </section>
+
+    <section class="journal-section"><h2>다음에 해 보고 싶은 것</h2>
+      <p>지금은 코드 서명이 없어서 처음 실행할 때 Windows가 경고를 띄운다. 서명을 붙이는 방법을 알아보고 싶다. 자주 쓰는 기능을 시작 화면에 고정하는 즐겨찾기도 만들어 보고 싶다.</p>
+    </section>
+
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a><a class="button" data-journal-detail href="../projects/cmd-toolbox.html">명령어 도구함 다운로드·사용법 ↗</a></div>
+  </article></main><footer>oddz · 심심하면 만들어요.</footer>
+</body></html>
