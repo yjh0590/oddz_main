@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="cmd에 직접 입력하던 Windows 명령어를 버튼 하나로 실행하는 Windows 프로그램. 설치 없이 실행 파일 하나로 씁니다.">
+  <title>명령어 도구함 · 다운로드 · oddz</title>
+  <link rel="canonical" href="https://oddz.click/projects/cmd-toolbox.html">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css">
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">← 프로젝트 목록</a></nav>
+  </header>
+  <main>
+    <span class="eyebrow">PJ 19 · Windows App · v1.0.0</span>
+    <h1>명령어 도구함</h1>
+    <p class="lead">cmd 창을 열고 명령어를 입력하지 않아도, 버튼 하나로 Windows 명령을 실행하는 프로그램입니다.</p>
+
+    <figure class="shot">
+      <img src="../assets/cmd-toolbox-shutdown.png" width="826" height="589" alt="명령어 도구함 화면: 왼쪽에 기능 13개 메뉴, 오른쪽에 종료 예약 시각을 고르는 화면과 남은 시간 원형 표시" loading="lazy">
+      <figcaption>종료 예약 화면. 실제로 실행되는 cmd 명령어가 기능 설명 아래에 함께 표시됩니다.</figcaption>
+    </figure>
+
+    <section class="info" aria-labelledby="about-title">
+      <h2 id="about-title">어떤 프로젝트인가요?</h2>
+      <p>자주 쓰지만 외우기 어려운 Windows 명령어들을 기능별로 묶어 두었습니다. 왼쪽 메뉴에서 기능을 고르고 버튼을 누르면 결과가 바로 아래에 나옵니다. 오래 걸리는 명령은 실행 중에 중지할 수 있습니다.</p>
+      <ul>
+        <li>종료 예약: 몇 시간 뒤, 또는 정한 시각에 PC 끄기. 앱을 다시 열어도 예약이 유지됩니다.</li>
+        <li>전원: 잠금, 절전, 로그아웃, 재시작, 종료</li>
+        <li>IP 확인(공인 IP 포함), 인터넷 연결 확인, IP 다시 받기, 네트워크 초기화</li>
+        <li>DNS 캐시 비우기, 저장된 와이파이 비밀번호 보기</li>
+        <li>포트·프로세스: 포트 번호나 프로그램 이름으로 찾아 강제 종료</li>
+        <li>디스크 정리, 프로그램 업데이트(<code>winget</code>), 시스템 정보, 배터리 리포트</li>
+        <li>시스템 파일 검사, 디스크 검사, Windows 도구 바로가기</li>
+      </ul>
+    </section>
+
+    <section class="info" aria-labelledby="use-title">
+      <h2 id="use-title">다운로드</h2>
+      <a class="button" href="https://github.com/yjh0590/CmdToolbox/releases/download/v1.0.0/CmdToolbox-v1.0.0.zip">ZIP 다운로드 · v1.0.0</a>
+      <p class="small">Windows 10, 11용 · 설치 없음 · ZIP 약 34KB (실행 파일과 안내문)</p>
+      <p class="small hash">SHA-256: <code>e582c79995f03013e0f4a64cfb55e4a661754d712542fcac70a56266043d7637</code><br>PowerShell에서 <code>Get-FileHash 파일이름.zip</code>으로 받은 파일이 원본인지 확인할 수 있습니다.</p>
+      <p class="small hash">실행 파일만 받으려면 <a href="https://github.com/yjh0590/CmdToolbox/releases/download/v1.0.0/CmdToolbox.exe">CmdToolbox.exe</a> (SHA-256 <code>687c31055685c5717db03a100af17d6d2a235530c61f6b09a080217ef658d1ad</code>)</p>
+    </section>
+
+    <section class="info" aria-labelledby="run-title">
+      <h2 id="run-title">이렇게 실행하세요</h2>
+      <ol>
+        <li>ZIP 파일의 압축을 풉니다.</li>
+        <li><code>CmdToolbox.exe</code>를 더블클릭합니다. 설치 과정은 없고, Windows에 기본으로 들어 있는 .NET Framework로 실행됩니다.</li>
+        <li>처음 실행할 때 파란 <strong>Windows의 PC 보호</strong> 창이 뜨면 <strong>추가 정보</strong>를 누른 뒤 <strong>실행</strong>을 누르세요. 코드 서명이 없는 개인 제작 프로그램이라 뜨는 창입니다.</li>
+      </ol>
+      <p class="small">브라우저가 "흔히 다운로드되는 파일이 아닙니다"라고 표시하면 다운로드 목록에서 <strong>유지</strong>(또는 <strong>계속</strong>)를 누르세요.</p>
+    </section>
+
+    <section class="info" aria-labelledby="care-title">
+      <h2 id="care-title">사용 전에 알아 둘 것</h2>
+      <ul>
+        <li>로그아웃·재시작·종료, IP 다시 받기, 네트워크 초기화, 임시 파일 삭제, 강제 종료처럼 되돌리기 어려운 동작은 실행 전에 한 번 더 묻습니다.</li>
+        <li>네트워크 초기화, 시스템 파일 검사처럼 관리자 권한이 필요한 기능은 Windows의 권한 확인 창이 뜹니다.</li>
+        <li>네트워크 초기화 뒤에는 PC를 재시작해야 하고, 직접 넣은 고정 IP나 VPN 설정이 사라질 수 있습니다.</li>
+        <li>삭제할 때는 <code>CmdToolbox.exe</code>를 지우면 됩니다. 종료 예약 기록이 남는 <code>%APPDATA%\CmdToolbox</code> 폴더도 지우면 깨끗하게 정리됩니다.</li>
+      </ul>
+      <p class="small">소스 코드와 자세한 사용법은 <a href="https://github.com/yjh0590/CmdToolbox">GitHub 저장소</a>에 공개되어 있습니다.</p>
+    </section>
+  </main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

@@ -348,19 +348,21 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-19",
     "no": "PJ 19",
-    "stage": "next",
-    "type": "Desktop Utility",
-    "name": "PC 명령어 도구",
-    "desc": "Windows 명령어를 몰라도 일상적인 컴퓨터 동작을 버튼으로 실행하는 프로그램.",
-    "feat": "예약 종료·재시작·화면 잠금 등 편의 명령",
-    "current": "아이디어 구상 단계",
-    "next": "안전한 명령부터 구현하고 위험 작업은 확인 절차 마련",
+    "stage": "done",
+    "type": "Windows App",
+    "name": "명령어 도구함 · CmdToolbox",
+    "desc": "cmd에 직접 입력하던 Windows 명령어를 버튼 하나로 실행하는 프로그램.",
+    "feat": "종료 예약, 전원, IP·네트워크 확인, 와이파이 비밀번호, 포트 정리, 디스크 정리 등 13가지 기능",
+    "current": "Windows 실행 파일 v1.0.0 배포",
     "tags": [
       "Windows",
-      "생산성"
+      "생산성",
+      "cmd"
     ],
-    "date": "2026.10.23",
-    "dateBasis": "아이디어 제안",
+    "url": "/projects/cmd-toolbox.html?theme=sparkle",
+    "link": "다운로드·사용법",
+    "date": "2026.11.08",
+    "dateBasis": "GitHub Release v1.0.0",
     "oldNumber": "PJ 09"
   },
   {

@@ -117,5 +117,10 @@ html[data-theme="hum"] .notice{background:oklch(94.5% 0.018 95);border-color:var
 html[data-theme="hum"] a:focus-visible{outline:3px solid var(--mint);outline-offset:4px}
 @media(prefers-reduced-motion:reduce){html[data-theme="hum"] .button{transition:none}}
 
+/* 프로젝트 화면 캡처 */
+.shot { margin:40px 0 0; }
+.shot img { display:block; max-width:100%; height:auto; border:1px solid var(--line); border-radius:14px; }
+.shot figcaption { margin-top:10px; color:var(--muted); font-size:.85rem; line-height:1.7; }
+
 /* 다운로드 SHA-256 해시: 좁은 화면에서도 줄바꿈 */
 .hash code { word-break: break-all; }
