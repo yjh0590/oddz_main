@@ -30,6 +30,14 @@
     url.searchParams.set('theme',theme==='oz'?'oz':theme);
     return url.href;
   };
+  const iconFor=(item)=>{
+    // Local project icons only (assets/icons/*.png).
+    if(typeof item.icon!=='string'||!/^\/assets\/icons\/[a-z0-9-]+\.png$/.test(item.icon))return null;
+    const img=mk('img','oddz-project-icon');
+    img.src=new URL(item.icon,document.baseURI).href;img.alt='';img.width=64;img.height=64;
+    img.loading='lazy';img.decoding='async';
+    return img;
+  };
   function badge(item){
     const digits=item.no.replace('PJ ','');
     if(theme==='oz')return mk('div','number',item.no);
@@ -97,12 +105,16 @@
         surface.setAttribute('aria-label',item.name+(details.open?' 계획과 진행 내용 접기':' 계획과 진행 내용 펼치기'));
       });
     }
+    const icon=iconFor(item);
     if(oz){
       const scene=mk('div','entry-scene');
       const sample=sceneSamples[index%Math.max(1,sceneSamples.length)];
-      if(sample?.html)scene.innerHTML=sample.html;
+      if(icon)scene.append(icon);
+      else if(sample?.html)scene.innerHTML=sample.html;
       else scene.innerHTML='<div class="motif" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M12 60Q40 15 68 60" fill="none" stroke="currentColor" stroke-width="3"/></svg></div>';
       card.append(scene);
+    }else if(icon){
+      card.classList.add('has-icon');card.append(icon);
     }
     // Added last for stacking, but the existing details sit above it.
     card.append(surface);

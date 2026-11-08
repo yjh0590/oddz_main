@@ -6,6 +6,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-01",
     "no": "PJ 01",
+    "icon": "/assets/icons/pj-01.png",
     "stage": "next",
     "type": "Web Game",
     "name": "연쇄 가위바위보",
@@ -24,6 +25,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-02",
     "no": "PJ 02",
+    "icon": "/assets/icons/pj-02.png",
     "stage": "done",
     "type": "Web",
     "name": "수강신청 연습사이트",
@@ -44,6 +46,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-03",
     "no": "PJ 03",
+    "icon": "/assets/icons/pj-03.png",
     "stage": "done",
     "type": "Desktop",
     "name": "나의 일기장",
@@ -64,6 +67,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-04",
     "no": "PJ 04",
+    "icon": "/assets/icons/pj-04.png",
     "stage": "next",
     "type": "Web · 3D",
     "name": "물병 던지기",
@@ -82,6 +86,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-05",
     "no": "PJ 05",
+    "icon": "/assets/icons/pj-05.png",
     "stage": "done",
     "type": "Chrome Extension",
     "name": "오늘의 강의 · LMS 재생 도우미",
@@ -102,6 +107,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-06",
     "no": "PJ 06",
+    "icon": "/assets/icons/pj-06.png",
     "stage": "doing",
     "type": "Web Game",
     "name": "랜덤게임 모음집",
@@ -120,6 +126,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-07",
     "no": "PJ 07",
+    "icon": "/assets/icons/pj-07.png",
     "stage": "doing",
     "type": "Web App",
     "name": "내리는 문 · 지하철 하차 방향",
@@ -139,6 +146,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-08",
     "no": "PJ 08",
+    "icon": "/assets/icons/pj-08.png",
     "stage": "done",
     "type": "Automation",
     "name": "자료 정리 매크로",
@@ -159,6 +167,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-09",
     "no": "PJ 09",
+    "icon": "/assets/icons/pj-09.png",
     "stage": "someday",
     "type": "Desktop Widget",
     "name": "커피 카운터 위젯",
@@ -177,6 +186,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-10",
     "no": "PJ 10",
+    "icon": "/assets/icons/pj-10.png",
     "stage": "next",
     "type": "Data · AI",
     "name": "단단 · AI 어휘 사전",
@@ -195,6 +205,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-11",
     "no": "PJ 11",
+    "icon": "/assets/icons/pj-11.png",
     "stage": "done",
     "type": "Web Guide",
     "name": "강의 영상 대본화 가이드",
@@ -215,6 +226,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-12",
     "no": "PJ 12",
+    "icon": "/assets/icons/pj-12.png",
     "stage": "someday",
     "type": "Search Platform",
     "name": "광고 레퍼런스 검색기",
@@ -234,6 +246,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-13",
     "no": "PJ 13",
+    "icon": "/assets/icons/pj-13.png",
     "stage": "someday",
     "type": "Roblox Game",
     "name": "랜덤 월드 · Random World",
@@ -252,6 +265,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-14",
     "no": "PJ 14",
+    "icon": "/assets/icons/pj-14.png",
     "stage": "done",
     "type": "Web Game",
     "name": "IF 세계 · 만약에 로또에 당첨된다면?",
@@ -273,6 +287,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-15",
     "no": "PJ 15",
+    "icon": "/assets/icons/pj-15.png",
     "stage": "doing",
     "type": "Web Game",
     "name": "페이지 키우기",
@@ -292,6 +307,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-16",
     "no": "PJ 16",
+    "icon": "/assets/icons/pj-16.png",
     "stage": "someday",
     "type": "Life Simulation",
     "name": "일기장 키우기",
@@ -311,6 +327,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-17",
     "no": "PJ 17",
+    "icon": "/assets/icons/pj-17.png",
     "stage": "someday",
     "type": "Routine Utility",
     "name": "나만의 괄사·마사지 타이머",
@@ -329,6 +346,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-18",
     "no": "PJ 18",
+    "icon": "/assets/icons/pj-18.png",
     "stage": "next",
     "type": "2D Game",
     "name": "글자 전투",
@@ -348,6 +366,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-19",
     "no": "PJ 19",
+    "icon": "/assets/icons/pj-19.png",
     "stage": "done",
     "type": "Windows App",
     "name": "명령어 도구함 · CmdToolbox",
@@ -368,6 +387,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-20",
     "no": "PJ 20",
+    "icon": "/assets/icons/pj-20.png",
     "stage": "someday",
     "type": "Practice Game",
     "name": "콘서트 티켓팅 연습장",
@@ -387,6 +407,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-21",
     "no": "PJ 21",
+    "icon": "/assets/icons/pj-21.png",
     "stage": "done",
     "type": "Windows App",
     "name": "쓱-싹 · 파일 정리 도우미",

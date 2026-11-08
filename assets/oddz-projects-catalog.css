@@ -159,3 +159,12 @@ html[data-oddz-theme="oz"] #work .oddz-catalog .oddz-project-card .oddz-project-
 #work .oddz-catalog .oddz-project-card .entry-link::after{
   content:none!important;display:none!important;
 }
+
+/* 2026-11-08: 프로젝트 아이콘 (assets/icons). 오즈는 카드 오른쪽 위 그림 자리에 넣는다. */
+#work .oddz-catalog .oddz-project-card>.oddz-project-icon{position:absolute;top:24px;right:24px;width:64px;height:64px;object-fit:contain;border-radius:22%;pointer-events:none;z-index:1}
+#work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main{padding-right:88px}
+#work .oddz-catalog .entry-scene .oddz-project-icon{width:56px;height:56px;object-fit:contain;border-radius:22%}
+@media(max-width:560px){
+  #work .oddz-catalog .oddz-project-card>.oddz-project-icon{top:16px;right:16px;width:44px;height:44px}
+  #work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main{padding-right:56px}
+}

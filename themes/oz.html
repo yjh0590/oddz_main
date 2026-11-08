@@ -18,9 +18,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23F6EFDC'/%3E%3Cpath d='M30 86V44l10-24 10 24v42M56 86V54l9-20 9 20v32' fill='%233F9A68' stroke='%231D2A24' stroke-width='4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261103">
-<script src="../assets/oddz-projects-data.js?v=20261103" defer></script>
-<script src="../assets/oddz-projects-catalog.js?v=20261103" defer></script>
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261108-2">
+<script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261108-2" defer></script>
 <style>
 /* 오즈 — 1900년 원작 동화책의 삽화처럼: 단색 면, 잉크 선, 종이 바탕 */
 :root{
@@ -48,11 +48,8 @@ header{border-bottom:1.5px solid var(--ink)}
 .wordmark{font:700 28px/1 var(--display);letter-spacing:-.03em;text-decoration:none;color:var(--ink);white-space:nowrap}
 .wordmark .z{color:var(--em)}.wordmark .star{font-family:serif;color:var(--yellow-dark);font-size:14px;vertical-align:super;margin-left:2px}
 .nav-links{display:flex;gap:4px;align-items:center;margin-left:auto}
-.nav-links>a,.theme-menu summary,.specs{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:600;padding:8px 11px;border:1px solid transparent;border-radius:4px;background:none;cursor:pointer;white-space:nowrap}
-.nav-links>a:hover,.theme-menu summary:hover,.specs:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
-.specs{border-color:var(--rule)}
-.specs svg{width:20px;height:11px;flex:none}
-.specs[aria-pressed=true]{background:var(--em);border-color:var(--em);color:var(--paper);text-decoration:none}
+.nav-links>a,.theme-menu summary{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink-2);font-size:13px;font-weight:600;padding:8px 11px;border:1px solid transparent;border-radius:4px;background:none;cursor:pointer;white-space:nowrap}
+.nav-links>a:hover,.theme-menu summary:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
 .theme-menu{position:relative}
 .theme-menu summary{list-style:none;border-color:var(--rule)}
 .theme-menu summary::-webkit-details-marker{display:none}
@@ -70,8 +67,33 @@ header{border-bottom:1.5px solid var(--ink)}
 
 /* 책 삽화 한 장 (.postcard 이름은 카탈로그 스크립트가 오즈 테마를 알아보는 표식이라 유지) */
 .postcard{margin:0;justify-self:end;width:100%;max-width:480px;background:var(--paper);border:1.5px solid var(--ink);padding:10px}
-.postcard svg{display:block;width:100%;height:auto;border:1px solid var(--ink)}
-.postcard figcaption{margin-top:9px;font:500 12.5px/1.5 var(--display);color:var(--muted);text-align:center}
+.plate-art{position:relative;border:1px solid var(--ink)}
+.plate-art svg{display:block;width:100%;height:auto}
+/* 초록 안경: 원작에서 에메랄드 시티에 들어가는 사람은 모두 초록 안경을 쓴다 */
+.plate-art::after{content:"";position:absolute;inset:0;pointer-events:none;background:#4fbf7f;mix-blend-mode:multiply;opacity:0;transition:opacity .5s}
+.postcard.specs-on .plate-art::after{opacity:.55;transition:opacity .8s 2.1s}
+/* 탁자 위 안경을 누르면: 소녀가 걸어 들어와(0–1.2s) 안경을 집어 쓰고(1.2–1.9s) 성을 올려다본다(2.0s~). 끌 때는 반대로. */
+.specs-hit{position:absolute;z-index:2;left:0;top:70%;width:23%;height:25%;padding:0;border:0;background:none;cursor:pointer;border-radius:8px}
+.specs-hit:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.walker{transform:translateX(-170px);opacity:0;transition:transform 1.1s ease-in .9s,opacity .3s 1.7s}
+.specs-on .walker{transform:none;opacity:1;transition:transform 1.2s cubic-bezier(.2,.6,.3,1),opacity .3s}
+.specs-on .walker-bob{animation:bob .3s ease-in-out 4}
+.walker-head{transform-origin:104px 305px;transition:transform .5s}
+.specs-on .walker-head{transform:rotate(-12deg);transition:transform .6s 2s}
+.specs-fly{transition:transform .6s ease-in-out .2s,opacity 0s .2s}
+.specs-fly-y{transform-origin:56px 315px;transition:transform .6s cubic-bezier(.4,1.8,.6,1) .2s}
+.specs-on .specs-fly{transform:translateX(38.4px);opacity:0;transition:transform .7s ease-in-out 1.2s,opacity 0s 1.9s}
+.specs-on .specs-fly-y{transform:translateY(-27.3px) scale(.4);transition:transform .7s cubic-bezier(.4,-1.2,.6,1) 1.2s}
+.specs-lift{transition:transform .25s}
+.plate-art:has(.specs-hit:hover) .specs-lift{transform:translateY(-3px)}
+.specs-glint{animation:glint 2.8s ease-in-out infinite}
+.specs-worn{opacity:0;transition:opacity 0s}
+.specs-on .specs-worn{opacity:1;transition:opacity 0s 1.9s}
+@keyframes bob{50%{transform:translateY(-2px)}}
+@keyframes glint{0%,70%,100%{opacity:0}80%{opacity:1}}
+.postcard figcaption{margin-top:9px;font:500 12.5px/1.6 var(--display);color:var(--muted);text-align:center;word-break:keep-all}
+.specs{margin-left:8px;padding:0;border:0;background:none;cursor:pointer;font:600 12.5px/1.6 var(--body);color:var(--em-dark);text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:2px;text-underline-offset:4px;white-space:nowrap}
+.specs:hover{color:var(--ink)}
 
 /* 카탈로그 */
 .work-band{padding:64px 0 140px}
@@ -126,6 +148,21 @@ html[data-oddz-theme=oz] #work .oddz-catalog .oddz-stage-en{display:none}
 html[data-oddz-theme=oz] #work .oddz-catalog .oddz-stage-count{order:3;color:var(--muted);opacity:1}
 html[data-oddz-theme=oz] #work .oddz-catalog .oddz-stage-intro{color:var(--muted);opacity:1;margin-bottom:16px}
 
+/* 초록 안경으로만 보이는 것 (assets/oz-spectacles.js) */
+#work .oddz-catalog .secret,#work .oddz-catalog .secret-lab{display:none}
+html.oz-specs #work .oddz-catalog .secret,html.oz-specs #work .oddz-catalog .secret-lab{display:block}
+#work .oddz-catalog:has(.oddz-filter[data-filter=all][aria-pressed=false]) .secret-lab{display:none}
+#work .oddz-catalog .secret{position:relative;z-index:3;margin:12px 0 0;padding:10px 12px;background:#e3f0e1;border:1px dashed var(--em);border-radius:4px;font-size:12px;line-height:1.6;animation:secret-in .5s ease}
+#work .oddz-catalog .secret .secret-tag{display:block;font:600 11.5px/1.4 var(--display);color:var(--em-dark)}
+#work .oddz-catalog .secret .secret-note{margin:3px 0 6px!important;color:var(--ink)!important;font-size:12px!important;min-height:0!important}
+#work .oddz-catalog .secret-links{display:flex;flex-wrap:wrap;gap:4px 12px}
+#work .oddz-catalog .secret-links a{font-weight:700;color:var(--em-dark);text-decoration:underline;text-underline-offset:3px}
+#work .oddz-catalog .secret-lab{animation:secret-in .5s ease}
+html[data-oddz-theme=oz] #work .oddz-catalog .oddz-project-stage[data-stage=secret]{--place:"안경을 써야 보이는 곳"}
+html[data-oddz-theme=oz] #work .oddz-catalog .secret-lab .oddz-stage-head{border-bottom-style:dashed;border-color:var(--em)}
+:is(html[data-oddz-theme=oz] #work .oddz-catalog) .entry.secret-card:not(#_){background:#f1f7ee;border-style:dashed;border-color:#9cc7a4}
+@keyframes secret-in{from{opacity:0;transform:translateY(4px)}}
+
 /* 바닥글: 성문 */
 .site-footer{position:relative;background:var(--em-dark);color:#efe7cf;text-align:center}
 .skyline{position:absolute;left:0;right:0;bottom:100%;width:100%;height:110px;display:block}
@@ -134,12 +171,10 @@ html[data-oddz-theme=oz] #work .oddz-catalog .oddz-stage-intro{color:var(--muted
 .site-footer p{font-size:14px;color:#c9d8cc;margin:14px 0}
 .contact-link{font-size:13px;color:var(--yellow);font-weight:700}
 
-/* 초록 안경: 원작에서 에메랄드 시티 사람들은 모두 초록 안경을 쓴다 */
-html.specs-on body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;background:#4fbf7f;mix-blend-mode:multiply;opacity:.45}
 
 @media(max-width:860px){.hero{grid-template-columns:minmax(0,1fr);gap:40px;padding:48px 0 50px}.postcard{justify-self:start;max-width:440px}}
-@media(max-width:750px){.wrap{width:min(100% - 32px,1040px)}.header-inner{min-height:68px;gap:10px;flex-wrap:wrap;padding:12px 0}.nav-links{gap:0;justify-content:flex-end;flex-wrap:wrap}.nav-links>a,.theme-menu summary,.specs{font-size:12px;padding:7px 8px}.section-heading h2{font-size:29px}.skyline{height:72px}}
-@media(max-width:430px){.wordmark{font-size:24px}.nav-links>a,.theme-menu summary,.specs{font-size:11.5px;padding:6px 7px}.specs .specs-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.hero-desc{font-size:14.5px}}
+@media(max-width:750px){.wrap{width:min(100% - 32px,1040px)}.header-inner{min-height:68px;gap:10px;flex-wrap:wrap;padding:12px 0}.nav-links{gap:0;justify-content:flex-end;flex-wrap:wrap}.nav-links>a,.theme-menu summary{font-size:12px;padding:7px 8px}.section-heading h2{font-size:29px}.skyline{height:72px}}
+@media(max-width:430px){.wordmark{font-size:24px}.nav-links>a,.theme-menu summary{font-size:11.5px;padding:6px 7px}.hero-desc{font-size:14.5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
 </style>
 <style id="oddz-static-fallback-css">
@@ -164,7 +199,6 @@ html.specs-on body::after{content:"";position:fixed;inset:0;z-index:60;pointer-e
 <a class="wordmark" href="../index.html" aria-label="oddz 홈">odd<span class="z">z</span><span class="star">✦</span></a>
 <nav class="nav-links" aria-label="주 메뉴">
 <a href="#work">프로젝트</a><a href="../journal/index.html?theme=sparkle">개발일지</a><a href="#contact">연락</a>
-<button class="specs" type="button" data-specs aria-pressed="false"><svg viewBox="0 0 44 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="12" r="8"/><circle cx="33" cy="12" r="8"/><path d="M19 11q3-3 6 0"/></g></svg><span class="specs-label">초록 안경</span></button>
 <details class="theme-menu"><summary>테마 ▾</summary><div class="theme-options">
 <a href="../index.html">반짝이</a><a href="machine.html">기계</a><a href="game-water.html">게임 · 물빛</a><a href="game-sunset.html">게임 · 노을</a><a href="bubbles.html">비눗방울</a><a href="oz.html" aria-current="page">오즈</a><a href="hum.html">종이 공작</a>
 </div></details></nav></div></header>
@@ -172,7 +206,7 @@ html.specs-on body::after{content:"";position:fixed;inset:0;z-index:60;pointer-e
 <section class="hero wrap"><div><p class="hero-kicker">oddz · dev journal · oz edition</p>
 <h1>Oddz,<br><em>심심하면 만들어요.</em></h1><p class="hero-desc">개발자가 되고 싶었던 사람의 끄적임.<br>작은 아이디어에서 시작된 여러 길을 모아두었습니다.</p>
 <a class="cta" href="#work">만든 것들 보기 ↓</a></div>
-<figure class="postcard" aria-hidden="true"><svg viewBox="0 0 500 380">
+<figure class="postcard"><div class="plate-art"><svg viewBox="0 0 500 380" aria-hidden="true">
 <rect width="500" height="380" fill="#efe6cb"/>
 <g fill="none" stroke="#8d8a80" stroke-width="2" stroke-linecap="round"><path d="M40 40q60-12 124 0"/><path d="M52 58q48-9 98 0"/><path d="M62 75q38-7 76 0"/><path d="M72 91q28-5 56 0"/><path d="M82 106q18-4 36 0"/><path d="M90 120q10-3 20 0"/><path d="M100 126c-3 8 3 14 0 22"/></g>
 <g transform="translate(172 74) rotate(-18)" stroke="#1d2a24" stroke-width="1.2"><rect x="-10" y="-3" width="20" height="13" fill="#c9c3b0"/><path d="M-13-3 0-14 13-3z" fill="#9b958a"/></g>
@@ -188,10 +222,29 @@ html.specs-on body::after{content:"";position:fixed;inset:0;z-index:60;pointer-e
 <g stroke="#1d2a24" stroke-width="1.2" fill="none"><path d="M248 214v-7h10v7m8 0v-7h10v7m8 0v-7h10v7m26 0v-7h10v7m8 0v-7h10v7m8 0v-7h10v7"/></g>
 <path d="M0 290q90-24 200-8 60 9 110-4 100-24 190 2v100H0z" fill="#7eb27f" stroke="#1d2a24" stroke-width="1.3"/>
 <g stroke="#1d2a24" stroke-width="1" stroke-linecap="round" opacity=".55"><path d="M30 310l4-8m6 10 3-9m70 14 4-8m6 9 3-8M420 300l4-8m6 10 3-8m30 30 4-8m6 9 3-8M60 350l4-8m6 9 3-8M440 350l4-8m6 9 3-8"/></g>
-<g fill="#c4412e"><circle cx="24" cy="262" r="3"/><circle cx="44" cy="254" r="2.6"/><circle cx="68" cy="266" r="3"/><circle cx="96" cy="258" r="2.6"/><circle cx="130" cy="268" r="3"/><circle cx="160" cy="256" r="2.4"/><circle cx="30" cy="332" r="3.6"/><circle cx="90" cy="342" r="3.4"/><circle cx="130" cy="360" r="3.8"/><circle cx="20" cy="364" r="3.6"/><circle cx="400" cy="252" r="2.6"/><circle cx="430" cy="262" r="3"/><circle cx="462" cy="250" r="2.6"/><circle cx="484" cy="266" r="3"/><circle cx="410" cy="330" r="3.6"/><circle cx="470" cy="324" r="3.4"/><circle cx="450" cy="360" r="3.8"/><circle cx="392" cy="362" r="3.4"/></g>
+<g fill="#c4412e"><circle cx="24" cy="262" r="3"/><circle cx="44" cy="254" r="2.6"/><circle cx="68" cy="266" r="3"/><circle cx="96" cy="258" r="2.6"/><circle cx="130" cy="268" r="3"/><circle cx="160" cy="256" r="2.4"/><circle cx="90" cy="342" r="3.4"/><circle cx="130" cy="360" r="3.8"/><circle cx="20" cy="364" r="3.6"/><circle cx="400" cy="252" r="2.6"/><circle cx="430" cy="262" r="3"/><circle cx="462" cy="250" r="2.6"/><circle cx="484" cy="266" r="3"/><circle cx="410" cy="330" r="3.6"/><circle cx="470" cy="324" r="3.4"/><circle cx="450" cy="360" r="3.8"/><circle cx="392" cy="362" r="3.4"/></g>
 <path d="M120 380c50-44 180-80 200-132h20c4 52-40 96-90 132z" fill="#e9b730" stroke="#1d2a24" stroke-width="1.4" stroke-linejoin="round"/>
 <g stroke="#a87c16" stroke-width="1.3" fill="none"><path d="M152 380c46-42 170-80 173-132" stroke-dasharray="13 4"/><path d="M186 380c40-40 145-80 150-132" stroke-dasharray="10 4" stroke-dashoffset="5"/><path d="M218 380c34-38 112-80 117-132" stroke-dasharray="13 4" stroke-dashoffset="2"/></g>
-</svg><figcaption>노란 벽돌길 끝에 에메랄드 시티가 있다.</figcaption></figure></section>
+
+<g transform="translate(56 349) scale(1.9) translate(-56 -349)"><g class="oz-table" stroke="#1d2a24" stroke-width="1.2"><ellipse cx="56" cy="349" rx="13" ry="3.5" fill="#a8743c"/><rect x="53" y="322" width="6" height="27" fill="#b98146"/><ellipse cx="56" cy="322" rx="26" ry="6.5" fill="#d4a467"/></g>
+</g>
+<g class="walker"><g class="walker-bob"><g transform="translate(114 353) scale(2.1) translate(-104 -353)">
+<ellipse cx="104" cy="353.5" rx="12" ry="2.6" fill="#1d2a24" opacity=".15"/>
+<path d="M100 338v13M108 338v13" stroke="#1d2a24" stroke-width="2.2"/>
+<g fill="#d5dde1" stroke="#1d2a24" stroke-width=".9"><ellipse cx="102" cy="352" rx="3.8" ry="2"/><ellipse cx="110" cy="352" rx="3.8" ry="2"/></g>
+<path d="M93 339h22l-6-33h-10z" fill="#5d84c4" stroke="#1d2a24" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M106 308h4l4 30h-8z" fill="#f4f1e6" stroke="#1d2a24" stroke-width=".8"/>
+<path d="M100 309q-3 10 0 18" fill="none" stroke="#1d2a24" stroke-width="2.4" stroke-linecap="round"/>
+<g class="walker-head">
+<path d="M96 299q-3 7 0 13" fill="none" stroke="#6b4226" stroke-width="3" stroke-linecap="round"/>
+<circle cx="104" cy="296" r="9" fill="#f1d2b2" stroke="#1d2a24" stroke-width="1.2"/>
+<path d="M95.2 297.5a9 9 0 0 1 16.6-6q-7-1.5-9.8 4.5-1.6 3.4-1.4 7.4-4.4-1.6-5.4-5.9z" fill="#6b4226"/>
+<circle cx="109.6" cy="295.6" r="1.1" fill="#1d2a24"/>
+<g class="specs-worn" stroke="#1d2a24" stroke-width=".9"><path d="M102 294.6l5.6.6" fill="none"/><ellipse cx="110" cy="295.6" rx="1.9" ry="3.4" fill="#6fd39b"/><ellipse cx="114.6" cy="295.6" rx="1.4" ry="3.2" fill="#6fd39b"/></g>
+</g></g></g></g>
+<g transform="translate(56 349) scale(1.9) translate(-56 -349)"><g class="specs-fly"><g class="specs-fly-y"><g class="specs-lift"><g stroke="#1d2a24" stroke-width="1.2"><path d="M44 315l-4 3M68 315l4 3" fill="none"/><circle cx="49" cy="315" r="5" fill="#6fd39b"/><circle cx="63" cy="315" r="5" fill="#6fd39b"/><path d="M54 314q2-2.6 4 0" fill="none"/></g><path class="specs-glint" d="M47 312.5l2.5-1.2" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/></g></g></g></g>
+</svg>
+<button class="specs-hit" type="button" data-specs aria-pressed="false" aria-label="탁자 위 초록 안경 쓰기"></button></div><figcaption><span data-specs-caption>노란 벽돌길 끝에 에메랄드 시티가 있다.</span><button class="specs" type="button" data-specs aria-pressed="false">초록 안경 쓰고 보기</button></figcaption></figure></section>
 <div class="bricks" aria-hidden="true"></div>
 <div class="work-band">
 <section class="wrap" id="work" aria-labelledby="catalog-title"><div class="section-heading"><h2 id="catalog-title">만든 것들</h2><p>웹·앱·스크립트로 만들어본 것들의 기록입니다. 아직 시작하지 않은 것은 흑백으로 두었어요.</p></div>
@@ -229,5 +282,5 @@ html.specs-on body::after{content:"";position:fixed;inset:0;z-index:60;pointer-e
 <a class="wordmark" href="../index.html">odd<span class="z">z</span><span class="star">✦</span></a><p>오늘도 심심해서 뭘 만듭니다.</p><a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a></div>
 <div class="bricks" aria-hidden="true"></div></footer>
 <script src="../assets/oz-menu.js"></script>
-<script src="../assets/oz-spectacles.js"></script>
+<script src="../assets/oz-spectacles.js?v=20261108-2"></script>
 </body></html>
