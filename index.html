@@ -17,7 +17,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23221934'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%238fe3d0'/%3E%3Ccircle cx='50' cy='50' r='28' fill='%238fe3d0' opacity='0.25'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <style>
   @font-face{
@@ -230,7 +230,7 @@
 </style>
 <style>:root{--picker-bg:#241b38;--picker-menu:#302442;--picker-text:#f3ead9;--picker-line:rgba(243,234,217,.45);--picker-hover:rgba(143,227,208,.16);--picker-accent:#8fe3d0}</style>
 <link rel="stylesheet" href="assets/theme-switcher.css">
-<script src="assets/theme-restore.js"></script>
+<script src="assets/theme-restore.js?v=20261110"></script>
 <style>
 /* Project index grouped by the owner's current progress. */
 .catalog .catalog-phase {
@@ -260,9 +260,79 @@
 .catalog .entry:has(.project-action):focus-within { outline:2px solid currentColor; outline-offset:3px; }
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
-<link rel="stylesheet" href="assets/oddz-projects-catalog.css?v=20261108-2">
+<link rel="stylesheet" href="assets/oddz-projects-catalog.css?v=20261110">
 <script src="assets/oddz-projects-data.js?v=20261108-2" defer></script>
-<script src="assets/oddz-projects-catalog.js?v=20261108-2" defer></script>
+<script src="assets/oddz-projects-catalog.js?v=20261110" defer></script>
+<link rel="stylesheet" href="assets/fonts/nanum-pen-script/font.css">
+<link rel="stylesheet" href="assets/oddz-home.css?v=20261110">
+<script src="assets/oddz-home-board.js?v=20261110" defer></script>
+<script src="assets/home-motion.js?v=20261110" defer></script>
+<style id="home-skin">
+/* 반짝이: 반딧불이를 담은 유리병 같은 현황판, 밤하늘 위 유리 카드 */
+:root{
+  --home-display:'Binggrae',sans-serif; --home-text:var(--paper); --home-muted:rgba(243,234,217,.7);
+  --home-accent:var(--firefly); --home-on-accent:#221934; --home-line:rgba(243,234,217,.2);
+  --board-bg:linear-gradient(160deg,rgba(54,40,82,.62),rgba(34,25,52,.5)); --board-line:rgba(243,234,217,.18);
+  --board-radius:24px; --board-chip-bg:rgba(243,234,217,.05);
+  --board-shadow:0 30px 70px -30px rgba(10,6,20,.8), inset 0 1px 0 rgba(255,255,255,.08);
+  --card-bg:rgba(34,25,52,.34); --card-line:rgba(243,234,217,.14); --card-radius:20px;
+}
+.hero-board::before{content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(120% 60% at 85% 0%,rgba(143,227,208,.16),transparent 60%)}
+.hero-board__num{text-shadow:0 0 18px rgba(143,227,208,.35)}
+main > .hero.has-board h1{font-size:clamp(2.6rem,5.4vw,4.4rem)}
+#work .oddz-catalog .oddz-project-card.entry{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#work .oddz-catalog .oddz-project-card.entry:hover{background:rgba(54,40,82,.44)}
+#work .oddz-catalog .oddz-project-card .entry-no{font-size:.7rem;color:var(--dusk-peach);opacity:.85;padding-top:0}
+#work .oddz-catalog .oddz-project-card.pending{background:transparent}
+#work .oddz-catalog .oddz-project-card.pending h3,#work .oddz-catalog .oddz-project-card.pending p{color:rgba(243,234,217,.62)}
+
+/* ===== 반짝이 v2: 반딧불이 채집 노트 ===== */
+:root{ --home-display:'Hahmlet','Binggrae',serif; }
+h1,.section-head h2{ font-family:'Hahmlet','Binggrae',serif; font-weight:700; letter-spacing:-.02em; }
+h1 em{ animation:emGlow 6s ease-in-out infinite; }
+@keyframes emGlow{ 0%,100%{ text-shadow:0 0 0 rgba(143,227,208,0); } 50%{ text-shadow:0 0 26px rgba(143,227,208,.55); } }
+#work .oddz-catalog .oddz-project-card h3{ font-family:'Hahmlet','Binggrae',serif; font-weight:700; letter-spacing:-.02em; }
+
+/* 초승달과 갈대 */
+.moon{ position:fixed; z-index:-2; top:4vh; left:47vw; width:74px; height:74px; border-radius:50%;
+  box-shadow:16px -8px 0 0 #f6ebcf; filter:drop-shadow(0 0 22px rgba(246,235,207,.55)); transform:rotate(-18deg); pointer-events:none; }
+.reeds{ position:fixed; left:0; right:0; bottom:0; width:100%; height:150px; z-index:-1; pointer-events:none; opacity:.95; }
+
+/* 반딧불이: 오르면서 따로 깜박인다 */
+.firefly::after{ content:''; position:absolute; inset:-5px; border-radius:50%;
+  background:radial-gradient(circle,rgba(201,242,230,.95),rgba(143,227,208,.35) 45%,transparent 70%);
+  animation:flick 2.8s ease-in-out infinite; }
+.firefly:nth-child(3n)::after{ animation-duration:1.9s; animation-delay:-.7s; }
+.firefly:nth-child(4n+1)::after{ animation-duration:3.6s; animation-delay:-1.4s; }
+@keyframes flick{ 0%,100%{ opacity:.15; transform:scale(.6);} 40%{ opacity:1; transform:scale(1.25);} 60%{ opacity:.85; } }
+
+/* 카드: 커서를 따라가는 반딧불 빛 */
+#work .oddz-catalog .oddz-project-card.entry{
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,-20%),rgba(143,227,208,.16),transparent 70%),rgba(34,25,52,.36);
+}
+#work .oddz-catalog .oddz-project-card.entry:hover{
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,-20%),rgba(143,227,208,.22),transparent 70%),rgba(54,40,82,.46);
+}
+/* PJ 번호: 구멍 뚫린 표본 꼬리표 */
+#work .oddz-catalog .oddz-project-card .entry-no{
+  padding:5px 10px 5px 20px; color:#2a2040; background:#f3ead9; font-size:.66rem; font-weight:500; opacity:1;
+  clip-path:polygon(10px 0,100% 0,100% 100%,10px 100%,0 50%); transform:rotate(5deg); transform-origin:0 50%;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+}
+#work .oddz-catalog .oddz-project-card .entry-no::before{ content:''; position:absolute; left:8px; top:50%; width:5px; height:5px; margin-top:-2.5px; border-radius:50%; background:#2a2040; }
+#work .oddz-catalog .oddz-project-card:hover .entry-no{ animation:tagSwing 1.4s ease-in-out; }
+@keyframes tagSwing{ 0%{transform:rotate(5deg)} 25%{transform:rotate(-7deg)} 55%{transform:rotate(9deg)} 80%{transform:rotate(2deg)} 100%{transform:rotate(5deg)} }
+#work .oddz-catalog .oddz-project-card.pending .entry-no{ background:rgba(243,234,217,.55); }
+#work .oddz-catalog .oddz-project-card.pending{ background:transparent; }
+/* 채집 노트의 손글씨 메모: 나눔손글씨 펜 (assets/fonts/nanum-pen-script) */
+.hero-desc{ font-family:"Nanum Pen Script",cursive; font-size:1.6rem; line-height:1.4; color:var(--dusk-peach); transform:rotate(-1.5deg); transform-origin:0 50%; }
+.section-head p,footer p{ font-family:"Nanum Pen Script",cursive; font-size:1.35rem; line-height:1.4; }
+.hero-board__sub{ font-family:"Nanum Pen Script",cursive; font-size:1.15rem; letter-spacing:0; font-weight:400; color:var(--dusk-peach); }
+#work .oddz-catalog .oddz-stage-intro{ font:400 1.2rem/1.4 "Nanum Pen Script",cursive; color:var(--dusk-peach); }
+@media (prefers-reduced-motion:reduce){ h1 em,.firefly::after{ animation:none; } }
+@media (max-width:760px){ .moon{ left:auto; right:8vw; } }
+</style>
 <style id="oddz-static-fallback-css">
 #work .oddz-static-catalog .oddz-fallback-main{min-width:0;text-align:left}
 #work .oddz-static-catalog .entry h3,#work .oddz-static-catalog .entry p{word-break:keep-all;overflow-wrap:anywhere;text-align:left}
@@ -271,12 +341,43 @@
 #work .oddz-static-catalog .gem-tag{position:relative;display:grid;place-items:center}
 #work .oddz-static-catalog .oddz-fallback-num{position:absolute;font-size:10px;font-weight:800;color:#123c4a}
 </style>
+<style id="typography">
+/* ===== 글꼴 꾸미기: 반딧불 채집 노트 =====
+   제목 Hahmlet · 손글씨 메모 나눔손글씨 펜 · 표본 라벨 JetBrains Mono · 본문 Pretendard */
+nav > a, header .theme-picker summary{ font-family:'Hahmlet',serif; font-weight:500; }
+.cta{ font-family:"Nanum Pen Script",cursive; font-size:1.55rem; font-weight:400; border-bottom:0; padding-bottom:8px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%238fe3d0' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x left bottom / 40px 8px; }
+.cta:hover{ background-position:20px 100%; }
+.hero-board__title{ font-family:'Hahmlet',serif; font-weight:700; }
+.section-head h2{ width:fit-content; padding-bottom:10px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%238fe3d0' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x left bottom / 40px 8px; }
+#work .oddz-catalog .oddz-filter{ font-family:'Hahmlet',serif; font-weight:500; font-size:.84rem; }
+#work .oddz-catalog .oddz-filter[aria-pressed=true]{ font-weight:700; }
+#work .oddz-catalog .oddz-project-card .oddz-project-date{ font:400 1.15rem/1.2 "Nanum Pen Script",cursive!important; color:var(--dusk-peach); opacity:1; }
+#work .oddz-catalog .oddz-project-card .oddz-project-date::before{ content:'채집 · '; }
+#work .oddz-catalog .oddz-project-details summary{ font:400 1.1rem/1.3 "Nanum Pen Script",cursive; }
+footer .wordmark{ font-size:1.8rem; }
+</style>
 </head>
 <body>
 
   <div class="sky"></div>
   <div class="haze"></div>
+  <div class="moon" aria-hidden="true"></div>
   <div class="fireflies" id="fireflies"></div>
+  <svg class="reeds" aria-hidden="true" viewBox="0 0 1200 150" preserveAspectRatio="xMidYMax slice">
+    <g fill="#1a1228">
+      <path d="M40 150 Q46 80 30 20 Q52 80 54 150Z"/><path d="M70 150 Q80 90 104 46 Q88 100 86 150Z"/>
+      <path d="M120 150 Q118 100 96 70 Q128 104 134 150Z"/><path d="M160 150 Q170 70 158 6 Q182 76 176 150Z"/>
+      <rect x="166" y="2" width="7" height="34" rx="3.5"/>
+      <path d="M210 150 Q224 96 250 66 Q236 108 228 150Z"/><path d="M262 150 Q258 110 240 90 Q270 112 276 150Z"/>
+      <path d="M920 150 Q930 84 914 30 Q942 86 938 150Z"/><path d="M960 150 Q966 100 990 64 Q978 110 976 150Z"/>
+      <rect x="912" y="26" width="7" height="30" rx="3.5"/>
+      <path d="M1010 150 Q1004 100 986 76 Q1018 106 1026 150Z"/><path d="M1050 150 Q1064 60 1050 0 Q1076 70 1068 150Z"/>
+      <rect x="1052" y="-2" width="7" height="34" rx="3.5"/>
+      <path d="M1100 150 Q1112 94 1140 60 Q1124 110 1118 150Z"/><path d="M1150 150 Q1148 104 1128 82 Q1160 108 1168 150Z"/>
+      <path d="M0 150 Q300 132 600 140 T1200 136 V150Z"/>
+    </g>
+  </svg>
 
   <header>
     <div class="wordmark">odd<span>z</span></div>
@@ -288,13 +389,14 @@
       <details class="theme-picker">
         <summary>테마</summary>
         <div class="theme-picker__list" aria-label="사이트 테마">
-          <a href="index.html" data-theme-path="" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반짝이</a>
-          <a href="themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>기계</a>
-          <a href="themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
-          <a href="themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
-          <a href="themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+          <a href="index.html" data-theme-path="" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
           <a href="themes/oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
           <a href="themes/hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="themes/olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
         </div>
       </details>
     </nav>

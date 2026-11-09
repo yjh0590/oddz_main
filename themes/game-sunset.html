@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>oddz — 심심하면 만드는 것들</title>
+<title>노을 모험가 길드 · oddz</title>
 <meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
@@ -17,7 +17,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2312181B'/%3E%3Cpolygon points='50,18 76,50 50,82 24,50' fill='none' stroke='%23D8A94A' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='7' fill='%23D8A94A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=Song+Myung&family=IM+Fell+English+SC&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <style>
   :root{
@@ -256,9 +256,116 @@
 .catalog .entry:has(.project-action):focus-within { outline:2px solid currentColor; outline-offset:3px; }
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
-<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261108-2">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261110">
 <script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
-<script src="../assets/oddz-projects-catalog.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261110" defer></script>
+<link rel="stylesheet" href="../assets/fonts/nanum-brush-script/font.css">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261110">
+<script src="../assets/oddz-home-board.js?v=20261110" defer></script>
+<script src="../assets/home-motion.js?v=20261110" defer></script>
+<style id="home-skin">
+/* 게임·노을: 금테 두른 모험 일지 */
+:root{
+  --home-display:'Noto Serif KR',serif; --home-text:var(--parchment); --home-muted:rgba(242,232,211,.7);
+  --home-accent:var(--gold-bright); --home-on-accent:var(--ink-panel); --home-line:var(--ink-line);
+  --board-bg:linear-gradient(180deg,rgba(18,24,27,.78),rgba(18,24,27,.66)); --board-line:rgba(216,169,74,.38);
+  --board-radius:4px; --board-chip-bg:rgba(216,169,74,.07);
+  --board-shadow:0 0 0 4px rgba(18,24,27,.35),0 30px 60px -28px rgba(0,0,0,.7);
+  --card-bg:rgba(18,24,27,.74); --card-line:var(--ink-line); --card-radius:4px;
+}
+.hero-board::before,.hero-board::after{content:'';position:absolute;width:18px;height:18px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);pointer-events:none}
+.hero-board::before{top:-2px;left:-2px}
+.hero-board::after{bottom:-2px;right:-2px;transform:rotate(180deg)}
+.hero-board__head{justify-content:center;flex-direction:column;align-items:center;gap:2px;padding-bottom:14px;border-bottom:1px solid var(--board-line)}
+.hero-board__title{font-weight:900;font-size:1.2rem;color:var(--gold-bright)}
+.hero-board__title::before,.hero-board__title::after{content:'◆';font-size:.5em;margin:0 10px;color:var(--gold);vertical-align:4px}
+.hero-board__total{font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
+.hero-board__stage{border-radius:2px}
+.hero-board__num{font-weight:900}
+.hero-board__sub{font-family:'JetBrains Mono',monospace;color:var(--gold);letter-spacing:.1em}
+.hero-board__item{border-radius:2px}
+.hero-board__chips li{border-radius:2px}
+.hero-board__chips li::before{border-radius:0;transform:rotate(45deg);background:var(--gold-bright)}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{border-radius:3px}
+#work .oddz-catalog .oddz-stage-head h3{font-weight:900!important}
+#work .oddz-catalog .oddz-project-card .rune-tag{width:38px;height:38px}
+#work .oddz-catalog .oddz-project-card .rune-tag span{font-size:.58rem}
+#work .oddz-catalog .oddz-project-card .project-action{border-radius:3px}
+#work .oddz-catalog .oddz-project-card.pending{background:rgba(18,24,27,.42);border-style:solid}
+#work .oddz-catalog .oddz-project-card.pending::before,#work .oddz-catalog .oddz-project-card.pending::after{opacity:.4}
+/* ===== 게임·노을 v2: 모험가 길드 의뢰 게시판 ===== */
+:root{ --brush:'Song Myung','Noto Serif KR',serif; --fell:'IM Fell English SC','Noto Serif KR',serif;
+  --parch:#f3e6c8; --parch-edge:#dcc694; --ink-brown:#3b2a1a; --ink-mid:#5e4a32; --seal:#8e2219; --home-display:var(--brush); }
+h1{ font-family:var(--brush); font-weight:400; letter-spacing:-.01em; }
+.section-head h2,#work .oddz-catalog .oddz-stage-head h3{ font-family:var(--brush)!important; font-weight:400!important; }
+.tag-label,.hero-board__sub,.hero-board__total{ font-family:var(--fell); letter-spacing:.12em; }
+.hero-board__title{ font-family:var(--brush); font-weight:400; font-size:1.35rem; }
+.hero-board__num{ font-family:var(--fell); font-weight:400; font-size:1.9rem; }
+#work .oddz-catalog .oddz-stage-en{ font-family:var(--fell); letter-spacing:.16em; opacity:.8; }
+
+/* 지는 해: 스크롤할수록 내려가고 하늘이 어두워진다 */
+.sun{ position:fixed; z-index:-3; top:56vh; left:47vw; width:180px; height:180px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle,#fff3c9 0 35%,#f6c46d 60%,rgba(240,150,80,0) 72%);
+  filter:blur(1px); translate:0 calc(min(var(--scroll,0), 2400) * .12px); }
+.dusk-veil{ position:fixed; inset:0; z-index:-1; pointer-events:none; background:linear-gradient(180deg,#0d1a22,#2a1a24);
+  opacity:min(.42, calc(var(--scroll,0) / 5200)); }
+.birds{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+.bird{ position:absolute; top:18vh; left:-60px; width:22px; animation:fly 46s linear infinite; }
+.bird:nth-child(2){ top:21vh; width:16px; animation-delay:-2.2s; }
+.bird:nth-child(3){ top:16vh; width:14px; animation-delay:-3.6s; }
+.bird svg{ display:block; width:100%; animation:flap .9s ease-in-out infinite; transform-origin:50% 70%; }
+.bird:nth-child(2) svg{ animation-duration:.75s; }
+@keyframes fly{ from{ transform:translate(0,0); } 50%{ transform:translate(55vw,-6vh); } to{ transform:translate(115vw,2vh); } }
+@keyframes flap{ 50%{ transform:scaleY(.45); } }
+
+/* 카드: 핀으로 꽂은 양피지 의뢰서 + 밀랍 봉인 번호 */
+#work .oddz-catalog .oddz-project-card.entry{
+  --tilt:-.6deg; color:var(--ink-brown); backdrop-filter:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 42%,var(--parch) 60%,var(--parch-edge) 100%);
+  border:1px solid #c7a96b; border-radius:2px;
+  box-shadow:0 16px 30px -16px rgba(0,0,0,.7),inset 0 0 34px rgba(140,98,40,.22);
+  transform:rotate(var(--tilt)); transition:transform .25s, box-shadow .25s;
+}
+#work .oddz-catalog .oddz-stage-list>.oddz-project-card:nth-child(even){ --tilt:.7deg; }
+#work .oddz-catalog .oddz-stage-list>.oddz-project-card:nth-child(3n){ --tilt:-.2deg; }
+#work .oddz-catalog .oddz-project-card.entry:hover{ transform:rotate(0) translateY(-4px); box-shadow:0 22px 36px -16px rgba(0,0,0,.75),inset 0 0 34px rgba(140,98,40,.22); }
+#work .oddz-catalog .oddz-project-card.entry::before{
+  top:-6px; left:50%; width:14px; height:14px; margin-left:-7px; border:0; border-radius:50%; transform:none;
+  background:radial-gradient(circle at 35% 30%,#f6dc9a,#b8862f 55%,#6e4a14); box-shadow:0 3px 4px rgba(0,0,0,.45);
+}
+#work .oddz-catalog .oddz-project-card.entry::after{
+  top:auto; left:auto; bottom:-1px; right:-1px; width:22px; height:22px; border:0; transform:none;
+  background:linear-gradient(135deg,var(--parch-edge) 50%,rgba(20,31,35,.55) 50%);
+}
+#work .oddz-catalog .oddz-project-card h3{ font-family:var(--brush); font-weight:400; font-size:1.32rem; color:var(--ink-brown); }
+#work .oddz-catalog .oddz-project-card .oddz-project-desc,#work .oddz-catalog .oddz-project-card .oddz-project-date,
+#work .oddz-catalog .oddz-project-card .oddz-project-details summary,#work .oddz-catalog .oddz-project-card .oddz-project-fact{ color:var(--ink-mid); }
+#work .oddz-catalog .oddz-project-card .oddz-project-facts{ border-color:rgba(94,74,50,.3); }
+#work .oddz-catalog .oddz-project-card .entry-cat{ color:#7a4f1d; border-color:rgba(122,79,29,.4); background:rgba(122,79,29,.06); }
+#work .oddz-catalog .oddz-project-card .project-action{ color:var(--ink-brown); border-color:rgba(59,42,26,.4); }
+#work .oddz-catalog .oddz-project-card:hover .project-action{ background:var(--seal); border-color:var(--seal); color:var(--parch); }
+#work .oddz-catalog .oddz-project-card>.oddz-project-icon{ box-shadow:0 3px 8px rgba(59,42,26,.35); }
+#work .oddz-catalog .oddz-project-card .rune-tag{
+  width:44px; height:44px; border-radius:48% 52% 46% 54%;
+  background:radial-gradient(circle at 34% 30%,#c9503f,var(--seal) 58%,#5f140d);
+  box-shadow:0 3px 5px rgba(0,0,0,.4),inset 0 0 0 4px rgba(0,0,0,.14); transform:rotate(-8deg);
+}
+#work .oddz-catalog .oddz-project-card .rune-tag svg polygon{ stroke:rgba(255,226,190,.5); stroke-width:5; }
+#work .oddz-catalog .oddz-project-card .rune-tag span{ color:#f8e4c4; font-family:var(--fell); font-size:.7rem; }
+#work .oddz-catalog .oddz-project-card:has(.oddz-card-surface):is(:hover,:focus-within){ border-color:#a3793a; }
+/* 아직 받지 않은 의뢰: 바랜 종이, 회색 밀랍 */
+#work .oddz-catalog .oddz-project-card.pending{ --parch:#e3d8bf; --parch-edge:#c9b994; opacity:.92; border-style:solid; }
+#work .oddz-catalog .oddz-project-card.pending .rune-tag{ width:32px; height:32px; background:radial-gradient(circle at 34% 30%,#9d968c,#6e675e 60%,#4a453f); }
+#work .oddz-catalog .oddz-project-card.pending::before,#work .oddz-catalog .oddz-project-card.pending::after{ opacity:1; }
+/* 붓으로 쓴 의뢰서 제목: 나눔손글씨 붓 (assets/fonts/nanum-brush-script) */
+#work .oddz-catalog .oddz-project-card h3{ font-family:"Nanum Brush Script",var(--brush); font-size:1.75rem; line-height:1.15; letter-spacing:0; }
+.section-head h2,#work .oddz-catalog .oddz-stage-head h3{ font-family:"Nanum Brush Script",var(--brush)!important; letter-spacing:0; }
+.section-head h2{ font-size:clamp(2.2rem,4vw,3rem); }
+#work .oddz-catalog .oddz-stage-head h3{ font-size:30px!important; }
+.hero-board__title{ font-family:"Nanum Brush Script",var(--brush); font-size:1.8rem; line-height:1; }
+@media (prefers-reduced-motion:reduce){ .bird,.bird svg{ animation:none; } .birds{ display:none; } }
+@media (max-width:760px){ .sun{ left:auto; right:-46px; top:10vh; width:130px; height:130px; opacity:.85; } }
+</style>
 <style id="oddz-static-fallback-css">
 #work .oddz-static-catalog .oddz-fallback-main{min-width:0;text-align:left}
 #work .oddz-static-catalog .entry h3,#work .oddz-static-catalog .entry p{word-break:keep-all;overflow-wrap:anywhere;text-align:left}
@@ -267,11 +374,32 @@
 #work .oddz-static-catalog .gem-tag{position:relative;display:grid;place-items:center}
 #work .oddz-static-catalog .oddz-fallback-num{position:absolute;font-size:10px;font-weight:800;color:#123c4a}
 </style>
+<link rel="stylesheet" href="../assets/fonts/maru-buri/font.css">
+<style id="typography">
+/* ===== 글꼴 꾸미기: 노을 모험가 길드 =====
+   큰 제목 Song Myung · 의뢰서 제목 나눔손글씨 붓 · 의뢰서 본문 마루 부리 · 라벨과 숫자 IM Fell English SC */
+h1 em{ display:inline-block; padding-bottom:14px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9 C60 4 120 11 180 6 S270 4 298 7 L296 10 C250 9 200 12 140 11 S40 12 4 12Z' fill='%23d8a94a'/%3E%3C/svg%3E") no-repeat left bottom / 100% 14px; }
+nav a, header .theme-picker summary{ font-family:'MaruBuri',serif; font-weight:600; }
+.cta{ font-family:'MaruBuri',serif; font-weight:700; }
+.hero-desc{ font-family:'MaruBuri',serif; font-size:1.08rem; }
+.hero-board__name{ font-family:'MaruBuri',serif; font-weight:700; }
+.hero-board__meta{ font-family:var(--fell); letter-spacing:.04em; }
+#work .oddz-catalog .oddz-filter{ font-family:'MaruBuri',serif; font-weight:600; }
+#work .oddz-catalog .oddz-project-card .oddz-project-desc{ font-family:'MaruBuri',serif; font-size:.95rem; line-height:1.8; }
+#work .oddz-catalog .oddz-project-card .oddz-project-date{ font:400 .9rem/1.4 var(--fell)!important; letter-spacing:.06em; }
+#work .oddz-catalog .oddz-project-card .oddz-project-date::before{ content:'의뢰일 '; font-family:'MaruBuri',serif; font-size:.78rem; letter-spacing:0; }
+#work .oddz-catalog .oddz-project-card .entry-cat{ font-family:var(--fell); font-weight:400; letter-spacing:.08em; font-size:.72rem; }
+#work .oddz-catalog .oddz-project-card .project-action{ font-family:'MaruBuri',serif; font-weight:700; }
+#work .oddz-catalog .oddz-project-card .oddz-project-details summary,#work .oddz-catalog .oddz-project-card .oddz-project-fact{ font-family:'MaruBuri',serif; }
+footer p{ font-family:'MaruBuri',serif; }
+</style>
 </head>
 <body>
 
   <div class="sky"></div>
+  <div class="sun" aria-hidden="true"></div>
   <div class="clouds"></div>
+  <div class="birds" aria-hidden="true"><span class="bird"><svg viewBox="0 0 26 10"><path d="M1 7 Q7 0 13 7 Q19 0 25 7" fill="none" stroke="#1d1a1c" stroke-width="2" stroke-linecap="round"/></svg></span><span class="bird"><svg viewBox="0 0 26 10"><path d="M1 7 Q7 0 13 7 Q19 0 25 7" fill="none" stroke="#1d1a1c" stroke-width="2" stroke-linecap="round"/></svg></span><span class="bird"><svg viewBox="0 0 26 10"><path d="M1 7 Q7 0 13 7 Q19 0 25 7" fill="none" stroke="#1d1a1c" stroke-width="2" stroke-linecap="round"/></svg></span></div>
   <div class="triangle-tex"></div>
   <div class="ridge">
     <svg viewBox="0 0 1200 340" preserveAspectRatio="none">
@@ -280,6 +408,7 @@
     </svg>
   </div>
   <div class="embers" id="embers"></div>
+  <div class="dusk-veil" aria-hidden="true"></div>
 
   <header>
     <div class="wordmark">
@@ -294,13 +423,14 @@
       <details class="theme-picker">
         <summary>테마</summary>
         <div class="theme-picker__list" aria-label="사이트 테마">
-          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반짝이</a>
-          <a href="../themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>기계</a>
-          <a href="../themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
-          <a href="../themes/game-sunset.html" data-theme-path="themes/game-sunset.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
-          <a href="../themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="../themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="../themes/game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="../themes/game-sunset.html" data-theme-path="themes/game-sunset.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="../themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
           <a href="../themes/oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
           <a href="../themes/hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="../themes/olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
         </div>
       </details>
     </nav>

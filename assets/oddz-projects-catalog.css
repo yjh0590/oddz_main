@@ -48,6 +48,7 @@ html[data-oddz-theme=game-water] #work .oddz-catalog{--oddz-accent:#8fe8f2}
 html[data-oddz-theme=game-sunset] #work .oddz-catalog{--oddz-accent:#f0c97a}
 html[data-oddz-theme=bubbles] #work .oddz-catalog{--oddz-accent:#f5a9c9}
 html[data-oddz-theme=sparkle] #work .oddz-catalog{--oddz-accent:#8fe3d0}
+html[data-oddz-theme=olympus] #work .oddz-catalog{--oddz-accent:#24578a}
 /* Oz only: preserve postcard/art direction and fit 3 genuine cards per desktop row. */
 html[data-oddz-theme=oz] #work .oddz-catalog{--oddz-accent:#4c9983;max-width:100%;width:100%}
 html[data-oddz-theme=oz] #work .oddz-catalog .oddz-catalog-controls{color:#546c6b;border-color:#e5e7e0}

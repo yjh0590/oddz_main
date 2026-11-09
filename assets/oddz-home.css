@@ -1,0 +1,205 @@
+/* oddz 홈 공통 레이아웃 (반짝이·기계·물빛·노을·비눗방울).
+   오즈·종이 공작은 이 파일을 불러오지 않는다.
+   색과 글꼴은 각 테마 파일의 :root 토큰(--board-*, --card-*, --home-*)으로 정한다. */
+
+:root{
+  --home-max:1240px;
+  --home-display:inherit;
+  --home-text:inherit;
+  --home-muted:rgba(255,255,255,.66);
+  --home-accent:#8fe3d0;
+  --home-line:rgba(255,255,255,.18);
+  --board-bg:rgba(0,0,0,.22);
+  --board-line:var(--home-line);
+  --board-radius:18px;
+  --board-shadow:0 24px 60px -24px rgba(0,0,0,.55);
+  --board-chip-bg:rgba(255,255,255,.06);
+  --card-bg:transparent;
+  --card-line:var(--home-line);
+  --card-radius:16px;
+  --card-pad:24px;
+}
+
+/* ---------- 머리글·히어로를 같은 폭으로 ---------- */
+body > header{max-width:var(--home-max);margin-inline:auto}
+
+main > .hero.has-board{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,430px);
+  column-gap:clamp(36px,6vw,96px);
+  align-content:center;
+  max-width:var(--home-max);
+  min-height:0;
+  margin-inline:auto;
+  padding:clamp(56px,11vh,120px) 6vw clamp(40px,6vh,72px);
+}
+main > .hero.has-board > *{grid-column:1;justify-self:start}
+main > .hero.has-board > .hero-board{
+  grid-column:2;grid-row:1 / span 6;
+  align-self:center;justify-self:stretch;
+}
+
+/* ---------- 작업 현황판 ---------- */
+.hero-board{
+  position:relative;
+  padding:22px 22px 20px;
+  border:1px solid var(--board-line);
+  border-radius:var(--board-radius);
+  background:var(--board-bg);
+  box-shadow:var(--board-shadow);
+  color:var(--home-text);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  animation:boardIn .7s cubic-bezier(.2,.7,.2,1) both .15s;
+}
+@keyframes boardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero-board__head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}
+.hero-board__title{font-family:var(--home-display);font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.hero-board__total{font-size:.74rem;font-weight:600;color:var(--home-muted);font-variant-numeric:tabular-nums}
+
+.hero-board__stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.hero-board__stage{
+  position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;
+  min-width:0;padding:11px 10px 14px;
+  border:1px solid var(--board-line);border-radius:calc(var(--board-radius) * .55);
+  background:var(--board-chip-bg);color:inherit;font:inherit;text-align:left;cursor:pointer;overflow:hidden;
+  transition:border-color .2s,transform .2s;
+}
+.hero-board__stage:hover{border-color:var(--home-accent);transform:translateY(-2px)}
+.hero-board__stage:focus-visible{outline:2px solid var(--home-accent);outline-offset:2px}
+.hero-board__num{font-family:var(--home-display);font-size:1.7rem;line-height:1;font-weight:700;font-variant-numeric:tabular-nums}
+.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--home-accent)}
+.hero-board__label{font-size:.68rem;font-weight:600;color:var(--home-muted);white-space:nowrap;letter-spacing:-.02em}
+.hero-board__bar{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--share) * 100%);background:var(--home-accent);opacity:.75}
+.hero-board__stage:not([data-stage="done"]) .hero-board__bar{opacity:.35}
+
+.hero-board__section{margin-top:18px;padding-top:16px;border-top:1px dashed var(--board-line)}
+.hero-board__sub{margin:0 0 10px;font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--home-muted)}
+.hero-board__recent{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.hero-board__item{
+  display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;
+  padding:7px 8px;margin:0 -8px;border-radius:calc(var(--board-radius) * .5);
+  color:inherit;text-decoration:none;transition:background .18s;
+}
+.hero-board__item img{width:40px;height:40px;object-fit:contain;border-radius:22%}
+a.hero-board__item:hover{background:var(--board-chip-bg)}
+a.hero-board__item:focus-visible{outline:2px solid var(--home-accent);outline-offset:1px}
+.hero-board__text{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hero-board__name{font-size:.92rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-board__meta{font-size:.72rem;color:var(--home-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-board__go{color:var(--home-accent);font-size:.9rem;transition:transform .18s}
+a.hero-board__item:hover .hero-board__go{transform:translateX(3px)}
+.hero-board__chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.hero-board__chips li{
+  font-size:.78rem;font-weight:600;padding:6px 11px;
+  border:1px solid var(--board-line);border-radius:99px;background:var(--board-chip-bg);
+}
+.hero-board__chips li::before{content:'';display:inline-block;width:6px;height:6px;margin-right:7px;border-radius:50%;background:var(--home-accent);vertical-align:2px;animation:boardPulse 2.2s ease-in-out infinite}
+@keyframes boardPulse{50%{opacity:.25}}
+
+/* ---------- 만든 것들: 제목과 목록을 같은 폭에 ---------- */
+main > #work{max-width:var(--home-max);margin-inline:auto;padding:clamp(32px,6vh,72px) 6vw clamp(24px,4vh,48px);scroll-margin-top:12px}
+#work > .section-head{max-width:none;margin:0 0 30px}
+#work > .section-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem)}
+#work .oddz-catalog{max-width:none}
+
+/* 필터 줄 */
+#work .oddz-catalog .oddz-catalog-controls{align-items:flex-end;border-color:var(--home-line);padding-bottom:22px;margin-bottom:8px}
+#work .oddz-catalog .oddz-filter{border-color:var(--home-line);padding:9px 15px;font-size:.8rem}
+#work .oddz-catalog .oddz-filter[aria-pressed=true]{background:var(--home-accent);border-color:var(--home-accent);color:var(--home-on-accent,#111)}
+#work .oddz-catalog .oddz-search{max-width:340px}
+#work .oddz-catalog .oddz-search input{border-color:var(--home-line);padding:12px 14px;font-size:.84rem}
+#work .oddz-catalog .oddz-search input:focus{border-color:var(--home-accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--home-accent) 25%,transparent)}
+#work .oddz-catalog .oddz-visible-count{padding-bottom:12px}
+
+/* 단계 머리 */
+#work .oddz-catalog .oddz-project-stage{margin:34px 0 46px}
+#work .oddz-catalog .oddz-stage-head{align-items:center;gap:10px 12px;margin-bottom:4px}
+#work .oddz-catalog .oddz-stage-head h3{font-family:var(--home-display),'Pretendard Variable',sans-serif!important;font-size:22px!important;font-weight:700!important}
+#work .oddz-catalog .oddz-stage-count{
+  order:-1;margin-left:0;display:inline-grid;place-items:center;min-width:30px;height:30px;padding:0 8px;
+  border-radius:99px;background:var(--home-accent);color:var(--home-on-accent,#111);font-size:12px;opacity:1;
+}
+#work .oddz-catalog .oddz-project-stage:not([data-stage="done"]) .oddz-stage-count{background:transparent;color:inherit;border:1px solid var(--home-line)}
+#work .oddz-catalog .oddz-stage-intro{margin-bottom:18px;color:var(--home-muted);opacity:1}
+
+/* ---------- 카드: 두 줄 격자, 아이콘이 왼쪽 기둥 ---------- */
+#work .oddz-catalog .oddz-stage-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#work .oddz-catalog .oddz-project-card.entry{
+  display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:18px;align-items:stretch;
+  min-height:100%;margin:0;padding:var(--card-pad);
+  background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--card-radius);
+}
+#work .oddz-catalog .oddz-project-card>.oddz-project-icon{
+  position:static;grid-column:1;grid-row:1;align-self:start;
+  width:56px;height:56px;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);
+  transition:transform .25s cubic-bezier(.3,1.4,.5,1);
+}
+#work .oddz-catalog .oddz-project-card:hover>.oddz-project-icon{transform:rotate(-6deg) scale(1.06)}
+#work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main{grid-column:2;grid-row:1;padding-right:0}
+#work .oddz-catalog .oddz-project-main{display:flex;flex-direction:column}
+#work .oddz-catalog .oddz-project-card .entry-meta{padding-right:64px;margin-bottom:8px}
+#work .oddz-catalog .oddz-project-card .entry-status,
+#work .oddz-catalog .oddz-project-card .dot-sep{display:none}
+#work .oddz-catalog .oddz-project-card h3{font-size:1.18rem;margin-bottom:4px}
+#work .oddz-catalog .oddz-project-card .oddz-project-date{color:var(--home-muted);opacity:1;font-variant-numeric:tabular-nums}
+#work .oddz-catalog .oddz-project-card .oddz-project-desc{font-size:.9rem;color:var(--home-muted)}
+#work .oddz-catalog .oddz-project-lower{margin-top:auto;padding-top:16px}
+#work .oddz-catalog .oddz-project-card .project-action{
+  padding:7px 12px;border:1px solid var(--home-line);border-radius:99px;text-decoration:none;font-size:.8rem;
+  transition:background .2s,border-color .2s,color .2s;
+}
+#work .oddz-catalog .oddz-project-card:hover .project-action{background:var(--home-accent);border-color:var(--home-accent);color:var(--home-on-accent,#111);opacity:1}
+#work .oddz-catalog .oddz-project-details summary{color:var(--home-muted);opacity:1}
+#work .oddz-catalog .oddz-project-card:has(.oddz-card-surface):is(:hover,:focus-within){outline:none;border-color:var(--home-accent)}
+#work .oddz-catalog .oddz-project-card .oddz-card-surface:focus-visible{outline-offset:2px;border-radius:var(--card-radius)}
+
+/* PJ 번호 배지는 오른쪽 위 작은 표식으로 */
+#work .oddz-catalog .oddz-project-card>:is(.entry-no,.part-tag,.gem-tag,.rune-tag,.bubble-tag,.roman-tag){
+  position:absolute;top:calc(var(--card-pad) - 2px);right:calc(var(--card-pad) - 4px);z-index:1;pointer-events:none;
+}
+
+/* ---------- 아직 시작 안 한 것: 낮고 촘촘한 줄 ---------- */
+#work .oddz-catalog .oddz-project-stage:is([data-stage="next"],[data-stage="someday"]) .oddz-stage-list{gap:10px}
+#work .oddz-catalog .oddz-project-card.pending{
+  grid-template-columns:38px minmax(0,1fr);column-gap:14px;padding:16px 18px;opacity:1;
+  background:transparent;border-style:dashed;
+}
+#work .oddz-catalog .oddz-project-card.pending>.oddz-project-icon{width:38px;height:38px;opacity:.6;filter:grayscale(.65);box-shadow:none}
+#work .oddz-catalog .oddz-project-card.pending:hover>.oddz-project-icon{opacity:1;filter:none}
+#work .oddz-catalog .oddz-project-card.pending h3{font-size:1rem;opacity:.9}
+#work .oddz-catalog .oddz-project-card.pending .oddz-project-date{display:none}
+#work .oddz-catalog .oddz-project-card.pending .oddz-project-desc{font-size:.82rem;line-height:1.6}
+#work .oddz-catalog .oddz-project-card.pending .oddz-project-lower{padding-top:8px}
+#work .oddz-catalog .oddz-project-card.pending .entry-meta{margin-bottom:4px}
+#work .oddz-catalog .oddz-project-card.pending>:is(.entry-no,.part-tag,.gem-tag,.rune-tag,.bubble-tag,.roman-tag){top:14px;right:14px;opacity:.7}
+
+/* ---------- 바닥글 ---------- */
+body > footer{max-width:var(--home-max);margin-inline:auto}
+
+/* ---------- 카드 등장 (home-motion.js가 .motion-reveal과 .is-in을 붙인다) ----------
+   backwards로만 채워서 끝난 뒤에는 테마의 hover 변형이 그대로 먹게 한다. */
+.motion-reveal #work .oddz-project-card:not(.is-in){opacity:0}
+.motion-reveal #work .oddz-project-card.is-in{animation:cardIn .7s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i,0) * 70ms)}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px)}}
+
+/* ---------- 좁은 화면 ---------- */
+@media (max-width:960px){
+  main > .hero.has-board{grid-template-columns:minmax(0,1fr);min-height:0;padding-top:11vh}
+  main > .hero.has-board > .hero-board{grid-column:1;grid-row:auto;margin-top:44px;max-width:560px}
+}
+@media (max-width:760px){
+  #work .oddz-catalog .oddz-stage-list{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .hero-board{padding:18px 16px 16px}
+  .hero-board__stages{grid-template-columns:repeat(2,minmax(0,1fr))}
+  :root{--card-pad:18px}
+  #work .oddz-catalog .oddz-project-card.entry{grid-template-columns:44px minmax(0,1fr);column-gap:14px}
+  #work .oddz-catalog .oddz-project-card>.oddz-project-icon{width:44px;height:44px}
+  #work .oddz-catalog .oddz-project-card.pending{grid-template-columns:34px minmax(0,1fr)}
+  #work .oddz-catalog .oddz-project-card.pending>.oddz-project-icon{width:34px;height:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-board,.hero-board__chips li::before{animation:none}
+  #work .oddz-catalog .oddz-project-card>.oddz-project-icon{transition:none}
+}

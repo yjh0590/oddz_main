@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>oddz — 심심하면 만드는 것들</title>
+<title>폭포 던전 · oddz</title>
 <meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
@@ -17,9 +17,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A2A40'/%3E%3Crect x='40' y='20' width='20' height='20' fill='%238FE8F2'/%3E%3Crect x='30' y='40' width='40' height='20' fill='%236B6FC4'/%3E%3Crect x='40' y='60' width='20' height='20' fill='%23A6ABE8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
   @font-face{
-    font-family:'DungGeunMo';
+    font-family:'Galmuri11','DungGeunMo';
     src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
     font-weight:normal;
     font-display:swap;
@@ -89,12 +90,12 @@
 
   /* ---------- header ---------- */
   header{ display:flex; align-items:center; justify-content:space-between; padding:30px 6vw 0; position:relative; z-index:2; }
-  .wordmark{ font-family:'DungGeunMo', monospace; font-size:1.3rem; color:var(--paper); letter-spacing:0.02em; }
+  .wordmark{ font-family:'Galmuri11','DungGeunMo', monospace; font-size:1.3rem; color:var(--paper); letter-spacing:0.02em; }
   .wordmark span{ color:var(--cascade-cyan); }
   nav{ display:flex; gap:10px; }
   nav a{
     color:var(--paper-soft); text-decoration:none;
-    font-family:'DungGeunMo', monospace;
+    font-family:'Galmuri11','DungGeunMo', monospace;
     font-size:0.82rem;
     background:var(--panel);
     border:1px solid var(--panel-line);
@@ -108,7 +109,7 @@
   /* ---------- tag label ---------- */
   .tag-label{
     display:inline-flex; align-items:center; gap:8px;
-    font-family:'DungGeunMo', monospace;
+    font-family:'Galmuri11','DungGeunMo', monospace;
     font-size:0.72rem; letter-spacing:0.02em;
     color:var(--cascade-cyan);
     border:1px solid var(--panel-line);
@@ -121,7 +122,7 @@
   .hero{ min-height:50vh; display:flex; flex-direction:column; justify-content:center; padding:14vh 6vw 8vh; max-width:760px; position:relative; }
   .hero .tag-label{ margin-bottom:26px; width:fit-content; }
   h1{
-    font-family:'DungGeunMo', monospace;
+    font-family:'Galmuri11','DungGeunMo', monospace;
     font-size:clamp(1.9rem, 4.6vw, 3.1rem);
     line-height:1.55;
     color:var(--paper);
@@ -135,7 +136,7 @@
   .cta{
     display:inline-flex; align-items:center; gap:10px;
     color:var(--ink); text-decoration:none;
-    font-family:'DungGeunMo', monospace;
+    font-family:'Galmuri11','DungGeunMo', monospace;
     font-size:0.92rem;
     background:var(--cascade-cyan);
     padding:14px 24px;
@@ -149,7 +150,7 @@
   /* ---------- section shared ---------- */
   section{ padding:4vw 6vw; }
   .section-head{ max-width:640px; margin:0 auto 44px; }
-  .section-head h2{ font-family:'DungGeunMo', monospace; font-size:clamp(1.3rem, 2.4vw, 1.7rem); color:var(--paper); margin:16px 0 10px; }
+  .section-head h2{ font-family:'Galmuri11','DungGeunMo', monospace; font-size:clamp(1.3rem, 2.4vw, 1.7rem); color:var(--paper); margin:16px 0 10px; }
   .section-head p{ color:var(--paper-soft); font-size:0.95rem; line-height:1.7; }
 
   /* ---------- catalog: observation records ---------- */
@@ -169,20 +170,20 @@
 
   .entry-meta{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
   .entry-cat{
-    font-family:'DungGeunMo', monospace; font-size:0.68rem; color:var(--cascade-cyan);
+    font-family:'Galmuri11','DungGeunMo', monospace; font-size:0.68rem; color:var(--cascade-cyan);
     border:1px solid var(--panel-line); padding:3px 9px;
   }
-  .entry-status{ font-family:'DungGeunMo', monospace; font-size:0.68rem; color:var(--paper-faint); }
-  .entry h3{ font-family:'DungGeunMo', monospace; font-size:1.05rem; color:var(--paper); margin-bottom:9px; line-height:1.5; }
+  .entry-status{ font-family:'Galmuri11','DungGeunMo', monospace; font-size:0.68rem; color:var(--paper-faint); }
+  .entry h3{ font-family:'Galmuri11','DungGeunMo', monospace; font-size:1.05rem; color:var(--paper); margin-bottom:9px; line-height:1.5; }
   .entry p{ font-size:0.91rem; line-height:1.75; color:var(--paper-soft); max-width:560px; }
   .entry.pending{ opacity:0.55; }
 
   /* ---------- footer ---------- */
   footer{ padding:74px 6vw 54px; text-align:center; position:relative; z-index:2; }
   footer .wordmark{ display:block; margin-bottom:14px; }
-  footer p{ font-family:'DungGeunMo', monospace; color:var(--paper-soft); font-size:0.78rem; margin-bottom:20px; line-height:1.8; }
+  footer p{ font-family:'Galmuri11','DungGeunMo', monospace; color:var(--paper-soft); font-size:0.78rem; margin-bottom:20px; line-height:1.8; }
   .contact-link{
-    font-family:'DungGeunMo', monospace;
+    font-family:'Galmuri11','DungGeunMo', monospace;
     color:var(--cascade-cyan); text-decoration:none; font-size:0.85rem;
     border-bottom:1px solid var(--panel-line); padding-bottom:2px;
   }
@@ -228,9 +229,92 @@
 .catalog .entry:has(.project-action):focus-within { outline:2px solid currentColor; outline-offset:3px; }
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
-<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261108-2">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261110">
 <script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
-<script src="../assets/oddz-projects-catalog.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261110" defer></script>
+<link rel="stylesheet" href="../assets/fonts/galmuri/font.css">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261110">
+<script src="../assets/oddz-home-board.js?v=20261110" defer></script>
+<script src="../assets/home-motion.js?v=20261110" defer></script>
+<style id="home-skin">
+/* 게임·물빛: 픽셀 RPG 대화창 */
+:root{
+  --home-display:'Galmuri11','DungGeunMo',monospace; --home-text:var(--paper); --home-muted:rgba(234,247,251,.68);
+  --home-accent:var(--cascade-cyan); --home-on-accent:var(--ink); --home-line:var(--panel-line);
+  --board-bg:rgba(7,27,43,.82); --board-line:var(--panel-line); --board-radius:0px; --board-chip-bg:rgba(18,63,92,.55);
+  --board-shadow:6px 6px 0 rgba(107,111,196,.55);
+  --card-bg:rgba(10,42,64,.62); --card-line:var(--panel-line); --card-radius:0px;
+}
+.hero-board{box-shadow:inset 0 0 0 3px var(--water-deep),inset 0 0 0 4px rgba(143,232,242,.45),6px 6px 0 rgba(107,111,196,.55);border-color:var(--cascade-cyan)}
+.hero-board__title::before{content:'▶';margin-right:8px;font-size:.8em;color:var(--cascade-cyan);animation:boardBlink 1s steps(2) infinite}
+@keyframes boardBlink{50%{opacity:0}}
+.hero-board__title{font-weight:400}
+.hero-board__num{font-weight:400}
+.hero-board__stage{border-radius:0}
+.hero-board__stage[data-stage="done"] .hero-board__num{text-shadow:0 0 14px rgba(143,232,242,.6)}
+.hero-board__bar{height:4px;background:repeating-linear-gradient(90deg,var(--cascade-cyan) 0 6px,transparent 6px 8px)}
+.hero-board__sub,.hero-board__label{font-family:'Galmuri11','DungGeunMo',monospace;letter-spacing:0;font-weight:400}
+.hero-board__item{border-radius:0}
+.hero-board__item img{border-radius:0;image-rendering:auto}
+.hero-board__chips li{border-radius:0;font-family:'Galmuri11','DungGeunMo',monospace;font-weight:400}
+.hero-board__chips li::before{border-radius:0;background:var(--shrine-red)}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input,#work .oddz-catalog .oddz-stage-count{border-radius:0;font-family:'Galmuri11','DungGeunMo',monospace;font-weight:400}
+#work .oddz-catalog .oddz-filter[aria-pressed=true]{box-shadow:3px 3px 0 var(--spirit-indigo)}
+#work .oddz-catalog .oddz-stage-head h3{font-weight:400!important}
+#work .oddz-catalog .oddz-project-card .gem-tag{width:30px;height:28px}
+#work .oddz-catalog .oddz-project-card .oddz-gem-number{font-size:9px}
+#work .oddz-catalog .oddz-project-card>.oddz-project-icon{border-radius:0}
+#work .oddz-catalog .oddz-project-card .project-action{border-radius:0;font-family:'Galmuri11','DungGeunMo',monospace;font-weight:400}
+#work .oddz-catalog .oddz-project-card.entry:hover{box-shadow:4px 4px 0 var(--spirit-indigo)}
+#work .oddz-catalog .oddz-project-card.pending{background:rgba(7,27,43,.4)}
+/* ===== 게임·물빛 v2: 픽셀 RPG 폭포 던전 ===== */
+:root{ --px:'Press Start 2P','Galmuri11',monospace; }
+.hero-board__num{ font-family:var(--px); font-size:1.15rem; line-height:1.3; }
+.hero-board__total,#work .oddz-catalog .oddz-stage-en,#work .oddz-catalog .oddz-visible-count{ font-family:var(--px); font-size:.5rem; letter-spacing:.04em; }
+#work .oddz-catalog .oddz-stage-count{ font-family:var(--px); font-size:.55rem; }
+
+/* 픽셀 구름: 한 칸씩 끊어 흐른다 */
+.px-clouds{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+.px-clouds i{ position:absolute; display:block; width:96px; height:24px; background:rgba(240,252,255,.1);
+  clip-path:polygon(16px 0,56px 0,56px 8px,80px 8px,80px 16px,96px 16px,96px 24px,0 24px,0 16px,8px 16px,8px 8px,16px 8px);
+  animation:pxDrift 90s steps(90) infinite; }
+.px-clouds i:nth-child(1){ top:12vh; animation-delay:-20s; }
+.px-clouds i:nth-child(2){ top:30vh; transform:scale(1.6); animation-duration:130s; animation-delay:-70s; }
+.px-clouds i:nth-child(3){ top:48vh; animation-duration:110s; animation-delay:-45s; opacity:.7; }
+@keyframes pxDrift{ from{ left:-140px; } to{ left:100%; } }
+
+/* 픽셀 물결: 바닥에서 두 단으로 출렁인다 */
+.px-waves{ position:fixed; left:0; right:0; bottom:0; height:16px; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 0 8px,rgba(143,232,242,.35) 8px 24px,transparent 24px 32px) 0 0 / 32px 4px repeat-x,
+    linear-gradient(rgba(18,63,92,.9),rgba(18,63,92,.9)) 0 4px / 100% 12px no-repeat;
+  animation:pxWave 1.6s steps(4) infinite; }
+@keyframes pxWave{ to{ background-position:32px 0,0 4px; } }
+
+/* 카드: RPG 아이템 창 */
+#work .oddz-catalog .oddz-project-card.entry{
+  border:2px solid rgba(143,232,242,.55);
+  box-shadow:inset 0 0 0 3px var(--water-deep),inset 0 0 0 4px rgba(143,232,242,.22);
+  transition:transform .16s steps(2), box-shadow .16s steps(2);
+}
+#work .oddz-catalog .oddz-project-card.entry:hover{ transform:translate(-3px,-3px);
+  box-shadow:inset 0 0 0 3px var(--water-deep),inset 0 0 0 4px rgba(143,232,242,.3),6px 6px 0 var(--spirit-indigo); }
+#work .oddz-catalog .oddz-project-card>.oddz-project-icon{ padding:5px; background:var(--water-deep); border:2px solid rgba(143,232,242,.5); box-shadow:2px 2px 0 var(--spirit-indigo); }
+#work .oddz-catalog .oddz-project-card h3::before{ content:'▶'; display:inline-block; width:0; margin-right:0; overflow:hidden; color:var(--cascade-cyan); font-size:.8em; vertical-align:1px; transition:width .1s steps(1),margin .1s steps(1); }
+#work .oddz-catalog .oddz-project-card:hover h3::before{ width:1em; margin-right:4px; animation:boardBlink .8s steps(2) infinite; }
+#work .oddz-catalog .oddz-project-card.entry::after{
+  content:'CLEAR'; position:absolute; right:calc(var(--card-pad) - 4px); bottom:calc(var(--card-pad) - 6px);
+  font:400 .5rem/1 var(--px); letter-spacing:.06em; color:var(--cascade-cyan); padding:5px 6px; border:2px solid currentColor; pointer-events:none;
+}
+#work .oddz-catalog .oddz-project-card[data-stage="doing"]::after{ content:'NOW'; color:var(--shrine-red); animation:boardBlink 1.2s steps(2) infinite; }
+#work .oddz-catalog .oddz-project-card[data-stage="next"]::after{ content:'NEXT'; color:var(--paper-faint); }
+#work .oddz-catalog .oddz-project-card[data-stage="someday"]::after{ content:'LOCKED'; color:var(--paper-faint); }
+#work .oddz-catalog .oddz-project-card.pending::after{ bottom:12px; right:12px; padding:3px 4px; border-width:1px; }
+#work .oddz-catalog .oddz-project-card.pending{ border-style:dashed; border-width:2px; box-shadow:none; }
+#work .oddz-catalog .oddz-project-card.pending>.oddz-project-icon{ padding:3px; }
+.hero-board__stage{ transition:transform .16s steps(2); }
+@media (prefers-reduced-motion:reduce){ .px-clouds i,.px-waves,#work .oddz-catalog .oddz-project-card::after{ animation:none; } }
+</style>
 <style id="oddz-static-fallback-css">
 #work .oddz-static-catalog .oddz-fallback-main{min-width:0;text-align:left}
 #work .oddz-static-catalog .entry h3,#work .oddz-static-catalog .entry p{word-break:keep-all;overflow-wrap:anywhere;text-align:left}
@@ -239,6 +323,22 @@
 #work .oddz-static-catalog .gem-tag{position:relative;display:grid;place-items:center}
 #work .oddz-static-catalog .oddz-fallback-num{position:absolute;font-size:10px;font-weight:800;color:#123c4a}
 </style>
+<style id="typography">
+/* ===== 글꼴 꾸미기: 폭포 던전 =====
+   제목·메뉴·라벨 갈무리11 · 숫자 Press Start 2P · 카드 설명만 Pretendard(긴 글 읽기용) */
+h1{ text-shadow:4px 4px 0 var(--spirit-indigo); line-height:1.4; }
+h1 em{ text-shadow:4px 4px 0 var(--water-deep),0 0 22px rgba(143,232,242,.45); }
+nav a, header .theme-picker summary, .hero-desc, .cta, .tag-label,
+#work .oddz-catalog .oddz-filter, #work .oddz-catalog .oddz-search input, #work .oddz-catalog .oddz-search-label,
+#work .oddz-catalog .oddz-project-card .project-action, #work .oddz-catalog .oddz-project-details summary,
+.hero-board__name, .hero-board__label, .hero-board__sub, .hero-board__chips li, footer p, .contact-link{
+  font-family:'Galmuri11','DungGeunMo',monospace; -webkit-font-smoothing:none; }
+.hero-desc{ font-size:1.1rem; }
+.hero-board__name{ font-weight:700; }
+#work .oddz-catalog .oddz-project-card h3{ font-weight:700; -webkit-font-smoothing:none; }
+#work .oddz-catalog .oddz-project-card .oddz-project-date{ font-family:var(--px)!important; font-size:.55rem!important; letter-spacing:.04em; }
+.wordmark{ font-family:'Press Start 2P',monospace; font-size:.95rem; }
+</style>
 </head>
 <body>
 
@@ -246,6 +346,8 @@
   <div class="cascade"></div>
   <div class="scanlines"></div>
   <div class="stars" id="stars"></div>
+  <div class="px-clouds" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="px-waves" aria-hidden="true"></div>
   <div class="shore">
     <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
       <polygon points="30,60 60,30 90,60" fill="#0F3550"/>
@@ -282,13 +384,14 @@
       <details class="theme-picker">
         <summary>테마</summary>
         <div class="theme-picker__list" aria-label="사이트 테마">
-          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반짝이</a>
-          <a href="../themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>기계</a>
-          <a href="../themes/game-water.html" data-theme-path="themes/game-water.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>게임 · 물빛</a>
-          <a href="../themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>게임 · 노을</a>
-          <a href="../themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="../themes/machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="../themes/game-water.html" data-theme-path="themes/game-water.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="../themes/game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="../themes/bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
           <a href="../themes/oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
           <a href="../themes/hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="../themes/olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
         </div>
       </details>
     </nav>

@@ -6,7 +6,8 @@
     'game-sunset': '../themes/game-sunset.html',
     bubbles: '../themes/bubbles.html',
     oz: '../themes/oz.html',
-    hum: '../themes/hum.html'
+    hum: '../themes/hum.html',
+    olympus: '../themes/olympus.html'
   };
   const requested = new URLSearchParams(location.search).get('theme');
   let theme = 'sparkle';
@@ -26,6 +27,8 @@
   }
   document.documentElement.dataset.theme = theme;
   document.documentElement.dataset.oddzTheme = theme;
+  // 오즈·종이 공작은 전용 디자인을 쓴다. 나머지 다섯 테마만 공통 다듬기 규칙(:root[data-polish])을 받는다.
+  if (theme !== 'oz' && theme !== 'hum') document.documentElement.dataset.polish = '';
   document.addEventListener('DOMContentLoaded', () => {
     for (const link of document.querySelectorAll('[data-home-link]')) {
       link.href = home[theme] + (link.dataset.homeLink === 'work' ? '#work' : '');

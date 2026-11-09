@@ -52,3 +52,59 @@ html[data-theme="hum"] .journal-pager__link { border-style: solid; border-radius
 
 .journal-section li { color:var(--muted); line-height:1.9; margin-bottom:7px; word-break:keep-all; overflow-wrap:anywhere; }
 .journal-section strong { color:var(--paper); }
+
+/* ===================================================================
+   2026-11-09 다듬기: 반짝이·기계·물빛·노을·비눗방울 개발일지.
+   data-polish와 --panel 같은 토큰은 project-theme.js·project-detail.css에서 온다.
+   =================================================================== */
+/* 목록: 왼쪽 날짜 기둥 + 오른쪽 내용 */
+:root[data-polish] .journal-intro { padding-bottom:30px; border-bottom:1px solid var(--line); }
+:root[data-polish] .journal-group > h2 { display:flex; align-items:center; gap:14px; border-bottom:0; padding-bottom:0; font-size:1.6rem; }
+:root[data-polish] .journal-group > h2::after { content:''; flex:1; height:1px; background:var(--line); }
+:root[data-polish] .journal-list { gap:12px; }
+:root[data-polish] .journal-card {
+  display:grid; grid-template-columns:150px minmax(0,1fr); column-gap:28px; align-items:start;
+  padding:24px 26px; border-radius:var(--radius); background:var(--panel);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+}
+:root[data-polish] .journal-card__meta {
+  grid-column:1; grid-row:1 / span 3; align-self:stretch; flex-direction:column; align-items:flex-start; gap:6px;
+  padding-right:20px; border-right:1px dashed var(--line);
+}
+:root[data-polish] .journal-card__meta time { font-size:1.2rem; }
+:root[data-polish] .journal-card__type { font-size:.74rem; font-weight:600; line-height:1.45; }
+:root[data-polish] .journal-card__title { grid-column:2; margin:0 0 8px; font-size:1.22rem; line-height:1.45; word-break:keep-all; }
+:root[data-polish] .journal-card__summary { grid-column:2; }
+:root[data-polish] .journal-card__arrow { grid-column:2; margin-top:12px; transition:transform .2s; }
+:root[data-polish] .journal-card:hover .journal-card__arrow { transform:translateX(4px); }
+:root[data-polish] .journal-card:hover { background:var(--panel-strong); }
+:root[data-polish][data-theme="game-water"] .journal-card:hover { transform:translate(-2px,-2px); box-shadow:4px 4px 0 #6b6fc4; }
+
+/* 글: 섹션 번호와 읽기 폭 */
+:root[data-polish] .journal-article { counter-reset:jsec; }
+:root[data-polish] .journal-article .article-date { display:inline-flex; align-items:center; gap:9px; font-variant-numeric:tabular-nums; }
+:root[data-polish] .journal-article .article-date::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--mint); box-shadow:0 0 10px var(--mint); }
+:root[data-polish] .journal-section { counter-increment:jsec; border-top:0; margin-top:56px; padding-top:0; }
+:root[data-polish] .journal-section > h2 { display:flex; align-items:center; gap:14px; }
+:root[data-polish] .journal-section > h2::before {
+  content:counter(jsec, decimal-leading-zero); flex:none;
+  font:700 .76rem/1 var(--mono); letter-spacing:.04em; color:var(--mint);
+  padding:6px 8px; border:1px solid var(--line); border-radius:calc(var(--radius) * .4); background:var(--panel);
+}
+:root[data-polish] .journal-section :is(p,ul,ol) { max-width:68ch; }
+:root[data-polish] .journal-section :not(pre) > code {
+  font-family:var(--mono); font-size:.86em; padding:2px 6px; border-radius:5px; background:var(--panel-strong); color:var(--paper);
+}
+:root[data-polish] .journal-section li::marker { color:var(--mint); }
+:root[data-polish] .journal-pager__link { background:var(--panel); }
+:root[data-polish] .journal-article .end-links { align-items:center; padding-top:26px; border-top:1px solid var(--line); }
+/* 올림포스: 소제목 번호를 로마 숫자로, 카드 위에 메안더 띠 */
+:root[data-polish][data-theme="olympus"] .journal-section > h2::before { content:counter(jsec, upper-roman); font-family:'Cinzel',serif; letter-spacing:.08em; color:#5b97cb; border-radius:2px; }
+:root[data-polish][data-theme="olympus"] .journal-card { padding-top:34px; background:var(--meander) repeat-x 0 0 / 12px 12px, var(--panel); box-shadow:0 16px 36px -30px rgba(36,87,138,.5); }
+:root[data-polish][data-theme="olympus"] .journal-card__meta time { font-family:'Cinzel',serif; font-weight:700; letter-spacing:.04em; }
+:root[data-polish][data-theme="olympus"] .journal-pager__link { border-style:solid; border-radius:2px; }
+@media (max-width:680px) {
+  :root[data-polish] .journal-card { grid-template-columns:minmax(0,1fr); padding:20px; }
+  :root[data-polish] .journal-card__meta { grid-row:auto; flex-direction:row; flex-wrap:wrap; align-items:baseline; gap:4px 12px; border-right:0; padding-right:0; margin-bottom:10px; }
+  :root[data-polish] :is(.journal-card__title,.journal-card__summary,.journal-card__arrow) { grid-column:1; }
+}
