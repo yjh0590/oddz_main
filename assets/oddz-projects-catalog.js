@@ -9,7 +9,8 @@
   const path=window.location.pathname;
   const selectedTheme=document.querySelector('.theme-picker [aria-current="page"]')?.dataset.themePath||'';
   const oz=!!work.querySelector('.catalog-group')&&!!document.querySelector('.postcard');
-  let theme=oz?'oz':path.includes('/ripple.html')||selectedTheme.endsWith('/ripple.html')?'ripple':path.includes('/olympus.html')||selectedTheme.endsWith('/olympus.html')?'olympus':path.includes('/hum.html')||selectedTheme.endsWith('/hum.html')?'hum':path.includes('/machine.html')||selectedTheme.endsWith('/machine.html')?'machine':path.includes('/game-water.html')||selectedTheme.endsWith('/game-water.html')?'game-water':path.includes('/game-sunset.html')||selectedTheme.endsWith('/game-sunset.html')?'game-sunset':path.includes('/bubbles.html')||selectedTheme.endsWith('/bubbles.html')?'bubbles':'sparkle';
+  const known=['ripple','olympus','hum','machine','game-water','game-sunset','bubbles','ink','fog','sand','magnet','cloth'];
+  let theme=oz?'oz':(known.find(k=>path.includes('/'+k+'.html')||selectedTheme.endsWith('/'+k+'.html'))||'sparkle');
   document.documentElement.setAttribute('data-oddz-theme',theme);
   const isSubpath=theme!=='sparkle';
   const stageDefs=[
@@ -25,10 +26,15 @@
     'game-water':{done:['CLEAR','보스를 쓰러뜨리고 클리어한 퀘스트'],doing:['NOW PLAYING','지금 공략 중인 층'],next:['NEXT STAGE','다음에 들어갈 던전'],someday:['LOCKED','아직 잠겨 있는 숨겨진 스테이지']},
     'game-sunset':{done:['COMPLETED','완수 도장을 찍은 의뢰'],doing:['ON THE ROAD','지금 길 위에 있는 의뢰'],next:['POSTED','다음에 받을 의뢰'],someday:['OLD NOTICE','게시판 구석에 오래 붙어 있는 의뢰']},
     bubbles:{done:['ON STAGE','무대에 올라 박수를 받은 공연'],doing:['REHEARSAL','지금 리허설 중인 무대'],next:['COMING UP','다음 공연 예정작'],someday:['DREAM STAGE','언젠가 올릴 꿈의 무대']},
+    ink:{done:['落款','낙관까지 찍은 그림'],doing:['墨','먹이 아직 마르지 않은 그림'],next:['草','밑그림만 그려 둔 것'],someday:['白','빈 화선지로 남겨 둔 것']},
+    fog:{done:['written','또렷하게 적어 둔 것'],doing:['wet','아직 물기가 남은 글씨'],next:['fogging','곧 쓸 자리에 김이 서리는 중'],someday:['blurred','김 속에 흐릿하게 남은 것']},
+    sand:{done:['unearthed','바람에 깎여도 남은 것'],doing:['piling','지금 한 줌씩 쌓는 중'],next:['buried','모래 아래 묻혀 있는 다음 것'],someday:['mirage','신기루처럼 멀리 보이는 것']},
+    magnet:{done:['LOCKED','완전히 달라붙은 것'],doing:['PULLING','지금 끌려오는 중'],next:['IN RANGE','자기장 안에 들어온 것'],someday:['FAR FIELD','아직 먼 곳에 있는 것']},
+    cloth:{done:['dried','바람에 바싹 마른 것'],doing:['stitching','지금 한 땀씩 꿰매는 중'],next:['cut','재단해 둔 천'],someday:['fabric','언젠가 쓸 천 뭉치']},
     ripple:{done:['surfaced','수면 위로 떠오른 것'],doing:['rippling','지금 물결이 번지는 중인 것'],next:['falling','곧 떨어질 물방울'],someday:['in the deep','깊은 곳에 가라앉아 있는 것']},
     olympus:{done:['PERFECTVM','올림포스에 오른 것'],doing:['IN OPERE','지금 대장간에서 빚는 중인 것'],next:['PROXIMVM','다음에 빚을 것'],someday:['ALIQVANDO','신탁으로만 전해지는 것']}
   };
-  const accent={sparkle:'#8fe3d0',machine:'#F5B921','game-water':'#8FE8F2','game-sunset':'#F0C97A',bubbles:'#F5A9C9',oz:'#63a995',hum:'#2f6fd0',olympus:'#24578a',ripple:'#9ff3ff'}[theme];
+  const accent={sparkle:'#8fe3d0',machine:'#F5B921','game-water':'#8FE8F2','game-sunset':'#F0C97A',bubbles:'#F5A9C9',oz:'#63a995',hum:'#2f6fd0',olympus:'#24578a',ripple:'#9ff3ff',ink:'#b3261e',fog:'#ffc46b',sand:'#b4532a',magnet:'#e0483b',cloth:'#2c3e6b'}[theme];
   // 올림포스: PJ 번호를 로마 숫자로 (PJ 19 → XIX)
   const roman=(n)=>{let out='';for(const [v,s] of [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]){while(n>=v){out+=s;n-=v;}}return out;};
   const sceneSamples=[...work.querySelectorAll('.entry[data-mood]')].map(n=>({mood:n.dataset.mood,html:n.querySelector('.entry-scene')?.innerHTML||''}));
@@ -54,7 +60,7 @@
     const digits=item.no.replace('PJ ','');
     if(theme==='oz')return mk('div','number',item.no);
     if(theme==='olympus'){const e=mk('div','roman-tag','PJ · '+roman(parseInt(digits,10)||0));e.title=item.no;return e;}
-    if(theme==='sparkle'||theme==='hum'||theme==='ripple')return mk('div','entry-no',item.no);
+    if(['sparkle','hum','ripple','ink','fog','sand','magnet','cloth'].includes(theme))return mk('div','entry-no',item.no);
     if(theme==='machine')return mk('div','part-tag',item.no);
     if(theme==='bubbles')return mk('div','bubble-tag',item.no);
     if(theme==='game-water'){

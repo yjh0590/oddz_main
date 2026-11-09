@@ -50,6 +50,11 @@ html[data-oddz-theme=bubbles] #work .oddz-catalog{--oddz-accent:#f5a9c9}
 html[data-oddz-theme=sparkle] #work .oddz-catalog{--oddz-accent:#8fe3d0}
 html[data-oddz-theme=olympus] #work .oddz-catalog{--oddz-accent:#24578a}
 html[data-oddz-theme=ripple] #work .oddz-catalog{--oddz-accent:#9ff3ff}
+html[data-oddz-theme=ink] #work .oddz-catalog{--oddz-accent:#b3261e}
+html[data-oddz-theme=fog] #work .oddz-catalog{--oddz-accent:#ffc46b}
+html[data-oddz-theme=sand] #work .oddz-catalog{--oddz-accent:#b4532a}
+html[data-oddz-theme=magnet] #work .oddz-catalog{--oddz-accent:#e0483b}
+html[data-oddz-theme=cloth] #work .oddz-catalog{--oddz-accent:#2c3e6b}
 /* Oz only: preserve postcard/art direction and fit 3 genuine cards per desktop row. */
 html[data-oddz-theme=oz] #work .oddz-catalog{--oddz-accent:#4c9983;max-width:100%;width:100%}
 html[data-oddz-theme=oz] #work .oddz-catalog .oddz-catalog-controls{color:#546c6b;border-color:#e5e7e0}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김 서린 창 · oddz</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230c1420'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%239db4cc'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/fonts/nanum-pen-script/font.css">
+<style>
+  /* 김 서린 창: 비 오는 밤 창문. 창밖 불빛이 김에 번져 보이고, 문지르면 닦인다. 물방울이 흘러내린 자리는 맑다. */
+  :root{--bg:#0c1420;--fg:#eef3f8;--muted:rgba(238,243,248,.74);--accent:#ffc46b;--on-accent:#1a1408;--line:rgba(255,255,255,.22);--panel:rgba(20,32,50,.42);--fd:'Gowun Batang',serif;--fb:'Pretendard Variable','Pretendard',sans-serif;--hand:'Nanum Pen Script',cursive}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--fg);background:var(--bg);overflow-x:hidden;min-height:100vh}
+  .sim{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+  header{display:flex;align-items:center;justify-content:space-between;padding:26px 6vw 0}
+  .wordmark{font-family:var(--fd);font-size:1.8rem;line-height:1;color:var(--fg);text-decoration:none}
+  .wordmark span{color:var(--accent)}
+  nav{display:flex;gap:8px}
+  nav>a{color:var(--fg);text-decoration:none;font:600 .84rem/1 var(--fb);padding:10px 15px;border-radius:var(--pill,99px);background:var(--panel);border:1px solid var(--line);transition:border-color .2s,transform .2s}
+  nav>a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  main{position:relative;z-index:1}
+  .tag-label{display:inline-flex;align-items:center;gap:8px;font:600 .74rem/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:8px 14px;border-radius:var(--pill,99px);border:1px solid var(--line);background:var(--panel)}
+  .hero{display:flex;flex-direction:column;justify-content:center;padding:14vh 6vw 8vh;max-width:760px}
+  .hero .tag-label{margin-bottom:24px;width:fit-content}
+  h1{font:400 clamp(3rem,6.2vw,5rem)/1.08 var(--fd);color:var(--fg);margin-bottom:22px}
+  h1 em{display:inline-block;margin-top:8px;font-style:normal;font-size:.72em;line-height:1.2;color:var(--accent)}
+  .hero-desc{font-size:1.06rem;line-height:1.8;color:var(--muted);max-width:480px;margin-bottom:32px}
+  .cta{display:inline-flex;align-items:center;gap:10px;width:fit-content;padding:16px 28px;color:var(--on-accent);background:var(--accent);text-decoration:none;font:700 1rem/1 var(--fb);border-radius:var(--pill,99px)}
+  .cta svg{width:16px;height:16px}
+  .theme-hint{margin-top:16px;font-size:.84rem;color:var(--muted)}
+  section{padding:4vw 6vw}
+  .section-head{margin:0 auto 44px}
+  .section-head h2{font:400 clamp(2rem,3.6vw,2.8rem)/1.2 var(--fd);color:var(--fg);margin:14px 0 8px}
+  .section-head p{color:var(--muted);line-height:1.7}
+  .catalog-fallback{color:var(--muted);line-height:1.8}.catalog-fallback a{color:var(--accent)}
+  .entry{position:relative}
+  .entry-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .entry-cat{font:600 .68rem/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding:5px 10px;border-radius:var(--pill,99px);border:1px solid var(--line)}
+  .entry h3{font-family:var(--fd);font-weight:400;color:var(--fg)}
+  footer{padding:60px 6vw;text-align:center}
+  footer .wordmark{display:inline-block;margin-bottom:10px;font-size:2.4rem}
+  footer p{color:var(--muted);margin-bottom:18px}
+  .contact-link{display:inline-block;color:var(--fg);font-weight:600;text-decoration:none;padding:11px 18px;border-radius:var(--pill,99px);border:1px solid var(--line);background:var(--panel)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  @media (max-width:640px){header{padding:22px 5vw 0}nav{gap:6px}nav>a{padding:9px 11px}}
+
+  #scene{z-index:-3}#fog{z-index:-2}#drops{z-index:-1}
+  nav>a,.tag-label,.contact-link{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+  h1{font-family:'Cormorant Garamond',var(--fd);font-style:italic;font-weight:500;text-shadow:0 2px 24px rgba(0,0,0,.4)}
+  h1 em{font-family:var(--fd);font-style:normal;font-weight:700;color:rgba(255,255,255,.94);text-shadow:0 0 22px rgba(255,255,255,.35)}
+  .hero-desc{font-family:var(--fd)}
+  .cta{background:var(--accent);box-shadow:0 0 0 6px rgba(255,196,107,.15),0 12px 30px -10px rgba(255,170,70,.6)}
+  .theme-hint{font-family:var(--hand);font-size:1.35rem;color:rgba(255,255,255,.8)}
+  .section-head h2{font-weight:700}
+</style>
+<style>:root{--picker-bg:rgba(20,32,50,.7);--picker-menu:#15233a;--picker-text:#eef3f8;--picker-line:rgba(255,255,255,.3);--picker-hover:rgba(255,196,107,.14);--picker-accent:#ffc46b}</style>
+<link rel="stylesheet" href="../assets/theme-switcher.css">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
+<script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261112" defer></script>
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261110b">
+<script src="../assets/oddz-home-board.js?v=20261112" defer></script>
+<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/fog-glass.js?v=20261112" defer></script>
+<style id="home-skin">
+/* 배경 시뮬레이션이 움직임을 맡는다. 느린 기기에서도 내용이 늘 보이도록 등장 효과는 끈다(oddz-home.css 뒤에 와야 이긴다). */
+.hero-board{animation:none}
+.motion-reveal #work .oddz-project-card:not(.is-in){opacity:1}
+.motion-reveal #work .oddz-project-card.is-in{animation:none}
+:root{--home-display:var(--fd);--home-text:var(--fg);--home-muted:var(--muted);--home-accent:var(--accent);--home-on-accent:var(--on-accent);--home-line:var(--line);--board-line:var(--line);--card-line:var(--line)}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input,#work .oddz-catalog .oddz-stage-intro,#work .oddz-catalog .oddz-project-details summary{font-family:var(--fb);color:var(--fg)}
+#work .oddz-catalog .oddz-stage-head h3{font-family:var(--fd)!important;font-weight:400!important;font-size:26px!important}
+#work .oddz-catalog .oddz-project-card h3{font-size:1.28rem}
+.hero-board__title,.hero-board__num{font-family:var(--fd);font-weight:400}
+:root{--dots:radial-gradient(circle at 30% 30%,rgba(255,255,255,.3) 0 .8px,transparent 1.4px) 0 0/9px 11px,radial-gradient(circle at 50% 50%,rgba(255,255,255,.2) 0 1.2px,transparent 1.8px) 4px 6px/17px 19px;
+  --board-bg:var(--dots),linear-gradient(160deg,rgba(60,80,105,.45),rgba(20,32,50,.55));--board-radius:22px;--board-chip-bg:rgba(255,255,255,.06);
+  --board-shadow:inset 0 1px 1px rgba(255,255,255,.35),0 24px 50px -22px rgba(0,0,0,.7);
+  --card-bg:var(--dots),linear-gradient(160deg,rgba(50,70,95,.42),rgba(16,26,42,.55));--card-radius:20px}
+.hero-board,#work .oddz-catalog .oddz-project-card.entry{-webkit-backdrop-filter:blur(14px) saturate(130%);backdrop-filter:blur(14px) saturate(130%)}
+.hero-board__title{font-family:var(--hand);font-size:2.1rem;color:rgba(255,255,255,.9)}
+.hero-board__num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2.4rem}
+.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--accent);text-shadow:0 0 16px rgba(255,196,107,.5)}
+#work .oddz-catalog .oddz-project-card h3{font-family:var(--fd);font-weight:700}
+#work .oddz-catalog .oddz-project-card .entry-no{font:500 1.05rem/1 'Cormorant Garamond',serif;font-style:italic;color:var(--accent)}
+#work .oddz-catalog .oddz-project-card .oddz-project-date{font:400 1.2rem/1.1 var(--hand)!important;opacity:.85}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{background:rgba(20,32,50,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#work .oddz-catalog .oddz-stage-en{font-family:var(--hand);font-size:1.25rem;letter-spacing:0}
+</style>
+</head>
+<body>
+
+  <canvas id="scene" class="sim" aria-hidden="true"></canvas>
+  <canvas id="fog" class="sim" aria-hidden="true"></canvas>
+  <canvas id="drops" class="sim" aria-hidden="true"></canvas>
+
+  <header>
+    <a class="wordmark" href="#">odd<span>z</span></a>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="../journal/index.html?theme=fog">개발일지</a>
+      <a href="#contact">연락</a>
+
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
+          <a href="oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
+          <a href="hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
+          <a href="ripple.html" data-theme-path="themes/ripple.html"><span class="theme-picker__swatch" style="--swatch:#3cc8d8" aria-hidden="true"></span>물방울 수면</a>
+          <a href="ink.html" data-theme-path="themes/ink.html"><span class="theme-picker__swatch" style="--swatch:#1d1b19" aria-hidden="true"></span>먹물 화선지</a>
+          <a href="fog.html" data-theme-path="themes/fog.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#9db4cc" aria-hidden="true"></span>김 서린 창</a>
+          <a href="sand.html" data-theme-path="themes/sand.html"><span class="theme-picker__swatch" style="--swatch:#d9a463" aria-hidden="true"></span>사막 모래언덕</a>
+          <a href="magnet.html" data-theme-path="themes/magnet.html"><span class="theme-picker__swatch" style="--swatch:#e0483b" aria-hidden="true"></span>자석 실험대</a>
+          <a href="cloth.html" data-theme-path="themes/cloth.html"><span class="theme-picker__swatch" style="--swatch:#2c3e6b" aria-hidden="true"></span>바람 부는 깃발</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-label">oddz · rainy window</span>
+      <h1>Oddz,<br><em>심심하면 창에 낙서해요.</em></h1>
+      <p class="hero-desc">비 오는 밤, 개발자가 되고 싶었던 사람이 김 서린 창에 적어 둔 것들.</p>
+      <a class="cta" href="#work">창 안쪽 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <p class="theme-hint">창을 누른 채로 문질러 보세요. 김이 닦였다가 다시 서려요</p>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">written on glass</span>
+        <h2>창에 적어 둔 것들</h2>
+        <p>웹·앱·스크립트로 만든 것들을 손가락으로 하나씩 적었습니다.</p>
+      </div>
+
+      <div class="catalog">
+        <p class="catalog-fallback">프로젝트 목록을 불러오는 중이에요. 목록이 보이지 않으면 <a href="../journal/index.html?theme=fog">개발일지</a>에서 기록을 볼 수 있어요.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span>z</span></span>
+    <p>김이 다시 서리면 또 적겠습니다.</p>
+    <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
+  </footer>
+
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>

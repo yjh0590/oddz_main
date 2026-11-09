@@ -8,7 +8,12 @@
     oz: '../themes/oz.html',
     hum: '../themes/hum.html',
     olympus: '../themes/olympus.html',
-    ripple: '../themes/ripple.html'
+    ripple: '../themes/ripple.html',
+    ink: '../themes/ink.html',
+    fog: '../themes/fog.html',
+    sand: '../themes/sand.html',
+    magnet: '../themes/magnet.html',
+    cloth: '../themes/cloth.html'
   };
   const requested = new URLSearchParams(location.search).get('theme');
   let theme = 'sparkle';

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자석 실험대 · oddz</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2317191d'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%23e0483b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbit&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+
+<style>
+  /* 자석 실험대: 흑연색 실험판 위 철가루가 자기장을 따라 줄지어 선다. 커서와 카드가 모두 자석이다. */
+  :root{--bg:#17191d;--fg:#e8ebef;--muted:#9aa3ad;--accent:#e0483b;--on-accent:#fff;--line:rgba(232,235,239,.16);--panel:rgba(35,39,45,.88);--fd:'Orbit',sans-serif;--fb:'IBM Plex Sans KR',sans-serif;--mono:'IBM Plex Mono',monospace;--s:#3b7be0;--pill:6px}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--fg);background:var(--bg);overflow-x:hidden;min-height:100vh}
+  .sim{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+  header{display:flex;align-items:center;justify-content:space-between;padding:26px 6vw 0}
+  .wordmark{font-family:var(--fd);font-size:1.8rem;line-height:1;color:var(--fg);text-decoration:none}
+  .wordmark span{color:var(--accent)}
+  nav{display:flex;gap:8px}
+  nav>a{color:var(--fg);text-decoration:none;font:600 .84rem/1 var(--fb);padding:10px 15px;border-radius:var(--pill,99px);background:var(--panel);border:1px solid var(--line);transition:border-color .2s,transform .2s}
+  nav>a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  main{position:relative;z-index:1}
+  .tag-label{display:inline-flex;align-items:center;gap:8px;font:600 .74rem/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:8px 14px;border-radius:var(--pill,99px);border:1px solid var(--line);background:var(--panel)}
+  .hero{display:flex;flex-direction:column;justify-content:center;padding:14vh 6vw 8vh;max-width:760px}
+  .hero .tag-label{margin-bottom:24px;width:fit-content}
+  h1{font:400 clamp(3rem,6.2vw,5rem)/1.08 var(--fd);color:var(--fg);margin-bottom:22px}
+  h1 em{display:inline-block;margin-top:8px;font-style:normal;font-size:.72em;line-height:1.2;color:var(--accent)}
+  .hero-desc{font-size:1.06rem;line-height:1.8;color:var(--muted);max-width:480px;margin-bottom:32px}
+  .cta{display:inline-flex;align-items:center;gap:10px;width:fit-content;padding:16px 28px;color:var(--on-accent);background:var(--accent);text-decoration:none;font:700 1rem/1 var(--fb);border-radius:var(--pill,99px)}
+  .cta svg{width:16px;height:16px}
+  .theme-hint{margin-top:16px;font-size:.84rem;color:var(--muted)}
+  section{padding:4vw 6vw}
+  .section-head{margin:0 auto 44px}
+  .section-head h2{font:400 clamp(2rem,3.6vw,2.8rem)/1.2 var(--fd);color:var(--fg);margin:14px 0 8px}
+  .section-head p{color:var(--muted);line-height:1.7}
+  .catalog-fallback{color:var(--muted);line-height:1.8}.catalog-fallback a{color:var(--accent)}
+  .entry{position:relative}
+  .entry-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .entry-cat{font:600 .68rem/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding:5px 10px;border-radius:var(--pill,99px);border:1px solid var(--line)}
+  .entry h3{font-family:var(--fd);font-weight:400;color:var(--fg)}
+  footer{padding:60px 6vw;text-align:center}
+  footer .wordmark{display:inline-block;margin-bottom:10px;font-size:2.4rem}
+  footer p{color:var(--muted);margin-bottom:18px}
+  .contact-link{display:inline-block;color:var(--fg);font-weight:600;text-decoration:none;padding:11px 18px;border-radius:var(--pill,99px);border:1px solid var(--line);background:var(--panel)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  @media (max-width:640px){header{padding:22px 5vw 0}nav{gap:6px}nav>a{padding:9px 11px}}
+
+  body{background:radial-gradient(ellipse 80% 70% at 50% 40%,#22252b,#121417),#17191d;background-attachment:fixed}
+  body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px)}
+  #field{z-index:-1}
+  h1 em{background:linear-gradient(90deg,var(--accent),#c45bb0 50%,var(--s));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tag-label,.theme-hint{font-family:var(--mono)}
+  .cta{background:linear-gradient(90deg,var(--accent) 50%,var(--s) 50%);font-family:var(--fd);letter-spacing:.02em;box-shadow:0 12px 26px -12px rgba(0,0,0,.8)}
+  .cta:hover{background:linear-gradient(90deg,var(--s) 50%,var(--accent) 50%)}
+</style>
+<style>:root{--picker-bg:#23272d;--picker-menu:#23272d;--picker-text:#e8ebef;--picker-line:rgba(255,255,255,.2);--picker-hover:rgba(224,72,59,.15);--picker-accent:#e0483b}</style>
+<link rel="stylesheet" href="../assets/theme-switcher.css">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
+<script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261112" defer></script>
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261110b">
+<script src="../assets/oddz-home-board.js?v=20261112" defer></script>
+<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/magnet-field.js?v=20261112" defer></script>
+<style id="home-skin">
+/* 배경 시뮬레이션이 움직임을 맡는다. 느린 기기에서도 내용이 늘 보이도록 등장 효과는 끈다(oddz-home.css 뒤에 와야 이긴다). */
+.hero-board{animation:none}
+.motion-reveal #work .oddz-project-card:not(.is-in){opacity:1}
+.motion-reveal #work .oddz-project-card.is-in{animation:none}
+:root{--home-display:var(--fd);--home-text:var(--fg);--home-muted:var(--muted);--home-accent:var(--accent);--home-on-accent:var(--on-accent);--home-line:var(--line);--board-line:var(--line);--card-line:var(--line)}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input,#work .oddz-catalog .oddz-stage-intro,#work .oddz-catalog .oddz-project-details summary{font-family:var(--fb);color:var(--fg)}
+#work .oddz-catalog .oddz-stage-head h3{font-family:var(--fd)!important;font-weight:400!important;font-size:26px!important}
+#work .oddz-catalog .oddz-project-card h3{font-size:1.28rem}
+.hero-board__title,.hero-board__num{font-family:var(--fd);font-weight:400}
+:root{--metal:repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 2px),linear-gradient(160deg,#2f343b,#22262c);
+  --board-bg:var(--metal);--board-radius:8px;--board-chip-bg:rgba(0,0,0,.25);--board-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 24px 50px -24px rgba(0,0,0,.9);
+  --card-bg:var(--metal);--card-radius:8px}
+.hero-board{-webkit-backdrop-filter:none;backdrop-filter:none}
+.hero-board__title{font-size:1.25rem;letter-spacing:.2em}
+.hero-board__title::before{content:'N';margin-right:8px;padding:2px 6px;border-radius:3px;background:var(--accent);font:700 .7rem/1 var(--mono);letter-spacing:0;vertical-align:3px}
+.hero-board__num{font-family:var(--mono);font-weight:700}
+.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--accent)}
+.hero-board__total,.hero-board__meta,.hero-board__sub{font-family:var(--mono)}
+#work .oddz-catalog .oddz-project-card.entry{box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 36px -24px rgba(0,0,0,.9)}
+#work .oddz-catalog .oddz-project-card .entry-no{padding:4px 8px;border-radius:4px;color:#fff;font:700 .68rem/1 var(--mono);background:linear-gradient(90deg,var(--accent) 50%,var(--s) 50%)}
+#work .oddz-catalog .oddz-project-card.pending .entry-no{background:linear-gradient(90deg,#5b6068 50%,#3d4249 50%)}
+#work .oddz-catalog .oddz-project-card .oddz-project-date,#work .oddz-catalog .oddz-stage-en,#work .oddz-catalog .oddz-stage-count{font-family:var(--mono)!important}
+#work .oddz-catalog .oddz-project-card.pending{background:rgba(35,39,45,.55)}
+#work .oddz-catalog .oddz-filter{border-radius:4px}
+</style>
+</head>
+<body>
+
+  <canvas id="field" class="sim" aria-hidden="true"></canvas>
+
+  <header>
+    <a class="wordmark" href="#">odd<span>z</span></a>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="../journal/index.html?theme=magnet">개발일지</a>
+      <a href="#contact">연락</a>
+
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
+          <a href="oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
+          <a href="hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
+          <a href="ripple.html" data-theme-path="themes/ripple.html"><span class="theme-picker__swatch" style="--swatch:#3cc8d8" aria-hidden="true"></span>물방울 수면</a>
+          <a href="ink.html" data-theme-path="themes/ink.html"><span class="theme-picker__swatch" style="--swatch:#1d1b19" aria-hidden="true"></span>먹물 화선지</a>
+          <a href="fog.html" data-theme-path="themes/fog.html"><span class="theme-picker__swatch" style="--swatch:#9db4cc" aria-hidden="true"></span>김 서린 창</a>
+          <a href="sand.html" data-theme-path="themes/sand.html"><span class="theme-picker__swatch" style="--swatch:#d9a463" aria-hidden="true"></span>사막 모래언덕</a>
+          <a href="magnet.html" data-theme-path="themes/magnet.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#e0483b" aria-hidden="true"></span>자석 실험대</a>
+          <a href="cloth.html" data-theme-path="themes/cloth.html"><span class="theme-picker__swatch" style="--swatch:#2c3e6b" aria-hidden="true"></span>바람 부는 깃발</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-label">oddz · field lab</span>
+      <h1>Oddz,<br><em>심심하면 끌어당겨요.</em></h1>
+      <p class="hero-desc">개발자가 되고 싶었던 사람에게 하나씩 끌려온 것들.</p>
+      <a class="cta" href="#work">자기장 따라가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <p class="theme-hint">커서가 자석이에요. 누르면 N극과 S극이 바뀌어요</p>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">attracted</span>
+        <h2>끌려온 것들</h2>
+        <p>웹·앱·스크립트로 만든 것마다 작은 자기장이 있습니다.</p>
+      </div>
+
+      <div class="catalog">
+        <p class="catalog-fallback">프로젝트 목록을 불러오는 중이에요. 목록이 보이지 않으면 <a href="../journal/index.html?theme=magnet">개발일지</a>에서 기록을 볼 수 있어요.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span>z</span></span>
+    <p>오늘도 심심해서 뭔가를 끌어당깁니다.</p>
+    <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
+  </footer>
+
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>먹물 화선지 · oddz</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23f3eee2'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%231d1b19'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/fonts/nanum-brush-script/font.css">
+<link rel="stylesheet" href="../assets/fonts/maru-buri/font.css">
+<style>
+  /* 먹물 화선지: 물 먹은 화선지 위로 먹이 번진다. 붓글씨 제목, 붉은 낙관, 족자처럼 걸린 현황판. */
+  :root{--bg:#f3eee2;--fg:#1d1b19;--muted:#5d564c;--accent:#b3261e;--on-accent:#fff7ef;--line:rgba(29,27,25,.18);--panel:rgba(250,247,239,.82);--fd:'Nanum Brush Script',cursive;--fb:'MaruBuri','Noto Serif KR',serif;--pill:3px;--seal:#b3261e}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--fg);background:var(--bg);overflow-x:hidden;min-height:100vh}
+  .sim{position:fixed;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+  header{display:flex;align-items:center;justify-content:space-between;padding:26px 6vw 0}
+  .wordmark{font-family:var(--fd);font-size:1.8rem;line-height:1;color:var(--fg);text-decoration:none}
+  .wordmark span{color:var(--accent)}
+  nav{display:flex;gap:8px}
+  nav>a{color:var(--fg);text-decoration:none;font:600 .84rem/1 var(--fb);padding:10px 15px;border-radius:var(--pill,99px);background:var(--panel);border:1px solid var(--line);transition:border-color .2s,transform .2s}
+  nav>a:hover{border-color:var(--accent);transform:translateY(-1px)}
+  main{position:relative;z-index:1}
+  .tag-label{display:inline-flex;align-items:center;gap:8px;font:600 .74rem/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:8px 14px;border-radius:var(--pill,99px);border:1px solid var(--line);background:var(--panel)}
+  .hero{display:flex;flex-direction:column;justify-content:center;padding:14vh 6vw 8vh;max-width:760px}
+  .hero .tag-label{margin-bottom:24px;width:fit-content}
+  h1{font:400 clamp(3rem,6.2vw,5rem)/1.08 var(--fd);color:var(--fg);margin-bottom:22px}
+  h1 em{display:inline-block;margin-top:8px;font-style:normal;font-size:.72em;line-height:1.2;color:var(--accent)}
+  .hero-desc{font-size:1.06rem;line-height:1.8;color:var(--muted);max-width:480px;margin-bottom:32px}
+  .cta{display:inline-flex;align-items:center;gap:10px;width:fit-content;padding:16px 28px;color:var(--on-accent);background:var(--accent);text-decoration:none;font:700 1rem/1 var(--fb);border-radius:var(--pill,99px)}
+  .cta svg{width:16px;height:16px}
+  .theme-hint{margin-top:16px;font-size:.84rem;color:var(--muted)}
+  section{padding:4vw 6vw}
+  .section-head{margin:0 auto 44px}
+  .section-head h2{font:400 clamp(2rem,3.6vw,2.8rem)/1.2 var(--fd);color:var(--fg);margin:14px 0 8px}
+  .section-head p{color:var(--muted);line-height:1.7}
+  .catalog-fallback{color:var(--muted);line-height:1.8}.catalog-fallback a{color:var(--accent)}
+  .entry{position:relative}
+  .entry-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .entry-cat{font:600 .68rem/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);padding:5px 10px;border-radius:var(--pill,99px);border:1px solid var(--line)}
+  .entry h3{font-family:var(--fd);font-weight:400;color:var(--fg)}
+  footer{padding:60px 6vw;text-align:center}
+  footer .wordmark{display:inline-block;margin-bottom:10px;font-size:2.4rem}
+  footer p{color:var(--muted);margin-bottom:18px}
+  .contact-link{display:inline-block;color:var(--fg);font-weight:600;text-decoration:none;padding:11px 18px;border-radius:var(--pill,99px);border:1px solid var(--line);background:var(--panel)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  @media (max-width:640px){header{padding:22px 5vw 0}nav{gap:6px}nav>a{padding:9px 11px}}
+
+  body{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'320'%20height%3D'320'%3E%3Cfilter%20id%3D'n'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'.85%20.025'%20numOctaves%3D'2'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%20.42%20%200%200%200%200%20.37%20%200%200%200%200%20.3%20%200%200%200%20.1%200'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20filter%3D'url(%23n)'%2F%3E%3C%2Fsvg%3E"),radial-gradient(ellipse 80% 60% at 50% 40%,#f7f3ea,#ece5d5);background-attachment:fixed}
+  #ink{z-index:-1;mix-blend-mode:multiply}
+  h1{font-size:clamp(4rem,8.6vw,7rem);line-height:.95}
+  h1 em{color:var(--fg);font-size:.66em;margin-top:14px}
+  h1 em::after{content:'';display:inline-block;width:.5em;height:.5em;margin-left:.18em;vertical-align:.1em;background:var(--seal);border-radius:2px;transform:rotate(-6deg);box-shadow:inset 0 0 0 3px rgba(255,255,255,.25)}
+  .tag-label{background:transparent;border:1.5px solid var(--seal);color:var(--seal);border-radius:2px}
+  .cta{font:400 1.7rem/1 var(--fd);padding:14px 30px 12px;color:#f3eee2;background:var(--fg);border-radius:2px;
+    clip-path:polygon(1% 8%,12% 0,40% 5%,70% 1%,99% 6%,100% 60%,97% 100%,60% 95%,30% 100%,3% 94%,0 50%);transition:transform .2s}
+  .cta:hover{transform:rotate(-1deg) scale(1.03)}
+  .section-head h2{font-size:clamp(2.8rem,5vw,3.8rem)}
+  .theme-hint{font-family:var(--fd);font-size:1.25rem}
+</style>
+<style>:root{--picker-bg:#faf7ef;--picker-menu:#faf7ef;--picker-text:#1d1b19;--picker-line:rgba(29,27,25,.25);--picker-hover:rgba(179,38,30,.08);--picker-accent:#b3261e}</style>
+<link rel="stylesheet" href="../assets/theme-switcher.css">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
+<script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261112" defer></script>
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261110b">
+<script src="../assets/oddz-home-board.js?v=20261112" defer></script>
+<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/ink-sim.js?v=20261112" defer></script>
+<style id="home-skin">
+/* 배경 시뮬레이션이 움직임을 맡는다. 느린 기기에서도 내용이 늘 보이도록 등장 효과는 끈다(oddz-home.css 뒤에 와야 이긴다). */
+.hero-board{animation:none}
+.motion-reveal #work .oddz-project-card:not(.is-in){opacity:1}
+.motion-reveal #work .oddz-project-card.is-in{animation:none}
+:root{--home-display:var(--fd);--home-text:var(--fg);--home-muted:var(--muted);--home-accent:var(--accent);--home-on-accent:var(--on-accent);--home-line:var(--line);--board-line:var(--line);--card-line:var(--line)}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input,#work .oddz-catalog .oddz-stage-intro,#work .oddz-catalog .oddz-project-details summary{font-family:var(--fb);color:var(--fg)}
+#work .oddz-catalog .oddz-stage-head h3{font-family:var(--fd)!important;font-weight:400!important;font-size:26px!important}
+#work .oddz-catalog .oddz-project-card h3{font-size:1.28rem}
+.hero-board__title,.hero-board__num{font-family:var(--fd);font-weight:400}
+:root{--board-bg:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'320'%20height%3D'320'%3E%3Cfilter%20id%3D'n'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'.85%20.025'%20numOctaves%3D'2'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%20.42%20%200%200%200%200%20.37%20%200%200%200%200%20.3%20%200%200%200%20.1%200'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20filter%3D'url(%23n)'%2F%3E%3C%2Fsvg%3E"),#faf7ef;--board-radius:2px;--board-chip-bg:rgba(29,27,25,.04);--board-shadow:0 22px 40px -26px rgba(40,30,20,.55);
+  --card-bg:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'320'%20height%3D'320'%3E%3Cfilter%20id%3D'n'%3E%3CfeTurbulence%20type%3D'fractalNoise'%20baseFrequency%3D'.85%20.025'%20numOctaves%3D'2'%20stitchTiles%3D'stitch'%2F%3E%3CfeColorMatrix%20values%3D'0%200%200%200%20.42%20%200%200%200%200%20.37%20%200%200%200%200%20.3%20%200%200%200%20.1%200'%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D'100%25'%20height%3D'100%25'%20filter%3D'url(%23n)'%2F%3E%3C%2Fsvg%3E"),rgba(250,247,239,.92);--card-radius:2px;--home-on-accent:#fff7ef}
+/* 족자: 위아래 나무 축 */
+.hero-board{overflow:visible;margin-block:18px}
+.hero-board::before,.hero-board::after{content:'';position:absolute;left:-16px;right:-16px;height:12px;border-radius:6px;background:linear-gradient(#5a3b24,#2e1d12);box-shadow:0 3px 6px rgba(0,0,0,.25)}
+.hero-board::before{top:-14px}.hero-board::after{bottom:-14px}
+.hero-board__title{font-size:2rem}
+.hero-board__num{font-size:2.3rem}
+.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--seal)}
+.hero-board__bar{background:var(--fg)}
+#work .oddz-catalog .oddz-project-card h3{font-size:1.9rem;line-height:1.1}
+#work .oddz-catalog .oddz-project-card .entry-no{padding:6px 7px;color:#fff7ef;background:var(--seal);border-radius:3px;font:400 1rem/1 var(--fd);transform:rotate(-5deg);box-shadow:inset 0 0 0 2px rgba(255,255,255,.3)}
+#work .oddz-catalog .oddz-project-card.pending .entry-no{background:transparent;color:var(--seal);box-shadow:inset 0 0 0 1.5px var(--seal)}
+#work .oddz-catalog .oddz-project-card.entry{box-shadow:0 1px 0 rgba(0,0,0,.04),0 18px 30px -24px rgba(40,30,20,.55)}
+#work .oddz-catalog .oddz-project-card.pending{background:rgba(250,247,239,.5)}
+#work .oddz-catalog .oddz-stage-en{font-family:var(--fd);font-size:1.3rem;opacity:.7}
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{border-radius:2px;background:rgba(250,247,239,.92)}
+</style>
+</head>
+<body>
+
+  <canvas id="ink" class="sim" aria-hidden="true"></canvas>
+
+  <header>
+    <a class="wordmark" href="#">odd<span>z</span></a>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="../journal/index.html?theme=ink">개발일지</a>
+      <a href="#contact">연락</a>
+
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
+          <a href="oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
+          <a href="hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
+          <a href="ripple.html" data-theme-path="themes/ripple.html"><span class="theme-picker__swatch" style="--swatch:#3cc8d8" aria-hidden="true"></span>물방울 수면</a>
+          <a href="ink.html" data-theme-path="themes/ink.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#1d1b19" aria-hidden="true"></span>먹물 화선지</a>
+          <a href="fog.html" data-theme-path="themes/fog.html"><span class="theme-picker__swatch" style="--swatch:#9db4cc" aria-hidden="true"></span>김 서린 창</a>
+          <a href="sand.html" data-theme-path="themes/sand.html"><span class="theme-picker__swatch" style="--swatch:#d9a463" aria-hidden="true"></span>사막 모래언덕</a>
+          <a href="magnet.html" data-theme-path="themes/magnet.html"><span class="theme-picker__swatch" style="--swatch:#e0483b" aria-hidden="true"></span>자석 실험대</a>
+          <a href="cloth.html" data-theme-path="themes/cloth.html"><span class="theme-picker__swatch" style="--swatch:#2c3e6b" aria-hidden="true"></span>바람 부는 깃발</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-label">oddz · ink & paper</span>
+      <h1>Oddz,<br><em>심심하면 먹을 갈아요.</em></h1>
+      <p class="hero-desc">개발자가 되고 싶었던 사람이 화선지에 한 획씩 남긴 것들.</p>
+      <a class="cta" href="#work">펼쳐 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <p class="theme-hint">종이를 누르면 먹이 떨어지고, 누른 채 끌면 붓이 지나가요</p>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">gallery</span>
+        <h2>그려 둔 것들</h2>
+        <p>웹·앱·스크립트로 그린 것들을 한 폭씩 걸어 두었습니다.</p>
+      </div>
+
+      <div class="catalog">
+        <p class="catalog-fallback">프로젝트 목록을 불러오는 중이에요. 목록이 보이지 않으면 <a href="../journal/index.html?theme=ink">개발일지</a>에서 기록을 볼 수 있어요.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span>z</span></span>
+    <p>오늘도 심심해서 먹을 갈아 둡니다.</p>
+    <a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
+  </footer>
+
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>

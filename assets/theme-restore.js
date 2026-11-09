@@ -11,7 +11,12 @@
       'themes/oz.html',
       'themes/hum.html',
       'themes/olympus.html',
-      'themes/ripple.html'
+      'themes/ripple.html',
+      'themes/ink.html',
+      'themes/fog.html',
+      'themes/sand.html',
+      'themes/magnet.html',
+      'themes/cloth.html'
     ];
     if (allowed.includes(saved)) location.replace(new URL(saved + location.hash, location.href));
   } catch (_) { /* Stay on the default design when storage is unavailable. */ }
