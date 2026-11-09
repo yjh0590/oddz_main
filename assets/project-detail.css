@@ -7,6 +7,8 @@
 @import url('fonts/maru-buri/font.css');
 @import url('fonts/nanum-pen-script/font.css');
 @import url('fonts/hakgyoansim-dunggeunmiso/font.css');
+@import url('fonts/gowun-dodum/font.css');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 @font-face { font-family:Binggrae; src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff) format('woff'); font-weight:400; font-display:swap; }
 @font-face { font-family:Binggrae; src:url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Binggrae-Bold.woff2) format('woff2'); font-weight:700; font-display:swap; }
 :root { color-scheme:dark; --paper:#f3ead9; --muted:#d4cbd0; --mint:#8fe3d0; --line:rgba(243,234,217,.32);
@@ -280,3 +282,31 @@ html[data-theme="olympus"] .eyebrow { font-family:'Cinzel',serif; letter-spacing
 :root[data-polish][data-theme="olympus"] :is(.shot img,.preview) { box-shadow:0 26px 50px -30px rgba(36,87,138,.6); }
 :root[data-polish][data-theme="olympus"] .page-tabs button[aria-selected="true"],
 :root[data-polish][data-theme="olympus"] .school-versions a[aria-current="page"] { background:#5b97cb; border-color:#5b97cb; color:#fff; }
+
+/* ---------- 물방울 수면: 깊은 물빛 바탕에 리퀴드 글라스 판 ---------- */
+html[data-theme="ripple"] {
+  --paper:#e9fdff; --muted:rgba(233,253,255,.76); --mint:#9ff3ff;
+  --line:rgba(255,255,255,.26); --button-text:#021e2e; --button-hover:#c9f9ff;
+  --bg:linear-gradient(180deg,#0b6a84 0%,#063a52 45%,#021e2e 100%);
+  --bg-art:radial-gradient(ellipse 50% 30% at 80% 0%,rgba(255,255,255,.14),transparent 70%),
+    repeating-radial-gradient(circle at 24% 30%,rgba(159,243,255,.07) 0 2px,transparent 3px 46px),
+    repeating-radial-gradient(circle at 78% 72%,rgba(159,243,255,.05) 0 2px,transparent 3px 60px);
+}
+:root[data-polish][data-theme="ripple"] { --panel:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 55%,rgba(255,255,255,.08)); --panel-strong:rgba(2,30,46,.45); --radius:26px; }
+html[data-theme="ripple"] .wordmark { font:italic 400 1.9rem 'Instrument Serif',serif; }
+html[data-theme="ripple"] .wordmark span { color:#9ff3ff; }
+html[data-theme="ripple"] :is(h1,h2,.journal-card__title,.journal-pager__title,.lead,.info p,.info li,.journal-section p,.journal-section li,body > header nav a,.button,.eyebrow) { font-family:'Gowun Dodum','Pretendard Variable',sans-serif; }
+html[data-theme="ripple"] :is(h1,h2) { font-weight:400; letter-spacing:-.03em; }
+html[data-theme="ripple"] :is(.article-date,.journal-card__meta time) { font:italic 400 1.3rem 'Instrument Serif',serif; }
+:root[data-polish][data-theme="ripple"] :is(.info,.journal-card,body > header nav a,.journal-pager__link) {
+  -webkit-backdrop-filter:blur(12px) saturate(160%); backdrop-filter:blur(12px) saturate(160%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.55),inset 0 -12px 22px -16px rgba(159,243,255,.3),0 16px 36px -22px rgba(0,20,40,.7);
+}
+:root[data-polish][data-theme="ripple"] .info h2::before { width:10px; height:13px; border-radius:0; box-shadow:none; background:#9ff3ff;
+  clip-path:path('M5 0C7.5 4 10 7 10 8.8a5 5 0 0 1-10 0C0 7 2.5 4 5 0Z'); }
+:root[data-polish][data-theme="ripple"] .button { border-radius:999px; border-color:rgba(255,255,255,.6);
+  background:linear-gradient(135deg,rgba(159,243,255,.95),rgba(60,200,216,.8));
+  box-shadow:inset 0 2px 2px rgba(255,255,255,.8),inset 0 -6px 12px -6px rgba(2,30,46,.3),0 16px 30px -14px rgba(0,25,45,.8);
+  transition:transform .45s cubic-bezier(.25,1.8,.45,1); }
+:root[data-polish][data-theme="ripple"] .button:hover { transform:scale(1.05,.96); }
+:root[data-polish][data-theme="ripple"] .button:active { transform:scale(.94,1.06); }

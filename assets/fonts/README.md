@@ -12,6 +12,7 @@
 | `nanum-brush-script/` | 나눔손글씨 붓 | 노을 모험가 길드 (의뢰서 제목) | [눈누 #43](https://noonnu.cc/font_page/43), Google Fonts | SIL OFL 1.1 (`OFL.txt`) |
 | `cafe24-ssurround/` | 카페24 써라운드 | 비눗방울 극장 (제목) | [눈누 #669](https://noonnu.cc/font_page/669) | 수정·복제·배포 가능, 판매 금지 |
 | `hakgyoansim-dunggeunmiso/` | 학교안심 둥근미소 R·B | 비눗방울 극장 (메뉴·버튼·본문) | [눈누 #1479](https://noonnu.cc/font_page/1479) | 수정·복제·배포 가능, 판매 금지 |
+| `gowun-dodum/` | 고운돋움 | 물방울 수면 (한글 제목·본문) | [눈누 #734](https://noonnu.cc/font_page/734), Google Fonts | SIL OFL 1.1 (`OFL.txt`) |
 | `maru-buri/` | 마루 부리 | 올림포스 신전 (한글 제목) | [눈누 #487](https://noonnu.cc/font_page/487), 네이버 한글한글 아름답게 | 수정·복제·배포 가능, 판매 금지 |
 
 - 폴더마다 `font.css`가 있어 HTML에서 `<link rel="stylesheet" href=".../assets/fonts/<폴더>/font.css">`로 불러옵니다.

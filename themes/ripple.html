@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>물방울 수면 · oddz</title>
+<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oddz">
+<meta property="og:title" content="oddz — 심심하면 만드는 것들">
+<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:url" content="https://oddz.click/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://oddz.click/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23063a52'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%233cc8d8' stroke-width='4' opacity='.45'/%3E%3Ccircle cx='50' cy='50' r='18' fill='none' stroke='%239ff3ff' stroke-width='4' opacity='.7'/%3E%3Cpath d='M50 22c7 11 11 18 11 24a11 11 0 0 1-22 0c0-6 4-13 11-24Z' fill='%23e9fdff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/fonts/gowun-dodum/font.css">
+<style>
+  /* 물방울 수면: 위에서 내려다본 맑은 물. 바닥의 빛 무늬가 물결에 굴절되고,
+     그 위에 리퀴드 글라스 판과 버튼이 떠 있다. 물방울이 떨어지면 주변이 떨린다. */
+  :root{
+    --abyss:#021e2e;
+    --deep:#063a52;
+    --sea:#0b6a84;
+    --aqua:#3cc8d8;
+    --sun:#9ff3ff;
+    --foam:#e9fdff;
+    --foam-soft:rgba(233,253,255,.74);
+    --foam-faint:rgba(233,253,255,.5);
+    --glass-line:rgba(255,255,255,.34);
+    --font-wave:'Instrument Serif','Gowun Dodum',serif;
+    --font-kr:'Gowun Dodum','Pretendard Variable',sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Pretendard Variable','Pretendard',sans-serif;
+    color:var(--foam); background:var(--deep);
+    overflow-x:hidden; min-height:100vh;
+  }
+
+  /* ---------- 물 ---------- */
+  #water{ position:fixed; inset:0; width:100%; height:100%; z-index:-3; display:block; image-rendering:auto; filter:saturate(1.1); }
+  .surface{ position:fixed; inset:0; z-index:-2; pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 40% at 78% 0%,rgba(255,255,255,.14),transparent 70%),
+      linear-gradient(180deg,rgba(2,30,46,0) 55%,rgba(2,30,46,.55) 100%); }
+
+  /* ---------- 리퀴드 글라스 ---------- */
+  .glass{
+    position:relative; isolation:isolate;
+    background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05) 55%,rgba(255,255,255,.1));
+    -webkit-backdrop-filter:blur(14px) saturate(170%); backdrop-filter:blur(14px) saturate(170%);
+    border:1px solid var(--glass-line);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,.75),
+      inset 0 -10px 20px -12px rgba(159,243,255,.35),
+      inset 0 0 0 1px rgba(255,255,255,.05),
+      0 14px 34px -14px rgba(0,20,40,.6);
+  }
+  .glass::before{ content:''; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; z-index:-1;
+    background:
+      radial-gradient(160px circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.26),transparent 70%),
+      linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,0) 42%);
+    mix-blend-mode:screen; opacity:.75; }
+
+  /* ---------- 머리글 ---------- */
+  header{ display:flex; align-items:center; justify-content:space-between; padding:26px 6vw 0; }
+  .wordmark{ font:italic 400 1.9rem/1 var(--font-wave); color:var(--foam); text-decoration:none; letter-spacing:.01em; }
+  .wordmark span{ color:var(--sun); }
+  nav{ display:flex; gap:8px; }
+  nav > a{
+    color:var(--foam); text-decoration:none; font:600 .84rem/1 var(--font-kr);
+    padding:10px 16px; border-radius:99px;
+    background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+    -webkit-backdrop-filter:blur(10px) saturate(160%); backdrop-filter:blur(10px) saturate(160%);
+    border:1px solid var(--glass-line); box-shadow:inset 0 1px 1px rgba(255,255,255,.6);
+    transition:background .2s, transform .25s cubic-bezier(.3,1.6,.5,1);
+  }
+  nav > a:hover{ background:linear-gradient(135deg,rgba(255,255,255,.26),rgba(255,255,255,.08)); transform:scale(1.05); }
+  main{ position:relative; z-index:1; }
+
+  /* ---------- 라벨 ---------- */
+  .tag-label{
+    display:inline-flex; align-items:center; gap:9px;
+    font:500 .74rem/1 var(--font-kr); letter-spacing:.14em; text-transform:uppercase; color:var(--sun);
+    padding:8px 14px 8px 10px; border-radius:99px;
+    background:rgba(255,255,255,.08); border:1px solid rgba(159,243,255,.3);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  }
+  .tag-label::before{ content:''; width:9px; height:12px; background:var(--sun);
+    clip-path:path('M4.5 0C6.8 3.6 9 6.4 9 8a4.5 4.5 0 0 1-9 0C0 6.4 2.2 3.6 4.5 0Z'); }
+
+  /* ---------- 히어로 ---------- */
+  .hero{ display:flex; flex-direction:column; justify-content:center; padding:14vh 6vw 8vh; max-width:760px; }
+  .hero .tag-label{ margin-bottom:24px; }
+  h1{
+    font:italic 400 clamp(3rem,6.4vw,5.2rem)/1.04 var(--font-wave); letter-spacing:-.01em; color:var(--foam);
+    text-shadow:0 2px 30px rgba(2,30,46,.5); margin-bottom:22px;
+  }
+  h1 em{
+    display:inline-block; margin-top:10px; font:400 .66em/1.25 var(--font-kr); font-style:normal; letter-spacing:-.03em;
+    color:transparent; background:linear-gradient(100deg,var(--foam) 10%,var(--sun) 40%,var(--aqua) 60%,var(--foam) 90%) 0 0 / 220% 100%;
+    -webkit-background-clip:text; background-clip:text;
+    filter:url(#waver) drop-shadow(0 2px 14px rgba(60,200,216,.35));
+    animation:sheen 9s ease-in-out infinite alternate;
+  }
+  @keyframes sheen{ to{ background-position:100% 0; } }
+  .hero-desc{ font:400 1.08rem/1.8 var(--font-kr); color:var(--foam-soft); max-width:480px; margin-bottom:34px; }
+
+  /* 물방울 버튼 */
+  .cta{
+    display:inline-flex; align-items:center; gap:10px; width:fit-content;
+    padding:17px 30px; border-radius:999px; color:var(--foam); text-decoration:none;
+    font:600 1rem/1 var(--font-kr);
+    background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(159,243,255,.1) 50%,rgba(255,255,255,.16));
+    -webkit-backdrop-filter:blur(16px) saturate(190%); backdrop-filter:blur(16px) saturate(190%);
+    border:1px solid rgba(255,255,255,.5);
+    box-shadow:
+      inset 0 2px 2px rgba(255,255,255,.85),
+      inset 0 -6px 14px -6px rgba(159,243,255,.55),
+      inset 0 0 18px rgba(255,255,255,.12),
+      0 18px 36px -14px rgba(0,25,45,.7);
+    position:relative; overflow:hidden; isolation:isolate;
+    transition:transform .45s cubic-bezier(.25,1.8,.45,1), box-shadow .3s;
+    animation:float 5s ease-in-out infinite;
+  }
+  .cta::before{ content:''; position:absolute; left:12%; right:12%; top:3px; height:42%; border-radius:999px; z-index:-1;
+    background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0)); opacity:.75; }
+  .cta::after{ content:''; position:absolute; inset:0; z-index:-1; border-radius:inherit;
+    background:radial-gradient(90px circle at var(--mx,50%) var(--my,50%),rgba(159,243,255,.45),transparent 70%); opacity:0; transition:opacity .3s; }
+  .cta:hover{ transform:scale(1.06,.95); }
+  .cta:hover::after{ opacity:1; }
+  .cta:active{ transform:scale(.93,1.07); transition-duration:.12s; }
+  .cta svg{ width:16px; height:16px; }
+  @keyframes float{ 50%{ translate:0 -4px; } }
+  .ripple-hint{ margin-top:18px; font:400 .82rem/1.5 var(--font-kr); color:var(--foam-faint); display:flex; align-items:center; gap:8px; }
+  .ripple-hint i{ width:14px; height:14px; border-radius:50%; border:1px solid var(--sun); box-shadow:0 0 0 4px rgba(159,243,255,.15),0 0 0 8px rgba(159,243,255,.07); animation:hintPulse 2.4s ease-out infinite; }
+  @keyframes hintPulse{ 0%{ box-shadow:0 0 0 0 rgba(159,243,255,.45),0 0 0 0 rgba(159,243,255,.25); } 100%{ box-shadow:0 0 0 12px rgba(159,243,255,0),0 0 0 22px rgba(159,243,255,0); } }
+
+  /* ---------- 만든 것들 ---------- */
+  section{ padding:4vw 6vw; }
+  .section-head{ margin:0 auto 44px; }
+  .section-head h2{ font:400 clamp(1.9rem,3.4vw,2.6rem)/1.3 var(--font-kr); letter-spacing:-.03em; color:var(--foam); margin:14px 0 8px; }
+  .section-head p{ font:400 .98rem/1.7 var(--font-kr); color:var(--foam-soft); }
+  .catalog-fallback{ color:var(--foam-soft); line-height:1.8; }
+  .catalog-fallback a{ color:var(--sun); }
+  .entry{ position:relative; }
+  .entry-meta{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .entry-cat{ font:600 .68rem/1 var(--font-kr); letter-spacing:.08em; text-transform:uppercase; color:var(--sun);
+    padding:5px 10px; border-radius:99px; background:rgba(159,243,255,.1); border:1px solid rgba(159,243,255,.25); }
+  .entry h3{ font-family:var(--font-kr); font-weight:400; color:var(--foam); }
+  .entry-no{ font:italic 400 1.15rem/1 var(--font-wave); color:var(--sun); }
+
+  /* ---------- 물방울이 튀는 자리 ---------- */
+  .splash{ position:fixed; z-index:50; width:0; height:0; pointer-events:none; }
+  .splash .ring{ position:absolute; left:-6px; top:-6px; width:12px; height:12px; border-radius:50%;
+    border:2px solid rgba(233,253,255,.85); animation:ring .9s cubic-bezier(.2,.7,.3,1) forwards; }
+  .splash .r2{ animation-delay:.12s; border-width:1px; }
+  @keyframes ring{ to{ transform:scale(9); opacity:0; } }
+  .splash b{ position:absolute; left:-3px; top:-3px; width:6px; height:6px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff,rgba(159,243,255,.8) 60%,rgba(60,200,216,.3));
+    animation:spray .7s cubic-bezier(.15,.7,.4,1) forwards; }
+  @keyframes spray{
+    0%{ transform:rotate(var(--a)) translateX(0) scale(1); opacity:1; }
+    100%{ transform:rotate(var(--a)) translateX(var(--d)) translateY(10px) scale(.3); opacity:0; }
+  }
+
+  /* 물결이 지나갈 때의 떨림은 ripple-water.js가 Web Animations API로 얹는다. */
+
+  /* ---------- 바닥글 ---------- */
+  footer{ padding:60px 6vw 60px; text-align:center; }
+  footer .wordmark{ display:inline-block; margin-bottom:10px; font-size:2.4rem; }
+  footer p{ font:400 .95rem/1.6 var(--font-kr); color:var(--foam-soft); margin-bottom:18px; }
+  .contact-link{ color:var(--foam); text-decoration:none; font:500 .9rem/1 var(--font-kr); padding:11px 18px; border-radius:99px; display:inline-block; }
+
+  @media (prefers-reduced-motion:reduce){
+    h1 em{ filter:drop-shadow(0 2px 14px rgba(60,200,216,.35)); animation:none; }
+    .cta,.ripple-hint i{ animation:none; }
+  }
+  @media (max-width:640px){
+    header{ padding:22px 5vw 0; }
+    nav{ gap:6px; }
+    nav > a{ padding:9px 12px; }
+  }
+</style>
+<style>:root{--picker-bg:rgba(6,58,82,.75);--picker-menu:#0a4a63;--picker-text:#e9fdff;--picker-line:rgba(255,255,255,.34);--picker-hover:rgba(159,243,255,.16);--picker-accent:#9ff3ff}</style>
+<link rel="stylesheet" href="../assets/theme-switcher.css">
+<link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261111">
+<script src="../assets/oddz-projects-data.js?v=20261108-2" defer></script>
+<script src="../assets/oddz-projects-catalog.js?v=20261111b" defer></script>
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261110b">
+<script src="../assets/oddz-home-board.js?v=20261111" defer></script>
+<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/ripple-water.js?v=20261111c" defer></script>
+<style id="home-skin">
+/* 물방울 수면: 현황판·카드·필터 모두 리퀴드 글라스 */
+:root{
+  --home-display:'Instrument Serif','Gowun Dodum',serif; --home-text:var(--foam); --home-muted:var(--foam-soft);
+  --home-accent:var(--sun); --home-on-accent:var(--abyss); --home-line:rgba(255,255,255,.22);
+  --board-bg:linear-gradient(135deg,rgba(255,255,255,.16),rgba(4,44,64,.42) 45%,rgba(2,30,46,.5));
+  --board-line:rgba(255,255,255,.34); --board-radius:30px; --board-chip-bg:rgba(255,255,255,.07);
+  --board-shadow:inset 0 1px 1px rgba(255,255,255,.7),inset 0 -12px 24px -14px rgba(159,243,255,.35),0 24px 50px -20px rgba(0,20,40,.65);
+  --card-bg:linear-gradient(135deg,rgba(255,255,255,.14),rgba(4,44,64,.4) 45%,rgba(2,30,46,.48));
+  --card-line:rgba(255,255,255,.28); --card-radius:26px;
+}
+/* 물이 움직임을 맡으므로, 프레임이 느린 기기에서도 내용이 늘 보이도록 등장 효과는 쓰지 않는다 */
+.hero-board{ animation:none; }
+.motion-reveal #work .oddz-project-card:not(.is-in){ opacity:1; }
+.motion-reveal #work .oddz-project-card.is-in{ animation:none; }
+.hero-board{ isolation:isolate; -webkit-backdrop-filter:blur(18px) saturate(160%); backdrop-filter:blur(18px) saturate(160%); }
+.hero-board::before{ content:''; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; z-index:-1;
+  background:radial-gradient(220px circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.18),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.22),transparent 30%); }
+.hero-board__title{ font:italic 400 1.6rem/1 var(--font-wave); letter-spacing:.01em; }
+.hero-board__total,.hero-board__sub,.hero-board__label,.hero-board__name,.hero-board__chips li{ font-family:var(--font-kr); }
+.hero-board__name{ font-weight:400; }
+.hero-board__stage{ border-radius:22px; background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.22);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.45); transition:transform .4s cubic-bezier(.25,1.8,.45,1),border-color .2s; }
+.hero-board__stage:hover{ transform:scale(1.05,.96); }
+.hero-board__stage:active{ transform:scale(.95,1.04); }
+.hero-board__num{ font:italic 400 2.2rem/1 var(--font-wave); color:var(--foam); }
+.hero-board__stage[data-stage="done"] .hero-board__num{ color:var(--sun); text-shadow:0 0 18px rgba(159,243,255,.5); }
+.hero-board__bar{ height:3px; border-radius:3px; background:linear-gradient(90deg,var(--aqua),var(--sun)); }
+.hero-board__chips li{ border-radius:99px; background:rgba(255,255,255,.08); }
+.hero-board__chips li::before{ width:7px; height:9px; border-radius:0; background:var(--sun);
+  clip-path:path('M3.5 0C5.3 2.8 7 5 7 6.2a3.5 3.5 0 0 1-7 0C0 5 1.7 2.8 3.5 0Z'); vertical-align:0; }
+.hero-board__item{ border-radius:16px; }
+
+#work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{
+  font-family:var(--font-kr); color:var(--foam); background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.03));
+  -webkit-backdrop-filter:blur(10px) saturate(160%); backdrop-filter:blur(10px) saturate(160%);
+  border-color:rgba(255,255,255,.3); box-shadow:inset 0 1px 1px rgba(255,255,255,.5); }
+#work .oddz-catalog .oddz-filter{ font-size:.86rem; transition:transform .4s cubic-bezier(.25,1.8,.45,1),background .2s; }
+#work .oddz-catalog .oddz-filter:hover{ transform:scale(1.06,.95); }
+#work .oddz-catalog .oddz-filter:active{ transform:scale(.94,1.06); }
+#work .oddz-catalog .oddz-filter[aria-pressed=true]{ background:linear-gradient(135deg,rgba(159,243,255,.9),rgba(60,200,216,.75)); color:var(--abyss); border-color:rgba(255,255,255,.7); font-weight:700; }
+#work .oddz-catalog .oddz-search input{ border-radius:99px; padding:13px 18px; }
+#work .oddz-catalog .oddz-stage-head h3{ font-family:var(--font-kr)!important; font-weight:400!important; font-size:24px!important; }
+#work .oddz-catalog .oddz-stage-en{ font:italic 400 .95rem/1 var(--font-wave); letter-spacing:.06em; color:var(--sun); opacity:.9; }
+#work .oddz-catalog .oddz-stage-count{ font:italic 400 1rem/1 var(--font-wave); }
+#work .oddz-catalog .oddz-stage-intro{ font-family:var(--font-kr); }
+
+#work .oddz-catalog .oddz-project-card.entry{
+  -webkit-backdrop-filter:blur(12px) saturate(160%); backdrop-filter:blur(12px) saturate(160%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.6),inset 0 -12px 22px -16px rgba(159,243,255,.35),0 18px 40px -22px rgba(0,20,40,.7);
+}
+#work .oddz-catalog .oddz-project-card.entry{ isolation:isolate; }
+#work .oddz-catalog .oddz-project-card.entry::before{ content:''; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; z-index:-1;
+  background:radial-gradient(240px circle at var(--mx,25%) var(--my,0%),rgba(255,255,255,.16),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.16),transparent 35%); }
+#work .oddz-catalog .oddz-project-card h3{ font-size:1.25rem; letter-spacing:-.02em; }
+#work .oddz-catalog .oddz-project-card .oddz-project-date{ font:italic 400 1rem/1.2 var(--font-wave)!important; color:var(--sun); opacity:.9; }
+#work .oddz-catalog .oddz-project-card .project-action{ font-family:var(--font-kr); border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.08); box-shadow:inset 0 1px 1px rgba(255,255,255,.5); }
+#work .oddz-catalog .oddz-project-card:hover .project-action{ background:linear-gradient(135deg,rgba(159,243,255,.95),rgba(60,200,216,.8)); color:var(--abyss); border-color:rgba(255,255,255,.7); }
+#work .oddz-catalog .oddz-project-card>.oddz-project-icon{ border-radius:30%; box-shadow:0 8px 20px -8px rgba(0,20,40,.7),0 0 0 1px rgba(255,255,255,.35); }
+#work .oddz-catalog .oddz-project-card.pending{ background:rgba(255,255,255,.04); border-style:solid; border-color:rgba(255,255,255,.16); box-shadow:inset 0 1px 1px rgba(255,255,255,.25); }
+#work .oddz-catalog .oddz-project-details summary{ font-family:var(--font-kr); }
+</style>
+</head>
+<body>
+
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div class="surface" aria-hidden="true"></div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="waver" x="-5%" y="-20%" width="110%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.04" numOctaves="2" seed="3" result="noise">
+        <animate attributeName="baseFrequency" dur="9s" values="0.012 0.04;0.016 0.05;0.012 0.04" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <header>
+    <a class="wordmark" href="#">odd<span>z</span></a>
+    <nav>
+      <a href="#work">프로젝트</a>
+      <a href="../journal/index.html?theme=ripple">개발일지</a>
+      <a href="#contact">연락</a>
+
+      <details class="theme-picker">
+        <summary>테마</summary>
+        <div class="theme-picker__list" aria-label="사이트 테마">
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
+          <a href="machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
+          <a href="game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
+          <a href="bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
+          <a href="oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
+          <a href="hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
+          <a href="olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
+          <a href="ripple.html" data-theme-path="themes/ripple.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#3cc8d8" aria-hidden="true"></span>물방울 수면</a>
+        </div>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="tag-label">oddz · ripples</span>
+      <h1>Oddz,<br><em>심심하면 물결을 일으켜요.</em></h1>
+      <p class="hero-desc">개발자가 되고 싶었던 사람이 수면에 하나씩 떨어뜨린 물방울들.</p>
+      <a class="cta" href="#work">
+        물속 들여다보기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+      <p class="ripple-hint"><i aria-hidden="true"></i>수면 아무 데나 눌러 보세요</p>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <span class="tag-label">surfaced</span>
+        <h2>떠오른 것들</h2>
+        <p>웹·앱·스크립트로 떨어뜨린 물방울과 그 물결을 모았습니다.</p>
+      </div>
+
+      <div class="catalog">
+        <p class="catalog-fallback">프로젝트 목록을 불러오는 중이에요. 목록이 보이지 않으면 <a href="../journal/index.html?theme=ripple">개발일지</a>에서 기록을 볼 수 있어요.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <span class="wordmark">odd<span>z</span></span>
+    <p>오늘도 심심해서 물방울 하나 떨어뜨립니다.</p>
+    <a class="contact-link glass" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a>
+  </footer>
+
+<script src="../assets/theme-switcher.js" defer></script>
+</body>
+</html>

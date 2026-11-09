@@ -10,7 +10,7 @@
 
   // 커서 빛: 카드와 현황판에만 위임으로 건다.
   document.addEventListener('pointermove', (e) => {
-    const el = e.target.closest?.('.oddz-project-card, .hero-board');
+    const el = e.target.closest?.('.oddz-project-card, .hero-board, .cta, .glass');
     if (!el) return;
     const r = el.getBoundingClientRect();
     el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');

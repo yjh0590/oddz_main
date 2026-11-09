@@ -10,7 +10,8 @@
       'themes/bubbles.html',
       'themes/oz.html',
       'themes/hum.html',
-      'themes/olympus.html'
+      'themes/olympus.html',
+      'themes/ripple.html'
     ];
     if (allowed.includes(saved)) location.replace(new URL(saved + location.hash, location.href));
   } catch (_) { /* Stay on the default design when storage is unavailable. */ }

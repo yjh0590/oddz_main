@@ -7,7 +7,8 @@
     bubbles: '../themes/bubbles.html',
     oz: '../themes/oz.html',
     hum: '../themes/hum.html',
-    olympus: '../themes/olympus.html'
+    olympus: '../themes/olympus.html',
+    ripple: '../themes/ripple.html'
   };
   const requested = new URLSearchParams(location.search).get('theme');
   let theme = 'sparkle';
