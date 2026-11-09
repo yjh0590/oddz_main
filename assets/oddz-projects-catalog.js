@@ -18,6 +18,15 @@
     {key:'next',title:'끝나면 할 것',english:'UP NEXT',note:'다음에 착수할 후보 프로젝트'},
     {key:'someday',title:'언젠가 할 것',english:'SOMEDAY',note:'장기적으로 보관해 두고 발전시킬 아이디어'}
   ];
+  // 테마별 말투: 단계 제목(완성 등)은 필터와 맞춰 그대로 두고, 영문 표시와 설명만 바꾼다. [영문, 설명]
+  const stageVoice={
+    sparkle:{done:['IN THE JAR','불이 켜진 채로 병에 담아 둔 것'],doing:['GLOWING','지금 손바닥 위에서 깜박이는 것'],next:['NEXT FIELD','다음에 잡으러 갈 자리'],someday:['SOMEDAY','언젠가 들판에서 찾아볼 것']},
+    machine:{done:['SHIPPED','검수를 마치고 출고한 제품'],doing:['ON THE LINE','지금 라인 위에서 조립 중인 것'],next:['QUEUED','다음 작업 지시서'],someday:['BLUEPRINT','설계 도면만 보관 중인 것']},
+    'game-water':{done:['CLEAR','보스를 쓰러뜨리고 클리어한 퀘스트'],doing:['NOW PLAYING','지금 공략 중인 층'],next:['NEXT STAGE','다음에 들어갈 던전'],someday:['LOCKED','아직 잠겨 있는 숨겨진 스테이지']},
+    'game-sunset':{done:['COMPLETED','완수 도장을 찍은 의뢰'],doing:['ON THE ROAD','지금 길 위에 있는 의뢰'],next:['POSTED','다음에 받을 의뢰'],someday:['OLD NOTICE','게시판 구석에 오래 붙어 있는 의뢰']},
+    bubbles:{done:['ON STAGE','무대에 올라 박수를 받은 공연'],doing:['REHEARSAL','지금 리허설 중인 무대'],next:['COMING UP','다음 공연 예정작'],someday:['DREAM STAGE','언젠가 올릴 꿈의 무대']},
+    olympus:{done:['PERFECTVM','올림포스에 오른 것'],doing:['IN OPERE','지금 대장간에서 빚는 중인 것'],next:['PROXIMVM','다음에 빚을 것'],someday:['ALIQVANDO','신탁으로만 전해지는 것']}
+  };
   const accent={sparkle:'#8fe3d0',machine:'#F5B921','game-water':'#8FE8F2','game-sunset':'#F0C97A',bubbles:'#F5A9C9',oz:'#63a995',hum:'#2f6fd0',olympus:'#24578a'}[theme];
   // 올림포스: PJ 번호를 로마 숫자로 (PJ 19 → XIX)
   const roman=(n)=>{let out='';for(const [v,s] of [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]){while(n>=v){out+=s;n-=v;}}return out;};
@@ -140,10 +149,11 @@
     const group=mk('section','oddz-project-stage');group.dataset.stage=st.key;
     const head=mk('div','oddz-stage-head');
     const title=mk('h3','',st.title);
-    const sub=mk('span','oddz-stage-en',st.english);
+    const voice=(stageVoice[theme]||{})[st.key];
+    const sub=mk('span','oddz-stage-en',voice?voice[0]:st.english);
     const count=mk('span','oddz-stage-count','');
     head.append(title,sub,count);group.append(head);
-    group.append(mk('p','oddz-stage-intro',st.note));
+    group.append(mk('p','oddz-stage-intro',voice?voice[1]:st.note));
     const list=mk('div','oddz-stage-list');
     source.filter(x=>x.stage===st.key).sort((a,b)=>parseInt(a.no.slice(3))-parseInt(b.no.slice(3))).forEach((x,i)=>{
       const index=source.findIndex(y=>y.id===x.id);

@@ -9,7 +9,7 @@
 
   const theme = document.documentElement.dataset.oddzTheme || 'sparkle';
   const copy = {
-    sparkle: ['작업 현황', '최근 완성', '지금 만드는 중'],
+    sparkle: ['채집 현황', '최근 채집한 것', '지금 깜박이는 것'],
     machine: ['작업 현황판', '최근 출고', '가동 중'],
     'game-water': ['퀘스트 로그', '최근 클리어', '진행 중인 퀘스트'],
     'game-sunset': ['모험 일지', '최근 완수한 의뢰', '진행 중인 의뢰'],

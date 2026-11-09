@@ -34,6 +34,8 @@ main > .hero.has-board{
   padding:clamp(56px,11vh,120px) 6vw clamp(40px,6vh,72px);
 }
 main > .hero.has-board > *{grid-column:1;justify-self:start}
+/* 한글 제목이 글자 단위로 끊기지 않게 (예: "채집해 / 요.") */
+main > .hero h1,#work > .section-head h2{word-break:keep-all;text-wrap:balance}
 main > .hero.has-board > .hero-board{
   grid-column:2;grid-row:1 / span 6;
   align-self:center;justify-self:stretch;
