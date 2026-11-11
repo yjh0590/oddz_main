@@ -411,10 +411,10 @@ window.ODDZ_PROJECTS = Object.freeze([
     "stage": "done",
     "type": "Windows App",
     "name": "쓱-싹 · 파일 정리 도우미",
-    "desc": "쌓인 파일을 검사하고, 정리할 항목을 골라 휴지통이나 보관함으로 옮기는 Windows 도구.",
-    "feat": "복사본·정리 후보 검사, 정크 파일 확인, 폴더 용량, 보관·복원, Chrome 다운로드 기록 정리",
-    "current": "v0.7.1 · Chrome 앱 창 버전 제작, Windows 실기기 실행 확인 필요",
-    "next": "Windows 실행·화면 검증과 배포 서명 검토",
+    "desc": "복사본과 비슷한 폴더를 비교하고, 직접 선택한 항목을 휴지통으로 옮기는 Windows 파일 정리 도우미.",
+    "feat": "파일·폴더 비교, 남길 기준 선택, 정크·용량 확인, Chrome 다운로드 정리, 파일 구조화",
+    "current": "v0.7.18 · 성능 개선과 Python 포함 포터블 ZIP 배포, 자동 테스트 57개 통과",
+    "next": "Windows 실제 사용 흐름·화면 검증과 코드 서명 검토",
     "tags": [
       "쓱싹",
       "파일 정리",
@@ -424,7 +424,7 @@ window.ODDZ_PROJECTS = Object.freeze([
     ],
     "url": "/projects/sseuk-ssak.html",
     "link": "다운로드·사용법",
-    "date": "2026.11.03",
-    "dateBasis": "개발 및 배포본 제작 기록"
+    "date": "2026.11.11",
+    "dateBasis": "성능 개선·포터블 ZIP 및 개발일지 업데이트"
   }
 ]);
