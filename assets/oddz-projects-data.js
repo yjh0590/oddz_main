@@ -426,5 +426,26 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "다운로드·사용법",
     "date": "2026.11.11",
     "dateBasis": "성능 개선·포터블 ZIP 및 개발일지 업데이트"
+  },
+  {
+    "id": "pj-22",
+    "no": "PJ 22",
+    "stage": "done",
+    "type": "Web",
+    "name": "Motion Shelf · 웹 모션 모음",
+    "desc": "복사해서 바로 쓰는 웹 모션·UI 요소 모음. 요소마다 AI에게 줄 프롬프트와 코드가 함께 있다.",
+    "feat": "모션·UI 요소 400여 종, 요소별 프롬프트·코드 복사, 프롬프트 쓰는 법, 모션 용어 사전, 레퍼런스 사이트",
+    "current": "motion.oddz.click 배포",
+    "next": "요소 추가와 카테고리 정리",
+    "tags": [
+      "모션",
+      "UI",
+      "프롬프트",
+      "웹"
+    ],
+    "url": "/projects/motion-shelf.html",
+    "link": "사이트 열기",
+    "date": "2026.11.10",
+    "dateBasis": "저장소 커밋 기록"
   }
 ]);
