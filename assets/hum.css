@@ -268,8 +268,8 @@ html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-no-matches { padding: var(
 
 /* Project icons (assets/icons) */
 html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card > .oddz-project-icon { position: absolute; top: var(--space-xl); right: var(--space-xl); width: 3.5rem; height: 3.5rem; object-fit: contain; border-radius: 22%; pointer-events: none; z-index: 1; }
-html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main { padding-right: 4.5rem; }
+html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card.has-icon .entry-meta { padding-right: 4.5rem; }
 @media (max-width: 40rem) {
   html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card > .oddz-project-icon { top: var(--space-lg); right: var(--space-lg); width: 2.75rem; height: 2.75rem; }
-  html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main { padding-right: 3.5rem; }
+  html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card.has-icon .entry-meta { padding-right: 3.5rem; }
 }

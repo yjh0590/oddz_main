@@ -430,6 +430,7 @@ window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-22",
     "no": "PJ 22",
+    "icon": "/assets/icons/pj-22.png",
     "stage": "done",
     "type": "Web",
     "name": "Motion Shelf · 웹 모션 모음",

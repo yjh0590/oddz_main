@@ -10,7 +10,7 @@ assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
   pj-01 scissors · pj-02 graduation-cap · pj-03 notebook-pen · pj-04 milk
   pj-06 dices · pj-08 folders · pj-09 coffee · pj-10 book-a · pj-11 captions
   pj-12 clapperboard · pj-13 globe · pj-14 coins · pj-15 sprout · pj-16 egg
-  pj-17 timer · pj-18 swords · pj-20 ticket
+  pj-17 timer · pj-18 swords · pj-20 ticket · pj-22 sparkles
 
 Lucide 라이선스 원문:
 

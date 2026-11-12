@@ -83,6 +83,7 @@ main > .hero.has-board > .hero-board{
   color:inherit;text-decoration:none;transition:background .18s;
 }
 .hero-board__item img{width:40px;height:40px;object-fit:contain;border-radius:22%}
+.hero-board__item>.hero-board__text:first-child{grid-column:1/3}
 a.hero-board__item:hover{background:var(--board-chip-bg)}
 a.hero-board__item:focus-visible{outline:2px solid var(--home-accent);outline-offset:1px}
 .hero-board__text{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -138,6 +139,7 @@ main > #work{max-width:var(--home-max);margin-inline:auto;padding:clamp(32px,6vh
 }
 #work .oddz-catalog .oddz-project-card:hover>.oddz-project-icon{transform:rotate(-6deg) scale(1.06)}
 #work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main{grid-column:2;grid-row:1;padding-right:0}
+#work .oddz-catalog .oddz-project-card.entry:not(.has-icon) .oddz-project-main{grid-column:1/-1}
 #work .oddz-catalog .oddz-project-main{display:flex;flex-direction:column}
 #work .oddz-catalog .oddz-project-card .entry-meta{padding-right:64px;margin-bottom:8px}
 #work .oddz-catalog .oddz-project-card .entry-status,
