@@ -1,4 +1,4 @@
-import { funnySports, funnyInterview, funnyMessage, funnyMeeting, cosmicExcuse } from './humor.js';
+import { funnySports, funnyInterview, funnyMessage, funnyMeeting, rainyTrip, missingLink, hasEverydayStart } from './humor.js';
 
 export const examples = [
   ['집에서 롤드컵을 봤다', '응원하던 팀이 결승에서 졌다'],
@@ -16,16 +16,16 @@ export function makeStory(cause, effect, variant = 0) {
   if (cause === effect) throw new Error('조금 다른 두 사건을 적어주세요. 연결고리는 우리가 찾아볼게요.');
   const v = Number.isFinite(variant) ? ((Math.trunc(variant) % 3) + 3) % 3 : 0;
   let scenario;
-  if (/롤|바론|넥서스/.test(effect + cause) && /졌|패배|지다|탈락/.test(effect)) scenario = funnySports(cause, v);
-  else if (/면접/.test(effect) && /잊|까먹|기억|말|긴장/.test(effect)) scenario = funnyInterview(cause, v);
-  else if (/답장|연락|카톡/.test(effect) && /커피|카페/.test(cause)) scenario = funnyMessage(cause, v);
-  else if (/회의/.test(effect)) scenario = funnyMeeting(cause, v);
-  else scenario = cosmicExcuse(cause, effect, v);
+  if (/롤|바론|넥서스/.test(effect + cause) && /집|집관/.test(cause) && /졌|패배|지다|탈락/.test(effect)) scenario = funnySports(cause, v);
+  else if (/면접/.test(effect) && /잊|까먹|기억|말|긴장/.test(effect) && hasEverydayStart(cause)) scenario = funnyInterview(cause, v);
+  else if (/답장|연락|카톡/.test(effect) && hasEverydayStart(cause)) scenario = funnyMessage(cause, v);
+  else if (/회의/.test(effect) && hasEverydayStart(cause)) scenario = funnyMeeting(cause, v);
+  else if (/비가|비를|소나기/.test(effect) && hasEverydayStart(cause)) scenario = rainyTrip(cause);
+  else scenario = missingLink(cause, effect);
 
-  const steps = [...scenario.steps,
-    ['그래서, 처음 적은 그 사건', `“${effect}”\n작은 행동 하나에 다른 사람들의 타이밍이 얹히고, 일이 여기까지 커졌습니다. 이 이야기의 등장인물 수를 보세요. 혼자 책임지기엔 출연진이 너무 많습니다.`, '앞선 가상 장면들이 겹쳐 만든 결말이에요. 결론을 당신 한 명의 책임으로 요약하기에는 중간 과정이 너무 길어요.', '연결 중 하나만 달랐어도 다른 결말이 나왔겠죠. 그러니 잠깐 자책을 내려놓아도 괜찮아요.'],
-  ];
-  return { cause, effect, steps, assumptions: scenario.assumptions, genre: scenario.genre, unsupported: false, verdict: scenario.verdict };
+  const steps = [...scenario.steps];
+  if (!scenario.needsContext) steps.push(['처음 적은 사건과 만나는 지점', `“${effect}”\n앞의 조건들이 있었다면 이런 결과로 이어졌을 수 있어요. 결과를 보장하는 설명이 아니라, 일상적인 행동으로 이어본 가상의 경로입니다.`, '각 단계에는 다른 결과로 갈 여지도 있어요. 이 경로만으로 실제 원인을 확정하지는 않아요.', '중간의 타이밍이나 선택 하나가 달랐다면 전개도 달랐을 수 있어요.']);
+  return { cause, effect, steps, assumptions: scenario.assumptions, genre: scenario.genre, variantCount:scenario.variantCount||1, needsContext:!!scenario.needsContext, unsupported:!!scenario.needsContext, verdict: scenario.verdict };
 }
 
 export function storyText(story) {

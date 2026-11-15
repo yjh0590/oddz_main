@@ -31,9 +31,10 @@ $('random-example').addEventListener('click', () => {
 
 function render(nextStory) {
   $('scenario-assumptions').textContent = nextStory.assumptions.join(' · ');
-  $('mode').textContent = nextStory.genre.includes('판타지') ? '판타지 이야기' : '가상의 이야기';
-  $('result-title').textContent = '그래서, 어쩔 수 없었어.';
-  $('regenerate').hidden = false;
+  $('mode').textContent = nextStory.genre;
+  $('result-title').textContent = nextStory.needsContext ? '중간에 어떤 일이 있었을까요?' : '이렇게 이어졌을 수도 있어요.';
+  document.querySelector('.scenario-details').open = true;
+  $('regenerate').hidden = nextStory.needsContext || nextStory.variantCount < 2;
   $('regenerate').textContent = '다른 변명 ↻';
   const items = nextStory.steps.map(([title, body, because, otherwise], index) => {
     const item = document.createElement('li');
