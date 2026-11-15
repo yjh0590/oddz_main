@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">날아다니는 나비</title>
+  <desc id="desc">굵은 검은 선의 나비 두 마리가 곡선을 따라 날개를 접었다 펴며 날아다닙니다.</desc>
+  <style>
+    .outline{stroke:#111;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;fill:#fff}
+    .fly{animation:flight 15s ease-in-out infinite;transform-origin:0 0}
+    .companion{animation:companion 12s ease-in-out infinite;transform-origin:0 0}
+    .wings{animation:flap 1.5s ease-in-out infinite;transform-origin:0 0}
+    .small-wings{animation:flap 1.1s -.5s ease-in-out infinite;transform-origin:0 0}
+    .trail{stroke:#b8b8b8;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:6 13;animation:trail 6s linear infinite}
+    @keyframes flight{0%,100%{transform:translate(-16px,10px) rotate(-18deg)}25%{transform:translate(50px,-35px) rotate(12deg)}50%{transform:translate(88px,15px) rotate(27deg)}75%{transform:translate(28px,40px) rotate(-5deg)}}
+    @keyframes companion{0%,100%{transform:translate(0,0) rotate(20deg)}35%{transform:translate(-34px,20px) rotate(-20deg)}70%{transform:translate(-10px,55px) rotate(-5deg)}}
+    @keyframes flap{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.58)}}
+    @keyframes trail{to{stroke-dashoffset:-114}}
+    svg.paused *{animation-play-state:paused!important}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+  <defs><g id="butterfly">
+    <g class="outline">
+      <path d="M-3 3C-24-38-49-89-90-74c-35 13-28 60 3 73 26 11 52 7 84 4Z"/>
+      <path d="M3 3C24-38 49-89 90-74c35 13 28 60-3 73-26 11-52 7-84 4Z"/>
+      <path d="M-3 5C-26-1-64-5-75 22c-12 29 10 51 34 38C-20 49-11 25-3 5Z"/>
+      <path d="M3 5C26-1 64-5 75 22c12 29-10 51-34 38C20 49 11 25 3 5Z"/>
+    </g>
+  </g></defs>
+  <path class="trail" d="M24 263c73 15 125-48 82-80s-90 6-65 38c33 43 99-30 144-62"/>
+  <path class="trail" d="M339 80c50-44 103-48 139-17"/>
+  <g transform="translate(225 166)"><g class="fly">
+    <g class="wings"><use href="#butterfly"/></g>
+    <path d="M0-13V34" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-2-12c-2-13-8-20-15-23m19 23c2-13 8-20 15-23" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+  </g></g>
+  <g transform="translate(415 90) scale(.37)"><g class="companion">
+    <g class="small-wings"><use href="#butterfly"/></g>
+    <path d="M0-13V34" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-2-12c-2-13-8-20-15-23m19 23c2-13 8-20 15-23" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+  </g></g>
+</svg>

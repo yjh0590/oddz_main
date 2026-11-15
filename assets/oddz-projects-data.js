@@ -448,5 +448,26 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "사이트 열기",
     "date": "2026.11.10",
     "dateBasis": "저장소 커밋 기록"
+  },
+  {
+    "id": "pj-23",
+    "no": "PJ 23",
+    "icon": "/assets/icons/pj-23.png",
+    "stage": "doing",
+    "type": "Web",
+    "name": "어쩔 수 없었어 · 나비효과",
+    "desc": "아무 상관 없어 보이는 두 사건을 구체적이고 웃긴 나비효과 이야기로 연결하는 사이트.",
+    "feat": "두 사건 입력, 상세한 연결 과정, 다른 변명·복사, 흑백 나비 모션",
+    "current": "시나리오 기반 예시 엔진 첫 공개, 이야기 테스트 9개 및 브라우저 동작 확인",
+    "next": "자유형 AI 생성 연결과 이야기 다양성 개선",
+    "tags": [
+      "나비효과",
+      "유머",
+      "웹"
+    ],
+    "url": "/projects/butterfly-effect.html",
+    "link": "사이트·개발일지",
+    "date": "2026.11.15",
+    "dateBasis": "기획·구현 및 첫 공개 기록"
   }
 ]);

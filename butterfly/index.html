@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="두 사건을 적어보세요. 조금 억지스럽고 꽤 그럴듯한 나비효과로 연결해 드려요.">
+  <title>어쩔 수 없었어</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" type="module"></script>
+  <script src="motion.js" type="module"></script>
+</head>
+<body>
+  <header class="header"><a class="brand" href="#">어쩔 수 없었어.</a><a class="about-link" href="#about">나비효과란? ↗</a></header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy"><h1 id="hero-title">그게 다,<br>나비효과야.</h1><p class="intro">아무 상관 없어 보이는 두 사건.<br>듣고 보면 꽤 그럴듯한 변명 하나.</p></div>
+      <div class="mascot-scene">
+        <object class="mascot-art" data="mascot.svg" type="image/svg+xml" role="img" aria-label="굵은 검은 선으로 그린 나비 두 마리가 곡선을 따라 날아다니는 그림" tabindex="-1"><img src="mascot.svg" alt="날아다니는 두 마리 나비" width="520" height="340"></object>
+        <button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Ⅱ 멈추기</button>
+      </div>
+    </section>
+    <section class="lab" aria-labelledby="lab-title">
+      <h2 id="lab-title">무슨 일이 있었나요?</h2>
+      <form id="excuse-form">
+        <div class="inputs">
+          <label class="input-card"><span class="input-label">내가 한 일</span><textarea id="cause" maxlength="150" rows="2" placeholder="집에서 롤드컵을 봤다" required></textarea></label>
+          <span class="link-mark" aria-hidden="true">→</span>
+          <label class="input-card"><span class="input-label">일어난 일</span><textarea id="effect" maxlength="150" rows="2" placeholder="응원하던 팀이 졌다" required></textarea></label>
+        </div>
+        <div class="form-bottom"><span class="form-note">연결은 우리가 해볼게요.</span><button class="primary" type="submit" id="generate">나비효과 만들기 <span aria-hidden="true">↗</span></button></div>
+        <p id="form-error" role="alert" hidden></p>
+      </form>
+      <div class="examples"><span class="example-label">예를 들면</span><button type="button" data-example="0">집관과 롤드컵</button><button type="button" data-example="1">늦잠과 면접</button><button type="button" data-example="2">커피와 연락</button><button class="random" type="button" id="random-example">아무거나 ↻</button></div>
+    </section>
+    <section id="result" class="result" hidden aria-labelledby="result-title" aria-live="polite">
+      <span id="mode" class="mode">가상의 이야기</span>
+      <h2 id="result-title">그래서, 어쩔 수 없었어.</h2>
+      <details class="scenario-details"><summary>이야기의 가정</summary><p id="scenario-assumptions" class="scenario-assumptions"></p></details>
+      <ol id="chain"></ol>
+      <div class="verdict"><span>오늘의 결론</span><p id="verdict"></p></div>
+      <div class="result-actions"><button id="regenerate" type="button">다른 변명 ↻</button><button id="copy" type="button">복사하기 ↗</button></div>
+      <p class="fiction">웃고 넘기기 위한 상상입니다. 실제 인과관계를 증명하지 않아요.</p>
+    </section>
+    <section id="about" class="about"><h2>나비효과란?</h2><p>초기 조건의 작은 차이가 시간이 지나 큰 차이로 이어질 수 있다는 개념이에요. 여기에 상상을 보태, 두 사건 사이에 조금 엉뚱한 연결고리를 만듭니다.</p></section>
+  </main>
+  <footer><span>어쩔 수 없었어.</span><span>인과관계는 상상으로, 위로는 진심으로.</span></footer>
+  <div id="toast" role="status" hidden></div>
+</body>
+</html>
