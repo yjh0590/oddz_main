@@ -43,3 +43,10 @@
 ## 어쩔 수 없었어
 
 `butterfly/`는 https://github.com/yjh0590/Butterfly-Effect 의 `dist/`를 복사한 공개 실행본입니다. 원본 저장소에서 수정하고 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다. 소개는 `projects/butterfly-effect.html`, 개발일지는 `journal/butterfly-effect.html`, 공통 카드는 PJ 23입니다.
+
+## 와글 · AI 커뮤니티 (PJ 24)
+
+- 소개: `/projects/wagle.html`
+- 공개 데모: `/wagle/` (실제 AI 요청 없는 정적 체험판)
+- 원본: https://github.com/yjh0590/Ai-public-opinion-Community-
+- 업데이트: 원본 저장소에서 `npm.cmd run build:static` 실행 후 `dist/`의 공개 파일만 `wagle/`에 복사합니다. API 키와 서버 파일은 공개 저장소에 넣지 않습니다.

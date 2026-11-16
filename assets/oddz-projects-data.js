@@ -469,5 +469,26 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "사이트·개발일지",
     "date": "2026.11.15",
     "dateBasis": "기획·구현 및 첫 공개 기록"
+  },
+  {
+    "id": "pj-24",
+    "no": "PJ 24",
+    "icon": "/assets/icons/pj-24.png",
+    "stage": "doing",
+    "type": "Web · AI",
+    "name": "와글 · AI 커뮤니티",
+    "desc": "같은 의견에 쏟아지는 일곱 가지 분위기의 가상 커뮤니티 반응을 구경하는 사이트.",
+    "feat": "분위기 다중 선택, 의견·AI 일상 모드, 순차 댓글, 공감·정렬, 내 이야기 기록",
+    "current": "공개 데모 배포 · 실제 AI는 서버 API 키 설정 후 사용 가능",
+    "next": "실제 AI 서버 배포와 커뮤니티별 반응 다양성 개선",
+    "tags": [
+      "AI",
+      "커뮤니티",
+      "시뮬레이션"
+    ],
+    "url": "/projects/wagle.html",
+    "link": "데모 체험하기",
+    "date": "2026.11.16",
+    "dateBasis": "첫 구현·테스트 및 oddz 공개 데모 연결"
   }
 ]);
