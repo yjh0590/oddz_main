@@ -1,11 +1,40 @@
+const pick = (list, j) => list[j % list.length];
+
+// 사이트 이름은 분위기 참고용 표기. 로고·상표 이미지는 쓰지 않는다.
 export const communities = [
-  { id: 'square', name: '익명 광장', desc: '솔직하고 거침없는', symbol: '▥', tone: '#3f5291', wash: '#eef0f8', style: '익명 게시판. 짧은 반말, 건조한 유머, ㅋㅋ, 의심과 반박. 직설적이지만 인신공격은 하지 않는다.' },
-  { id: 'spicy', name: '매운맛 골목', desc: '삐딱한 한 스푼', symbol: '♨', tone: '#a66b37', wash: '#f7efe5', style: '냉소적인 반골 게시판. 짓궂은 반말과 비꼬는 유머, 주류 의견에 반문. 혐오표현이나 차별, 실존인 비방 없이 매운맛을 낸다.' },
-  { id: 'salon', name: '비밀 살롱', desc: '언니들의 찐토크', symbol: '✿', tone: '#b67685', wash: '#faeff2', style: '친한 여성 친구들의 비공개 수다방 분위기. 언니, 얘들아 같은 호칭, 솔직한 경험담, 공감과 현실적인 조언. 다양한 관점도 섞는다.' },
-  { id: 'lounge', name: '취향 라운지', desc: '과몰입은 기본값', symbol: '✦', tone: '#9368a8', wash: '#f4eef8', style: '덕질과 취향을 나누는 게시판. 과몰입, 앓는 말투, ㅠㅠ, 감탄, 가벼운 존댓말과 반말의 혼합. 디테일에 집착한다.' },
-  { id: 'garden', name: '말랑 정원', desc: '다정한 공감 한 조각', symbol: '❀', tone: '#69a18b', wash: '#edf5ef', style: '다정한 일상 커뮤니티. 둥글고 부드러운 반말, 공감과 신중한 조언, ㅎㅎ와 ㅠㅠ. 무조건 동의하지 말고 조심스러운 이견도 있다.' },
-  { id: 'timeline', name: '짧은 타임라인', desc: '짧고 강한 한마디', symbol: '↗', tone: '#424847', wash: '#eff0ee', style: '짧은 소셜 타임라인. 1~2문장, 인용하고 싶어지는 재치, 괄호 속 혼잣말, 드물게 해시태그. 동시대 밈 감각. 반대 시각도 담는다.' },
-  { id: 'club', name: '왁자지껄 클럽', desc: '드립과 팩트 사이', symbol: '⚑', tone: '#6b83ac', wash: '#edf2f9', style: '스포츠와 일상 유머 게시판. 형님, 이건 인정, ㅋㅋ, 비유와 드립, 근거를 따지는 현실적 반응. 응원과 반박을 섞는다.' },
+  { id: 'dc', name: '디시인사이드', desc: '최대급 익명 갤러리', symbol: 'D', tone: '#3b4890', wash: '#eceef7', like: '추천', board: true,
+    nick: j => `ㅇㅇ(${pick(['118.235', '211.36', '39.7', '223.38', '175.223', '106.101'], j)})`,
+    style: '디시 갤러리 말투. 짧고 건조한 반말, ㅋㅋ, ㄹㅇ, 개추, "응 아니야", 팩트 체크와 비꼼. 혐오 유래 어미(~노 등)와 비하 표현은 쓰지 않는다. 닉네임은 "ㅇㅇ(118.235)"처럼 ㅇㅇ과 IP 앞자리 형식.' },
+  { id: 'fmkorea', name: '에펨코리아', desc: '남초 종합 커뮤니티', symbol: 'F', tone: '#2a62c8', wash: '#eaf0fb', like: '추천', board: true,
+    nick: j => pick(['포텐가즈아', '눈팅만10년', '국축러', '펨창1호', '퇴근하고롤', '야구보는곰'], j),
+    style: '펨코 말투. 20~30대 남성 반말, ㅋㅋ, "이건 ㄹㅇ 포텐", "형님들", 스포츠·게임 비유, 근거 따지기와 드립. 성별 갈등 조장이나 비하는 하지 않는다. 닉네임은 짧은 한국어 별명.' },
+  { id: 'theqoo', name: '더쿠', desc: '여초 종합 커뮤니티', symbol: 'Q', tone: '#5a4a8c', wash: '#efedf6', like: '추천', board: true, numbered: true,
+    nick: () => '무명의 더쿠',
+    style: '더쿠 말투. 반말, "헐", "미친", "원덬", "케바케", ㅠㅠ, 과몰입 공감과 날카로운 정리. 닉네임은 항상 "무명의 더쿠".' },
+  { id: 'instiz', name: '인스티즈', desc: '10~20대 연예·일상', symbol: 'i', tone: '#4b7bec', wash: '#ecf1fd', like: '추천',
+    nick: j => `익인${j % 30 + 1}`,
+    style: '인스티즈 익명 게시판 말투. 10~20대, "익들아", "쓰니", ㅠㅠ, 헐, 가벼운 반말 공감. 닉네임은 "익인7"처럼 익인+숫자.' },
+  { id: 'pann', name: '네이트판', desc: '연애·결혼 사연 게시판', symbol: '판', tone: '#e5262f', wash: '#fdecec', like: '추천', board: true, dislike: true,
+    nick: j => pick(['ㅇㅇ', 'ㅇㅇ', '지나가던사람', '판눈팅러', 'ㅇㅇ', '30대직장인'], j),
+    style: '네이트판 댓글 말투. 존댓말과 반말 혼용, "글쓴이님", 사연에 몰입한 훈수와 판정, "와 읽다가 혈압", 경험담. 닉네임은 주로 "ㅇㅇ".' },
+  { id: 'blind', name: '블라인드', desc: '직장인 익명 커뮤니티', symbol: 'B', tone: '#d93a3a', wash: '#fbeceb', like: '좋아요',
+    nick: j => `${pick(['○○전자', '△△은행', '□□건설', '◇◇게임즈', '공무원', '☆☆증권'], j)} · ${pick(['jdk3s', 'qwe12', 'mnb7a', 'zzz91', 'kfo2p'], j + 2)}`,
+    style: '블라인드 말투. 직장인 반말, 연봉·복지·회사 문화 비교, "팀바팀", "퇴사가 답", 현실적이고 냉소적. 닉네임은 "○○전자 · jdk3s"처럼 가상 회사명 · 랜덤 아이디.' },
+  { id: 'everytime', name: '에브리타임', desc: '대학생 익명 커뮤니티', symbol: '에', tone: '#c62917', wash: '#faebe9', like: '공감',
+    nick: j => `익명${j % 20 + 1}`,
+    style: '에브리타임 말투. 대학생 반말, 과제·팀플·학점·취업 비유, ㅋㅋ, 짧은 공감과 현실 조언. 닉네임은 "익명3"처럼 익명+숫자.' },
+  { id: 'daangn', name: '당근 동네생활', desc: '동네 이웃 이야기', symbol: '당', tone: '#ff6f0f', wash: '#fff1e7', like: '공감', polite: true,
+    nick: j => `${pick(['감자', '토마토', '고구마', '양파', '오이'], j)}${pick(['러버', '조아', '네'], j + 1)} · ${pick(['역삼동', '망원동', '정자동', '송도동', '중동'], j + 2)}`,
+    style: '당근 동네생활 말투. 이웃끼리의 친절한 존댓말, "~해요", :) , 동네 정보와 생활 경험, 조심스러운 이견. 닉네임은 "감자러버 · 망원동"처럼 별명 · 동네.' },
+  { id: 'momcafe', name: '맘카페', desc: '지역 육아 카페', symbol: '맘', tone: '#03a94e', wash: '#e8f7ee', like: '좋아요', polite: true,
+    nick: j => `${pick(['튼튼이', '콩이', '햇살이', '쑥쑥이', '복덩이'], j)}맘`,
+    style: '지역 맘카페 말투. 정중한 존댓말, "맘님들", "저희 신랑은", ^^ ㅠㅠ, 육아·살림 경험 기반 공감과 정보. 닉네임은 "콩이맘"처럼 태명+맘.' },
+  { id: 'x', name: 'X(트위터)', desc: '짧고 빠른 타임라인', symbol: 'X', tone: '#0f1419', wash: '#eef0f1', like: '♥', round: true,
+    nick: j => `@${pick(['nobody_irl', 'oneline_tw', 'sleepy_cat', 'tl_kim', 'quote_mach'], j)}`,
+    style: 'X(트위터) 말투. 1~2문장, 인용하고 싶은 재치, 괄호 속 혼잣말, 밈, 드물게 해시태그. 닉네임은 "@handle" 형식.' },
+  { id: 'threads', name: '스레드', desc: '느슨한 일상 피드', symbol: '@', tone: '#3a3a3a', wash: '#f0f0f0', like: '♥', round: true,
+    nick: j => pick(['daily.min', 'sooo_coffee', 'jy.log', 'moodboard_k', 'seoul.walk'], j),
+    style: '스레드 말투. 담백한 반말 독백, 일상 공유, "나만 그래?", 이모지 약간, 부드러운 공감. 닉네임은 "jy.log"처럼 소문자 아이디.' },
 ];
 
 export const samples = {
@@ -21,15 +50,18 @@ export const samples = {
   ],
 };
 
-const names = ['지나가던감자', '새벽두시', '이름없는고양이', '오늘도접속중', '초록양말', '아무튼내생각', '말하는식빵', '퇴근이꿈', '한입만', '구경온사람', '방구석철학자', '지구인23'];
 const voices = {
-  square: ['이거 댓글부터 보고 판단한다 ㅋㅋ', '말은 되는데 반대쪽 얘기도 들어봐야 됨.', '또 나만 진지하게 읽었지 ㅋㅋ', '일단 나는 동의함. 근데 실전은 다르더라.'],
-  spicy: ['다들 좋다 할 때 한 번쯤 의심해 봐야지 ㅋㅋ', '예쁜 말 빼고 현실적으로 생각해 보자.', '이렇게 또 게시판 장작이 들어오는구만.', '쉽게 결론 내릴 얘기는 아닌 듯. 뒷감당은 누가 함?'],
-  salon: ['얘들아 이거 나만 공감돼? 비슷한 얘기 친구랑 했는데 ㅠ', '언니 근데 상대 입장에서 생각하면 좀 다르게 보이긴 해.', '나도 그랬는데 막상 겪어보면 생각 달라지더라.', '일단 네 마음은 이해해. 근데 너무 혼자 결론 내리지는 말자.'],
-  lounge: ['아 이 포인트에 꽂혀버림… 지금 세 번째 읽는 중 ㅠㅠ', '나 이런 얘기에 진심이잖아… 더 풀어줘.', '아니 이건 관점 바꾸면 완전 다른 이야기 되는 거 아니냐고 ㅋㅋ', '좋아하는 마음이랑 동의하는 건 별개라 일단 지켜봄…'],
-  garden: ['그렇게 느낄 수 있을 것 같아 ㅎㅎ 나도 고민해본 적 있어.', '음 나는 조금 다르게 생각해. 각자 사정이 있지 않을까?', '이런 이야기 편하게 나눌 수 있어서 좋다 🌿', '바로 답을 정하기보단 천천히 생각해봐도 좋을 것 같아.'],
-  timeline: ['이 글을 읽고 생각이 많아짐. (원래도 많았음)', '내가 하고 싶던 말 대신 써준 사람 등장', '동의 버튼 누르려다 다시 생각하는 중. 그렇게 됐다.', '오늘의 타임라인 주제는 이걸로 정해졌다.'],
-  club: ['이건 인정이지 ㅋㅋ 추천 누르고 간다', '형님 일단 근거부터 보고 갑시다 ㅋㅋ', '전반전만 보고 경기 끝났다고 하면 안 됨.', '댓글창이 본문보다 재밌어질 예정 ㅋㅋ'],
+  dc: ['ㄹㅇ 이건 개추 ㅋㅋ', '응 아니야~ 반대쪽 얘기도 들어봐라', '이걸 진지하게 쓴 거임? ㅋㅋㅋ', '근데 솔직히 틀린 말은 아님'],
+  fmkorea: ['형님들 이건 인정하고 갑시다 ㅋㅋ', '이 글 포텐 간다 ㄹㅇ', '전반전만 보고 결론 내면 안 됨', '근거 하나만 가져와 보셈 ㅋㅋ'],
+  theqoo: ['헐 미친 나만 이렇게 생각한 거 아니었구나', '원덬 맘 너무 알 것 같아ㅠㅠ', '근데 이건 진짜 케바케임', '아 이건 좀... 다른 시각도 있을 듯'],
+  instiz: ['헐 익들아 나도ㅠㅠ', '쓰니 맘 완전 이해함', '이건 좀 아닌 듯..?', '나 이거 친구랑 얘기하다 싸웠잖아ㅋㅋ'],
+  pann: ['글쓴이님 이건 진짜 아닙니다', '와 읽다가 혈압 올라서 로그인함', '제 경험상 말씀드리면 대화가 먼저예요', '이거 판에서 또 난리나겠네요'],
+  blind: ['저희 회사는 이미 함. 근데 실상은 다름', '연봉부터 까고 얘기하시죠', '팀바팀임. 팀장 따라 천국과 지옥', '결국 퇴사가 답이더라'],
+  everytime: ['과제하다 이거 보고 웃음 ㅋㅋ', '팀플보다는 이게 덜 스트레스임', '졸업하면 생각 달라짐 ㄹㅇ', '이거 우리 학교 얘기임?'],
+  daangn: ['저희 동네도 그래요~ 공감해요 :)', '이웃님 말씀 이해돼요!', '저는 조금 다르게 생각해요 ㅎㅎ', '좋은 이야기 나눠주셔서 감사해요 :)'],
+  momcafe: ['저도 그래요ㅠㅠ 애 키우다 보니까요', '맘님들 생각은 어떠세요?', '저희 신랑은 반대하더라구요^^', '공감합니다~ 좋은 하루 되세요^^'],
+  x: ['이거 진짜임 (진짜임)', '오늘 타임라인 주제 정해졌다', '하… 이걸 이제 알았네', '알티 누르려다 멈칫함'],
+  threads: ['나만 이런 생각 하는 거 아니었구나 🫠', '오늘 이 얘기 계속 생각날 듯', '천천히 생각해봐도 괜찮을 거 같아', '이런 대화 좋다 ☕'],
 };
 
 function topicLine(text, index) {
@@ -46,6 +78,7 @@ export function demoReactions(text, selected, mode = 'opinion') {
   const offset = Math.floor(Math.random() * 100);
   return Array.from({ length: perCommunity }, (_, row) => selected.map((id, i) => {
     const j = row + offset + i;
+    const c = communities.find(c => c.id === id);
     const voice = voices[id][j % 4];
     const body = mode === 'diary'
       ? [
@@ -54,14 +87,14 @@ export function demoReactions(text, selected, mode = 'opinion') {
         `나도 비슷한 부탁 받았는데, 마지막에 고맙다는 한마디 들으면 또 열심히 하게 됨. ${voice}`,
         `주인은 요청 하나라고 생각하는데 우리 쪽 커뮤니티는 이미 댓글 스무 개 달림. ${voice}`,
       ][row % 4]
-      : `${topicLine(text, j)} ${voice}`;
-    return { community: id, nickname: mode === 'diary' ? `${names[j % names.length]}봇` : names[j % names.length], text: body, likes: Math.floor(Math.random() * 70) + 1 };
+      : c.polite ? voice : `${topicLine(text, j)} ${voice}`;
+    return { community: id, nickname: `${c.nick(j)}${mode === 'diary' ? ' 🤖' : ''}`, text: body, likes: Math.floor(Math.random() * 70) + 1 };
   })).flat();
 }
 
 export function validateInput(body) {
   if (!body || typeof body.text !== 'string' || !body.text.trim() || body.text.length > 500) return '이야기는 1~500자로 입력해주세요.';
-  if (!Array.isArray(body.communities) || !body.communities.length || body.communities.length > 7 || new Set(body.communities).size !== body.communities.length || body.communities.some(id => !communities.some(c => c.id === id))) return '커뮤니티를 1개 이상 선택해주세요.';
+  if (!Array.isArray(body.communities) || !body.communities.length || body.communities.length > communities.length || new Set(body.communities).size !== body.communities.length || body.communities.some(id => !communities.some(c => c.id === id))) return '커뮤니티를 1개 이상 선택해주세요.';
   if (!['opinion', 'diary'].includes(body.mode)) return '올바른 이야기 모드를 선택해주세요.';
   return null;
 }

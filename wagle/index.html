@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f9f6">
+  <meta name="theme-color" content="#fafafa">
   <meta name="wagle-runtime" content="demo">
-  <meta name="description" content="내 생각 하나에 쏟아지는 가지각색의 반응. 일곱 가지 분위기의 AI 커뮤니티, 와글.">
+  <meta name="description" content="내 생각 하나에 쏟아지는 가지각색의 반응. 국내 대형 커뮤니티 말투로 보는 AI 반응, 와글.">
   <title>와글 — 내 생각에, 세상이 와글와글</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -26,9 +26,9 @@
     </section>
 
     <section class="workspace" aria-label="커뮤니티 시뮬레이터">
-      <div class="section-label"><h2><span class="step">01</span> 어디에 이야기할까요?</h2><button id="select-all" class="text-button">모두 선택 <span>↗</span></button></div>
+      <div class="section-label"><h2><span class="step">01</span> 어느 사이트에 올려볼까요?</h2></div>
       <div class="communities" id="communities" role="group" aria-label="커뮤니티 분위기 선택"></div>
-      <div class="selection-caption"><span class="tiny-spark">✳</span> 이름은 달라도, 어딘가 익숙한 그 분위기.<span class="selection-count" id="selection-count">1개 선택됨</span></div>
+      <div class="selection-caption"><span class="tiny-spark">✳</span> 사이트 이름은 분위기 참고용 표기이며, 각 서비스와 무관한 패러디입니다.<span class="selection-count" id="selection-count">사이트를 골라주세요</span></div>
 
       <div class="section-label compose-label"><h2><span class="step">02</span> 어떤 이야기를 던져볼까요?</h2><span class="mode-badge" id="connection-status">데모 모드</span></div>
       <form id="opinion-form" class="composer">
@@ -51,10 +51,10 @@
 
       <section id="empty-state" class="empty-state"><div class="empty-illustration" aria-hidden="true"><span class="bubble bubble-one">···</span><span class="bubble bubble-two">!</span><span class="mini-star">✳</span><span class="mini-dot"></span></div><h2>여긴 어떤 반응이 나올까?</h2><p>이야기를 던져보세요. 조용하던 커뮤니티가 깨어납니다.</p><div class="empty-tags"><span>과몰입 환영</span><i>·</i><span>눈치 보기 금지</span><i>·</i><span>현실 여론 아님</span></div></section>
     </section>
-    <footer><a href="./" class="footer-brand">와글<span>작은 생각, 시끌벅적한 세상.</span></a><p>모든 반응은 AI가 만든 가상의 이야기이며, 실제 커뮤니티의 의견과 무관합니다.</p><a class="oddz-link" href="https://oddz.click/">← oddz</a></footer>
+    <footer><a href="./" class="footer-brand">와글<span>작은 생각, 시끌벅적한 세상.</span></a><p>모든 반응은 AI가 만든 가상의 이야기이며, 표기된 실제 서비스나 그 이용자의 의견과 무관합니다.</p><a class="oddz-link" href="https://oddz.click/">← oddz</a></footer>
   </main>
 
-  <dialog id="help-dialog"><div class="dialog-header"><h2>와글, 이렇게 즐겨요.</h2><button class="icon-button close-dialog" aria-label="닫기">✕</button></div><div class="guide-step"><b>01</b><div><h3>마음 가는 분위기를 골라요</h3><p>일곱 가지 커뮤니티를 하나씩, 또는 여러 개 함께 선택할 수 있어요.</p></div></div><div class="guide-step"><b>02</b><div><h3>내 생각을 툭 던져요</h3><p>일상, 연애, 회사 이야기까지. ‘AI 일상’에서는 내 부탁을 들어준 AI들의 뒷이야기를 볼 수 있어요.</p></div></div><div class="guide-step"><b>03</b><div><h3>서로 다른 반응을 구경해요</h3><p>마음에 드는 댓글에 공감하거나, 새로운 반응을 받아보세요. 실제 사람들의 여론을 측정하는 서비스는 아니에요.</p></div></div><p class="dialog-note">데모 모드는 미리 준비된 문장을 조합합니다. AI 연결 모드에서는 입력한 이야기가 AI 서비스로 전송됩니다. 내 이야기는 이 브라우저에만 저장되며, 기록 창에서 삭제할 수 있어요.</p><button class="primary-button close-dialog full-width">좋아요, 시작할게요 ↗</button></dialog>
+  <dialog id="help-dialog"><div class="dialog-header"><h2>와글, 이렇게 즐겨요.</h2><button class="icon-button close-dialog" aria-label="닫기">✕</button></div><div class="guide-step"><b>01</b><div><h3>사이트를 하나 골라요</h3><p>열한 곳 중 한 곳을 고르면 화면과 댓글이 그 사이트 분위기로 바뀌어요.</p></div></div><div class="guide-step"><b>02</b><div><h3>내 생각을 툭 던져요</h3><p>일상, 연애, 회사 이야기까지. ‘AI 일상’에서는 내 부탁을 들어준 AI들의 뒷이야기를 볼 수 있어요.</p></div></div><div class="guide-step"><b>03</b><div><h3>서로 다른 반응을 구경해요</h3><p>마음에 드는 댓글에 공감하거나, 새로운 반응을 받아보세요. 실제 사람들의 여론을 측정하는 서비스는 아니에요.</p></div></div><p class="dialog-note">데모 모드는 미리 준비된 문장을 조합합니다. AI 연결 모드에서는 입력한 이야기가 AI 서비스로 전송됩니다. 내 이야기는 이 브라우저에만 저장되며, 기록 창에서 삭제할 수 있어요.</p><button class="primary-button close-dialog full-width">좋아요, 시작할게요 ↗</button></dialog>
   <dialog id="history-dialog"><div class="dialog-header"><h2>내 이야기 <span id="history-total"></span></h2><button class="icon-button close-dialog" aria-label="닫기">✕</button></div><p class="history-description">이 브라우저에서 나눈 이야기들이에요. 최근 20개까지 보관해요.</p><div id="history-list"></div><button id="clear-history" class="clear-button">기록 모두 지우기</button></dialog>
   <div id="toast" class="toast" role="status" hidden></div>
 </body>

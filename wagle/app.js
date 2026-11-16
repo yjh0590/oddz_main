@@ -1,7 +1,7 @@
 import { communities, samples, demoReactions } from './community.js';
 
 const $ = id => document.getElementById(id);
-const selected = new Set(['square']);
+let site = null; // 한 번에 한 사이트만 선택. 처음엔 미선택(흑백).
 let mode = 'opinion';
 let busy = false;
 let sort = 'latest';
@@ -33,27 +33,33 @@ function palette(node, community) {
   node.style.setProperty('--wash', community.wash);
 }
 
+// 처음엔 흑백, 카드를 누르면 그 커뮤니티의 색으로 페이지 분위기를 바꾼다.
+function theme(community) {
+  const root = document.documentElement.style;
+  document.documentElement.dataset.site = community?.id ?? '';
+  if (!community) return ['--accent', '--page'].forEach(p => root.removeProperty(p));
+  root.setProperty('--accent', community.tone);
+  root.setProperty('--page', `color-mix(in srgb, ${community.tone} 20%, #fff)`);
+}
+
 function renderCommunities() {
   $('communities').replaceChildren(...communities.map(c => {
-    const button = element('button', `community-card${selected.has(c.id) ? ' selected' : ''}`);
+    const button = element('button', `community-card${site === c.id ? ' selected' : ''}`);
     button.type = 'button';
-    button.setAttribute('aria-pressed', String(selected.has(c.id)));
+    button.setAttribute('aria-pressed', String(site === c.id));
     button.setAttribute('aria-label', `${c.name}, ${c.desc}`);
     button.disabled = busy;
     palette(button, c);
     button.append(element('span', 'check-mark', '✓'), element('span', 'community-symbol', c.symbol), element('span', 'community-name', c.name), element('span', 'community-desc', c.desc));
     button.addEventListener('click', () => {
-      if (selected.has(c.id)) {
-        if (selected.size === 1) return toast('최소 한 곳은 선택해주세요.');
-        selected.delete(c.id);
-      } else selected.add(c.id);
+      site = c.id;
+      theme(c);
       renderCommunities();
       $('communities').children[communities.indexOf(c)].focus({ preventScroll: true });
     });
     return button;
   }));
-  $('selection-count').textContent = `${selected.size}개 선택됨`;
-  $('select-all').textContent = selected.size === 7 ? '선택 초기화 ↺' : '모두 선택 ↗';
+  $('selection-count').textContent = site ? `${communities.find(c => c.id === site).name} 선택됨` : '사이트를 골라주세요';
 }
 
 function renderSuggestions() {
@@ -87,18 +93,21 @@ function persistThread() {
 
 function renderReaction(reaction, index) {
   const c = communities.find(c => c.id === reaction.community);
-  const article = element('article', 'reaction');
+  const article = element('article', `reaction${c.board ? ' board' : ''}${c.round ? ' round' : ''}`);
+  article.dataset.site = c.id;
   palette(article, c);
   const avatar = element('div', 'reaction-avatar', c.symbol);
   avatar.setAttribute('aria-hidden', 'true');
   const body = element('div', 'reaction-body');
   const meta = element('div', 'reaction-meta');
-  meta.append(element('span', 'reaction-name', reaction.nickname), element('span', 'reaction-community', c.name), element('span', 'reaction-time', `${index + 1}분 전 · 가상 반응`));
+  meta.append(element('span', 'reaction-name', `${c.numbered ? `${index + 1}. ` : ''}${reaction.nickname}`), element('span', 'reaction-community', c.name), element('span', 'reaction-time', `${index + 1}분 전 · 가상 반응`));
   const like = element('button', `like-button${reaction.liked ? ' liked' : ''}`);
   like.setAttribute('aria-pressed', String(!!reaction.liked));
   const updateLike = () => {
-    like.replaceChildren(element('span', 'heart', reaction.liked ? '♥' : '♡'), document.createTextNode(`공감 ${reaction.likes + (reaction.liked ? 1 : 0)}`));
-    like.setAttribute('aria-label', `${reaction.nickname} 댓글 공감 ${reaction.likes + (reaction.liked ? 1 : 0)}개`);
+    const count = reaction.likes + (reaction.liked ? 1 : 0);
+    const label = c.like === '♥' ? `${reaction.liked ? '♥' : '♡'} ${count}` : `${c.like} ${count}${c.dislike ? ` · 반대 ${Math.round(reaction.likes / 6)}` : ''}`;
+    like.replaceChildren(document.createTextNode(label));
+    like.setAttribute('aria-label', `${reaction.nickname} 댓글 ${c.like === '♥' ? '좋아요' : c.like} ${count}개`);
   };
   updateLike();
   like.addEventListener('click', () => {
@@ -136,7 +145,6 @@ function setBusy(value) {
   $('submit-button').disabled = value;
   $('submit-button').textContent = value ? '반응 모으는 중…' : '반응 구경하기 ↗';
   $('opinion').disabled = value;
-  $('select-all').disabled = value;
   $('regenerate').disabled = value;
   $('regenerate').hidden = value;
   $('new-story').disabled = value;
@@ -191,17 +199,12 @@ $('opinion-form').addEventListener('submit', event => {
   event.preventDefault();
   const text = $('opinion').value.trim();
   if (!text) { toast('먼저 이야기를 한 줄 적어주세요.'); $('opinion').focus(); return; }
-  submit({ text, communities: [...selected], mode });
+  if (!site) { toast('먼저 이야기할 사이트를 골라주세요.'); return; }
+  submit({ text, communities: [site], mode });
 });
 $('opinion').addEventListener('input', updateCount);
 $('opinion').addEventListener('keydown', event => {
   if (event.key === 'Enter' && (event.ctrlKey || event.metaKey) && !event.isComposing) { event.preventDefault(); $('opinion-form').requestSubmit(); }
-});
-$('select-all').addEventListener('click', () => {
-  const allSelected = selected.size === 7;
-  selected.clear();
-  (allSelected ? [communities[0]] : communities).forEach(c => selected.add(c.id));
-  renderCommunities();
 });
 document.querySelectorAll('.compose-tab').forEach(button => button.addEventListener('click', () => {
   mode = button.dataset.mode;
