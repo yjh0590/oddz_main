@@ -166,3 +166,10 @@ body.in-site>:not(.site-view):not(dialog):not(.toast){display:none}
 .sp[data-site=threads] .c-foot{justify-content:flex-start;gap:20px}
 
 @media(max-width:600px){.sp-search{display:none}.sp-icons{display:none}.sp-head{padding:12px 16px}.sp-board,.sp-tabs,.sp-post,.sp-cmt-head,.c{padding-inline:16px}.sp[data-site=dc] .c-main{display:block}.sp[data-site=dc] .c-head{display:flex}.sp[data-site=dc] .c-text{margin:4px 0}.site-note{width:100%;margin-left:8px}}
+
+/* 반박 답글: 들여쓰기 + ↳ 표시 */
+.c.reply{margin-left:28px;border-left:2px solid color-mix(in srgb,var(--tone) 35%,#fff)}
+.c.reply .c-nick:before{content:'↳ ';color:#aaa;font-weight:400}
+.c-to{color:var(--tone);font-weight:600}
+.sp[data-layout=feed] .c.reply,.sp[data-layout=app] .c.reply{margin-left:24px}
+@media(max-width:600px){.c.reply{margin-left:14px}}

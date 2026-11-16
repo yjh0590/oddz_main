@@ -1,4 +1,4 @@
-import { communities, samples, demoReactions } from './community.js';
+import { communities, samples, demoReactions, demoPost } from './community.js';
 import { renderPage, renderComment, layoutOf } from './sites.js';
 
 const $ = id => document.getElementById(id);
@@ -12,7 +12,7 @@ let toastTimeout;
 let history = [];
 try {
   const saved = JSON.parse(localStorage.getItem('wagle-stories') || '[]');
-  if (Array.isArray(saved)) history = saved.filter(t => t && typeof t.id === 'string' && typeof t.text === 'string' && ['opinion', 'diary'].includes(t.mode) && Array.isArray(t.communities) && t.communities.every(id => communities.some(c => c.id === id)) && Array.isArray(t.reactions) && t.reactions.every(r => r && communities.some(c => c.id === r.community) && typeof r.text === 'string' && typeof r.nickname === 'string' && Number.isFinite(r.likes))).slice(0, 20);
+  if (Array.isArray(saved)) history = saved.filter(t => t && typeof t.id === 'string' && typeof t.text === 'string' && ['opinion', 'diary'].includes(t.mode) && Array.isArray(t.communities) && t.communities.every(id => communities.some(c => c.id === id)) && Array.isArray(t.reactions) && t.reactions.every(r => r && communities.some(c => c.id === r.community) && typeof r.text === 'string' && typeof r.nickname === 'string' && Number.isFinite(r.likes)) && (t.post === undefined || (typeof t.post?.title === 'string' && typeof t.post.body === 'string'))).slice(0, 20);
 } catch { /* Storage may be disabled or contain invalid data. */ }
 
 function element(tag, className, text) {
@@ -75,8 +75,13 @@ function renderSuggestions() {
     });
     return button;
   }));
-  $('opinion').placeholder = mode === 'diary' ? '오늘 내 AI에게 무슨 부탁을 했나요? AI들끼리 뒷이야기를 나눠요.' : '솔직히, 주 4일제는 이제 도입해야 하는 거 아님?';
+  // 시점에 따라 입력창 문구가 바뀐다: 1인칭은 내 얘기, 3인칭은 "내 얘기는 아닌데…"로 시작하는 친구 얘기.
+  $('compose-hint').textContent = mode === 'diary' ? '주인공은 ‘친구’. 아무도 모를 거예요.' : '주인공은 나. 익명이니까, 편하게.';
+  if (!busy) $('submit-button').textContent = submitLabel();
+  $('opinion').placeholder = mode === 'diary' ? '내 얘기는 아닌데… (예: 친구가 단톡방에 전 애인 욕을 했는데 전 애인도 그 방에 있었대)' : '오늘 엘리베이터에서 팀장님 앞에서 방귀 뀌었는데, 이거 퇴사 사유임?';
 }
+
+const submitLabel = () => mode === 'diary' ? '친구 얘기로 올리기 ↗' : '내 시점으로 올리기 ↗';
 
 function updateCount() { $('char-count').textContent = $('opinion').value.length; }
 
@@ -94,7 +99,7 @@ function persistThread() {
 
 const threadSite = () => communities.find(c => c.id === currentThread.communities[0]);
 const onLike = () => { if (!busy) persistThread(); };
-const comment = (reaction, best = false) => renderComment(reaction, currentThread.reactions.indexOf(reaction), threadSite(), best, onLike);
+const comment = (reaction, best = false) => renderComment(reaction, currentThread.reactions.indexOf(reaction), threadSite(), best, onLike, currentThread.reactions[reaction.replyTo]?.nickname);
 const updateCounts = () => document.querySelectorAll('.sp-count').forEach(node => { node.textContent = currentThread.reactions.length; });
 
 function renderReactions() {
@@ -110,11 +115,11 @@ function renderReactions() {
 function enterSite() {
   document.body.classList.add('in-site');
   scrollTo(0, 0);
-  if (location.hash !== '#site') history.pushState(null, '', '#site');
+  if (location.hash !== '#site') window.history.pushState(null, '', '#site');
 }
 function leaveSite() {
   document.body.classList.remove('in-site');
-  if (location.hash === '#site') history.replaceState(null, '', location.pathname + location.search);
+  if (location.hash === '#site') window.history.replaceState(null, '', location.pathname + location.search);
 }
 
 function showThread() {
@@ -132,7 +137,7 @@ function showThread() {
 function setBusy(value) {
   busy = value;
   $('submit-button').disabled = value;
-  $('submit-button').textContent = value ? '반응 모으는 중…' : '반응 구경하기 ↗';
+  $('submit-button').textContent = value ? '올리는 중…' : submitLabel();
   $('opinion').disabled = value;
   $('regenerate').disabled = value;
   $('regenerate').hidden = value;
@@ -146,7 +151,7 @@ function setBusy(value) {
 }
 
 async function generate(payload) {
-  if (!serverAvailable) return { reactions: demoReactions(payload.text, payload.communities, payload.mode), demo: true };
+  if (!serverAvailable) return { post: demoPost(payload.text, payload.communities[0], payload.mode), reactions: demoReactions(payload.text, payload.communities, payload.mode), demo: true };
   const response = await fetch('/api/reactions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: AbortSignal.timeout(65000) });
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || '반응을 불러오지 못했어요. 잠시 후 다시 시도해주세요.');
@@ -163,6 +168,7 @@ async function submit(payload) {
   try {
     const data = await generate(payload);
     currentThread.demo = data.demo;
+    currentThread.post = data.post;
     showThread();
     for (const reaction of data.reactions) {
       await new Promise(resolve => setTimeout(resolve, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 240 + Math.random() * 180));
@@ -230,7 +236,7 @@ function renderHistory() {
   $('history-total').textContent = history.length;
   $('history-list').replaceChildren(...history.map(thread => {
     const button = element('button', 'history-item');
-    button.append(element('strong', '', thread.text), element('span', '', `${new Date(thread.createdAt).toLocaleDateString('ko-KR')} · ${thread.mode === 'diary' ? 'AI 일상' : '내 의견'} · 댓글 ${thread.reactions.length}개`));
+    button.append(element('strong', '', thread.text), element('span', '', `${new Date(thread.createdAt).toLocaleDateString('ko-KR')} · ${thread.mode === 'diary' ? '3인칭' : '1인칭'} · 댓글 ${thread.reactions.length}개`));
     button.addEventListener('click', () => {
       currentThread = thread;
       $('history-dialog').close();
@@ -244,7 +250,7 @@ function renderHistory() {
 $('history-button').addEventListener('click', () => { renderHistory(); $('history-dialog').showModal(); });
 $('clear-history').addEventListener('click', () => { history = []; saveHistory(); renderHistory(); toast('이 브라우저의 기록을 모두 지웠어요.'); });
 
-if (location.hash === '#site') history.replaceState(null, '', location.pathname + location.search);
+if (location.hash === '#site') window.history.replaceState(null, '', location.pathname + location.search);
 renderCommunities();
 renderSuggestions();
 $('history-count').textContent = history.length;

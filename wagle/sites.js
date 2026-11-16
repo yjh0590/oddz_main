@@ -29,8 +29,9 @@ const count = () => h('b', 'sp-count', '0'); // app.js가 댓글 수로 채운�
 
 export function renderPage(thread, c, sort) {
   const p = pages[c.id];
-  const text = thread.text;
-  const title = Array.from(text.split('\n')[0]).slice(0, 40).join('') + (Array.from(text).length > 40 ? '…' : '');
+  // 생성된 글(post)이 오기 전이나 예전 기록에서는 입력 원문을 그대로 보여준다.
+  const text = thread.post?.body ?? thread.text;
+  const title = thread.post?.title || Array.from(thread.text.split('\n')[0]).slice(0, 40).join('') + (Array.from(thread.text).length > 40 ? '…' : '');
   const views = 120 + (text.length * 37) % 880;
   const likes = Math.round(views / 18);
   const root = h('div', 'sp');
@@ -80,7 +81,16 @@ export function renderPage(thread, c, sort) {
   return root;
 }
 
-export function renderComment(reaction, index, c, best, onLike) {
+// 블라인드 회사명은 첫 글자만 보이게 가린다: "삼성전자 · ab12" → "삼*** · ab12"
+const maskNick = (c, nickname) => {
+  const at = nickname.indexOf('·');
+  if (c.id !== 'blind' || at < 1) return nickname;
+  const company = Array.from(nickname.slice(0, at).trim());
+  return `${company[0]}${'*'.repeat(company.length - 1)} · ${nickname.slice(at + 1).trim()}`;
+};
+
+// target: 이 댓글이 반박하는 앞 댓글의 닉네임 (없으면 일반 댓글)
+export function renderComment(reaction, index, c, best, onLike, target) {
   const p = pages[c.id];
   const like = h('button', `c-like${reaction.liked ? ' liked' : ''}`);
   like.type = 'button';
@@ -94,17 +104,19 @@ export function renderComment(reaction, index, c, best, onLike) {
   like.addEventListener('click', () => { reaction.liked = !reaction.liked; like.classList.toggle('liked', reaction.liked); paint(); onLike(); });
 
   const isX = c.id === 'x' && reaction.nickname.startsWith('@');
-  const name = (p.numbered ? `${index + 1}. ` : '') + (isX ? reaction.nickname.slice(1).replace(/_/g, ' ') : reaction.nickname);
+  const nick = maskNick(c, reaction.nickname);
+  if (target) target = maskNick(c, target);
+  const name = (p.numbered ? `${index + 1}. ` : '') + (isX ? reaction.nickname.slice(1).replace(/_/g, ' ') : nick);
   const time = p.layout === 'board' ? `${index + 1}분 전` : p.layout === 'feed' ? `· ${index + 1}분` : `${index + 1}분 전`;
   const foot = p.layout === 'feed'
     ? [h('span', '', `💬 ${reaction.likes % 7}`), h('span', '', `⟲ ${reaction.likes % 11}`), like, h('span', '', `📊 ${reaction.likes * 13 + 40}`)]
     : p.layout === 'app' ? [like, h('span', '', '답글쓰기')]
       : p.down ? [like, h('span', 'c-down', `${p.down} ${Math.round(reaction.likes / 6)}`)] : [like];
 
-  const item = h('li', `c${best ? ' best' : ''}`, h('span', 'c-avatar', c.symbol),
+  const item = h('li', `c${best ? ' best' : ''}${target ? ' reply' : ''}`, h('span', 'c-avatar', c.symbol),
     h('div', 'c-main',
       h('div', 'c-head', best ? h('em', 'c-best', 'BEST') : null, h('b', 'c-nick', name), isX ? h('span', 'c-handle', reaction.nickname) : null, h('span', 'c-time', time)),
-      h('p', 'c-text', reaction.text),
+      h('p', 'c-text', target ? h('span', 'c-to', `@${target} `) : null, reaction.text),
       h('div', 'c-foot', ...foot)));
   item.querySelector('.c-avatar').setAttribute('aria-hidden', 'true');
   return item;
