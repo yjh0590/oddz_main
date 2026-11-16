@@ -1,4 +1,5 @@
 import { communities, samples, demoReactions } from './community.js';
+import { renderPage, renderComment, layoutOf } from './sites.js';
 
 const $ = id => document.getElementById(id);
 let site = null; // 한 번에 한 사이트만 선택. 처음엔 미선택(흑백).
@@ -91,53 +92,41 @@ function persistThread() {
   saveHistory();
 }
 
-function renderReaction(reaction, index) {
-  const c = communities.find(c => c.id === reaction.community);
-  const article = element('article', `reaction${c.board ? ' board' : ''}${c.round ? ' round' : ''}`);
-  article.dataset.site = c.id;
-  palette(article, c);
-  const avatar = element('div', 'reaction-avatar', c.symbol);
-  avatar.setAttribute('aria-hidden', 'true');
-  const body = element('div', 'reaction-body');
-  const meta = element('div', 'reaction-meta');
-  meta.append(element('span', 'reaction-name', `${c.numbered ? `${index + 1}. ` : ''}${reaction.nickname}`), element('span', 'reaction-community', c.name), element('span', 'reaction-time', `${index + 1}분 전 · 가상 반응`));
-  const like = element('button', `like-button${reaction.liked ? ' liked' : ''}`);
-  like.setAttribute('aria-pressed', String(!!reaction.liked));
-  const updateLike = () => {
-    const count = reaction.likes + (reaction.liked ? 1 : 0);
-    const label = c.like === '♥' ? `${reaction.liked ? '♥' : '♡'} ${count}` : `${c.like} ${count}${c.dislike ? ` · 반대 ${Math.round(reaction.likes / 6)}` : ''}`;
-    like.replaceChildren(document.createTextNode(label));
-    like.setAttribute('aria-label', `${reaction.nickname} 댓글 ${c.like === '♥' ? '좋아요' : c.like} ${count}개`);
-  };
-  updateLike();
-  like.addEventListener('click', () => {
-    reaction.liked = !reaction.liked;
-    like.classList.toggle('liked', reaction.liked);
-    like.setAttribute('aria-pressed', String(reaction.liked));
-    updateLike();
-    if (!busy) persistThread();
-  });
-  body.append(meta, element('p', 'reaction-text', reaction.text), like);
-  article.append(avatar, body);
-  return article;
-}
+const threadSite = () => communities.find(c => c.id === currentThread.communities[0]);
+const onLike = () => { if (!busy) persistThread(); };
+const comment = (reaction, best = false) => renderComment(reaction, currentThread.reactions.indexOf(reaction), threadSite(), best, onLike);
+const updateCounts = () => document.querySelectorAll('.sp-count').forEach(node => { node.textContent = currentThread.reactions.length; });
 
 function renderReactions() {
-  const items = currentThread ? [...currentThread.reactions] : [];
+  const items = [...currentThread.reactions];
   if (sort === 'popular') items.sort((a, b) => (b.likes + !!b.liked) - (a.likes + !!a.liked));
-  $('reactions').replaceChildren(...items.map(renderReaction));
-  $('comment-count').textContent = items.length;
-  $('response-count').textContent = items.length;
+  // 네이트판 베플: 반응이 다 모인 뒤 추천 상위 3개에 BEST 표시
+  const best = threadSite().id === 'pann' && !busy ? new Set([...items].sort((a, b) => b.likes - a.likes).slice(0, 3)) : new Set();
+  $('reactions').replaceChildren(...items.map(r => comment(r, best.has(r))));
+  updateCounts();
+}
+
+// 와글 화면을 숨기고 그 사이트의 페이지로 "들어간다". 브라우저 뒤로가기로도 나올 수 있다.
+function enterSite() {
+  document.body.classList.add('in-site');
+  scrollTo(0, 0);
+  if (location.hash !== '#site') history.pushState(null, '', '#site');
+}
+function leaveSite() {
+  document.body.classList.remove('in-site');
+  if (location.hash === '#site') history.replaceState(null, '', location.pathname + location.search);
 }
 
 function showThread() {
-  $('empty-state').hidden = true;
-  $('thread-section').hidden = false;
-  $('post-text').textContent = currentThread.text;
-  $('post-meta').textContent = `${currentThread.mode === 'diary' ? 'AI 일상 엿보기' : '내 의견 던지기'} · ${new Date(currentThread.createdAt).toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`;
-  $('post-communities').textContent = currentThread.communities.map(id => communities.find(c => c.id === id).name).join(' · ');
-  $('thread-mode-label').textContent = currentThread.demo ? '데모 · 예시 반응' : 'AI 생성 반응';
+  const c = threadSite();
+  palette($('thread-section'), c);
+  $('thread-section').dataset.layout = layoutOf(c);
+  $('site-page').replaceChildren(renderPage(currentThread, c, sort));
+  $('thread-mode-label').textContent = `패러디 · ${currentThread.demo ? '데모 예시 반응' : 'AI 생성 반응'}`;
+  $('typing').hidden = !busy;
+  document.querySelectorAll('.sort-button').forEach(button => { button.disabled = busy; });
   renderReactions();
+  if (!document.body.classList.contains('in-site')) enterSite();
 }
 
 function setBusy(value) {
@@ -171,7 +160,6 @@ async function submit(payload) {
   currentThread = { id: crypto.randomUUID(), text: payload.text, mode: payload.mode, communities: payload.communities, reactions: [], createdAt: Date.now(), demo: true };
   showThread();
   setBusy(true);
-  $('thread-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   try {
     const data = await generate(payload);
     currentThread.demo = data.demo;
@@ -179,20 +167,20 @@ async function submit(payload) {
     for (const reaction of data.reactions) {
       await new Promise(resolve => setTimeout(resolve, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 240 + Math.random() * 180));
       currentThread.reactions.push(reaction);
-      $('reactions').append(renderReaction(reaction, currentThread.reactions.length - 1));
-      $('comment-count').textContent = currentThread.reactions.length;
-      $('response-count').textContent = currentThread.reactions.length;
+      $('reactions').append(comment(reaction));
+      updateCounts();
     }
-    renderReactions();
     persistThread();
   } catch (error) {
     currentThread = previous;
-    if (currentThread) showThread();
-    else { $('thread-section').hidden = true; $('empty-state').hidden = false; }
+    leaveSite();
     $('error-message').textContent = error.name === 'TimeoutError' ? '응답 시간이 길어지고 있어요. 잠시 후 다시 시도해주세요.' : error.message;
     $('error-message').hidden = false;
     $('error-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  } finally { setBusy(false); }
+  } finally {
+    setBusy(false);
+    if (currentThread && threadSite().id === 'pann' && document.body.classList.contains('in-site')) renderReactions(); // 베플 표시 갱신
+  }
 }
 
 $('opinion-form').addEventListener('submit', event => {
@@ -211,26 +199,25 @@ document.querySelectorAll('.compose-tab').forEach(button => button.addEventListe
   document.querySelectorAll('.compose-tab').forEach(tab => { const active = tab === button; tab.classList.toggle('active', active); tab.setAttribute('aria-pressed', String(active)); });
   renderSuggestions();
 }));
-document.querySelectorAll('.sort-button').forEach(button => button.addEventListener('click', () => {
+$('thread-section').addEventListener('click', event => {
+  const button = event.target.closest('.sort-button');
+  if (!button) return;
   sort = button.dataset.sort;
   document.querySelectorAll('.sort-button').forEach(b => { b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', String(b === button)); });
   renderReactions();
-}));
+});
 $('regenerate').addEventListener('click', () => { if (currentThread) submit({ text: currentThread.text, communities: currentThread.communities, mode: currentThread.mode }); });
+$('back-home').addEventListener('click', leaveSite);
+addEventListener('popstate', () => { if (location.hash !== '#site') document.body.classList.remove('in-site'); });
 $('new-story').addEventListener('click', () => {
   if (busy) return;
   currentThread = null;
-  $('thread-section').hidden = true;
-  $('empty-state').hidden = false;
+  leaveSite();
   $('opinion').value = '';
   updateCount();
   $('opinion').focus();
 });
 $('playground').addEventListener('click', () => { $('opinion').scrollIntoView({ behavior: 'smooth', block: 'center' }); if (!busy) $('opinion').focus({ preventScroll: true }); });
-$('copy-story').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(currentThread.text); toast('이야기를 복사했어요.'); }
-  catch { toast('이 브라우저에서는 복사를 사용할 수 없어요.'); }
-});
 $('help-button').addEventListener('click', () => $('help-dialog').showModal());
 document.querySelectorAll('.close-dialog').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
 document.querySelectorAll('dialog').forEach(dialog => dialog.addEventListener('click', event => {
@@ -248,7 +235,6 @@ function renderHistory() {
       currentThread = thread;
       $('history-dialog').close();
       showThread();
-      $('thread-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     return button;
   }));
@@ -258,6 +244,7 @@ function renderHistory() {
 $('history-button').addEventListener('click', () => { renderHistory(); $('history-dialog').showModal(); });
 $('clear-history').addEventListener('click', () => { history = []; saveHistory(); renderHistory(); toast('이 브라우저의 기록을 모두 지웠어요.'); });
 
+if (location.hash === '#site') history.replaceState(null, '', location.pathname + location.search);
 renderCommunities();
 renderSuggestions();
 $('history-count').textContent = history.length;

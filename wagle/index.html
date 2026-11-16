@@ -40,19 +40,16 @@
       <div class="suggestions"><span>이런 이야기는 어때요?</span><div id="suggestion-buttons"></div></div>
 
       <div id="error-message" class="error-message" role="alert" hidden></div>
-      <section id="thread-section" class="thread-section" aria-label="커뮤니티 반응" hidden>
-        <div class="thread-top"><div><span class="live-dot"></span><h2>와글와글, 반응이 도착했어요</h2><span id="response-count">0</span></div><button class="text-button" id="new-story">새 이야기 <span>＋</span></button></div>
-        <article class="original-post"><div class="post-author"><div class="user-avatar">나</div><div><strong>익명의 이야기꾼 <span class="author-tag">작성자</span></strong><span id="post-meta">방금 전</span></div><button id="copy-story" class="icon-button" aria-label="이야기 복사">↗</button></div><p id="post-text"></p><div class="post-bottom"><span id="post-communities"></span><span id="thread-mode-label">AI 시뮬레이션</span></div></article>
-        <div class="response-toolbar"><span>댓글 <strong id="comment-count">0</strong></span><div><button class="sort-button active" data-sort="latest" aria-pressed="true">등록순</button><span>·</span><button class="sort-button" data-sort="popular" aria-pressed="false">공감순</button></div></div>
-        <div id="reactions" class="reactions" aria-live="polite" aria-relevant="additions"></div>
-        <div id="typing" class="typing" hidden><span></span><span></span><span></span> 누군가 열심히 댓글을 쓰고 있어요</div>
-        <button id="regenerate" class="regenerate">↻ 새로운 반응 보기</button>
-      </section>
 
       <section id="empty-state" class="empty-state"><div class="empty-illustration" aria-hidden="true"><span class="bubble bubble-one">···</span><span class="bubble bubble-two">!</span><span class="mini-star">✳</span><span class="mini-dot"></span></div><h2>여긴 어떤 반응이 나올까?</h2><p>이야기를 던져보세요. 조용하던 커뮤니티가 깨어납니다.</p><div class="empty-tags"><span>과몰입 환영</span><i>·</i><span>눈치 보기 금지</span><i>·</i><span>현실 여론 아님</span></div></section>
     </section>
     <footer><a href="./" class="footer-brand">와글<span>작은 생각, 시끌벅적한 세상.</span></a><p>모든 반응은 AI가 만든 가상의 이야기이며, 표기된 실제 서비스나 그 이용자의 의견과 무관합니다.</p><a class="oddz-link" href="https://oddz.click/">← oddz</a></footer>
   </main>
+
+  <section id="thread-section" class="site-view" aria-label="사이트 반응">
+    <div class="site-bar"><button id="back-home" type="button">← 와글로</button><button id="new-story" type="button">새 이야기 ＋</button><button id="regenerate" type="button">↻ 다른 반응</button><span class="site-note" id="thread-mode-label">패러디 · 가상 반응</span></div>
+    <div id="site-page"></div>
+  </section>
 
   <dialog id="help-dialog"><div class="dialog-header"><h2>와글, 이렇게 즐겨요.</h2><button class="icon-button close-dialog" aria-label="닫기">✕</button></div><div class="guide-step"><b>01</b><div><h3>사이트를 하나 골라요</h3><p>열한 곳 중 한 곳을 고르면 화면과 댓글이 그 사이트 분위기로 바뀌어요.</p></div></div><div class="guide-step"><b>02</b><div><h3>내 생각을 툭 던져요</h3><p>일상, 연애, 회사 이야기까지. ‘AI 일상’에서는 내 부탁을 들어준 AI들의 뒷이야기를 볼 수 있어요.</p></div></div><div class="guide-step"><b>03</b><div><h3>서로 다른 반응을 구경해요</h3><p>마음에 드는 댓글에 공감하거나, 새로운 반응을 받아보세요. 실제 사람들의 여론을 측정하는 서비스는 아니에요.</p></div></div><p class="dialog-note">데모 모드는 미리 준비된 문장을 조합합니다. AI 연결 모드에서는 입력한 이야기가 AI 서비스로 전송됩니다. 내 이야기는 이 브라우저에만 저장되며, 기록 창에서 삭제할 수 있어요.</p><button class="primary-button close-dialog full-width">좋아요, 시작할게요 ↗</button></dialog>
   <dialog id="history-dialog"><div class="dialog-header"><h2>내 이야기 <span id="history-total"></span></h2><button class="icon-button close-dialog" aria-label="닫기">✕</button></div><p class="history-description">이 브라우저에서 나눈 이야기들이에요. 최근 20개까지 보관해요.</p><div id="history-list"></div><button id="clear-history" class="clear-button">기록 모두 지우기</button></dialog>
