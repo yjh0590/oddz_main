@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="oddz 개발일지 — 오늘의 강의 — K-MOOC 버전">
+  <title>오늘의 강의 — K-MOOC 버전 · 개발일지 · oddz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav>
+  </header>
+  <main><article class="journal-article">
+      <header class="journal-intro">
+        <div class="journal-topline"><span class="eyebrow">Chrome Extension · K-MOOC v0.1.0</span></div>
+        <h1 class="journal-title--long"><span>오늘의 강의</span><span>— K-MOOC 버전</span></h1>
+        <p class="lead">인천대 버전을 바탕으로, 처음 보는 K-MOOC 강의실 구조를 확인하고 하루 만에 옮겨 온 기록.</p>
+        <p class="article-date">기록 시기 · 2026.11.17</p>
+      </header>
+      <section class="journal-section"><p>오늘의 강의는 인천대 LMS와 가톨릭대 LMS에서 쓰고 있었다. 이번에는 <strong>K-MOOC 강좌도 같은 방식으로 이어서 듣고 싶어졌다.</strong> K-MOOC도 영상이 끝날 때마다 다음 영상을 직접 열어야 하는 건 똑같았다.</p></section>
+      <section class="journal-section"><h2>처음 보는 사이트, 어디서부터 볼까?</h2><p>먼저 로그인 없이 볼 수 있는 공개 페이지부터 확인했다. 강좌 소개 페이지에 있는 ‘학습하기’ 링크는 <code>lms.kmooc.kr/course/view.php?id=…</code>로 이어졌고, 로그인 페이지는 <code>MoodleSession</code> 쿠키를 쓰고 있었다.</p>
+<p>인천대 LMS와 같은 <strong>Moodle 기반 강의실</strong>이었다. 그렇다면 인천대 버전을 처음부터 다시 만들 필요 없이, 다른 부분만 고치면 될 것 같았다.</p>
+<p>다만 강의실 안쪽은 로그인해야 보인다. 그래서 개발자 도구 콘솔에 붙여넣으면 링크 주소의 형식과 영상 정보만 모아 복사해 주는 짧은 코드를 만들어, 강의실 화면과 영상 화면에서 각각 실행해 봤다.</p></section>
+      <section class="journal-section"><h2>같은 듯 달랐던 두 가지</h2><p>영상 화면은 반가울 만큼 같았다. 주소가 인천대와 똑같이 <code>/mod/vod/viewer.php?id=…</code>였고, 페이지에 영상이 바로 들어 있어서 <strong>종료 감지와 재생 코드를 그대로 쓸 수 있었다.</strong></p>
+<p>하지만 두 가지가 달랐다.</p>
+<ul><li><strong>영상 링크가 없었다.</strong> 파일·퀴즈·토론은 일반 링크였는데, 동영상만 링크 없이 클릭하면 새 창을 여는 방식이었다. 인천대 버전은 링크에서 영상을 찾기 때문에 영상이 하나도 읽히지 않았다.</li><li><strong>강좌 이름 형식이 달랐다.</strong> 인천대는 ‘과목명 (과목코드)’ 형식인데, K-MOOC는 ‘미생물학 입문2026-09-01 09:00:00 ~ …’처럼 강좌명 뒤에 운영 기간이 붙어 있었다.</li></ul>
+<p>그래서 영상은 강의실의 동영상 항목에서 직접 읽도록 바꿨다. 새 창을 여는 코드 안의 영상 번호와 제목, 수강 기간, 영상 길이, 완료 아이콘을 모아 인천대 버전과 같은 형태로 정리했다. 강좌는 운영 기간 날짜가 붙은 링크만 강좌로 인식하게 해서, ‘학습하기’나 ‘강의실 홈’ 같은 메뉴 링크는 건너뛰게 했다.</p>
+<p>바꾼 부분은 실제 강의실에서 복사한 값으로 먼저 확인했다. 강좌명, 영상 번호, 제목과 길이, 완료 여부가 제대로 나오고, 두 영상의 총 재생 시간도 맞게 더해졌다.</p></section>
+      <section class="journal-section"><h2>한눈에 구분되는 아이콘</h2><p>처음에는 인천대 버전의 아이콘을 그대로 썼다. 그런데 두 확장프로그램을 같이 설치하니 크롬 도구 모음에서 어느 쪽인지 구분하기 어려웠다.</p>
+<p>그래서 K-MOOC 버전은 <strong>주황색 바탕에 흰색 K와 작은 재생 버튼</strong>을 넣은 아이콘으로 바꿨다. 파란색 인천대 아이콘과 색부터 달라서 바로 구분된다. 16픽셀 크기에서도 K가 보이도록 큰 크기로 그린 뒤 줄였다.</p></section>
+      <section class="journal-section"><h2>꼭 ‘내 강의실’에서 시작하기</h2><p>실제 K-MOOC에서 테스트했고, 강좌를 고르고 영상을 담아 재생하는 흐름이 작동하는 것을 확인했다.</p>
+<p>사용하면서 꼭 알려야 할 점이 하나 있었다. K-MOOC는 강좌를 찾는 첫 화면(<code>www.kmooc.kr</code>)과 실제 강의실(<code>lms.kmooc.kr</code>)의 주소가 다르다. 이 확장프로그램은 강의실 쪽에서만 작동하기 때문에, <strong>로그인한 뒤 ‘내 강의실’에 들어가야 오늘의 강의 창이 나타난다.</strong> 첫 화면에서는 아무것도 보이지 않아서 설치가 안 된 것처럼 느껴질 수 있다. 그래서 사용법의 첫 단계와 안내 상자에 이 내용을 넣었다.</p>
+<p>K-MOOC는 영상을 팝업 창으로 열지만, 이 확장프로그램은 지금 탭에서 바로 연다. 진도와 이수 인정 여부는 K-MOOC의 학습활동현황에서 직접 확인하는 것을 권한다.</p></section>
+      <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지 보기</a> <a class="button" data-journal-detail href="../projects/kmooc.html">K-MOOC 버전 다운로드 · 사용법 ↗</a></div>
+    </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
