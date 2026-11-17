@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="여러 강좌에서 고른 강의 영상을 원하는 순서로 이어서 재생하는 K-MOOC용 Chrome 확장프로그램.">
+  <title>오늘의 강의 — K-MOOC 재생 도우미 · oddz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="../assets/transcript-guide-tabs.css">
+  <script src="../assets/transcript-guide-tabs.js" defer></script>
+  <link rel="stylesheet" href="../assets/todays-lecture.css">
+  <script src="../journal/journal.js" defer></script>
+  <script src="../assets/lecture-versions.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a>
+    <nav><a data-home-link="work" href="../index.html#work">← 프로젝트 목록</a> <a data-journal-detail href="../journal/todays-lecture.html">개발일지 ↗</a></nav>
+  </header>
+  <main>
+    <span class="eyebrow">PJ 05 · Chrome Extension · K-MOOC v0.1.0</span>
+    <div class="page-tabs" role="tablist" aria-label="프로젝트 안내" hidden>
+      <button id="download-tab" type="button" role="tab" aria-selected="true" aria-controls="download-panel">다운로드</button>
+      <button id="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="guide-panel" tabindex="-1">사용법</button>
+    </div>
+    <div class="project-heading"><img src="../assets/kmooc-icon.png" width="64" height="64" alt=""><h1>오늘의 강의</h1><nav class="school-versions" aria-label="학교별 버전"><a data-lecture-version href="todays-lecture.html">인천대ver</a><a data-lecture-version href="catholic-lms.html">가톨릭대ver</a><a data-lecture-version href="kmooc.html" aria-current="page">K-MOOCver</a></nav></div>
+    <p class="subtitle">K-MOOC 재생 도우미</p>
+    <p class="lead">오늘 들을 K-MOOC 영상을 한곳에 모으고, 여러 강좌의 강의를 원하는 순서로 이어서 재생하세요.</p>
+    <div id="download-panel" role="tabpanel" aria-labelledby="download-tab" tabindex="0">
+      <section class="info" aria-labelledby="download-title">
+        <h2 id="download-title">크롬 확장프로그램 다운로드</h2>
+        <a class="button" href="../downloads/oddz-kmooc-v0.1.0.zip" download>확장프로그램 다운로드 · v0.1.0 <span aria-hidden="true">↓</span></a>
+        <p class="small">PC 크롬용 · 직접 설치 필요 · K-MOOC 전용 · ZIP 약 23KB</p>
+        <p class="small hash">SHA-256: <code>ca1f13a8431cd37a8b98fa662001cdb0f4562088e3475a3de7b94a4d81568ce6</code><br>PowerShell에서 <code>Get-FileHash 파일이름.zip</code>으로 받은 파일이 원본인지 확인할 수 있습니다.</p>
+        <p>압축을 푼 뒤 크롬의 개발자 모드에서 설치합니다. 처음 사용한다면 위의 <strong>사용법</strong> 탭을 확인하세요.</p>
+        <p class="notice">설치 후에는 반드시 K-MOOC에 로그인하고 <strong>내 강의실</strong>(<code>lms.kmooc.kr</code>)에 들어가야 오늘의 강의 창이 나타납니다. K-MOOC 첫 화면(<code>www.kmooc.kr</code>)에서는 나타나지 않습니다.</p>
+      </section>
+      <section class="info" aria-labelledby="features-title">
+        <h2 id="features-title">오늘 들을 강의만 골라서</h2>
+        <ul><li>여러 강좌에서 선택한 영상을 하나의 목록에 모읍니다.</li><li>목록의 순서를 바꾸고, 전체 시작으로 차례대로 재생합니다.</li><li>오늘 목록의 총 재생 시간을 위젯 제목 옆에 보여줍니다.</li><li>접기·펼치기로 강의 화면과 목록을 편하게 오갑니다.</li><li>중지한 뒤 이어서 시작할 수 있습니다.</li></ul>
+        <p class="small">인천대 버전과 같은 화면이고, 주황색 K 아이콘으로 구분됩니다.</p>
+      </section>
+    </div>
+    <div id="guide-panel" role="tabpanel" aria-labelledby="guide-tab" tabindex="0">
+      <section class="info" aria-labelledby="install-title">
+        <h2 id="install-title">처음 설치하기</h2>
+        <ol class="guide-steps">
+          <li><strong>ZIP 다운로드·압축 해제</strong><p>다운로드 탭에서 파일을 받고, 계속 사용할 위치에 압축을 푸세요.</p></li>
+          <li><strong>크롬 확장프로그램 관리 열기</strong><p>크롬 주소창에 <code>chrome://extensions</code>를 입력하세요.</p></li>
+          <li><strong>개발자 모드 켜기</strong><p>오른쪽 위의 개발자 모드 스위치를 켜세요.</p></li>
+          <li><strong>압축해제된 확장 프로그램 로드</strong><p><strong>압축해제된 확장 프로그램을 로드합니다</strong>를 누르세요.</p></li>
+          <li><strong>extension 폴더 선택</strong><p>압축을 푼 폴더 안에서 <code>manifest.json</code>이 들어 있는 <code>extension</code> 폴더를 선택하세요.</p></li>
+          <li><strong>K-MOOC 로그인 후 내 강의실 들어가기</strong><p>K-MOOC에 로그인한 뒤 위쪽 메뉴의 <strong>내 강의실</strong>을 누르세요. 주소가 <code>lms.kmooc.kr</code>로 바뀌고 오늘의 강의 창이 나타납니다. 이미 열려 있었다면 새로고침하세요.</p></li>
+        </ol>
+        <p class="notice"><strong>꼭 내 강의실에서 시작하세요.</strong> 오늘의 강의 창은 내 강의실(<code>lms.kmooc.kr</code>)과 강좌 강의실에서만 나타납니다. K-MOOC 첫 화면이나 강좌 소개 페이지(<code>www.kmooc.kr</code>)에서는 보이지 않습니다.</p>
+        <p class="small">설치한 extension 폴더는 삭제하거나 옮기지 마세요. 크롬 도구 모음의 퍼즐 메뉴에서 아이콘을 고정할 수 있습니다.</p>
+      </section>
+      <section class="info" aria-labelledby="use-title">
+        <h2 id="use-title">오늘의 목록 만들고 재생하기</h2>
+        <p class="flow-summary">내 강의실 들어가기 → 강좌 열기 → 영상 선택·추가 → 순서 확인 → 전체 시작</p>
+        <ol class="guide-steps">
+          <li><strong>내 강의실 들어가기</strong><p>K-MOOC에 로그인하고 <strong>내 강의실</strong>로 들어가세요. 오늘의 강의 창에 수강 중인 강좌 목록이 나타납니다.</p></li>
+          <li><strong>강좌 열기</strong><p>오늘의 강의 창에서 강좌 이름을 누르면 그 강좌의 강의실로 이동합니다.</p></li>
+          <li><strong>듣고 싶은 영상 추가</strong><p>영상을 체크하고 <strong>선택 영상 추가</strong>를 누르세요. 영상이 보이지 않으면 강의실 화면이 다 열린 뒤 <strong>현재 페이지 다시 읽기</strong>를 누르세요.</p></li>
+          <li><strong>다른 강좌도 추가·순서 확인</strong><p>내 강의실로 돌아가 다른 강좌에서도 반복하세요. 오늘 재생할 목록의 ↑ ↓ 버튼으로 순서를 바꾸고, 불필요한 영상은 삭제하세요.</p></li>
+          <li><strong>전체 시작</strong><p><strong>전체 시작</strong>을 누르세요. 영상은 팝업 창이 아니라 지금 탭에서 열리고, 끝나면 다음 선택 영상으로 이동합니다. 강좌가 바뀔 때는 내 강의실을 거쳐 이동합니다. 자동 재생이 차단되면 영상의 재생 버튼을 직접 누르세요.</p></li>
+        </ol>
+        <p class="small">제목·수강 기간·완료 여부를 원래 강의실 화면과 대조하세요. 완료한 영상도 자동 제외하지 않습니다.</p>
+      </section>
+      <section class="info" aria-labelledby="controls-title">
+        <h2 id="controls-title">재생 중에는 이렇게 사용하세요</h2>
+        <div class="choice-grid">
+          <div class="guide-card"><h3>접기 / 펼치기</h3><p>창이 영상을 가리면 접기를 누르세요. 오른쪽 작은 패널에서 선택·완료 개수와 총 재생 시간을 확인할 수 있습니다.</p></div>
+          <div class="guide-card"><h3>중지 / 이어서 시작</h3><p>중지는 자동 이동을 멈춥니다. 영상 자체는 계속 재생될 수 있습니다. 이어서 시작하면 중지했던 영상을 다시 엽니다.</p></div>
+          <div class="guide-card"><h3>실행 초기화</h3><p>선택 목록을 유지하면서 실행 순서를 처음으로 되돌립니다. 재생 중이거나 중지 후 목록을 편집하려면 먼저 초기화하세요.</p></div>
+          <div class="guide-card"><h3>목록 비우기</h3><p>대기 상태에서 담아 둔 영상 목록을 모두 삭제합니다.</p></div>
+        </div>
+        <p>실행 중에는 재생 탭을 열어 두고, 같은 탭에서 다른 강의를 직접 열지 마세요. 브라우저를 종료하거나 실행 탭을 닫으면 자동 실행이 중지됩니다.</p>
+        <p class="small">재생 완료 표시는 영상 종료를 뜻합니다. 진도와 이수 인정 여부는 K-MOOC의 학습활동현황에서 직접 확인하세요.</p>
+      </section>
+      <section class="info" aria-labelledby="update-title">
+        <h2 id="update-title">새 버전으로 업데이트하기</h2>
+        <ol class="guide-steps"><li><strong>재생 중지·새 ZIP 압축 해제</strong><p>현재 실행을 멈추고 최신 ZIP을 받으세요.</p></li><li><strong>기존 extension 폴더에 덮어쓰기</strong><p>새 ZIP의 extension 폴더 안 파일을 기존에 설치한 extension 폴더 안에 덮어쓰세요.</p></li><li><strong>확장프로그램·내 강의실 새로고침</strong><p><code>chrome://extensions</code>에서 새로고침 아이콘을 누른 뒤 내 강의실 탭도 새로고침하세요.</p></li></ol>
+      </section>
+      <section class="info" aria-labelledby="help-title">
+        <h2 id="help-title">잘 안 될 때</h2>
+        <details><summary>오늘의 강의 창이 나타나지 않아요</summary><p>대부분 K-MOOC 첫 화면(<code>www.kmooc.kr</code>)에 있는 경우입니다. 로그인 후 <strong>내 강의실</strong>을 눌러 <code>lms.kmooc.kr</code>로 들어간 뒤 새로고침하세요. 설치할 때는 ZIP 자체가 아니라 manifest.json이 들어 있는 extension 폴더를 선택해야 합니다.</p></details>
+        <details><summary>강좌 목록이 비어 있어요</summary><p>내 강의실 화면에서 수강 중인 강좌 카드가 보이는지 확인하세요. 강좌 강의실을 직접 연 뒤 영상을 선택해도 됩니다.</p></details>
+        <details><summary>영상 목록이 비어 있어요</summary><p>강좌 강의실 화면이 다 열린 뒤 현재 페이지 다시 읽기를 누르세요. 이 도구는 강의실에 표시된 동영상 항목을 읽습니다.</p></details>
+        <details><summary>영상이 재생되지 않거나 중지됐어요</summary><p>수강 기간·접근 권한과 로딩 상태를 확인하세요. 자동 재생이 막혔다면 직접 재생 버튼을 누르세요. 영상이 45초 동안 나타나지 않으면 자동 실행이 중지됩니다.</p></details>
+      </section>
+      <section class="info" aria-labelledby="data-title"><h2 id="data-title">저장되는 정보</h2><p>선택한 강좌·영상 이름, 영상 번호, 순서와 진행 상태를 크롬 확장프로그램의 로컬 저장소에 저장합니다. 목록 비우기 또는 확장프로그램 제거로 지울 수 있습니다.</p><p class="small">설치 방식 참고: <a href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked" target="_blank" rel="noopener noreferrer">Chrome 공식 안내 ↗</a></p></section>
+    </div>
+  </main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
