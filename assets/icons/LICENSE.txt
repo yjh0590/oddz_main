@@ -1,6 +1,7 @@
 assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
 
 직접 만든 앱 아이콘
+  pj-25.png  AGORA (직접 작성한 pj-25.svg를 PNG로 렌더링)
   pj-23.png  어쩔 수 없었어 (직접 작성한 pj-23.svg를 PNG로 렌더링)
   pj-05.png  오늘의 강의 (assets/todays-lecture-icon.png)
   pj-07.png  내리는 문 (앱 icon-192.png)

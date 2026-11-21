@@ -50,3 +50,7 @@
 - 공개 데모: `/wagle/` (실제 AI 요청 없는 정적 체험판)
 - 원본: https://github.com/yjh0590/Ai-public-opinion-Community-
 - 업데이트: 원본 저장소에서 `npm.cmd run build:static` 실행 후 `dist/`의 공개 파일만 `wagle/`에 복사합니다. API 키와 서버 파일은 공개 저장소에 넣지 않습니다.
+
+## AGORA
+
+`agora/`는 https://github.com/yjh0590/agora 의 `app/`을 복사한 공개 실행본입니다. 원본 저장소에서 수정하고 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다. 이 페이지만 자체 CSP에서 `connect-src https://api.anthropic.com`을 허용하고, 검색엔진에는 노출하지 않습니다(`noindex`). 소개는 `projects/agora.html`, 개발일지는 `journal/agora.html`, 공통 카드는 PJ 25입니다.

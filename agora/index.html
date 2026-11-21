@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://api.anthropic.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#24496d">
+  <meta name="description" content="질문을 광장에 던지면 동서양 철학자들이 한 줄씩 답합니다.">
+  <title>AGORA · 철학자들의 광장</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" type="module"></script>
+</head>
+<body>
+  <svg class="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1f4166"/>
+        <stop offset=".55" stop-color="#6f93ad"/>
+        <stop offset=".82" stop-color="#e9cf9e"/>
+        <stop offset="1" stop-color="#f4dfb6"/>
+      </linearGradient>
+      <radialGradient id="sun" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#fff3d6"/>
+        <stop offset=".45" stop-color="#f8d896" stop-opacity=".8"/>
+        <stop offset="1" stop-color="#f8d896" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#d9bf93"/>
+        <stop offset="1" stop-color="#b59268"/>
+      </linearGradient>
+      <linearGradient id="marble" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#cdbb9c"/>
+        <stop offset=".35" stop-color="#f3ead8"/>
+        <stop offset="1" stop-color="#bfa987"/>
+      </linearGradient>
+      <pattern id="column" x="240" y="586" width="96" height="320" patternUnits="userSpaceOnUse">
+        <rect x="22" y="22" width="52" height="290" fill="url(#marble)"/>
+        <rect x="14" y="8" width="68" height="16" fill="#e8dcc4"/>
+        <rect x="16" y="304" width="64" height="12" fill="#d8c8a8"/>
+        <path d="M33 26v278M43 26v278M53 26v278M63 26v278" stroke="#b9a582" stroke-width="2" opacity=".55"/>
+      </pattern>
+      <pattern id="tiles" width="120" height="40" patternUnits="userSpaceOnUse">
+        <path d="M0 0H120M0 20H120M0 0V20M60 20V40" stroke="#a8875d" stroke-width="1.5" fill="none" opacity=".45"/>
+      </pattern>
+    </defs>
+
+    <rect width="1600" height="900" fill="url(#sky)"/>
+    <circle class="sun" cx="1180" cy="430" r="260" fill="url(#sun)"/>
+    <circle cx="1180" cy="430" r="54" fill="#fff4dc" opacity=".9"/>
+
+    <g class="clouds" fill="#f6ead2" opacity=".55">
+      <ellipse cx="300" cy="170" rx="140" ry="18"/>
+      <ellipse cx="380" cy="150" rx="80" ry="14"/>
+      <ellipse cx="1300" cy="120" rx="160" ry="16"/>
+      <ellipse cx="900" cy="230" rx="110" ry="10"/>
+    </g>
+
+    <!-- 멀리 보이는 언덕 위 신전 -->
+    <g class="acropolis">
+      <path d="M0 560 C180 520 300 500 470 470 C560 455 700 452 820 470 C980 495 1120 540 1600 520 V640 H0Z" fill="#b99c80" opacity=".7"/>
+      <path d="M380 470 C430 430 520 405 640 405 C760 405 830 430 880 468Z" fill="#a8896d"/>
+      <g fill="#ead9bb" opacity=".95">
+        <path d="M500 402 L630 372 L760 402Z"/>
+        <rect x="506" y="402" width="248" height="8"/>
+        <rect x="514" y="410" width="10" height="44"/><rect x="538" y="410" width="10" height="44"/>
+        <rect x="562" y="410" width="10" height="44"/><rect x="586" y="410" width="10" height="44"/>
+        <rect x="610" y="410" width="10" height="44"/><rect x="634" y="410" width="10" height="44"/>
+        <rect x="658" y="410" width="10" height="44"/><rect x="682" y="410" width="10" height="44"/>
+        <rect x="706" y="410" width="10" height="44"/><rect x="730" y="410" width="10" height="44"/>
+        <rect x="500" y="454" width="260" height="8"/>
+      </g>
+    </g>
+
+    <!-- 사이프러스 -->
+    <g fill="#3f5a3a">
+      <path d="M140 640 C120 560 128 470 150 420 C172 470 180 560 160 640Z"/>
+      <path d="M200 650 C186 590 190 520 206 485 C222 520 226 590 214 650Z" opacity=".85"/>
+      <path d="M1460 640 C1440 570 1446 490 1466 450 C1486 490 1492 570 1474 640Z"/>
+    </g>
+
+    <!-- 주랑(스토아) -->
+    <g class="stoa">
+      <path d="M220 560 L800 520 L1380 560Z" fill="#e6d7ba"/>
+      <rect x="230" y="560" width="1140" height="26" fill="#ddcba9"/>
+      <path d="M230 572 H1370" stroke="#bba47e" stroke-width="2"/>
+      <rect x="240" y="586" width="1120" height="320" fill="url(#column)"/>
+    </g>
+
+    <!-- 광장 바닥 -->
+    <path d="M0 780 H1600 V900 H0Z" fill="url(#ground)"/>
+    <path d="M0 780 H1600 V900 H0Z" fill="url(#tiles)"/>
+    <path d="M0 780 H1600" stroke="#8f714c" stroke-width="3" opacity=".5"/>
+
+    <!-- 올리브 나무 -->
+    <g class="olive">
+      <path d="M1490 900 C1480 840 1500 790 1470 740 C1460 720 1480 700 1500 720 C1520 760 1530 820 1530 900Z" fill="#6b5236"/>
+      <g fill="#7f8f5a">
+        <ellipse cx="1440" cy="700" rx="90" ry="44"/>
+        <ellipse cx="1540" cy="680" rx="100" ry="50"/>
+        <ellipse cx="1490" cy="640" rx="80" ry="40"/>
+      </g>
+      <g fill="#97a56d" opacity=".8">
+        <ellipse cx="1470" cy="660" rx="50" ry="20"/>
+        <ellipse cx="1560" cy="700" rx="46" ry="18"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="page">
+    <header class="masthead">
+      <p class="greek" lang="el">ΑΓΟΡΑ</p>
+      <h1>철학자들의 광장</h1>
+      <p class="tagline">아무 질문이나 던져 보세요. 스물 몇 세기의 철학자들이 한 줄씩 답합니다.</p>
+    </header>
+
+    <main>
+      <section id="unlock" class="tablet" hidden aria-labelledby="unlock-title">
+        <h2 id="unlock-title">광장 문 열기</h2>
+        <form id="unlock-form">
+          <label for="secret" id="secret-label">비밀번호</label>
+          <input id="secret" type="password" autocomplete="current-password" required>
+          <label class="remember"><input id="remember" type="checkbox" checked> 이 기기 기억하기</label>
+          <button type="submit">문 열기</button>
+          <p id="unlock-error" class="error" role="alert"></p>
+        </form>
+        <p class="fineprint" id="unlock-help"></p>
+      </section>
+
+      <section id="ask" class="tablet" hidden aria-labelledby="ask-title">
+        <h2 id="ask-title" class="visually-hidden">질문하기</h2>
+        <form id="ask-form">
+          <label for="question" class="visually-hidden">질문이나 의견</label>
+          <textarea id="question" rows="3" maxlength="400" required placeholder="하늘에서 떨어지는 물건을 피하게 하려면 어떤 말을 해야 할까"></textarea>
+          <div class="ask-row">
+            <div class="examples" aria-label="예시 질문">
+              <button type="button" class="chip">솔방울을 가장 멀리 보내는 방법</button>
+              <button type="button" class="chip">쾌락과 고통의 절댓값을 계산할 수 있을까</button>
+              <button type="button" class="chip">안녕은 hi도 bye도 되는데, 스쳐 지나가며 인사할 땐 뭐라고 해야 하나</button>
+            </div>
+            <button id="ask-button" type="submit">광장에 던지기</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="result" aria-live="polite" hidden>
+        <p class="asked" id="asked"></p>
+        <p class="status" id="status"></p>
+        <ol class="stelae" id="answers"></ol>
+        <div class="result-actions" id="result-actions" hidden>
+          <button type="button" id="again">다른 철학자들에게 다시 묻기</button>
+        </div>
+      </section>
+
+      <details id="history" class="history" hidden>
+        <summary>지난 질문</summary>
+        <ul id="history-list"></ul>
+        <button type="button" id="clear-history" class="link">기록 지우기</button>
+      </details>
+    </main>
+
+    <footer class="foot">
+      <button type="button" id="lock" class="link" hidden>이 기기에서 잠그기</button>
+      <span>답은 AI가 각 철학자의 사상을 바탕으로 지어낸 것으로, 실제 그들이 한 말이 아닙니다.</span>
+    </footer>
+  </div>
+
+  <template id="stele-template">
+    <li class="stele">
+      <p class="who"><span class="name"></span><span class="meta"></span></p>
+      <p class="line"></p>
+      <p class="concept"></p>
+    </li>
+  </template>
+</body>
+</html>
