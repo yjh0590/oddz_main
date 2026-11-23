@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="군대에서 떠올린 생각에서 시작해, 철학자들이 한 줄씩 답하는 개인용 광장을 만든 기록.">
+  <title>AGORA 만들기 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">Web · 첫 공개</span><h1>AGORA 만들기</h1><p class="lead">솔방울을 멀리 보내는 법을 소크라테스와 장자에게 물어보는 광장.</p><p class="article-date"><time datetime="2026-11-21">2026.11.21</time></p></header>
+    <section class="journal-section"><h2>군대에서 한 생각</h2><p>군대에 있을 때, 내 생각을 철학자들은 어떻게 볼지 물어볼 수 있는 광장이 있으면 좋겠다고 생각했다. AI를 쓰면 그 생각을 여러 철학자의 사상으로 다시 비춰 볼 수 있다.</p><p>평소에 하는 궁금증은 대체로 엉뚱하다. 하늘에서 떨어지는 물건을 피하게 하려면 뭐라고 외쳐야 할까. 쾌락과 고통의 절댓값을 계산할 수 있을까. 안녕은 hi도 bye도 되는데, 스쳐 지나가며 인사할 땐 뭐라고 해야 할까. 이런 질문을 던지면 고대 그리스부터 현대까지, 동양과 서양의 철학자들이 한 줄씩 답해 주는 곳을 만들기로 했다.</p></section>
+    <section class="journal-section"><h2>진지한데 피식 웃기게</h2><p>답의 톤은 진지해야 했다. 말투만 흉내 내는 것이 아니라 그 사람의 실제 사상에서 나온 답이어야 한다. 소크라테스는 되묻고, 디오게네스는 무례할 만큼 단순하고, 칸트는 모두가 그렇게 해도 되는지 따진다. 진지하게 끝까지 밀어붙인 결과가 웃기게 만드는 쪽을 택했다.</p><p>그래서 답마다 근거가 된 개념을 작은 꼬리표로 붙였다(칸트 · 정언명령, 장자 · 소요유). 실제로 한 적 없는 말을 명언처럼 꾸미지 않도록 했다. 철학자 명단은 40명으로 시작했다. 질문마다 동양 철학자를 2명 이상 넣고 한 시대에 몰리지 않게 6명을 고른다.</p></section>
+    <section class="journal-section"><h2>서버 없이 키를 지키는 법</h2><p>oddz.click은 정적 사이트라 API 키를 숨길 서버가 없다. 그래서 키를 비밀번호로 암호화(PBKDF2 60만 회 + AES-GCM)해 페이지에 넣고, 비밀번호를 입력하면 브라우저 안에서 풀리도록 했다. 공개된 암호문은 긴 비밀번호와 콘솔의 월 사용 한도로 보완한다.</p></section>
+    <section class="journal-section"><h2>광장 그리기와 다음 단계</h2><p>배경은 SVG로 직접 그렸다. 해 질 녘 하늘, 언덕 위 신전, 주랑 기둥, 사이프러스와 올리브 나무가 있다. 질문은 대리석 판에 적고, 답은 비석 모양 카드로 하나씩 올라온다. 동작 줄이기 설정을 따르고 휴대폰에서도 한 줄로 쌓인다.</p><p>테스트 6개를 통과했고, PC와 휴대폰 화면을 확인했다. 다음에는 실제 답변을 읽으며 말투를 다듬고 철학자 명단을 늘리려 한다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a> <a class="button" href="/agora/">광장 열기 ↗</a> <a data-theme-link href="../projects/agora.html">프로젝트 소개</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
