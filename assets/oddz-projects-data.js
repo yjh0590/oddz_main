@@ -490,5 +490,26 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "데모 체험하기",
     "date": "2026.11.16",
     "dateBasis": "첫 구현·테스트 및 oddz 공개 데모 연결"
+  },
+  {
+    "id": "pj-25",
+    "no": "PJ 25",
+    "icon": "/assets/icons/pj-25.png",
+    "stage": "doing",
+    "type": "Web · AI",
+    "name": "AGORA · 철학자들의 광장",
+    "desc": "질문이나 생각을 던지면 동서양 철학자 6명이 각자의 사상으로 한 줄씩 답하는 개인용 광장.",
+    "feat": "철학자 40명 중 질문별 6명 선정, 사상 꼬리표, 가짜 명언 금지, 최근 질문 기록",
+    "current": "첫 버전 공개 · 브라우저에서 Claude API 직접 호출, 비밀번호로 잠근 키",
+    "next": "답변 톤 다듬기와 철학자 명단 보강",
+    "tags": [
+      "AI",
+      "철학",
+      "웹"
+    ],
+    "url": "/projects/agora.html",
+    "link": "광장 열기",
+    "date": "2026.11.23",
+    "dateBasis": "첫 구현·테스트 및 oddz 연결"
   }
 ]);
