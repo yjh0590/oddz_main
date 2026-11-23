@@ -12,17 +12,18 @@
 | `index.html` | 기본 테마(반딧불 채집 노트) 홈 |
 | `themes/` | 다른 디자인의 홈(톱니바퀴 공장, 폭포 던전, 노을 모험가 길드, 비눗방울 극장, 오즈, 종이 공작, 올림포스 신전, 물방울 수면, 먹물 화선지, 김 서린 창, 사막 모래언덕, 자석 실험대, 바람 부는 깃발) |
 | `projects/` | 프로젝트별 소개·다운로드·사용법 |
-| `journal/` | 개발일지 |
+| `journal/` | 개발일지. 목록과 각 일지 상단에 해당 카드 번호(`PJ 08 · …`)를 붙입니다. 모든 개발일지가 카드와 짝을 이룹니다. PJ 번호는 최초 기록 순서이고, 새 프로젝트는 맨 뒤 번호를 받습니다. 번호를 바꾸면 `assets/icons/pj-번호.png`, `assets/oz-spectacles.js`의 키, 상세·개발일지의 `PJ 번호`, 정적 대체 목록이 있는 테마 HTML을 함께 고치세요. |
 | `assets/oddz-projects-data.js` | 모든 테마가 함께 쓰는 프로젝트 목록 데이터 |
 | `assets/icons/` | 프로젝트 카드·상세 페이지 아이콘(`pj-번호.png`, 128px, Lucide 선 아이콘·직접 만든 앱 아이콘). 출처와 라이선스는 `assets/icons/LICENSE.txt` |
 | `assets/` | 공용 CSS·JS·이미지 |
 | `downloads/` | 배포 ZIP |
+| `butterfly/`, `wagle/`, `agora/` | 프로젝트 공개 실행본(아래 참고) |
 | `404.html`, `robots.txt`, `sitemap.xml`, `favicon.ico` | 없는 주소 안내, 검색엔진 설정, 아이콘이 없는 페이지의 기본 아이콘 |
 
 ## 수정할 때 확인할 것
 
-- **프로젝트 추가·변경**: `assets/oddz-projects-data.js`만 고치면 8개 테마에 함께 반영됩니다. 아이콘은 `assets/icons/pj-번호.png`로 넣고 데이터의 `icon`에 경로를 적으세요. 새 페이지를 만들면 `sitemap.xml`에도 추가하세요.
-- **홈 공통 레이아웃(`assets/oddz-home.css`, `assets/oddz-home-board.js`, `assets/home-motion.js`)**: 오즈·종이 공작을 뺀 여섯 홈이 함께 씁니다. 히어로 옆 "작업 현황판"(단계별 개수·최근 완성 3개·진행 중)은 프로젝트 데이터로 그려지고, `home-motion.js`는 커서 위치(`--mx`/`--my`), 스크롤 위치(`--scroll`), 카드 등장 효과를 넘깁니다. 테마별 글꼴·배경·카드·움직임은 각 홈 파일의 `<style id="home-skin">`에 있습니다. 오즈·종이 공작은 이 파일들을 쓰지 않습니다.
+- **프로젝트 추가·변경**: `assets/oddz-projects-data.js`만 고치면 모든 테마(홈 14개)에 함께 반영됩니다. 소개 페이지가 없는 카드는 `url`에 개발일지(`/journal/…`)를 연결합니다. 아이콘은 `assets/icons/pj-번호.png`로 넣고 데이터의 `icon`에 경로를 적으세요. 새 페이지를 만들면 `sitemap.xml`에도 추가하세요.
+- **홈 공통 레이아웃(`assets/oddz-home.css`, `assets/oddz-home-board.js`, `assets/home-motion.js`)**: 오즈·종이 공작을 뺀 열두 홈이 함께 씁니다. 히어로 옆 "작업 현황판"(단계별 개수·최근 완성 3개·진행 중)은 프로젝트 데이터로 그려지고, `home-motion.js`는 커서 위치(`--mx`/`--my`), 스크롤 위치(`--scroll`), 카드 등장 효과를 넘깁니다. 테마별 글꼴·배경·카드·움직임은 각 홈 파일의 `<style id="home-skin">`에 있습니다. 오즈·종이 공작은 이 파일들을 쓰지 않습니다.
 - **테마 이름과 파일**: 메뉴 이름은 반딧불 채집 노트(`index.html`, 코드 이름 sparkle), 톱니바퀴 공장(`machine`), 폭포 던전(`game-water`), 노을 모험가 길드(`game-sunset`), 비눗방울 극장(`bubbles`), 올림포스 신전(`olympus`), 물방울 수면(`ripple`), 먹물 화선지(`ink`), 김 서린 창(`fog`), 사막 모래언덕(`sand`), 자석 실험대(`magnet`), 바람 부는 깃발(`cloth`)입니다. 이름을 바꿀 때는 모든 홈의 테마 메뉴와 `oz.html` 메뉴, 각 테마의 `<title>`을 함께 고치세요.
 - **테마별 모습**: 반딧불 채집 노트(초승달·갈대·표본 꼬리표), 톱니바퀴 공장(톱니·컨베이어·LED 강판), 폭포 던전(픽셀 아이템 창·CLEAR 표시·픽셀 물결), 노을 모험가 길드(양피지 의뢰서·밀랍 봉인·스크롤하면 지는 해), 비눗방울 극장(벨벳 막·조명·무지갯빛 막 카드), 올림포스 신전(재스퍼웨어 신전 현황판·메안더 띠·로마 숫자 번호), 물방울 수면(물 표면 시뮬레이션 `assets/ripple-water.js`: 바닥 빛 무늬가 물결에 굴절되고, 수면을 누르면 물방울이 튀며 가까운 카드·버튼이 물결이 닿는 순서대로 떨림. 리퀴드 글라스 버튼과 판).
 - **배경 시뮬레이션 테마**: 테마마다 배경을 직접 계산하는 스크립트가 하나씩 있습니다. `ripple-water.js`(물결 굴절), `ink-sim.js`(먹이 번지는 유체 흐름: 누르면 먹이 떨어지고 끌면 붓 자국), `fog-glass.js`(김 서린 유리: 문지르면 닦이고 다시 서림, 흘러내리는 물방울), `sand-sim.js`(모래알 낙하: 누르고 있으면 쏟아지고 바람이 사구를 깎음), `magnet-field.js`(철가루가 커서·카드 자석의 자기장을 따라 섬, 누르면 극 반전), `cloth-sim.js`(위에 걸린 천이 펄럭이고 잡아당길 수 있음, 현황판이 줄에 매달려 흔들림). 모두 외부 라이브러리 없는 canvas 코드이고, 움직임 줄이기 설정이면 정지 화면만 그립니다. 다섯 새 테마 페이지는 같은 뼈대로 만들었으니 고칠 때 다른 테마와 비교해 보세요.
@@ -42,11 +43,29 @@
 
 ## 어쩔 수 없었어
 
-`butterfly/`는 https://github.com/yjh0590/Butterfly-Effect 의 `dist/`를 복사한 공개 실행본입니다. 원본 저장소에서 수정하고 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다. 소개는 `projects/butterfly-effect.html`, 개발일지는 `journal/butterfly-effect.html`, 공통 카드는 PJ 23입니다.
+`butterfly/`는 https://github.com/yjh0590/Butterfly-Effect 의 `dist/`를 복사한 공개 실행본입니다. 원본 저장소에서 수정하고 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다. 소개는 `projects/butterfly-effect.html`, 개발일지는 `journal/butterfly-effect.html`, 공통 카드는 PJ 27입니다.
 
-## 와글 · AI 커뮤니티 (PJ 24)
+## 와글 · AI 커뮤니티 (PJ 28)
 
 - 소개: `/projects/wagle.html`
 - 공개 데모: `/wagle/` (실제 AI 요청 없는 정적 체험판)
 - 원본: https://github.com/yjh0590/Ai-public-opinion-Community-
 - 업데이트: 원본 저장소에서 `npm.cmd run build:static` 실행 후 `dist/`의 공개 파일만 `wagle/`에 복사합니다. API 키와 서버 파일은 공개 저장소에 넣지 않습니다.
+
+## AGORA · 철학자들의 광장 (PJ 29)
+
+- 소개: `/projects/agora.html`
+- 실행본: `/agora/`
+- 원본 저장소에서 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다.
+
+## 다른 저장소에서 복사해 온 웹 프로젝트
+
+각 저장소의 **커밋된 파일만** 복사합니다. 원본에서 고친 뒤 커밋하고 다시 복사하세요.
+
+| 폴더 | 카드 | 원본 저장소 | 복사하는 파일 |
+| --- | --- | --- | --- |
+| `random-game/` | PJ 09 랜덤게임 모음집 | random-game | `index.html`, `css/`, `js/`, `sounds/` (Electron 파일·`games/` 메모 제외) |
+| `companion/` | PJ 19 반려 페이지 키우기 | companion_page | `public/` 안의 파일 |
+| `baramsup/` | PJ 30 바람숲 | rant-myself | `index.html`, `app.js`, `evidence.js`, `*.css` |
+
+PJ 11 내리는 문은 복사하지 않고 GitHub Pages(`yjh0590.github.io/Where-should-I-go-Subway-version/`)로 연결합니다. 실시간 도착정보 Worker가 `ALLOWED_ORIGINS`에 있는 출처만 받는데, 지금은 `https://oddz.click`이 없습니다. 옮기려면 Worker의 `wrangler.jsonc`에 추가해 다시 배포한 뒤 폴더로 복사하세요.

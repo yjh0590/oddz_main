@@ -1,0 +1,208 @@
+:root{--ink:#40423b;--accent:#dae5bb;--line:#e5e6df}*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:Arial,'Malgun Gothic',sans-serif;background:#fff;transition:background 2s}button,input{font:inherit;color:inherit}button{cursor:pointer}button:disabled{cursor:default}button:focus-visible{outline:2px solid #7f9561;outline-offset:5px}.page{position:relative;isolation:isolate;min-height:100svh;overflow:hidden;background:#fff!important}#pageTexture{position:absolute;inset:0;z-index:-2;opacity:0;transition:opacity 2s,background 2s;pointer-events:none}#world{position:absolute;inset:0;z-index:-1;pointer-events:none}.emerge{opacity:0;visibility:hidden;transition:opacity 1.5s}.emerge.visible{opacity:1;visibility:visible}.settings{position:absolute;top:28px;right:30px;border:0;background:none;font-size:11px;color:#b6b9ae;z-index:10}.settings:hover{color:#40423b}.presence{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);width:min(470px,85vw);height:300px;display:flex;justify-content:center;align-items:center}#speech{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(400px,80vw);font-size:12px;line-height:1.9;text-align:center;color:#969b8c;transition:color 1s;pointer-events:none}.pet{margin-top:50px;width:100%;border:0;padding:0;background:none;touch-action:manipulation}.pet svg{width:100%;overflow:visible}#body{display:none}#eyes,#mouth,#firstLine{stroke:#42483b;fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;transition:opacity 1s}#firstDot{fill:#42483b}#firstDot,#firstLine,#eyes,#mouth,#decor,#cheeks{opacity:0;transition:opacity 1.5s}#particles{position:absolute;inset:0;pointer-events:none}.particle{position:absolute;left:50%;top:50%;font-size:20px;animation:float 1.3s forwards}.pet.eating{animation:munch .28s 4}.pet.happy{animation:hop .45s 2}.feed{position:absolute;bottom:clamp(40px,12vh,130px);left:50%;transform:translateX(-50%);width:min(490px,calc(100% - 50px));z-index:3}form{display:flex;border-bottom:1px solid #e3e5dc;transition:border-color 1s}input{background:none;flex:1;min-width:0;border:0;padding:14px 4px;outline:none;font-size:14px}input::placeholder{color:#b9beb0}form:focus-within{border-color:#8b9c70}form button{background:none;border:0;font-size:23px;padding:8px 14px;color:#8e9b7b}form button:disabled{opacity:.3}#feedNote{font-size:10px;color:#a6ac9b;text-align:center;line-height:1.8;margin:13px 0}.suggestions{display:flex;justify-content:center;gap:14px;margin-top:10px}.suggestions button{background:none;border:0;font-size:10px;color:#a3aa97;padding:5px}.suggestions button:hover{color:#52613d}#identity{position:absolute;left:40px;top:32px}.tiny{font-size:10px;color:#a0a78f;letter-spacing:1px}h1{font-weight:500;font-size:17px;margin:10px 0;letter-spacing:-.5px}#stage{font-size:10px;color:#949f84}.care{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;gap:20px;justify-content:center;width:100%;padding:0 20px;z-index:4}.care button{border:0;background:none;font-size:11px;color:#7d8a69;padding:8px 0;white-space:nowrap}#collectionCount{font-size:9px;margin-left:3px}.panel{position:absolute;right:30px;top:80px;width:260px;border:1px solid var(--line);background:#fffffff0;backdrop-filter:blur(12px);border-radius:12px;padding:22px;z-index:11}.panel-heading{display:flex;justify-content:space-between;font-size:11px;align-items:center}h2{font-size:12px;font-weight:500;margin:0}.panel h3{font-size:13px}.panel p{font-size:10px;color:#909b80;line-height:1.8}.stats{display:grid;gap:15px;margin:25px 0}.stats label{font-size:10px}.stats span{float:right;color:#8f9b7e}progress{display:block;width:100%;height:4px;margin-top:7px;border:0}progress::-webkit-progress-bar{background:#eef1e7;border-radius:5px}progress::-webkit-progress-value{background:#b0bd8c}progress::-moz-progress-bar{background:#b0bd8c}.growth-track{height:3px;background:#eef1e7;margin-top:16px}.growth-track i{height:100%;display:block;background:#91aa60;transition:width .5s}#flavors{display:flex;gap:5px;flex-wrap:wrap}#flavors span{font-size:9px;background:#eff3e5;padding:5px}.memories{position:absolute;left:40px;bottom:150px;width:190px;pointer-events:none}.memories h2{font-size:10px;color:#94a082;margin-bottom:18px}#history{list-style:none;padding:0;margin:0}#history li{font-size:11px;line-height:1.9;margin-top:16px;color:#788768;overflow-wrap:anywhere}#history small{display:block;font-size:9px;color:#adb6a1;margin-bottom:3px}footer{position:absolute;bottom:12px;right:25px;font-size:9px;color:#acb59d;pointer-events:none}dialog{border:1px solid var(--line);border-radius:15px;background:#fffffa;padding:25px;width:min(500px,90vw);color:var(--ink)}dialog::backdrop{background:#34422233;backdrop-filter:blur(4px)}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.dialog-head h2{font-size:16px}.dialog-head button{background:none;border:0}.dialog-actions{display:grid;gap:10px}.dialog-actions button,.collection button{border:1px solid var(--line);background:white;border-radius:7px;padding:12px;font-size:12px}.dialog-actions input{border:1px solid var(--line);padding:12px}.dialog-actions p,#drawerContent>p{font-size:12px;line-height:1.9;color:#8b967a}.collection{display:grid;grid-template-columns:1fr 1fr;gap:10px}.collection .active{background:#e6edd8}.collection button:disabled{opacity:.5}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.world-star{position:absolute;color:#a199bf;font-size:var(--size,14px);opacity:.55;animation:twinkle 5s ease-in-out infinite}.world-leaf{position:absolute;width:30px;height:13px;background:#bacf92;border-radius:100% 0 100% 0;opacity:.5;transform:rotate(var(--angle));}.world-wave{position:absolute;left:0;bottom:0;width:100%;height:90px;opacity:.22}.edge-line{position:absolute;inset:16px;border:1px solid #b6c6a222;border-radius:4px;pointer-events:none;transition:opacity 1.5s}.sleeping #world{filter:brightness(.9)}@keyframes munch{50%{transform:scale(1.06,.94)}}@keyframes hop{50%{transform:translateY(-20px)}}@keyframes float{to{transform:translate(var(--x),-100px);opacity:0}}@keyframes twinkle{50%{opacity:.2;transform:scale(.8)}}@media(max-width:1050px){.memories{width:145px;left:25px;bottom:195px}#history li{font-size:10px}}@media(max-width:760px){#identity{left:24px;top:24px}.presence{top:42%;width:min(350px,90vw)}.feed{bottom:110px}.care{gap:13px;flex-wrap:wrap;bottom:30px}.care button{font-size:10px}.memories{top:105px;bottom:auto;left:24px;width:calc(100% - 48px)}.memories h2{display:none}#history li{display:none}#history li:first-child{display:block;text-align:left;font-size:10px;max-width:220px}#history small{display:none}.settings{right:22px;top:25px}.panel{right:20px;top:60px}.world-wave{height:55px}footer{bottom:8px;left:20px;text-align:center}.suggestions{gap:10px}h1{font-size:14px}#speech{font-size:11px}.presence #speech{top:20px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* Feelings change the page's expression and pace, without creating a body. */
+.feeling{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:2px;color:#a4ad97;pointer-events:none;white-space:nowrap}#eyes{color:#42483b}body[data-emotion="cool"] #eyes,body[data-emotion="cool"] #mouth{color:#586471;stroke:#586471}body[data-emotion="sad"] #eyes,body[data-emotion="sad"] #mouth{color:#7185a1;stroke:#7185a1}body[data-emotion="angry"] #eyes,body[data-emotion="angry"] #mouth{color:#9a6959;stroke:#9a6959}body[data-emotion="shy"] #eyes,body[data-emotion="shy"] #mouth{color:#a67b8a;stroke:#a67b8a}.pet:not(.eating):not(.happy){transform-origin:center}body[data-emotion="lively"] .pet:not(.eating):not(.happy){animation:lively 2.4s ease-in-out infinite}body[data-emotion="cool"] .pet:not(.eating):not(.happy){animation:cool 7s ease-in-out infinite}body[data-emotion="sad"] .pet:not(.eating):not(.happy){animation:sad 6s ease-in-out infinite}body[data-emotion="angry"] .pet:not(.eating):not(.happy){animation:angry 2.5s ease-in-out infinite}body[data-emotion="calm"] .pet:not(.eating):not(.happy){animation:calm 7s ease-in-out infinite}body[data-emotion="curious"] .pet:not(.eating):not(.happy){animation:curious 4s ease-in-out infinite}body[data-emotion="shy"] .pet:not(.eating):not(.happy){animation:shy 3.6s ease-in-out infinite}body[data-emotion="playful"] .pet:not(.eating):not(.happy){animation:playful 2.8s ease-in-out infinite}.sleeping .pet:not(.eating):not(.happy){animation:calm 7s ease-in-out infinite!important}body[data-growth="0"] .pet{animation:none!important}.suggestions{flex-wrap:wrap;gap:7px 12px}.suggestions button{font-size:9px}.panel{max-height:calc(100svh - 100px);overflow:auto}@keyframes lively{0%,70%,100%{transform:translateY(0)}35%{transform:translateY(-12px) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}@keyframes cool{50%{transform:translateX(6px) rotate(-1deg)}}@keyframes sad{50%{transform:translateY(5px)}}@keyframes angry{0%,80%,100%{transform:translateX(0)}83%,89%{transform:translateX(-3px)}86%,92%{transform:translateX(3px)}}@keyframes calm{50%{transform:scale(1.02,.99)}}@keyframes curious{35%{transform:rotate(-4deg)}70%{transform:rotate(3deg)}}@keyframes shy{50%{transform:translateY(4px) scale(.98)}}@keyframes playful{25%{transform:rotate(-4deg) translateY(-4px)}60%{transform:rotate(4deg)}}@media(prefers-reduced-motion:reduce){.pet,.sleeping .pet{animation:none!important}}
+/* Personality influences intensity; a feeling can be mixed without adding a body. */
+body[data-personality="cool"][data-emotion="lively"] .pet:not(.eating):not(.happy){animation:cool 7s ease-in-out infinite}body[data-personality="calm"][data-emotion="lively"] .pet:not(.eating):not(.happy){animation:calm 7s ease-in-out infinite}body[data-personality="shy"][data-emotion="lively"] .pet:not(.eating):not(.happy){animation:shy 4s ease-in-out infinite}body[data-personality="lively"][data-emotion="lively"] .pet:not(.eating):not(.happy){animation:livelyBold 1.7s ease-in-out infinite}body[data-mix="livelyCalm"] .pet:not(.eating):not(.happy){animation:tiredJoy 6s ease-in-out infinite}body[data-mix="shyTense"] .pet:not(.eating):not(.happy){animation:hesitate 4s ease-in-out infinite}body[data-mix="affectionSad"] .pet:not(.eating):not(.happy){animation:sad 6s ease-in-out infinite}body[data-mix="angrySad"] .pet:not(.eating):not(.happy){animation:angry 4s ease-in-out infinite}.tear{animation:tearDrop 3s ease-in infinite}#situationScene{position:absolute;top:19%;left:50%;width:130px;height:60px;transform:translateX(-50%);pointer-events:none;color:#9daa85;opacity:.6}.event-flag{position:absolute;left:51px;top:5px;font-size:29px;animation:flagIn .8s ease-out}.event-spark{position:absolute;font-size:20px}.spark-0{left:18px;top:0}.spark-1{left:89px;top:4px}.spark-2{left:99px;top:34px}.event-piece{position:absolute;top:25px;width:18px;height:18px;border:1px solid #a3b190;border-radius:3px}.piece-a{left:35px;transform:rotate(-12deg)}.piece-b{left:77px;transform:rotate(15deg)}body[data-situation="setback"] .piece-a{animation:reassembleA 5s ease-in-out infinite}body[data-situation="setback"] .piece-b{animation:reassembleB 5s ease-in-out infinite}body[data-situation="conflict"] .piece-a{left:13px;transform:rotate(-30deg)}body[data-situation="conflict"] .piece-b{left:100px;transform:rotate(30deg)}.event-connection{position:absolute;left:53px;top:33px;width:25px;border-top:1px solid #a3b190;transform-origin:left;animation:connect 1s ease-out}.event-rest{position:absolute;left:51px;top:-8px;font-size:16px}body[data-situation="rest"] .event-piece{animation:calm 7s ease-in-out infinite}.event-door{position:absolute;left:47px;top:8px;width:31px;height:42px;border:1px solid #a3b190;border-bottom:0;transform:perspective(100px) rotateY(-30deg);transform-origin:left;animation:doorOpen 2s ease-out}.event-light{position:absolute;left:82px;top:8px;color:#b9be8b;font-size:28px}.feeling{max-width:90vw;text-align:center;letter-spacing:1px;line-height:1.8}@keyframes livelyBold{0%,75%,100%{transform:translateY(0)}35%{transform:translateY(-22px) rotate(-3deg)}55%{transform:translateY(-6px) rotate(3deg)}}@keyframes tiredJoy{50%{transform:translateY(-4px) scale(.99)}}@keyframes hesitate{25%{transform:scale(1.035) translateY(-3px)}60%{transform:scale(.97) translateY(5px)}}@keyframes tearDrop{0%,35%{transform:translateY(0);opacity:.9}90%,100%{transform:translateY(26px);opacity:0}}@keyframes reassembleA{50%{transform:translateX(8px) rotate(0)}}@keyframes reassembleB{50%{transform:translateX(-8px) rotate(0)}}@keyframes connect{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes flagIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes doorOpen{from{transform:perspective(100px) rotateY(0)}to{transform:perspective(100px) rotateY(-30deg)}}@media(max-width:760px){#situationScene{top:19%;transform:translateX(-50%) scale(.8)}}@media(prefers-reduced-motion:reduce){.pet,.tear,.event-piece,.event-door,.event-connection,.event-flag{animation:none!important}}
+.sample-switch{display:block;margin:8px auto 0;border:0;background:none;font-size:9px;color:#a3aa97;padding:4px 10px}.sample-switch:hover{color:#62744b}.suggestions button[hidden]{display:none}
+#placedOrnaments{position:absolute;inset:0;pointer-events:none;z-index:2}.placed-ornament{position:absolute;transform:translate(-50%,-50%);background:none;border:1px solid transparent;border-radius:50%;font-size:30px;width:54px;height:54px;pointer-events:auto;touch-action:none;transition:border-color .2s}.editing .placed-ornament{border:1px dashed #b3bea0;cursor:grab;background:#ffffff88}.editing .placed-ornament.dragging{cursor:grabbing;background:#f0f4e8}.ornament-pop{animation:ornamentPop .6s ease-out}#discoveryToast{position:fixed;top:24px;left:50%;transform:translate(-50%,-8px);max-width:80vw;text-align:center;padding:10px 16px;border-radius:20px;background:#f0f3e8e8;border:1px solid #dfe6d2;color:#79886a;font-size:10px;pointer-events:none;opacity:0;transition:opacity .4s,transform .4s;z-index:30}#discoveryToast.show{opacity:1;transform:translate(-50%,0)}.discovery-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.discovery-row{border:1px dashed #e0e5d7;border-radius:8px;padding:13px;color:#b0b8a3}.discovery-row.found{border-style:solid;background:#f1f5e8;color:#758762}.discovery-row strong{font-weight:500;font-size:11px}.discovery-row p{font-size:10px;line-height:1.7;margin-bottom:0}#activityLayer{position:absolute;inset:0;z-index:12;background:#fffffff0;backdrop-filter:blur(2px)}#activityBar{position:absolute;left:50%;bottom:19%;transform:translateX(-50%);z-index:14;width:min(520px,90vw);text-align:center;background:#ffffffdd;border:1px solid #e6eadd;border-radius:12px;padding:14px 18px;font-size:12px;line-height:1.8;color:#849272}#activityBar button{display:block;margin:7px auto 0;border:0;background:none;font-size:10px;color:#a1ab94}.task-piece{position:absolute;transform:translate(-50%,-50%);border:0;background:none;font-size:40px;color:#9ea980;padding:12px;touch-action:none}.task-piece:disabled{opacity:.35}.collect-star{color:#a69abd;animation:twinkle 3s ease-in-out infinite}.collected,.gathered{visibility:hidden}.gather-target{border:1px dashed #b1bd9c;border-radius:50%;width:100px;height:100px;font-size:40px;background:#f1f4e788}.gather-piece{color:#96aa80;font-size:35px}.breath-orb{border:1px solid #c5cfb7;border-radius:50%;width:140px;height:140px;background:#f0f4e9;font-size:16px}.breathing{animation:breathQuest 2s ease-in-out}.little-door{height:100px;width:62px;border:1px solid #c3cdb3;border-bottom:0;color:#a6b692;font-size:16px;background:linear-gradient(120deg,#fff,#edf1e5)}.connection-node{font-size:65px;color:#9eb5a3}.connection-node.selected{color:#cfb497}.care{gap:14px;flex-wrap:wrap;max-width:950px;bottom:24px}#activityLayer[hidden],#activityBar[hidden]{display:none}.settings{z-index:15}#drawerContent{max-height:70svh;overflow:auto}@keyframes ornamentPop{50%{transform:translate(-50%,-50%) rotate(12deg) scale(1.2)}}@keyframes breathQuest{50%{transform:translate(-50%,-50%) scale(1.16);background:#e5edda}}@media(max-width:760px){.care{gap:4px 14px;bottom:26px}.feed{bottom:150px}.presence{top:39%}.feeling{bottom:9px}#activityBar{bottom:22%;font-size:11px}.task-piece{font-size:32px}.little-door{font-size:14px}.breath-orb{font-size:14px}.gather-target{width:82px;height:82px}.placed-ornament{font-size:25px;width:46px;height:46px}#discoveryToast{top:65px}.panel{max-height:calc(100svh - 140px)}}@media(prefers-reduced-motion:reduce){.ornament-pop,.breathing,.collect-star{animation:none!important}}
+.gather-piece.chosen{color:#5f7b44;filter:drop-shadow(0 0 6px #c9df9a)}
+/* The original trace becomes an outline, a colored surface, then an extruded volume. */
+#body{transition:fill 1.5s,fill-opacity 1.5s,opacity 1.2s;stroke-linecap:round;stroke-linejoin:round}#firstLine{stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .8s;fill:none}.dimension-tag{position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:1.5px;color:#abb39d;opacity:0;white-space:nowrap;transition:opacity 1s}.dimension-tag.visible{opacity:1}.pet{touch-action:none}body[data-dimension="point"] .pet,body[data-dimension="line"] .pet,body[data-dimension="outline"] .pet{max-width:420px}body[data-dimension="volume"] .pet{cursor:grab}body[data-dimension="volume"] .pet:active{cursor:grabbing}body[data-dimension="point"] #speech,body[data-dimension="line"] #speech,body[data-dimension="outline"] #speech{font-size:11px}#dimensionFrame{transition:opacity .25s}body[data-dimension="point"] #feeling,body[data-dimension="line"] #feeling,body[data-dimension="outline"] #feeling{font-size:9px}body[data-dimension="volume"] .pet:not(.eating):not(.happy){animation:volumeFloat 6s ease-in-out infinite}body[data-dimension="blank"] #feeling{opacity:0}body[data-dimension="plane"] #cheeks{opacity:0}body[data-dimension="plane"] #decor{opacity:0}@keyframes volumeFloat{50%{transform:translateY(-5px)}}@media(prefers-reduced-motion:reduce){body[data-dimension="volume"] .pet{animation:none!important}}
+.dimension-tag{border:0;background:none;padding:5px;cursor:pointer}.dimension-tag:not(.visible){visibility:hidden}.dimension-tag:hover{color:#6f8059}.correct-feeling{position:absolute;bottom:-13px;left:50%;transform:translateX(-50%);border:0;background:none;font-size:9px;color:#aeb69f;white-space:nowrap}.correct-feeling:hover{color:#778a5f}.correct-feeling[hidden]{display:none}.growth-album{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.growth-card{background:#f8f9f4;border:1px dashed #e2e6da;border-radius:10px;padding:12px;color:#b1b9a4}.growth-card.recorded{border-style:solid;background:#f0f4e8;color:#7c8b6a}.growth-mini{height:110px;display:flex;align-items:center;justify-content:center;font-size:30px}.growth-mini svg{width:100%;height:100%}.growth-card strong{font-size:11px;font-weight:500}.growth-card p{font-size:9px;line-height:1.8;margin:8px 0 0}#drawerContent>button{background:#edf2e3;border:1px solid #dce4ce;border-radius:8px;padding:13px;width:100%;font-size:11px;color:#748562}#versionLabel{margin-left:10px}body[data-dimension="plane"] #pet{animation-duration:6s}body[data-dimension="line"] .presence{width:min(470px,90vw)}@media(max-width:760px){.correct-feeling{bottom:-9px}.growth-mini{height:88px}.growth-card{padding:10px}.dimension-tag{top:-14px}#speech{top:16px}}
+.life-hud{position:absolute;left:40px;top:128px;width:205px;z-index:3;border-left:1px solid #dce5cd;padding-left:17px;color:#879778}.life-overview{display:flex;align-items:baseline;gap:12px}.life-overview strong{font-size:27px;font-weight:500;color:#62794d}.life-overview span{font-size:10px}.life-job{font-size:12px;margin:9px 0}.life-hud>span{font-size:10px;color:#a2ad95}.life-skills{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0}.life-skills label{font-size:9px}.life-skills span{float:right;color:#a0ad90}.life-skills progress{height:3px}.life-hud button{display:block;border:0;background:#f0f4e7aa;border-radius:8px;text-align:left;padding:10px;width:100%;color:#7b8e66;font-size:10px;line-height:1.8}.life-hud button small{display:block;color:#a0ad91;font-size:8px}.life-hud button span{display:block}.life-event{border:1px solid #dde6cf;background:#f4f7ee;border-radius:12px;padding:18px;margin:16px 0}.life-event h3{font-size:15px;margin:0 0 10px}.life-event p{font-size:12px;color:#899678;line-height:1.8}.life-choice{width:100%;margin-top:9px;padding:12px;border:1px solid #dee7d2;border-radius:8px;background:#fff;text-align:left;white-space:pre-line;line-height:1.9;font-size:11px;color:#758962}.life-choice:hover{background:#edf5df}.hobby-list{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}.hobby-list button{border:1px solid #dfe6d4;border-radius:20px;background:none;padding:8px 12px;font-size:10px}.hobby-list .active{background:#e9f0db}.career-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.career-card{border:1px solid #e1e7d7;border-radius:10px;padding:14px;background:#f6f8f0}.career-card strong{font-size:12px;font-weight:500}.career-card p{font-size:10px;color:#8e9b7c;line-height:1.8}.career-card button{width:100%;border:0;background:#e9f0da;padding:9px;border-radius:6px;font-size:10px}.career-card button:disabled{background:#eff1e9;color:#aab39d}.life-log{list-style:none;padding:0;font-size:11px;line-height:1.9;color:#8b997a}.life-log li{border-bottom:1px solid #e6ebdd;padding:10px 0}body[data-emotion="anxious"] .pet:not(.eating):not(.happy){animation:hesitate 4s ease-in-out infinite}body[data-emotion="hopeful"] .pet:not(.eating):not(.happy){animation:lively 3s ease-in-out infinite}body[data-emotion="proud"] .pet:not(.eating):not(.happy){animation:cool 5s ease-in-out infinite}body[data-emotion="grateful"] .pet:not(.eating):not(.happy){animation:calm 5s ease-in-out infinite}body[data-emotion="bored"] .pet:not(.eating):not(.happy){animation:sad 8s ease-in-out infinite}body[data-emotion="regret"] .pet:not(.eating):not(.happy),body[data-emotion="lonely"] .pet:not(.eating):not(.happy){animation:sad 6s ease-in-out infinite}body[data-emotion="awkward"] .pet:not(.eating):not(.happy){animation:shy 4s ease-in-out infinite}.care{gap:8px 13px}@media(max-width:1000px){.life-hud{left:24px;width:170px}}@media(max-width:760px){.life-hud{top:102px;left:24px;width:calc(100% - 48px);border:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:5px 12px}.life-overview strong{font-size:20px}.life-job{margin:0;font-size:10px;align-self:center;text-align:right}.life-hud>span{font-size:9px}.life-skills{display:none}.life-hud button{grid-column:2;grid-row:2;text-align:right;font-size:9px;background:none;padding:0}.life-hud button small{display:none}.life-hud button span{display:inline}body[data-life="active"] .memories{display:none}body[data-life="active"] .presence{top:44%;height:250px;width:min(290px,80vw)}.career-grid{gap:8px}.career-card{padding:12px}.care{bottom:23px}.feed{bottom:158px}}@media(prefers-reduced-motion:reduce){body[data-emotion] .pet{animation:none!important}}
+.life-quick-stats{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}.life-quick-stats span{font-size:10px;background:#edf2e3;border-radius:6px;padding:7px 10px;color:#839373}
+.life-choice.special{border-color:#e2cf9f;background:#fffaf0;color:#8a7448}
+.life-choice:disabled{opacity:.5;cursor:not-allowed;background:#f6f6f2}
+.life-achievements{list-style:none;padding:0;font-size:11px;line-height:1.9;color:#b3baa8}
+.life-achievements .done{color:#758962}
+
+/* v0.13 · Paper and ink. The page is a sheet of paper; the pet is drawn and written on it. */
+:root{--paper:#f6f0e3;--card:#fbf7ec;--ink:#2f2a24;--ink-soft:#5f564b;--pencil:#998e7d;--rule:#d8ccb2;--stamp:#a94a37;--marker:#f2dc8a;--hand:'Nanum Pen Script','Gowun Batang',cursive;--serif:'Gowun Batang',Batang,'바탕',serif}
+body{font-family:var(--serif);color:var(--ink);background:var(--paper)}
+.page{background:radial-gradient(ellipse at 50% 45%,transparent 55%,#d6c6a344 100%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .18 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),var(--paper)!important}
+#pageTexture{mix-blend-mode:multiply}
+.edge-line{inset:14px;border:1px solid #2f2a241c;border-radius:2px;box-shadow:inset 0 0 0 6px transparent,inset 0 0 0 7px #2f2a240d}
+button:focus-visible{outline:2px dashed var(--ink);outline-offset:4px}
+/* The creature: wobbly ink lines, watercolor blush, its outline written with your words. */
+#body{stroke:var(--ink)!important;stroke-width:2.6!important;filter:url(#ink)}
+#eyes,#mouth,#firstLine{stroke:var(--ink);filter:url(#ink)}
+#firstDot{fill:var(--ink)}
+#cheeks{filter:url(#wash)}
+#lifeAccessory,#decor{filter:url(#ink)}
+#wordSkin{font-family:var(--hand);font-size:17px;fill:var(--ink);fill-opacity:.7;letter-spacing:.4px;transition:opacity 1.2s;pointer-events:none}
+#volumeMesh path{stroke:#2f2a2466}
+#speech{font-family:var(--hand);font-size:23px;line-height:1.25;color:var(--ink-soft)}
+.dimension-tag,.feeling,.correct-feeling{font-family:var(--serif);color:var(--pencil);letter-spacing:1px}
+.feeling{font-size:11px}
+.correct-feeling{font-size:11px;text-decoration:underline dotted}
+/* Writing line */
+form{border-bottom:1.5px solid var(--ink)}
+input{font-family:var(--hand);font-size:25px;padding:8px 4px 4px;color:var(--ink)}
+input::placeholder{color:#b3a891}
+form button{color:var(--ink);font-family:var(--hand);font-size:26px}
+#feedNote{font-size:12px;color:var(--pencil);font-style:italic}
+.suggestions button,.sample-switch{font-family:var(--hand);font-size:19px;color:var(--ink-soft)}
+.suggestions button:hover,.sample-switch:hover,.care button:hover{color:var(--ink);background:linear-gradient(transparent 58%,var(--marker) 58%,var(--marker) 88%,transparent 88%)}
+/* Identity, corners, footer */
+.tiny{font-size:11px;color:var(--pencil);letter-spacing:2px}
+h1{font-family:var(--hand);font-weight:400;font-size:32px;margin:4px 0}
+#stage{font-size:11px;color:var(--pencil)}
+.settings{font-family:var(--hand);font-size:20px;color:var(--ink-soft)}
+.settings:hover{color:var(--ink)}
+.memories h2{font-family:var(--serif);font-size:11px;color:var(--pencil);letter-spacing:2px}
+#history li{font-family:var(--hand);font-size:19px;line-height:1.3;color:var(--ink-soft)}
+#history small{font-family:var(--serif);font-size:10px;color:var(--pencil)}
+footer{font-size:10px;color:var(--pencil)}
+.care button{font-family:var(--hand);font-size:20px;color:var(--ink-soft)}
+#collectionCount{font-size:15px}
+/* Life: an index card taped to the page */
+.life-hud{background:var(--card);border:0;padding:20px 18px 16px;transform:rotate(-1.2deg);box-shadow:0 1px 1px #0000000d,0 10px 24px -14px #5a4a2a88;color:var(--ink-soft)}
+.life-hud::before{content:'';position:absolute;left:50%;top:-10px;width:86px;height:22px;transform:translateX(-50%) rotate(2deg);background:#efe3b0aa;box-shadow:0 1px 2px #0000000f}
+.life-overview strong{font-family:var(--hand);font-size:46px;font-weight:400;color:var(--ink);line-height:1}
+.life-overview span{font-size:11px;color:var(--pencil)}
+.life-job{font-family:var(--hand);font-size:22px;color:var(--ink)}
+.life-hud>span{font-size:12px;color:var(--pencil)}
+.life-skills label{font-size:11px;color:var(--ink-soft)}
+.life-skills span{color:var(--ink)}
+progress::-webkit-progress-bar{background:repeating-linear-gradient(90deg,#2f2a2426 0 2px,transparent 2px 5px);border-radius:0}
+progress::-webkit-progress-value{background:var(--ink);border-radius:0}
+progress::-moz-progress-bar{background:var(--ink)}
+.life-hud button{background:none;border:1px dashed #2f2a2455;border-radius:2px;font-family:var(--hand);font-size:20px;line-height:1.2;color:var(--ink)}
+.life-hud button small{font-family:var(--serif);font-size:10px;color:var(--pencil)}
+.life-hud button:hover{background:#f2dc8a55}
+/* Dialog: a notebook page with a red margin and ruled lines */
+dialog{background-color:#fbf6ea;background-image:linear-gradient(90deg,transparent 40px,#c9564455 40px,#c9564455 41.5px,transparent 41.5px),repeating-linear-gradient(transparent 0 33px,#b9c6cf55 33px 34px);border:0;border-radius:3px;padding:26px 30px 26px 58px;box-shadow:0 0 0 1px #2f2a2414,0 24px 60px -24px #3b2e1a99;color:var(--ink)}
+dialog::backdrop{background:#2a21144d;backdrop-filter:blur(3px)}
+.dialog-head h2{font-family:var(--hand);font-weight:400;font-size:34px}
+.dialog-head button{font-size:18px;color:var(--ink-soft)}
+#drawerContent>p,.dialog-actions p{font-size:14px;line-height:2.1;color:var(--ink-soft)}
+#drawerContent h3{font-family:var(--hand);font-weight:400;font-size:27px;margin:26px 0 6px;color:var(--ink)}
+.life-quick-stats span{background:none;padding:2px 4px;font-family:var(--hand);font-size:20px;color:var(--ink);border-bottom:1px solid #2f2a2433;border-radius:0}
+.life-event{background:none;border:0;border-top:1.5px solid var(--ink);border-radius:0;padding:14px 0 4px}
+.life-event h3{font-family:var(--hand);font-weight:400;font-size:31px!important;margin:0 0 4px!important}
+.life-event p{font-size:14px;color:var(--ink-soft)}
+.life-answer{display:flex;border-bottom:1.5px solid var(--ink);margin:16px 0 6px}
+.life-answer input{font-size:24px}
+.life-answer button{border:0;background:none;font-family:var(--hand);font-size:22px;color:var(--stamp);padding:4px 8px;white-space:nowrap}
+.life-hint{display:block;font-size:12px;color:var(--pencil);margin:14px 0 2px}
+.life-choice{position:relative;background:none;border:0;border-radius:0;margin-top:2px;padding:6px 6px 6px 22px;font-size:13px;line-height:1.7;color:var(--ink-soft)}
+.life-choice::before{content:'—';position:absolute;left:0;top:6px;color:var(--pencil)}
+.life-choice:hover{background:linear-gradient(transparent 12%,#f2dc8a77 12%,#f2dc8a77 88%,transparent 88%)}
+.life-choice.special{background:none;color:#7d5320}
+.life-choice.special::before{content:'★';color:#c39a3c}
+.life-choice:disabled{background:none;opacity:.45}
+.life-log,.life-achievements{font-size:13px;color:var(--ink-soft)}
+.life-log li{border-bottom:0;padding:0;line-height:34px}
+.life-achievements .done{color:var(--ink)}
+.hobby-list button,.life-friends>button:not(.life-choice){border:1px solid #2f2a2440;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;background:none;font-family:var(--hand);font-size:19px;padding:4px 14px;color:var(--ink-soft)}
+.hobby-list .active{background:#f2dc8a88;color:var(--ink)}
+#drawerContent>button,.dialog-actions button,.collection button,.career-card button{background:none;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;font-family:var(--hand);font-size:21px;color:var(--ink);padding:8px 14px}
+#drawerContent>button:hover,.dialog-actions button:hover,.collection button:hover,.career-card button:hover:not(:disabled){background:#f2dc8a66}
+.career-card,.growth-card,.discovery-row{background:var(--card);border:0;border-radius:2px;box-shadow:0 1px 1px #0000000f,0 8px 18px -12px #5a4a2a77}
+.career-card strong,.growth-card strong,.discovery-row strong{font-family:var(--hand);font-size:22px;font-weight:400;color:var(--ink)}
+.career-card p,.growth-card p,.discovery-row p{font-size:12px;color:var(--ink-soft)}
+.career-card button:disabled{background:none;border-style:dashed;color:var(--pencil)}
+.discovery-row:not(.found){opacity:.6}
+.collection .active{background:#f2dc8a88}
+.dialog-actions input{font-size:22px;border:0;border-bottom:1.5px solid var(--ink);background:none}
+/* Discovery toast: a rubber stamp */
+#discoveryToast{background:#fbf6ea;border:2px solid var(--stamp);border-radius:4px;color:var(--stamp);font-family:var(--hand);font-size:22px;padding:6px 16px;transform:translate(-50%,-8px) rotate(-2deg)}
+#discoveryToast.show{transform:translate(-50%,0) rotate(-2deg)}
+/* Word fragments: torn paper scraps drifting on the page */
+#wordField{position:absolute;inset:0;z-index:4;pointer-events:none;filter:drop-shadow(0 1px 1px #0000001a) drop-shadow(0 6px 8px #5a4a2a26)}
+#wordField[hidden]{display:none}
+.word-chip{position:absolute;transform:translate(-50%,-50%) rotate(var(--tilt));pointer-events:auto;touch-action:none;cursor:grab;border:0;background:#fffdf5;padding:7px 14px 5px;font-family:var(--hand);font-size:22px;line-height:1;color:var(--ink);clip-path:polygon(0 9%,7% 0,31% 7%,55% 0,79% 6%,100% 0,97% 52%,100% 100%,72% 93%,44% 100%,15% 94%,0 100%,3% 50%);animation:drift 7s ease-in-out infinite;animation-delay:var(--delay)}
+.word-chip.phrase{background:#fff3c9;color:#6a4417;font-size:24px}
+.word-chip:hover{background:#fff7dd}
+.word-chip.dragging{animation:none;cursor:grabbing;z-index:5;transform:translate(-50%,-50%) scale(1.12) rotate(0)}
+.word-book{list-style:none;padding:0;margin:8px 0}
+.word-book li{font-family:var(--hand);font-size:23px;line-height:34px;color:var(--ink)}
+.word-book small{font-family:var(--serif);font-size:11px;color:var(--pencil)}
+@keyframes drift{50%{transform:translate(-50%,calc(-50% - 7px)) rotate(calc(var(--tilt) * -1))}}
+@media(max-width:760px){
+ .life-hud{background:none;box-shadow:none;transform:none;padding:0}
+ .life-hud::before{display:none}
+ .life-overview strong{font-size:32px}
+ .life-job{font-size:18px}
+ .life-hud button{border:0;font-size:18px}
+ #speech{font-size:20px}
+ input{font-size:22px}
+ .care button{font-size:18px}
+ .word-chip{font-size:18px;padding:5px 10px 4px}
+ dialog{padding:22px 18px 22px 40px;background-image:linear-gradient(90deg,transparent 26px,#c9564455 26px,#c9564455 27.5px,transparent 27.5px),repeating-linear-gradient(transparent 0 33px,#b9c6cf55 33px 34px)}
+}
+@media(prefers-reduced-motion:reduce){.word-chip{animation:none!important}}
+.life-hud{top:152px}
+.presence .feeling{top:64px;bottom:auto;left:auto;right:-54px;transform:rotate(5deg);font-family:var(--hand);font-size:21px;letter-spacing:0;color:var(--ink-soft)}
+
+.correct-feeling{bottom:-24px}
+body[data-life="active"] .memories{display:none}
+@media(max-width:760px){.presence .feeling{right:-6px;top:40px;font-size:18px}}
+#speech{width:min(600px,92vw);font-size:21px}
+@media(min-width:761px){#speech{top:-58px}.dimension-tag{top:-86px}}
+.word-chip{white-space:nowrap}
+@media(max-width:760px){.word-chip{font-size:15px;padding:4px 8px 3px}.presence .feeling{display:none}}
+
+/* v0.14 · Tempo: quicker reveals and feedback. */
+body{transition:background .7s}
+.emerge{transition:opacity .5s}
+#firstDot,#firstLine,#eyes,#mouth,#decor,#cheeks{transition:opacity .45s}
+#body{transition:fill .5s,fill-opacity .5s,opacity .45s}
+#pageTexture{transition:opacity .7s,background .7s}
+.dimension-tag{transition:opacity .3s}
+#wordSkin{transition:opacity .4s}
+.pet.eating{animation:munch .17s 2}
+.pet.happy{animation:hop .3s 2}
+.particle{animation-duration:.9s}
+.word-flight{position:fixed;z-index:40;pointer-events:none;font-family:var(--hand);font-size:25px;color:var(--ink);white-space:nowrap;transform-origin:left center}
+.gain{position:absolute;left:50%;top:34%;transform:translateX(-50%);font-family:var(--hand);font-size:25px;color:var(--stamp);white-space:nowrap;pointer-events:none;animation:gainUp 1.1s ease-out forwards}
+@keyframes gainUp{0%{opacity:0;transform:translate(-50%,10px) scale(.8)}15%{opacity:1;transform:translate(-50%,0) scale(1.08)}100%{opacity:0;transform:translate(-50%,-48px)}}
+/* v0.14 · Layout: no collisions. */
+body[data-life="active"] .dimension-tag{display:none}
+@media(min-width:901px){
+ .care{flex-wrap:nowrap;bottom:30px;gap:4px 12px}
+ .care button{font-size:18px}
+ footer{bottom:6px}
+ .correct-feeling{top:98px;bottom:auto;left:auto;right:-74px;transform:rotate(5deg);font-family:var(--hand);font-size:17px}
+}
+/* Narrow screens stack everything in one column, so nothing can sit on top of anything else. */
+@media(max-width:900px){
+ .page{display:flex;flex-direction:column;gap:14px;padding:22px 20px 14px;min-height:100svh}
+ #identity,.life-hud,.presence,.feed,.care,footer{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;width:auto!important}
+ .emerge:not(.visible){display:none}
+ .memories{display:none!important}
+ #identity{order:1;padding-right:80px}
+ .life-hud{order:2}
+ .life-hud::before{display:none}
+ .presence{order:3;height:auto!important;width:min(340px,88vw)!important;margin:0 auto;display:block}
+ .feed{order:4;width:min(490px,100%)!important;margin:0 auto}
+ .care{order:5;flex-wrap:wrap;justify-content:center;gap:2px 12px}
+ footer{order:6;text-align:center}
+ #speech{position:relative!important;left:auto!important;top:auto!important;transform:none!important;width:auto!important;min-height:1.3em;margin:0 auto}
+ .pet{margin-top:4px}
+ .dimension-tag{position:relative;top:auto;left:auto;transform:none;display:block;margin:0 auto}
+ .presence .feeling{display:none}
+ .correct-feeling{position:relative;bottom:auto;left:auto;transform:none;display:block;margin:2px auto 0}
+ .feed{bottom:auto}
+}
+@media(prefers-reduced-motion:reduce){.gain{animation:none!important;opacity:0}}
+@media(min-width:901px){.presence{width:min(470px,85vw,50svh)}.pet{margin-top:10px}}
+@media(max-width:900px){#identity{margin-right:80px}.pet{margin-top:26px}.care{position:sticky!important;bottom:0!important;z-index:6;background:var(--paper);padding:8px 0 10px;border-top:1px solid #2f2a241a}}
+@media(max-width:520px){.presence{width:min(300px,74vw)!important}}
+@media(min-width:901px){#speech{top:-64px}.dimension-tag{top:-92px}}
+@media(max-width:900px){.page{overflow:clip}}
+.word-chip.edge-l{transform:translate(0,-50%) rotate(var(--tilt));animation:none}
+.word-chip.edge-r{transform:translate(-100%,-50%) rotate(var(--tilt));animation:none}
+@media(max-width:900px){.care{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;gap:0 14px;padding:10px 4px}.care button{flex:none}}
+@media(min-width:901px){.gain{top:-26px}}
+
+/* v0.16 · The page becomes the thing you name: an inked, washed-out drawing of it. */
+#formGlyph{font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;font-size:240px;filter:url(#glyphInk);transform-box:view-box;transform-origin:250px 188px;pointer-events:none}
+#formGlyph.form-in{animation:formIn .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes formIn{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}
+body.has-form #body{fill-opacity:0!important;stroke-opacity:0}
+body.has-form #eyes,body.has-form #mouth,body.has-form #cheeks,body.has-form #decor,body.has-form #emotionExtra,body.has-form #lifeAccessory,body.has-form #volumeMesh{display:none}
+.form-book{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.form-book button{border:1px solid #2f2a2440;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;background:none;font-family:var(--hand);font-size:20px;padding:4px 12px;color:var(--ink)}
+.form-book .active{background:#f2dc8a88}
+@media(prefers-reduced-motion:reduce){#formGlyph.form-in{animation:none}}

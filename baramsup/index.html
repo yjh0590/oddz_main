@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="숨 고르기, 짧은 명상, 감각 산책과 몸 쉬기로 나에게 돌아오는 작은 쉼터. 기록을 남기지 않는 바람숲.">
+  <meta name="referrer" content="no-referrer">
+  <title>바람숲 — 마음이 쉬어 가는 곳</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext y='32' font-size='32'%3E🌿%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="sanctuary.css">
+  <link rel="stylesheet" href="evidence.css">
+  <script src="evidence.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="forest" aria-hidden="true">
+    <svg viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <g id="bamboo">
+          <path d="M0 1050 Q-8 680 5 340 T0 -80" fill="none" stroke="currentColor" stroke-width="12"/>
+          <path d="M-7 840h17M-5 655h17M-2 465h17M-2 270h17M-6 80h17" stroke="#e8ede2" stroke-width="4"/>
+          <g fill="currentColor">
+            <path d="M3 460Q45 385 125 372Q74 429 3 460M40 422Q29 354 51 304Q69 371 40 422M61 410Q119 348 170 356Q126 401 61 410M3 655Q-64 571-139 580Q-75 638 3 655M-45 615Q-49 542-84 518Q-88 582-45 615M-68 610Q-133 555-182 571Q-126 612-68 610M2 269Q49 198 110 196Q70 249 2 269M38 230Q30 176 47 139Q68 190 38 230"/>
+          </g>
+        </g>
+      </defs>
+      <g color="#668164" opacity=".12"><use href="#bamboo" x="70"/><use href="#bamboo" x="275" transform="rotate(6 275 1000)"/><use href="#bamboo" x="1220"/><use href="#bamboo" x="1390" transform="rotate(-5 1390 1000)"/></g>
+      <g color="#71896d" opacity=".07"><use href="#bamboo" x="175" transform="translate(0 130)"/><use href="#bamboo" x="1120" transform="translate(0 180)"/></g>
+    </svg>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="바람숲 처음으로"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 26C9 16 14 8 25 5c0 12-5 20-17 21Z" fill="currentColor" opacity=".18"/><path d="M7 27 22 10M13 20l-1-7m6 2 6-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>바람숲</a>
+    <button class="sound-button" id="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Zm13-2c3 2 3 6 0 8m3-11c5 4 5 10 0 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>숲의 소리 켜기</span></button>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <span class="eyebrow">나에게 돌아오는 작은 시간</span>
+      <h1 id="title">잠깐 멈추고, <br>나를 돌보는 숲.</h1>
+      <p>숨을 고르고, 감각을 깨우고, 마음을 내려놓아요. <br>오늘의 나에게 편한 쉼을 골라 보세요.</p>
+    </section>
+
+    <section class="forest-window" aria-label="지금의 숲">
+      <div class="forest-sky" aria-hidden="true"><span class="celestial"></span><div class="ridge ridge-back"></div><div class="ridge ridge-front"></div><svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice"><g color="#345c49" opacity=".65" transform="translate(0 -470) scale(.8)"><use href="#bamboo" x="70"/><use href="#bamboo" x="260"/><use href="#bamboo" x="1170"/><use href="#bamboo" x="1390"/></g></svg><div class="rain-lines"></div><div class="fireflies"><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="forest-caption"><span class="eyebrow" id="forest-time">A MOMENT IN THE FOREST</span><h2 id="forest-title">당신의 속도로 흘러가는 숲</h2><p id="forest-description">마음을 고르면, 숲도 함께 표정을 바꿔요.</p></div>
+      <div class="weather-switch" role="group" aria-label="숲의 풍경"><button type="button" data-weather="dawn" aria-pressed="true">아침 안개</button><button type="button" data-weather="rain" aria-pressed="false">비 오는 오후</button><button type="button" data-weather="night" aria-pressed="false">별이 뜬 밤</button></div>
+    </section>
+
+    <section class="sanctuary" id="sanctuary" aria-labelledby="rest-title">
+      <div class="section-heading"><div><span class="eyebrow">작은 쉼의 방식들</span><h2 id="rest-title">지금, 어떻게 쉬고 싶나요?</h2></div><span class="section-aside">잘하려고 애쓰지 않아도 괜찮아요.</span></div>
+      <div class="practice-picker" role="group" aria-label="쉼 활동 선택">
+        <button class="practice-card" data-practice="breathing" type="button" aria-pressed="true" aria-controls="practice-player"><span class="practice-symbol symbol-breath" aria-hidden="true">◎</span><span class="practice-meta">1–5분 · 느린 호흡</span><strong>숨 고르기</strong><span class="practice-description">내게 편한 호흡의 리듬을 찾아요.</span></button>
+        <button class="practice-card" data-practice="meditation" type="button" aria-pressed="false" aria-controls="practice-player"><span class="practice-symbol symbol-meditate" aria-hidden="true">◡</span><span class="practice-meta">기본 3분 · 마음챙김</span><strong>고요히 머물기</strong><span class="practice-description">알아차리고, 머물고, 시야를 넓혀요.</span></button>
+        <button class="practice-card" data-practice="grounding" type="button" aria-pressed="false" aria-controls="practice-player"><span class="practice-symbol symbol-senses" aria-hidden="true">✧</span><span class="practice-meta">내 속도로 · 감각</span><strong>지금 여기 산책</strong><span class="practice-description">주변의 작은 감각을 하나씩 만나요.</span></button>
+        <button class="practice-card" data-practice="body" type="button" aria-pressed="false" aria-controls="practice-player"><span class="practice-symbol symbol-body" aria-hidden="true">⌁</span><span class="practice-meta">내 속도로 · 이완</span><strong>몸에 쉼 건네기</strong><span class="practice-description">힘이 들어간 곳에 잠시 여유를 줘요.</span></button>
+      </div>
+      <section class="practice-player" id="practice-player" aria-labelledby="practice-title" data-state="idle" data-kind="breathing">
+        <div class="player-top"><span class="eyebrow" id="practice-category">호흡에 기대는 시간</span><button id="focus-mode" class="quiet-button" type="button" aria-pressed="false">온전히 집중하기 <span aria-hidden="true">⛶</span></button></div>
+        <div class="player-layout">
+          <div class="practice-visual" aria-hidden="true"><div class="still-rings"><i></i><i></i><i></i></div><div class="practice-orb" id="practice-orb" data-phase="idle"><span id="orb-word">숨</span></div><span class="visual-caption" id="visual-caption">BREATHE AT YOUR OWN PACE</span></div>
+          <div class="practice-guidance">
+            <div class="practice-title-row"><h3 id="practice-title">숨 고르기</h3><span class="session-time" id="session-time" role="timer" aria-label="남은 시간">1:00</span></div>
+            <p class="practice-intro" id="practice-intro">4초 들이쉬고, 6초 내쉬어요. 여섯 번의 느린 호흡을 함께해요.</p>
+            <div class="practice-settings"><div class="duration-options" id="duration-options" role="group" aria-label="연습 시간 선택"><button type="button" data-duration="60" aria-pressed="true">1분</button><button type="button" data-duration="180" aria-pressed="false">3분</button><button type="button" data-duration="300" aria-pressed="false">5분</button></div><div class="pace-options" id="pace-options" role="group" aria-label="호흡 리듬 선택"><button type="button" data-pace="paced" aria-pressed="true">4초 / 6초</button><button type="button" data-pace="natural" aria-pressed="false">자연 호흡</button></div></div>
+            <p id="practice-adaptation" class="practice-adaptation">처음엔 1분부터. 숫자가 부담스러우면 자연 호흡을 골라요.</p>
+            <p class="step-eyebrow" id="step-label">시작하기 전에</p>
+            <p class="session-instruction" id="session-instruction" role="status" aria-live="polite" aria-atomic="true">편하게 앉아 보세요.<br>호흡은 언제든 편한 속도로 해도 좋아요.</p>
+            <p class="session-detail" id="session-detail">소리는 선택이에요. 조용한 채로 쉬어도 괜찮아요.</p>
+            <div class="session-track" id="session-track" role="progressbar" aria-label="쉼 진행" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><progress id="session-progress" max="100" value="0" aria-hidden="true"></progress></div>
+            <div class="session-controls"><button id="session-start" class="release-button" type="button">나를 위한 1분 시작</button><button id="session-next" class="quiet-button" type="button" hidden>다음 감각으로</button><button id="session-stop" class="quiet-button" type="button" hidden>마치기</button></div>
+            <p id="session-notice" class="session-notice" role="status" aria-live="polite"></p>
+            <button id="external-anchor" class="external-anchor" type="button">호흡에 집중하기 불편한가요? 주변 감각으로 쉬기</button>
+          </div>
+        </div>
+        <section id="rest-reflection" class="rest-reflection" aria-labelledby="reflection-title" hidden><h4 id="reflection-title">지금의 느낌도 잠깐 살펴봐요.</h4><div class="reflection-options" role="group" aria-label="쉼 이후의 느낌"><button type="button" data-reflection="lighter" aria-pressed="false">조금 편안해요</button><button type="button" data-reflection="same" aria-pressed="false">비슷해요</button><button type="button" data-reflection="uncomfortable" aria-pressed="false">오히려 불편해요</button></div><p id="reflection-response" role="status" aria-live="polite">고르지 않아도 괜찮아요. 느낌이나 활동 내역을 기록하지 않아요.</p></section>
+        <details class="practice-evidence"><summary>이 쉼의 근거와 안내<span aria-hidden="true">＋</span></summary><div class="practice-evidence-content"><span id="evidence-kind" class="evidence-tag">연구 검토</span><h4 id="evidence-title">느린 호흡 연구를 참고했어요</h4><p id="evidence-finding"></p><p id="evidence-application"></p><a id="evidence-source" href="https://pubmed.ncbi.nlm.nih.gov/30245619/" target="_blank" rel="noopener noreferrer">참고 자료 읽기 (새 탭)</a><p id="practice-comfort" class="practice-comfort"></p></div></details>
+      </section>
+      <section class="soundscape" aria-labelledby="soundscape-title">
+        <div class="soundscape-heading"><span class="soundscape-icon" aria-hidden="true">≋</span><div><h3 id="soundscape-title">쉼의 배경을 골라요</h3><p>지금 있는 곳을 작은 숲으로.</p></div></div>
+        <div class="sound-options" role="group" aria-label="배경 소리 선택"><button type="button" data-sound="wind" aria-pressed="true">잎 사이 바람</button><button type="button" data-sound="rain" aria-pressed="false">잔잔한 빗소리</button><button type="button" data-sound="stream" aria-pressed="false">작은 시냇물</button></div>
+        <button id="sound-toggle" class="sound-toggle" type="button" aria-pressed="false">소리 켜기</button>
+        <label class="volume-control" for="volume">소리 크기<input id="volume" type="range" min="0" max="100" value="35"></label>
+        <p id="sound-state" class="sound-state" role="status" aria-live="polite">소리는 꺼져 있어요. 조용히 쉬어도 괜찮아요.</p>
+      </section>
+    </section>
+    <section class="rest-library" aria-labelledby="library-title">
+      <div class="section-heading"><div><span class="eyebrow">쉼을 조금 더 이해하고 싶다면</span><h2 id="library-title">연구에서 배우고, 내 감각으로 골라요.</h2></div><span class="section-aside">자료 확인 · 2026.11.23</span></div>
+      <p class="library-intro">바람숲은 공개 연구와 기관 안내를 참고해 만든 일상의 쉼터예요. 짧게 바꾼 활동 자체가 임상시험을 거친 것은 아니며, 치료 프로그램을 대신하지 않아요.</p>
+      <div class="research-grid">
+        <article class="research-card" id="research-breathing"><span class="evidence-tag">체계적 문헌고찰 · 2018</span><h3>느린 호흡, 무엇이 연구됐을까요?</h3><p>건강한 성인을 다룬 15편의 연구를 검토한 논문이에요. 느린 호흡과 생리·심리 지표의 연관성을 살폈지만, 방법과 결과가 다양해요.</p><p class="research-limit">바람숲의 4초 / 6초, 1분 구성이 최적이거나 같은 효과를 낸다는 뜻은 아니에요.</p><a href="https://pubmed.ncbi.nlm.nih.gov/30245619/" target="_blank" rel="noopener noreferrer">Zaccaro 외 · 논문 원문 정보 (새 탭)</a></article>
+        <article class="research-card" id="research-breathwork"><span class="evidence-tag">무작위시험 메타분석 · 2023</span><h3>가능성과 한계를 함께 보기</h3><p>호흡 연습의 스트레스·정신건강 효과를 모아 분석한 연구예요. 도움이 될 가능성을 보고하면서도, 더 엄격한 연구가 필요하다고 밝혔어요.</p><p class="research-limit">서로 다른 호흡법과 연습 기간을 합친 결과여서 개인의 변화나 특정 활동의 효과를 보장하지 않아요.</p><a href="https://doi.org/10.1038/s41598-022-27247-y" target="_blank" rel="noopener noreferrer">Fincham 외 · Scientific Reports (새 탭)</a></article>
+        <article class="research-card" id="research-mindfulness"><span class="evidence-tag">연구용 훈련 구성 논문 · 2014</span><h3>짧은 명상에도 흐름이 있어요</h3><p>마음챙김 훈련을 구성한 논문에서 ‘알아차리기 → 호흡에 모으기 → 몸으로 넓히기’의 세 단계 숨 공간을 설명해요.</p><p class="research-limit">전체 훈련은 여러 주에 걸친 프로그램이에요. 바람숲의 1·3·5분 안내는 그 구조를 참고한 별도의 짧은 연습이에요.</p><a href="https://pubmed.ncbi.nlm.nih.gov/24554970/" target="_blank" rel="noopener noreferrer">Wahbeh 외 · Mindfulness (새 탭)</a></article>
+      </div>
+      <div class="video-heading"><h3>전문 기관의 설명도 들어 보세요.</h3><span>외부 영상을 직접 열 때만 YouTube로 이동해요.</span></div>
+      <div class="video-grid">
+        <article class="video-card"><span class="video-mark" aria-hidden="true">▷</span><div><span class="practice-meta">Stanford Medicine · 영어 · 약 90초</span><h4>호흡 연구자가 설명하는 cyclic sighing</h4><p>두 번 들이쉰 뒤 길게 내쉬는 별도의 기법을 설명해요. 바람숲의 4초 / 6초 호흡과는 다른 방법이에요.</p><a href="https://www.youtube.com/watch?v=lBJ2z4PxVt0" target="_blank" rel="noopener noreferrer">YouTube에서 설명 보기 (새 탭)</a><a class="provenance-link" href="https://med.stanford.edu/news/insights/2023/02/cyclic-sighing-can-help-breathe-away-anxiety.html" target="_blank" rel="noopener noreferrer">공식 소개와 연구 조건 확인 (새 탭)</a></div></article>
+        <article class="video-card"><span class="video-mark" aria-hidden="true">▷</span><div><span class="practice-meta">NHS HPFT Talking Therapies · 영어</span><h4>다른 이완법 알아보기: 점진적 근육 이완</h4><p>근육에 힘을 줬다 푸는 과정을 안내해요. 감각을 관찰하는 바람숲의 바디스캔과 구분해서 살펴보세요.</p><a href="https://www.youtube.com/watch?v=dknJFD3IIVI" target="_blank" rel="noopener noreferrer">YouTube에서 안내 보기 (새 탭)</a><a class="provenance-link" href="https://www.hpft-talkingtherapies.nhs.uk/resources-and-self-help/self-help-videos/practicing-relaxation-progressive-muscle-relaxation" target="_blank" rel="noopener noreferrer">NHS 공식 게시 페이지 (새 탭)</a></div></article>
+      </div>
+      <details class="care-note"><summary>내게 편한 연습을 위한 안내</summary><p>어지러움이나 숨참, 불편함이 생기면 활동을 멈추고 평소 호흡으로 돌아오세요. 눈을 뜨고 주변 사물에 주의를 두는 방식으로 바꿀 수도 있어요. 움직이거나 운전하는 동안에는 사용하지 마세요.</p><p>명상도 모든 사람에게 언제나 편안한 경험은 아니에요. 불편함이 계속되거나 일상에 영향을 준다면 전문가와 상의하세요.</p><a href="https://www.nccih.nih.gov/health/meditation-and-mindfulness-effectiveness-and-safety" target="_blank" rel="noopener noreferrer">미국 NIH NCCIH의 효과와 안전성 안내 (새 탭)</a></details>
+    </section>
+    <details class="writing-space" id="writing-space"><summary><span class="writing-summary-icon" aria-hidden="true">❧</span><span><strong>말로 내려놓고 싶은 마음이 있나요?</strong><span>혼자 적고, 흔적 없이 흘려보내요.</span></span><span class="summary-toggle" aria-hidden="true">＋</span></summary>
+    <div class="experience-grid">
+    <section class="writing-card" aria-label="마음 쓰기">
+      <div class="card-top"><span><span class="tiny-leaf" aria-hidden="true">❧</span> 지금, 내 마음은</span><span class="private-label"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="3.5" y="7" width="9" height="7" rx="2" stroke="currentColor"/><path d="M5.5 7V4a2.5 2.5 0 0 1 5 0v3" stroke="currentColor"/></svg>나에게만 보이는 이야기</span></div>
+      <div class="moods" role="group" aria-label="지금의 기분 (선택하지 않아도 괜찮아요)">
+        <button type="button" data-mood="답답해요" aria-pressed="false">☁️ <span>답답해요</span></button>
+        <button type="button" data-mood="속상해요" aria-pressed="false">🌧️ <span>속상해요</span></button>
+        <button type="button" data-mood="지쳤어요" aria-pressed="false">🍂 <span>지쳤어요</span></button>
+        <button type="button" data-mood="그냥 그래요" aria-pressed="false">🌿 <span>그냥 그래요</span></button>
+        <button type="button" data-mood="괜찮아요" aria-pressed="false">☀️ <span>괜찮아요</span></button>
+      </div>
+      <div class="prompt-strip"><span id="writing-prompt" aria-live="polite">어떤 말이 마음에 오래 남아 있나요?</span><button id="next-prompt" type="button" aria-label="다른 글감 보기">다른 질문 ↻</button></div>
+      <label class="sr-only" for="thought">마음에 담아 둔 이야기</label>
+      <textarea id="thought" placeholder="사실은 나, 오늘…&#10;&#10;문장이 되지 않아도 괜찮아요. 떠오르는 대로 적어 보세요." autocomplete="off" spellcheck="false"></textarea>
+      <div class="card-bottom"><span id="count">0자 만큼의 마음</span><button id="release" class="release-button" type="button" disabled><span>바람에 흘려보내기</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 8h12a3 3 0 1 0-3-3M3 12h16a2 2 0 1 1-2 2M3 16h7a3 3 0 1 1-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+    </section>
+    </div>
+
+    <p class="privacy-note"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m10 2 6 2v5c0 4-6 8-6 8S4 13 4 9V4l6-2Z" stroke="currentColor" stroke-width="1.2"/><path d="m7 9 2 2 4-4" stroke="currentColor" stroke-width="1.2"/></svg>이곳의 글은 저장되지 않아요. 흘려보내거나 페이지를 떠나면 사라져요.</p>
+    <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+    </details>
+    <div class="quiet-thought"><span aria-hidden="true">✧</span><p>아무것도 해내지 않아도 괜찮은 시간.<br>잠시 머물렀다는 것만으로 충분해요.</p></div>
+  </main>
+  <div id="released-leaves" class="released-leaves" aria-hidden="true"></div>
+  <dialog id="focus-dialog" class="focus-dialog" aria-label="나에게 집중하는 쉼"></dialog>
+
+  <footer><span>바람숲</span><span>여기서는, 잠시 가벼워져도 괜찮아요.</span><button id="about" type="button">이 공간에 대해</button></footer>
+  <dialog id="about-dialog"><button class="close-dialog" id="close-dialog" type="button" aria-label="닫기">×</button><span class="eyebrow">나에게 돌아오는 작은 시간</span><h2>잘 쉬는 것에도,<br>정답은 없으니까.</h2><p>바람숲은 호흡과 짧은 명상, 감각 산책, 몸 쉬기로 잠시 나를 돌보는 공간이에요. 글로 털어놓고 싶은 날엔 혼자 적고 흘려보낼 수도 있어요.</p><p>모든 활동은 언제든 멈출 수 있어요. 감각 산책과 몸 쉬기는 편할 때 다음 단계로 넘겨 주세요. 화면을 다른 곳으로 옮기면 활동도 잠시 쉬어 가요. 호흡과 움직임은 편안한 만큼만 따라 해 주세요.</p><p>글과 기분, 활동 내역은 서버로 보내거나 브라우저 저장소에 기록하지 않아요. 글은 흘려보내기·새로고침·페이지 이동 시 지워지며 복구되지 않아요.</p><p>배경 소리는 외부 녹음이 아닌 기기 안에서 합성한 소리예요. 소리와 풍경 설정도 저장하지 않아요.</p><button class="release-button" id="back-to-forest" type="button">다시 숲으로</button></dialog>
+</body>
+</html>

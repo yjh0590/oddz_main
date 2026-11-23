@@ -1,12 +1,34 @@
-/* oddz — 프로젝트 공통 데이터 (PJ 번호는 최초 기록 순서)
- * 이 파일만 수정하면 여섯 테마의 카드와 필터가 함께 업데이트됩니다.
+/* oddz — 프로젝트 공통 데이터 (PJ 번호는 최초 기록 순서, 같은 날은 만든 순서)
+ * 이 파일만 수정하면 모든 테마(홈 14개)의 카드와 필터가 함께 업데이트됩니다.
  * 주의: 사실확인이 필요한 기록 날짜는 dateBasis 참고.
+ * 소개 페이지가 없는 카드는 url에 개발일지(/journal/…)를 연결합니다.
  */
 window.ODDZ_PROJECTS = Object.freeze([
   {
     "id": "pj-01",
     "no": "PJ 01",
     "icon": "/assets/icons/pj-01.png",
+    "stage": "someday",
+    "type": "Web",
+    "name": "PDF 변환·정리 웹사이트",
+    "desc": "PDF 분석에 쓸 기본 프롬프트를 관리자 화면에서 정하는 웹사이트 실험.",
+    "feat": "관리자 화면의 기본 프롬프트 설정과 로그인 연결",
+    "current": "로그인 연결에서 멈춘 실험",
+    "next": "로그인이 막힌 원인부터 다시 확인",
+    "tags": [
+      "PDF",
+      "웹",
+      "실험"
+    ],
+    "url": "/journal/pdf-experiment.html",
+    "link": "개발일지",
+    "date": "2025.09.04",
+    "dateBasis": "개발일지"
+  },
+  {
+    "id": "pj-02",
+    "no": "PJ 02",
+    "icon": "/assets/icons/pj-02.png",
     "stage": "next",
     "type": "Web Game",
     "name": "연쇄 가위바위보",
@@ -18,14 +40,36 @@ window.ODDZ_PROJECTS = Object.freeze([
       "가위바위보",
       "캐주얼"
     ],
+    "url": "/journal/rock-paper-scissors.html",
+    "link": "개발일지",
     "date": "2025.10.02",
-    "dateBasis": "아이디어 메모",
-    "oldNumber": "PJ 17"
+    "dateBasis": "아이디어 메모"
   },
   {
-    "id": "pj-02",
-    "no": "PJ 02",
-    "icon": "/assets/icons/pj-02.png",
+    "id": "pj-03",
+    "no": "PJ 03",
+    "icon": "/assets/icons/pj-03.png",
+    "stage": "someday",
+    "type": "Idea",
+    "name": "키보드 답장 도우미",
+    "desc": "답장을 쓸 때 AI가 문장을 제안해 주는 키보드 아이디어.",
+    "feat": "입력 중인 답장에 맞춘 AI 문장 제안",
+    "current": "아이디어 메모 단계",
+    "next": "어떤 상황의 답장을 도울지 범위 정하기",
+    "tags": [
+      "키보드",
+      "AI",
+      "아이디어"
+    ],
+    "url": "/journal/keyboard.html",
+    "link": "개발일지",
+    "date": "2025.12.09",
+    "dateBasis": "개발일지"
+  },
+  {
+    "id": "pj-04",
+    "no": "PJ 04",
+    "icon": "/assets/icons/pj-04.png",
     "stage": "done",
     "type": "Web",
     "name": "수강신청 연습사이트",
@@ -40,13 +84,12 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/enrollment.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.05.04",
-    "dateBasis": "개발일지",
-    "oldNumber": "PJ 11"
+    "dateBasis": "개발일지"
   },
   {
-    "id": "pj-03",
-    "no": "PJ 03",
-    "icon": "/assets/icons/pj-03.png",
+    "id": "pj-05",
+    "no": "PJ 05",
+    "icon": "/assets/icons/pj-05.png",
     "stage": "done",
     "type": "Desktop",
     "name": "나의 일기장",
@@ -61,13 +104,12 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/diary.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.05.04",
-    "dateBasis": "개발일지",
-    "oldNumber": "PJ 12"
+    "dateBasis": "개발일지"
   },
   {
-    "id": "pj-04",
-    "no": "PJ 04",
-    "icon": "/assets/icons/pj-04.png",
+    "id": "pj-06",
+    "no": "PJ 06",
+    "icon": "/assets/icons/pj-06.png",
     "stage": "next",
     "type": "Web · 3D",
     "name": "물병 던지기",
@@ -79,14 +121,36 @@ window.ODDZ_PROJECTS = Object.freeze([
       "3D",
       "물리"
     ],
+    "url": "/journal/bottle.html",
+    "link": "개발일지",
     "date": "2026.05.04",
-    "dateBasis": "3D 실험 기록",
-    "oldNumber": "PJ 18"
+    "dateBasis": "3D 실험 기록"
   },
   {
-    "id": "pj-05",
-    "no": "PJ 05",
-    "icon": "/assets/icons/pj-05.png",
+    "id": "pj-07",
+    "no": "PJ 07",
+    "icon": "/assets/icons/pj-07.png",
+    "stage": "someday",
+    "type": "Web · 3D",
+    "name": "카메라 트래킹 3D 큐브",
+    "desc": "여러 회전축을 가진 큐브를 카메라 입력으로 돌려 보는 인터랙션 실험.",
+    "feat": "카메라로 큐브의 회전·방향 제어, 좌표계·감도 설정",
+    "current": "실험 단계, 움직임이 예민해 안정화가 필요",
+    "next": "감도와 인식 조건을 다듬어 안정적인 버전 만들기",
+    "tags": [
+      "3D",
+      "카메라",
+      "실험"
+    ],
+    "url": "/journal/cube.html",
+    "link": "개발일지",
+    "date": "2026.05.04",
+    "dateBasis": "개발일지"
+  },
+  {
+    "id": "pj-08",
+    "no": "PJ 08",
+    "icon": "/assets/icons/pj-08.png",
     "stage": "done",
     "type": "Chrome Extension",
     "name": "오늘의 강의 · LMS 재생 도우미",
@@ -101,52 +165,74 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/todays-lecture.html?theme=sparkle",
     "link": "다운로드·사용법",
     "date": "2026.07",
-    "dateBasis": "월만 확인",
-    "oldNumber": "PJ 14"
+    "dateBasis": "월만 확인"
   },
   {
-    "id": "pj-06",
-    "no": "PJ 06",
-    "icon": "/assets/icons/pj-06.png",
+    "id": "pj-09",
+    "no": "PJ 09",
+    "icon": "/assets/icons/pj-09.png",
     "stage": "doing",
     "type": "Web Game",
     "name": "랜덤게임 모음집",
     "desc": "짧게 즐길 수 있는 여러 게임을 한곳에 모으는 웹 프로젝트.",
     "feat": "가벼운 미니게임을 목록에서 선택해 즐기는 구성",
-    "current": "게임 10개로 정리, 규칙 검수 중",
+    "current": "웹 버전 공개, 게임 규칙 검수 중",
     "next": "게임 간 이동과 개별 게임 완성도 개선",
     "tags": [
       "미니게임",
       "웹"
     ],
+    "url": "/projects/random-game.html",
+    "link": "게임 하기",
     "date": "2026.07.30",
-    "dateBasis": "개발일지",
-    "oldNumber": "PJ 16"
+    "dateBasis": "개발일지"
   },
   {
-    "id": "pj-07",
-    "no": "PJ 07",
-    "icon": "/assets/icons/pj-07.png",
+    "id": "pj-10",
+    "no": "PJ 10",
+    "icon": "/assets/icons/pj-10.png",
+    "stage": "done",
+    "type": "Web",
+    "name": "oddz.click",
+    "desc": "만든 것들을 모아 두는 이 사이트. 이름을 정하고 도메인을 사서 GitHub Pages에 연결했다.",
+    "feat": "홈 테마 14개, 프로젝트 카드·현황판, 상세 페이지와 개발일지",
+    "current": "oddz.click 운영 중, 프로젝트가 생길 때마다 갱신",
+    "next": "사이트 구조와 디자인 대규모 업데이트",
+    "tags": [
+      "웹",
+      "포트폴리오",
+      "GitHub Pages"
+    ],
+    "url": "/journal/oddz.html",
+    "link": "개발일지",
+    "date": "2026.07.31",
+    "dateBasis": "도메인 구입·개발일지"
+  },
+  {
+    "id": "pj-11",
+    "no": "PJ 11",
+    "icon": "/assets/icons/pj-11.png",
     "stage": "doing",
     "type": "Web App",
     "name": "내리는 문 · 지하철 하차 방향",
     "desc": "사용자가 어느 방향을 바라보더라도 다음 역의 하차 문 방향을 안내하는 웹앱.",
     "feat": "지하철 운행 정보와 휴대폰 방향 센서를 조합한 안내",
-    "current": "Cloudflare Worker 연결과 나침반 표시 개선 작업 중",
+    "current": "서울 1~9호선 자동 추적 버전 공개, 문 방향 현장 기록 수집 중",
     "next": "방향 회전의 부드러움·센서 보정·실제 환경 테스트",
     "tags": [
       "지하철",
       "센서",
       "위치"
     ],
+    "url": "/projects/subway.html",
+    "link": "앱 열기",
     "date": "2026.08.12",
-    "dateBasis": "개발일지",
-    "oldNumber": "PJ 05"
+    "dateBasis": "개발일지"
   },
   {
-    "id": "pj-08",
-    "no": "PJ 08",
-    "icon": "/assets/icons/pj-08.png",
+    "id": "pj-12",
+    "no": "PJ 12",
+    "icon": "/assets/icons/pj-12.png",
     "stage": "done",
     "type": "Automation",
     "name": "자료 정리 매크로",
@@ -161,13 +247,12 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/document-macro.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.09.22",
-    "dateBasis": "개발일지",
-    "oldNumber": "PJ 13"
+    "dateBasis": "개발일지"
   },
   {
-    "id": "pj-09",
-    "no": "PJ 09",
-    "icon": "/assets/icons/pj-09.png",
+    "id": "pj-13",
+    "no": "PJ 13",
+    "icon": "/assets/icons/pj-13.png",
     "stage": "someday",
     "type": "Desktop Widget",
     "name": "커피 카운터 위젯",
@@ -180,13 +265,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "라이프"
     ],
     "date": "2026.09.23 이전",
-    "dateBasis": "첫 확인 기록",
-    "oldNumber": "PJ 20"
+    "dateBasis": "첫 확인 기록"
   },
   {
-    "id": "pj-10",
-    "no": "PJ 10",
-    "icon": "/assets/icons/pj-10.png",
+    "id": "pj-14",
+    "no": "PJ 14",
+    "icon": "/assets/icons/pj-14.png",
     "stage": "next",
     "type": "Data · AI",
     "name": "단단 · AI 어휘 사전",
@@ -199,13 +283,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "AI"
     ],
     "date": "2026.09.23 이전",
-    "dateBasis": "첫 확인 기록",
-    "oldNumber": "PJ 19"
+    "dateBasis": "첫 확인 기록"
   },
   {
-    "id": "pj-11",
-    "no": "PJ 11",
-    "icon": "/assets/icons/pj-11.png",
+    "id": "pj-15",
+    "no": "PJ 15",
+    "icon": "/assets/icons/pj-15.png",
     "stage": "done",
     "type": "Web Guide",
     "name": "강의 영상 대본화 가이드",
@@ -220,13 +303,12 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/transcript-guide.html?theme=bubbles",
     "link": "사용 가이드",
     "date": "2026.09.23",
-    "dateBasis": "최초 제작 대화",
-    "oldNumber": "PJ 15"
+    "dateBasis": "최초 제작 대화"
   },
   {
-    "id": "pj-12",
-    "no": "PJ 12",
-    "icon": "/assets/icons/pj-12.png",
+    "id": "pj-16",
+    "no": "PJ 16",
+    "icon": "/assets/icons/pj-16.png",
     "stage": "someday",
     "type": "Search Platform",
     "name": "광고 레퍼런스 검색기",
@@ -240,13 +322,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "장기 프로젝트"
     ],
     "date": "2026.09.27",
-    "dateBasis": "기획 대화",
-    "oldNumber": "PJ 01"
+    "dateBasis": "기획 대화"
   },
   {
-    "id": "pj-13",
-    "no": "PJ 13",
-    "icon": "/assets/icons/pj-13.png",
+    "id": "pj-17",
+    "no": "PJ 17",
+    "icon": "/assets/icons/pj-17.png",
     "stage": "someday",
     "type": "Roblox Game",
     "name": "랜덤 월드 · Random World",
@@ -259,13 +340,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "멀티플레이"
     ],
     "date": "2026.10.02",
-    "dateBasis": "기획 대화",
-    "oldNumber": "PJ 02"
+    "dateBasis": "기획 대화"
   },
   {
-    "id": "pj-14",
-    "no": "PJ 14",
-    "icon": "/assets/icons/pj-14.png",
+    "id": "pj-18",
+    "no": "PJ 18",
+    "icon": "/assets/icons/pj-18.png",
     "stage": "done",
     "type": "Web Game",
     "name": "IF 세계 · 만약에 로또에 당첨된다면?",
@@ -281,20 +361,19 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/if-world.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.10.12",
-    "dateBasis": "개발 대화",
-    "oldNumber": "PJ 04"
+    "dateBasis": "개발 대화"
   },
   {
-    "id": "pj-15",
-    "no": "PJ 15",
-    "icon": "/assets/icons/pj-15.png",
+    "id": "pj-19",
+    "no": "PJ 19",
+    "icon": "/assets/icons/pj-19.png",
     "stage": "doing",
     "type": "Web Game",
-    "name": "페이지 키우기",
-    "desc": "글과 상호작용에 반응해 점·선·면, 1D·2D·3D로 성장하는 캐릭터 게임.",
-    "feat": "입력에 따른 변화, 감정·나이·직업·능력치 성장 구조",
-    "current": "웹 프로토타입 제작, 반복 입력과 3D 전환은 재점검 필요",
-    "next": "성장 단계 오류 수정 및 스토리·직업 이벤트 확장",
+    "name": "반려 페이지 키우기",
+    "desc": "아무것도 없는 화면에 말을 건네며 점 → 선 → 면 → 2D 생명 → 3D 입체로 키우는 웹 게임.",
+    "feat": "말 먹이기, 성장 단계, 인연·꿈·집·직업 인생 시뮬레이션, 말한 것이 되는 변신",
+    "current": "v0.16.0 공개 · 말한 것이 되는 페이지",
+    "next": "성장 이벤트와 변신 단어 다듬기",
     "tags": [
       "성장",
       "인터랙션",
@@ -302,32 +381,32 @@ window.ODDZ_PROJECTS = Object.freeze([
     ],
     "date": "2026.10.14",
     "dateBasis": "개발 대화",
-    "oldNumber": "PJ 03"
+    "url": "/projects/companion.html",
+    "link": "페이지 키우기"
   },
   {
-    "id": "pj-16",
-    "no": "PJ 16",
-    "icon": "/assets/icons/pj-16.png",
+    "id": "pj-20",
+    "no": "PJ 20",
+    "icon": "/assets/icons/pj-20.png",
     "stage": "someday",
     "type": "Life Simulation",
     "name": "일기장 키우기",
     "desc": "일기를 쓸수록 캐릭터가 달라지고 이야기가 쌓이는 기록형 성장 서비스.",
     "feat": "기록 입력·감정 반응·외형 진화·그림일기",
     "current": "게임과 감정 기록 방식을 함께 구상 중",
-    "next": "PJ 15와 공통 성장 엔진 재사용 가능성 검토",
+    "next": "PJ 19와 공통 성장 엔진 재사용 가능성 검토",
     "tags": [
       "일기",
       "성장",
       "스토리"
     ],
     "date": "2026.10.14",
-    "dateBasis": "기획 대화",
-    "oldNumber": "PJ 06"
+    "dateBasis": "기획 대화"
   },
   {
-    "id": "pj-17",
-    "no": "PJ 17",
-    "icon": "/assets/icons/pj-17.png",
+    "id": "pj-21",
+    "no": "PJ 21",
+    "icon": "/assets/icons/pj-21.png",
     "stage": "someday",
     "type": "Routine Utility",
     "name": "나만의 괄사·마사지 타이머",
@@ -340,13 +419,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "루틴"
     ],
     "date": "2026.10.23",
-    "dateBasis": "아이디어 제안",
-    "oldNumber": "PJ 07"
+    "dateBasis": "아이디어 제안"
   },
   {
-    "id": "pj-18",
-    "no": "PJ 18",
-    "icon": "/assets/icons/pj-18.png",
+    "id": "pj-22",
+    "no": "PJ 22",
+    "icon": "/assets/icons/pj-22.png",
     "stage": "next",
     "type": "2D Game",
     "name": "글자 전투",
@@ -360,13 +438,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "게임"
     ],
     "date": "2026.10.23",
-    "dateBasis": "아이디어 제안",
-    "oldNumber": "PJ 08"
+    "dateBasis": "아이디어 제안"
   },
   {
-    "id": "pj-19",
-    "no": "PJ 19",
-    "icon": "/assets/icons/pj-19.png",
+    "id": "pj-23",
+    "no": "PJ 23",
+    "icon": "/assets/icons/pj-23.png",
     "stage": "done",
     "type": "Windows App",
     "name": "명령어 도구함 · CmdToolbox",
@@ -381,13 +458,12 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/cmd-toolbox.html?theme=sparkle",
     "link": "다운로드·사용법",
     "date": "2026.11.08",
-    "dateBasis": "GitHub Release v1.0.0",
-    "oldNumber": "PJ 09"
+    "dateBasis": "GitHub Release v1.0.0"
   },
   {
-    "id": "pj-20",
-    "no": "PJ 20",
-    "icon": "/assets/icons/pj-20.png",
+    "id": "pj-24",
+    "no": "PJ 24",
+    "icon": "/assets/icons/pj-24.png",
     "stage": "someday",
     "type": "Practice Game",
     "name": "콘서트 티켓팅 연습장",
@@ -401,13 +477,12 @@ window.ODDZ_PROJECTS = Object.freeze([
       "시뮬레이션"
     ],
     "date": "2026.10.23",
-    "dateBasis": "아이디어 제안",
-    "oldNumber": "PJ 10"
+    "dateBasis": "아이디어 제안"
   },
   {
-    "id": "pj-21",
-    "no": "PJ 21",
-    "icon": "/assets/icons/pj-21.png",
+    "id": "pj-25",
+    "no": "PJ 25",
+    "icon": "/assets/icons/pj-25.png",
     "stage": "done",
     "type": "Windows App",
     "name": "쓱-싹 · 파일 정리 도우미",
@@ -428,9 +503,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "dateBasis": "성능 개선·포터블 ZIP 및 개발일지 업데이트"
   },
   {
-    "id": "pj-22",
-    "no": "PJ 22",
-    "icon": "/assets/icons/pj-22.png",
+    "id": "pj-26",
+    "no": "PJ 26",
+    "icon": "/assets/icons/pj-26.png",
     "stage": "done",
     "type": "Web",
     "name": "Motion Shelf · 웹 모션 모음",
@@ -450,9 +525,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "dateBasis": "저장소 커밋 기록"
   },
   {
-    "id": "pj-23",
-    "no": "PJ 23",
-    "icon": "/assets/icons/pj-23.png",
+    "id": "pj-27",
+    "no": "PJ 27",
+    "icon": "/assets/icons/pj-27.png",
     "stage": "doing",
     "type": "Web",
     "name": "어쩔 수 없었어 · 나비효과",
@@ -471,9 +546,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "dateBasis": "기획·구현 및 첫 공개 기록"
   },
   {
-    "id": "pj-24",
-    "no": "PJ 24",
-    "icon": "/assets/icons/pj-24.png",
+    "id": "pj-28",
+    "no": "PJ 28",
+    "icon": "/assets/icons/pj-28.png",
     "stage": "doing",
     "type": "Web · AI",
     "name": "와글 · AI 커뮤니티",
@@ -492,9 +567,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "dateBasis": "첫 구현·테스트 및 oddz 공개 데모 연결"
   },
   {
-    "id": "pj-25",
-    "no": "PJ 25",
-    "icon": "/assets/icons/pj-25.png",
+    "id": "pj-29",
+    "no": "PJ 29",
+    "icon": "/assets/icons/pj-29.png",
     "stage": "doing",
     "type": "Web · AI",
     "name": "AGORA · 철학자들의 광장",
@@ -511,5 +586,26 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "광장 열기",
     "date": "2026.11.23",
     "dateBasis": "첫 구현·테스트 및 oddz 연결"
+  },
+  {
+    "id": "pj-30",
+    "no": "PJ 30",
+    "icon": "/assets/icons/pj-30.png",
+    "stage": "doing",
+    "type": "Web",
+    "name": "바람숲",
+    "desc": "숨 고르기, 짧은 명상, 감각 산책과 몸 쉬기로 잠시 나를 돌보는 웹 쉼터. 쓴 글과 활동은 저장하지 않는다.",
+    "feat": "호흡·명상·감각 산책·몸 쉬기 안내, 기분별 숲 풍경, 합성한 바람·비·시냇물 소리, 바람에 흘려보내는 글쓰기",
+    "current": "첫 버전 공개, 활동별 근거 자료 연결",
+    "next": "활동 흐름과 소리 다듬기",
+    "tags": [
+      "쉼",
+      "명상",
+      "웹"
+    ],
+    "url": "/projects/baramsup.html",
+    "link": "숲 열기",
+    "date": "2026.11.23",
+    "dateBasis": "저장소 첫 커밋"
   }
 ]);

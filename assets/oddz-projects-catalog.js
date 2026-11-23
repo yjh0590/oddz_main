@@ -35,15 +35,15 @@
     olympus:{done:['PERFECTVM','올림포스에 오른 것'],doing:['IN OPERE','지금 대장간에서 빚는 중인 것'],next:['PROXIMVM','다음에 빚을 것'],someday:['ALIQVANDO','신탁으로만 전해지는 것']}
   };
   const accent={sparkle:'#8fe3d0',machine:'#F5B921','game-water':'#8FE8F2','game-sunset':'#F0C97A',bubbles:'#F5A9C9',oz:'#63a995',hum:'#2f6fd0',olympus:'#24578a',ripple:'#9ff3ff',ink:'#b3261e',fog:'#ffc46b',sand:'#b4532a',magnet:'#e0483b',cloth:'#2c3e6b'}[theme];
-  // 올림포스: PJ 번호를 로마 숫자로 (PJ 19 → XIX)
+  // 올림포스: PJ 번호를 로마 숫자로 (PJ 23 → XIX)
   const roman=(n)=>{let out='';for(const [v,s] of [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]){while(n>=v){out+=s;n-=v;}}return out;};
   const sceneSamples=[...work.querySelectorAll('.entry[data-mood]')].map(n=>({mood:n.dataset.mood,html:n.querySelector('.entry-scene')?.innerHTML||''}));
   const mk=(tag,cls,content)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(content!==undefined&&content!==null)n.textContent=String(content);return n};
   const urlFor=(str)=>{
     // Public project paths only; no external redirect or dynamic script URLs.
-    if(typeof str!=='string'||!str.startsWith('/projects/'))return null;
+    if(typeof str!=='string'||!/^\/(projects|journal)\//.test(str))return null;
     const pathOnly=str.split('?')[0];
-    if(!/^\/projects\/[a-z0-9-]+\.html$/i.test(pathOnly))return null;
+    if(!/^\/(projects|journal)\/[a-z0-9-]+\.html$/i.test(pathOnly))return null;
     const url=new URL(pathOnly, document.baseURI);
     url.searchParams.set('theme',theme==='oz'?'oz':theme);
     return url.href;

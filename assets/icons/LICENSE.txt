@@ -1,17 +1,19 @@
 assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
 
 직접 만든 앱 아이콘
-  pj-23.png  어쩔 수 없었어 (직접 작성한 pj-23.svg를 PNG로 렌더링)
-  pj-05.png  오늘의 강의 (assets/todays-lecture-icon.png)
-  pj-07.png  내리는 문 (앱 icon-192.png)
-  pj-19.png  명령어 도구함 (CmdToolbox app.ico)
-  pj-21.png  쓱-싹 (assets/sseuk-ssak.ico)
+  pj-27.png  어쩔 수 없었어 (직접 작성한 pj-27.svg를 PNG로 렌더링)
+  pj-08.png  오늘의 강의 (assets/todays-lecture-icon.png)
+  pj-11.png  내리는 문 (앱 icon-192.png)
+  pj-23.png  명령어 도구함 (CmdToolbox app.ico)
+  pj-25.png  쓱-싹 (assets/sseuk-ssak.ico)
 
 나머지는 Lucide 선 아이콘(https://lucide.dev)을 옅은 색 타일에 얹어 PNG로 만든 것
-  pj-01 scissors · pj-02 graduation-cap · pj-03 notebook-pen · pj-04 milk
-  pj-06 dices · pj-08 folders · pj-09 coffee · pj-10 book-a · pj-11 captions
-  pj-12 clapperboard · pj-13 globe · pj-14 coins · pj-15 sprout · pj-16 egg
-  pj-17 timer · pj-18 swords · pj-20 ticket · pj-22 sparkles
+  pj-01 file-text · pj-02 scissors · pj-03 keyboard · pj-04 graduation-cap
+  pj-05 notebook-pen · pj-06 milk · pj-07 box · pj-09 dices
+  pj-10 layout-grid · pj-12 folders · pj-13 coffee · pj-14 book-a
+  pj-15 captions · pj-16 clapperboard · pj-17 globe · pj-18 coins
+  pj-19 sprout · pj-20 egg · pj-21 timer · pj-22 swords
+  pj-24 ticket · pj-26 sparkles · pj-30 wind
 
 Lucide 라이선스 원문:
 
@@ -59,4 +61,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-PJ 24: Original Wagle speech-bubble logo, created for oddz (2026).
+PJ 28: Original Wagle speech-bubble logo, created for oddz (2026).

@@ -13,27 +13,23 @@
 
   // Per-project back stories, keyed by card id.
   const secrets = {
-    'pj-01': { note: '아주 간단한 참여가 쌓이면 어떤 게임이 될지 적어 둔 첫 메모가 있다.', links: [journal('rock-paper-scissors')] },
-    'pj-02': { note: '처음에는 실행 파일로 만들려다 웹으로 방향을 바꾼, 첫 배포 프로젝트.', links: [journal('enrollment'), source('inu-sugangshinchoeng')] },
-    'pj-03': { note: '쓰던 일기 앱의 제한이 답답해서, 내가 쓰고 싶은 방식대로 직접 만들었다.', links: [journal('diary')] },
-    'pj-04': { note: '카메라로 실제 손과 물체의 움직임을 따라가 보려던 실험에서 시작했다.', links: [journal('bottle')] },
-    'pj-05': { note: '처음에는 마우스 좌표와 화면 인식으로 다음 강의를 누르는 스크립트였다.', links: [{ label: '그 스크립트 이야기', href: '../journal/lms-script.html?theme=oz' }, journal('todays-lecture')] },
-    'pj-06': { note: '낙서 캐릭터와 둥근 탁자 시점으로 만드는 중.', links: [journal('random-games')] },
-    'pj-07': { note: '‘왼쪽 문’ 안내를 실제 화살표로 바꾸려다 위치와 데이터의 한계를 만났다.', links: [journal('subway')] },
-    'pj-08': { note: '부처별 HWPX 문서 수백 개를 사업별로 나누던 일에서 나왔다.', links: [journal('macro')] },
-    'pj-11': { note: '강의 영상을 MP3로 바꾸고 대본을 공부 자료로 만들던 반복 작업을 한 흐름으로 묶었다.', links: [journal('transcript-guide'), source('lecture-video-transcript-guide')] },
-    'pj-14': { note: '시작은 “로또에 당첨되면 뭐 하지?”라는 상상이었다.', links: [journal('if-world'), source('if-you-get-lotto-1st')] },
-    'pj-19': { note: '처음에는 종료 예약 버튼 하나뿐인 프로그램이었다.', links: [journal('cmd-toolbox'), source('CmdToolbox')] },
-    'pj-21': { note: 'v0.6.1 아이콘 → v0.6.2 둥근 카드 → v0.7 HTML·CSS 화면 → v0.7.1 Chrome 앱 창.', links: [journal('sseuk-ssak')] },
+    'pj-02': { note: '아주 간단한 참여가 쌓이면 어떤 게임이 될지 적어 둔 첫 메모가 있다.', links: [journal('rock-paper-scissors')] },
+    'pj-04': { note: '처음에는 실행 파일로 만들려다 웹으로 방향을 바꾼, 첫 배포 프로젝트.', links: [journal('enrollment'), source('inu-sugangshinchoeng')] },
+    'pj-05': { note: '쓰던 일기 앱의 제한이 답답해서, 내가 쓰고 싶은 방식대로 직접 만들었다.', links: [journal('diary')] },
+    'pj-06': { note: '카메라로 실제 손과 물체의 움직임을 따라가 보려던 실험에서 시작했다.', links: [journal('bottle')] },
+    'pj-08': { note: '처음에는 마우스 좌표와 화면 인식으로 다음 강의를 누르는 스크립트였다.', links: [{ label: '그 스크립트 이야기', href: '../journal/lms-script.html?theme=oz' }, journal('todays-lecture')] },
+    'pj-09': { note: '낙서 캐릭터와 둥근 탁자 시점으로 만드는 중.', links: [journal('random-games')] },
+    'pj-11': { note: '‘왼쪽 문’ 안내를 실제 화살표로 바꾸려다 위치와 데이터의 한계를 만났다.', links: [journal('subway')] },
+    'pj-12': { note: '부처별 HWPX 문서 수백 개를 사업별로 나누던 일에서 나왔다.', links: [journal('macro')] },
+    'pj-15': { note: '강의 영상을 MP3로 바꾸고 대본을 공부 자료로 만들던 반복 작업을 한 흐름으로 묶었다.', links: [journal('transcript-guide'), source('lecture-video-transcript-guide')] },
+    'pj-18': { note: '시작은 “로또에 당첨되면 뭐 하지?”라는 상상이었다.', links: [journal('if-world'), source('if-you-get-lotto-1st')] },
+    'pj-23': { note: '처음에는 종료 예약 버튼 하나뿐인 프로그램이었다.', links: [journal('cmd-toolbox'), source('CmdToolbox')] },
+    'pj-07': { note: '물병 다음으로 시도한 움직임. 작은 값 하나에도 큐브가 엉뚱하게 돌았다.', links: [journal('cube')] },
+    'pj-01': { note: '로그인에서 막혀, 어디서 멈췄는지도 찾지 못한 채 메모만 남았다.', links: [journal('pdf-experiment')] },
+    'pj-03': { note: '한 줄로 적어 둔 생각. 구현까지 간 기록은 없다.', links: [journal('keyboard')] },
+    'pj-10': { note: '처음 돈을 주고 산 도메인. oddments에서 이름을 따왔다.', links: [journal('oddz')] },
+    'pj-25': { note: 'v0.6.1 아이콘 → v0.6.2 둥근 카드 → v0.7 HTML·CSS 화면 → v0.7.1 Chrome 앱 창.', links: [journal('sseuk-ssak')] },
   };
-
-  // Journal-only experiments that never made it onto the project list.
-  const lab = [
-    { no: '실험', type: '3D', title: '카메라 트래킹 3D 큐브', date: '2026.05.04', desc: '여러 회전축을 가진 큐브를 카메라로 움직여 보려던 인터랙션 실험.', slug: 'cube', mood: 'fantasy' },
-    { no: '실험', type: 'Web', title: 'PDF 변환·정리 웹사이트', date: '2025.09.04', desc: '관리자 화면과 로그인 연결을 시험하다가 막혔던 짧은 개발 메모.', slug: 'pdf-experiment', mood: 'trial' },
-    { no: '메모', type: 'Idea', title: '키보드 답장 아이디어', date: '2025.12.09', desc: '답장을 쓸 때 AI가 문장을 도와주는 키보드에 대한 짧은 구상.', slug: 'keyboard', mood: 'wish' },
-    { no: '기록', type: 'Web', title: 'oddz.click 만들기', date: '2026.07–09', desc: '이름을 정하고 여러 디자인을 거쳐 도메인과 GitHub Pages를 연결한 기록.', slug: 'oddz', mood: 'journey' },
-  ];
 
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
   const link = ({ label, href, external }) => {
@@ -54,23 +50,6 @@
       const links = el('span', 'secret-links'); s.links.forEach((l) => links.append(link(l))); box.append(links);
       main.insertBefore(box, main.querySelector('.oddz-project-lower'));
     }
-    const section = el('section', 'oddz-project-stage secret-lab'); section.dataset.stage = 'secret';
-    const head = el('div', 'oddz-stage-head');
-    head.append(el('h3', '', '지도 밖 실험실'), el('span', 'oddz-stage-count', lab.length + '개'));
-    const list = el('div', 'oddz-stage-list');
-    for (const x of lab) {
-      const card = el('article', 'entry oddz-project-card secret-card'); card.dataset.mood = x.mood;
-      const main = el('div', 'entry-main');
-      const meta = el('div', 'entry-meta'); meta.append(el('span', 'entry-cat', x.type), el('span', 'entry-status', '목록 밖'));
-      const lower = el('div', 'oddz-project-lower'); lower.append(el('span', 'entry-link', '개발일지 보기 ↗'));
-      main.append(meta, el('h3', '', x.title), el('p', 'oddz-project-date', x.date), el('p', 'oddz-project-desc', x.desc), lower);
-      const surface = el('a', 'oddz-card-surface'); surface.href = `../journal/${x.slug}.html?theme=oz`;
-      surface.setAttribute('aria-label', x.title + ' 개발일지 열기');
-      card.append(el('div', 'number', x.no), main, surface);
-      list.append(card);
-    }
-    section.append(head, el('p', 'oddz-stage-intro', '프로젝트 목록에는 없지만 개발일지에 남아 있는 실험과 메모'), list);
-    catalog.querySelector('.oddz-project-groups')?.after(section);
     return true;
   }
 
