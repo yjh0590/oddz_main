@@ -54,9 +54,7 @@
 
 ## AGORA · 철학자들의 광장 (PJ 29)
 
-- 소개: `/projects/agora.html`
-- 실행본: `/agora/`
-- 원본 저장소에서 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다.
+`agora/`는 https://github.com/yjh0590/agora 의 `app/`을 복사한 공개 실행본입니다. 원본 저장소에서 수정하고 `node scripts/sync-oddz.mjs <이 저장소 경로>`로 동기화합니다. 이 페이지만 자체 CSP에서 `connect-src https://api.anthropic.com`을 허용하고, 검색엔진에는 노출하지 않습니다(`noindex`, 사이트맵 제외). 소개는 `projects/agora.html`, 개발일지는 `journal/agora.html`입니다.
 
 ## 다른 저장소에서 복사해 온 웹 프로젝트
 

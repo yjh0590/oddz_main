@@ -583,9 +583,9 @@ window.ODDZ_PROJECTS = Object.freeze([
       "웹"
     ],
     "url": "/projects/agora.html",
-    "link": "광장 열기",
-    "date": "2026.11.23",
-    "dateBasis": "첫 구현·테스트 및 oddz 연결"
+    "link": "사이트·개발일지",
+    "date": "2026.11.21",
+    "dateBasis": "개발일지 첫 공개"
   },
   {
     "id": "pj-30",

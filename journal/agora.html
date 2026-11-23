@@ -14,7 +14,7 @@
 <body>
   <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
   <main><article class="journal-article">
-    <header class="journal-intro"><span class="eyebrow">Web · 첫 공개</span><h1>AGORA 만들기</h1><p class="lead">솔방울을 멀리 보내는 법을 소크라테스와 장자에게 물어보는 광장.</p><p class="article-date"><time datetime="2026-11-21">2026.11.21</time></p></header>
+    <header class="journal-intro"><span class="eyebrow">PJ 29 · Web · 첫 공개</span><h1>AGORA 만들기</h1><p class="lead">솔방울을 멀리 보내는 법을 소크라테스와 장자에게 물어보는 광장.</p><p class="article-date"><time datetime="2026-11-21">2026.11.21</time></p></header>
     <section class="journal-section"><h2>군대에서 한 생각</h2><p>군대에 있을 때, 내 생각을 철학자들은 어떻게 볼지 물어볼 수 있는 광장이 있으면 좋겠다고 생각했다. AI를 쓰면 그 생각을 여러 철학자의 사상으로 다시 비춰 볼 수 있다.</p><p>평소에 하는 궁금증은 대체로 엉뚱하다. 하늘에서 떨어지는 물건을 피하게 하려면 뭐라고 외쳐야 할까. 쾌락과 고통의 절댓값을 계산할 수 있을까. 안녕은 hi도 bye도 되는데, 스쳐 지나가며 인사할 땐 뭐라고 해야 할까. 이런 질문을 던지면 고대 그리스부터 현대까지, 동양과 서양의 철학자들이 한 줄씩 답해 주는 곳을 만들기로 했다.</p></section>
     <section class="journal-section"><h2>진지한데 피식 웃기게</h2><p>답의 톤은 진지해야 했다. 말투만 흉내 내는 것이 아니라 그 사람의 실제 사상에서 나온 답이어야 한다. 소크라테스는 되묻고, 디오게네스는 무례할 만큼 단순하고, 칸트는 모두가 그렇게 해도 되는지 따진다. 진지하게 끝까지 밀어붙인 결과가 웃기게 만드는 쪽을 택했다.</p><p>그래서 답마다 근거가 된 개념을 작은 꼬리표로 붙였다(칸트 · 정언명령, 장자 · 소요유). 실제로 한 적 없는 말을 명언처럼 꾸미지 않도록 했다. 철학자 명단은 40명으로 시작했다. 질문마다 동양 철학자를 2명 이상 넣고 한 시대에 몰리지 않게 6명을 고른다.</p></section>
     <section class="journal-section"><h2>서버 없이 키를 지키는 법</h2><p>oddz.click은 정적 사이트라 API 키를 숨길 서버가 없다. 그래서 키를 비밀번호로 암호화(PBKDF2 60만 회 + AES-GCM)해 페이지에 넣고, 비밀번호를 입력하면 브라우저 안에서 풀리도록 했다. 공개된 암호문은 긴 비밀번호와 콘솔의 월 사용 한도로 보완한다.</p></section>
