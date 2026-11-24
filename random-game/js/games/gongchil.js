@@ -9,14 +9,15 @@ registerGxGame(
       "마지막 \"빵!\"을 맞으면 <b>양옆 두 사람</b>이 [😱으악!]",
       "내가 반응조면 으악!, 아니면 <b>가만히!</b>"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"🎯 공공칠빵", start(GX){ gongchilRound(GX); } }
+  /* 엔진 설정 */ { title:"🎯 공공칠빵", flub:true, start(GX){ gongchilRound(GX); } }
 );
 
 /* ---- 공공칠빵 (+침묵) ---- */
 const GONGCHIL_SYL = ["공","공","칠","빵"];
 function gongchilRound(GX){
-  if(!GX||GX.over) return;
+  if(!GX||GX.over||closeCatch()) return;
   GX.round++;
+  $("msg-gx").textContent = "";
   GX.data.step = 0;
   GX.data.holder = rndOf([0,1,2,3]);
   gongchilStep(GX);
@@ -49,8 +50,11 @@ function gongchilReact(GX, target){
   const group = seatNeighbors(target);
   const meIn = group.includes(0);
   $("gx-center").innerHTML = `<b>빵!</b> (맞은 사람: <b>${GX.seats[target].name}</b>) 양옆이 반응할 차례!`;
-  group.forEach((i,k)=>{ if(i!==0) setTimeout(()=>{ if(GX&&!GX.over){ bubbleSay(GX.seats[i],"으악!!",900); hop(GX.seats[i]); } }, 200+k*120); });
+  const odd = rndOf([1,2,3]), flub = flubRoll(odd);
+  const reactors = [1,2,3].filter(i => group.includes(i) !== (flub && i === odd));   // 틀린 콤이는 반대로 행동
+  reactors.forEach((i,k)=>setTimeout(()=>{ if(GX&&!GX.over){ bubbleSay(GX.seats[i],"으악!!",900); hop(GX.seats[i]); } }, 200+k*120));
   $("gx-controls").innerHTML = "";
+  gxCatch(GX, odd, flub, GX.round-1);
   if(meIn){
     $("msg-gx").textContent = "너도 반응조다! [😱 으악!]";
     gxBtn("😱 으악!", () => { bubbleSay(GX.seats[0],"으악!!",900); click('word'); hop(GX.seats[0]); gxClearTimer(); $("gx-controls").innerHTML=""; gxSafeNext(()=>gongchilRound(GX), 700); }, "btn-berry");

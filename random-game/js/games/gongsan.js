@@ -2,7 +2,7 @@
 (() => {
 
 registerGame(
-  {key:"gongsan", emj:"✊", nm:"공산당", tg:"왕게임·복불복",
+  {key:"gongsan", flub:true, emj:"✊", nm:"공산당", tg:"왕게임·복불복",
     intro:"공~산당 공산당 공~산당 공산당!",
     rules:["발언권을 가진 <b>수령</b>이 \"동무!\" 하며 마음대로 지시!",
       "수령이 되면 제한 시간 안에 동무를 지목하라우!",
@@ -51,21 +51,21 @@ function startGongsan(){
 }
 function stopGongsan(){ haltState(GS); GS = null; }
 function nextGongsan(){
-  if(!GS || GS.over) return;
+  if(!GS || GS.over || closeCatch()) return;
   GS.round++;
   GS.seats.forEach((p,i) => p.el.classList.toggle("turn", i === GS.holder));
   const p = GS.seats[GS.holder];
   $("gs-targets").innerHTML = "";
   if(p.isHuman){
-    GS.limit = Math.max(1500, 4000 - 120 * (GS.round - 1));
+    GS.limit = Math.max(6000, 10000 - 200 * (GS.round - 1));
     GS.deadline = performance.now() + GS.limit;
-    $("gs-center").innerHTML = `네가 <b>수령</b>이다! ✊ 지목하라우!`;
-    $("msg-gs").textContent = "동무를 골라! (지시는 복불복이다...)";
-    [1,2,3].forEach(i => {
-      const b = document.createElement("button");
-      b.textContent = `🫵 ${GS.seats[i].name} 동무!`;
-      b.addEventListener("click", () => orderGongsan(0, i));
-      $("gs-targets").appendChild(b);
+    $("gs-center").innerHTML = `네가 <b>수령</b>이다! ✊ 💬 <b>채팅으로 명령</b>하라우!`;
+    $("msg-gs").textContent = "예: \"슬픈 동무 노래 하라우\" · \"무서운 동무 원샷!\" (마시·원샷·잔 → 벌칙주)";
+    askChat("누구 + 명령 (예: 재밌는 동무 애교!)", raw => {
+      if(!GS || GS.over) return;
+      const who = [1,2,3].find(i => raw.includes(GS.seats[i].name.split(" ")[0])) || rndOf([1,2,3]);
+      const penalty = /마시|마셔|원샷|잔|짠|술/.test(raw);
+      orderGongsan(0, who, [raw, penalty]);
     });
   } else {
     GS.deadline = 0;
@@ -77,30 +77,34 @@ function nextGongsan(){
     }, 900 + Math.random()*800);
   }
 }
-function orderGongsan(from, target){
+/* custom = [멘트, 벌칙 여부]: 내가 채팅으로 내린 명령 */
+function orderGongsan(from, target, custom){
   if(!GS || GS.over) return;
   GS.deadline = 0;
   $("gs-targets").innerHTML = "";
-  const [ment, isPenalty] = rndOf(GS_ORDERS);
+  const [ment, isPenalty] = custom || rndOf(GS_ORDERS);
   const F = GS.seats[from], T = GS.seats[target];
-  $("gs-center").innerHTML = `<b>${F.name}</b> 🫵 "<b>${T.name}</b> 동무! ${ment}"`;
+  $("gs-center").innerHTML = custom ? `<b>${F.name}</b> 🫵 "${esc(ment)}" → <b>${T.name}</b>` : `<b>${F.name}</b> 🫵 "<b>${T.name}</b> 동무! ${ment}"`;
   bubbleSay(F, "동무!", 900);
   click('word'); hop(F);
   GS.timer = setTimeout(() => {
     if(!GS || GS.over) return;
     if(isPenalty){
       if(T.isHuman) return failGongsan(`수령의 명령이다... "${ment}"`);
-      bubbleSay(T, "크윽... 🍺", 1200);
-      click('fail'); hop(T);
-      $("msg-gs").textContent = `${T.name} 원샷! 게임은 계속된다...`;
-      GS.holder = target;
-      GS.timer = setTimeout(nextGongsan, 900);
-    } else {
-      bubbleSay(T, "알갔습네다!", 1000);
-      click('word'); hop(T);
-      GS.holder = target;
-      GS.timer = setTimeout(nextGongsan, 700);
     }
+    /* 틀리면: 벌칙인데 마시는 척만 하거나, 명령에 "싫은데?" 하고 개김 */
+    const flub = flubRoll(target, 1 + GS.round*0.03);
+    GS.holder = target;
+    if(isPenalty){
+      bubbleSay(T, flub ? "(마시는 척...) 🤫" : "크윽... 🍺", 1200);
+      click('fail'); hop(T);
+      $("msg-gs").textContent = flub ? `${T.name}... 잔이 그대로인데?` : `${T.name} 원샷! 게임은 계속된다...`;
+    } else {
+      bubbleSay(T, flub ? "싫은데?" : custom ? ({ funny: "🎤 랄랄라~ 신난다!", scary: "...(마지못해 함)", sad: "흑... 알겠어요..." }[T.face] || "알갔습네다!") : "알갔습네다!", 1200);
+      click('word'); hop(T);
+    }
+    if(!T.isHuman) openCatch(T, flub, catchStd("msg-gs", failGongsan, () => { clearTimeout(GS.timer); GS.timer = setTimeout(nextGongsan, 1500); }));
+    GS.timer = setTimeout(nextGongsan, 1100);
   }, 900);
 }
 function loopGongsan(now){

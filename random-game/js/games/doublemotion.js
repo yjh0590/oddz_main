@@ -9,7 +9,7 @@ registerGxGame(
       "시간 안에 못 고르면 벌칙!",
       "템포가 <b>점점 빨라져!</b> ⚡"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"🔁 이중모션", start(GX){ GX.data.holder=0; dmRound(GX); } }
+  /* 엔진 설정 */ { title:"🔁 이중모션", flub:true, start(GX){ GX.data.holder=0; dmRound(GX); } }
 );
 
 /* ---- 이중모션 ---- */
@@ -33,16 +33,18 @@ function dmRound(GX){
     }));
     gxSetTimer(Math.max(900,2400-70*GX.round), () => gxFail("동작이 느렸다!", GX.round-1));
   } else {
-    gxSafeNext(() => {
-      bubbleSay(GX.seats[holder], rndOf(DM_GESTURES)+rndOf(DM_GESTURES), 900); hop(GX.seats[holder]); click('thumb');
-      GX.data.holder = gxPickTarget(holder);
-      gxSafeNext(()=>dmRound(GX), 500);
-    }, 700);
+    $("gx-center").innerHTML = `<b>${GX.seats[holder].name}</b> 차례...`;
+    GX.data.holder = gxPickTarget(holder);
+    gxSafeNext(() => gxNpc(GX, holder, flub => {
+      const move = flub ? rndOf(DM_GESTURES) : rndOf(DM_GESTURES)+rndOf(DM_GESTURES);   // 틀리면 동작 하나만
+      $("gx-center").innerHTML = `<b>${GX.seats[holder].name}</b>: ${move}`;
+      bubbleSay(GX.seats[holder], move, 900); hop(GX.seats[holder]); click('thumb');
+    }, () => dmRound(GX), 900, GX.round-1), 700);
   }
 }
 function dmPickTarget(GX){
   $("gx-center").innerHTML = "누구에게 넘길까?";
-  [1,2,3].forEach(i => gxBtn(`👉 ${GX.seats[i].name}`, () => { GX.data.holder=i; gxSafeNext(()=>dmRound(GX), 400); }));
+  gxAim(i => { GX.data.holder=i; gxSafeNext(()=>dmRound(GX), 400); }, "👉 누구에게 넘길까?");
 }
 
 })();

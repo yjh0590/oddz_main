@@ -9,12 +9,12 @@ registerGxGame(
       "이름 안 불렸는데 대답하거나, 불렸는데 못 하면 벌칙!",
       "시간이 <b>점점 짧아져!</b> ⚡"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"📖 출석부", start(GX){ chulseokRound(GX); } }
+  /* 엔진 설정 */ { title:"📖 출석부", flub:true, start(GX){ chulseokRound(GX); } }
 );
 
 /* ---- 출석부 ---- */
 function chulseokRound(GX){
-  if(!GX||GX.over) return;
+  if(!GX||GX.over||closeCatch()) return;
   GX.round++;
   const caller = rndOf([0,1,2,3]);
   const calledName = gxPickTarget(caller);
@@ -23,6 +23,15 @@ function chulseokRound(GX){
   $("gx-center").innerHTML = `<b>${GX.seats[caller].name}</b>: (손가락은 <b>${GX.seats[pointedAt].name}</b> 쪽!) "<b>${GX.seats[calledName].name}</b>!"`;
   bubbleSay(GX.seats[caller], GX.seats[calledName].name+"!", 1100); click('word'); hop(GX.seats[caller]);
   $("gx-controls").innerHTML="";
+  /* 불린 콤이는 "네!" 한다. 틀리면: 불렸는데 멍때리거나, 손가락에 속아 엉뚱한 콤이가 대답 */
+  const fooled = pointedAt!==0 && pointedAt!==calledName ? pointedAt : null;
+  const odd = calledName!==0 ? calledName : fooled;
+  if(odd !== null){
+    const flub = flubRoll(odd);
+    const answer = flub ? fooled : (calledName!==0 ? calledName : null);
+    if(answer !== null) setTimeout(()=>{ if(GX&&!GX.over){ bubbleSay(GX.seats[answer],"네!",900); hop(GX.seats[answer]); } }, 350);
+    gxCatch(GX, odd, flub, GX.round-1);
+  }
   const meCalled = calledName===0;
   if(meCalled){
     $("msg-gx").textContent = "네 이름이 불렸다! (손가락 방향 말고 이름을 봐!) [네!]";

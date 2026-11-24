@@ -25,8 +25,14 @@ function deathRound(GX){
     [3,5,7,9].forEach(n => gxBtn(`${n}!`, () => deathResolve(GX, pointers, host, n)));
     gxSetTimer(3200, () => gxFail("숫자를 못 골랐다!", GX.round-1));
   } else {
+    /* 콤이가 술래: 누가 누굴 가리키는지 보고, 숫자만큼 따라가면 누가 걸릴지 미리 찍는다 */
     const n = rndOf([3,5,7,9]);
-    gxSafeNext(() => deathResolve(GX, pointers, host, n), 700);
+    let cur = host; for(let k=0;k<n;k++) cur = pointers[cur];
+    const arrows = pointers.map((t,i) => `${GX.seats[i].isHuman ? "나" : GX.seats[i].name.split(" ")[0]}→${GX.seats[t].isHuman ? "나" : GX.seats[t].name.split(" ")[0]}`).join(" · ");
+    GX.seats.forEach((p,i) => bubbleSay(p, "👉 " + (GX.seats[pointers[i]].isHuman ? "나" : GX.seats[pointers[i]].name.split(" ")[0]), 4000));
+    $("gx-center").innerHTML = `<b>${GX.seats[host].name}</b>: "<b>${n}</b>!" <span class="sub">(${arrows})</span>`;
+    $("msg-gx").textContent = `🧮 ${GX.seats[host].name}부터 손가락을 ${n}번 따라가면? 맞히면 산다!`;
+    gxPredict(GX, cur, Math.max(3000, 7000 - 250*GX.round), GX.round-1, () => deathResolve(GX, pointers, host, n));
   }
 }
 function deathResolve(GX, pointers, host, n){
@@ -41,9 +47,10 @@ function deathResolve(GX, pointers, host, n){
     GX.seats.forEach((p,i)=>p.el.classList.toggle("turn", i===path[step]));
     if(step >= path.length-1){
       const loser = GX.seats[path[path.length-1]];
-      if(loser.isHuman) return gxFail(`숫자 ${n}에 걸렸다!`, GX.round-1);
-      $("msg-gx").innerHTML = `<b>${loser.name}</b> 걸렸다! 원샷~ 🍺`;
-      click('fail'); shakeSeat(loser);
+      if(loser.isHuman){
+        if(host === 0) return gxFail(`숫자 ${n}에 걸렸다!`, GX.round-1);
+        $("msg-gx").textContent = "나한테 올 줄 알았지! 피했다 😎"; click('word');
+      } else { $("msg-gx").innerHTML = `<b>${loser.name}</b> 걸렸다! 원샷~ 🍺`; npcDrinks(loser); }
       gxSafeNext(()=>deathRound(GX), 1000);
       return;
     }

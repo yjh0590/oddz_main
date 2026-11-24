@@ -14,6 +14,7 @@ assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
   pj-15 captions · pj-16 clapperboard · pj-17 globe · pj-18 coins
   pj-19 sprout · pj-20 egg · pj-21 timer · pj-22 swords
   pj-24 ticket · pj-26 sparkles · pj-30 wind
+  pj-31 calendar-heart · pj-32 bell-ring
 
 Lucide 라이선스 원문:
 

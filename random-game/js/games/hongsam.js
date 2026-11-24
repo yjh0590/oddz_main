@@ -27,7 +27,7 @@ function hongsamRound(GX){
   gxSafeNext(() => {
     if(humanPicks){
       $("msg-gx").textContent = "너도 지목받았다! 누굴 가리킬래?";
-      [1,2,3].forEach(i => gxBtn(`👉 ${GX.seats[i].name}`, () => hongsamResolve(GX, picks)));
+      gxAim(() => hongsamResolve(GX, picks), "👉 누굴 가리킬래?");
       gxSetTimer(Math.max(1000,2600-60*GX.round), () => gxFail("못 골랐다!", GX.round-1));
     } else {
       hongsamResolve(GX, picks);

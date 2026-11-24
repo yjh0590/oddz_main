@@ -72,6 +72,7 @@ function beginSubway(lineKey){
 }
 function stopSubway(){ haltState(SB); SB = null; }
 function nextSubway(){
+  if(closeCatch()) return;
   SB.turnCount++;
   SB.seats.forEach((p,i) => p.el.classList.toggle("turn", i === SB.turn));
   const p = SB.seats[SB.turn];
@@ -90,12 +91,16 @@ function nextSubway(){
       if(SB !== sb || SB.over) return;
       const remain = SB.line.stations.filter(s => !SB.used.has(normStation(s)));
       if(!remain.length) return endSubwayAllUsed();
-      const pick = rndOf(remain);
-      useStation(pick);
+      const flub = SB.usedList.length > 0 && flubRoll(SB.turn, 1 + SB.turnCount*0.03);   // 틀리면 이미 나온 역
+      const pick = flub ? rndOf(SB.usedList) : rndOf(remain);
+      if(!flub) useStation(pick);
       bubbleSay(p, pick + "!", 1000);
+      $("msg-sub").textContent = `${p.name}: "${pick}!"`;
       click('word'); hop(p);
       SB.turn = (SB.turn + 1) % SB.seats.length;
-      setTimeout(() => { if(SB === sb && !SB.over) nextSubway(); }, 200);
+      const go = ms => { clearTimeout(SB.timer); SB.timer = setTimeout(() => { if(SB === sb && !SB.over) nextSubway(); }, ms); };
+      openCatch(p, flub, catchStd("msg-sub", why => failSubway(SB.seats[0], why), () => go(1500)));
+      go(1000);
     }, 700 + Math.random()*700);
   }
 }

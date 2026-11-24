@@ -25,8 +25,21 @@ function pado2Round(GX){
     gxBtn("🌊 오른쪽으로 한 잔!", () => resolvePado2(GX, "오른쪽으로 한 잔", 0));
     gxSetTimer(Math.max(1000,2800-80*GX.round), () => gxFail("지시를 못 내렸다!", GX.round-1));
   } else {
+    /* 콤이가 리더: 지시대로 내 몸으로! 왼쪽=왼쪽으로 쓸기, 오른쪽=오른쪽으로 쓸기, 원샷=꾹 눌러 끝까지 */
     const o = rndOf(["왼쪽으로 반 잔","오른쪽으로 한 잔","전체 원샷 파도"]);
-    gxSafeNext(() => resolvePado2(GX, o, leader), 900);
+    $("gx-center").innerHTML = `<b>${GX.seats[leader].name}</b>: "<b>${o}</b> 파도!" 🌊`;
+    bubbleSay(GX.seats[leader], o + "!", 1200); click('word'); hop(GX.seats[leader]);
+    const ok = () => { click('clink'); hop(GX.seats[0]); gxClearTimer(); gxSafeNext(() => resolvePado2(GX, o, leader), 300); };
+    const wrong = why => gxFail(why, GX.round-1);
+    if(o === "전체 원샷 파도"){
+      gxHold("🍺 원샷!", 0.85, lv => lv < 0.85 ? wrong("원샷이라며! 잔이 남았다!") : lv > 1.05 ? wrong("너무 마셔서 사레들렸다! 🤧") : ok());
+    } else {
+      const want = o.startsWith("왼") ? "left" : "right";
+      const go = d => { if(d !== "left" && d !== "right") return; gxInput(null); d === want ? ok() : wrong("반대쪽으로 보냈다!"); };
+      gxInput({ swipe: go, key: e => e.key === "ArrowLeft" ? (go("left"), true) : e.key === "ArrowRight" ? (go("right"), true) : false },
+        "🌊 지시대로 <b>쓸어서</b> 잔을 넘겨! (← → 도 OK)");
+    }
+    gxSetTimer(Math.max(1600, 3200 - 80*GX.round), () => { gxInput(null); wrong("파도를 놓쳤다!"); });
   }
 }
 function resolvePado2(GX, order, leader){

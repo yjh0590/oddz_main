@@ -27,6 +27,15 @@ const instruction = document.querySelector('#session-instruction');
 const orb = document.querySelector('#practice-orb');
 const focusButton = document.querySelector('#focus-mode');
 const focusDialog = document.querySelector('#focus-dialog');
+const guidanceDialog = document.querySelector('#guidance-dialog');
+const libraryDialog = document.querySelector('#library-dialog');
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const halo = document.querySelector('#breath-halo');
+const torso = document.querySelector('#person-torso');
+const leftArm = document.querySelector('#person-left-arm');
+const rightArm = document.querySelector('#person-right-arm');
+const belly = document.querySelector('#person-belly');
+const bodyZones = [...document.querySelectorAll('[data-zone]')];
 const weatherCopy = {
   dawn: ['MORNING MIST', '서두르지 않아도 괜찮은 아침', '안개가 걷히듯, 마음도 천천히 맑아질 거예요.'],
   rain: ['A RAINY AFTERNOON', '말 대신 비가 내려 주는 오후', '오늘의 무거운 마음은 빗소리에 잠시 맡겨요.'],
@@ -49,13 +58,14 @@ let noiseSource;
 let masterVolume;
 let audioNodes = [];
 let selectedSound = 'wind';
-let focusPlaceholder;
+let lastPracticeTrigger;
+let motionFrame;
 
 const practices = {
   breathing: {
-    title: '숨 고르기', category: '호흡에 기대는 시간', word: '숨', caption: 'BREATHE AT YOUR OWN PACE',
+    title: '심호흡하기', category: '호흡에 기대는 시간', word: '준비', caption: 'BREATHE AT YOUR OWN PACE',
     intro: '4초 들이쉬고, 6초 내쉬어요. 여섯 번의 느린 호흡을 함께해요.',
-    ready: '편하게 앉아 보세요. 호흡은 언제든 편한 속도로 해도 좋아요.',
+    ready: '어깨는 편하게, 손은 배 위에 가볍게 두세요.',
     detail: '숨을 참거나 깊게 쉬려고 애쓰지 않아도 괜찮아요.',
     end: '잠시 숨을 골랐어요. 이제 편한 호흡으로 돌아와요.',
   },
@@ -122,13 +132,47 @@ const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60
 function clearSessionClock() {
   window.clearInterval(sessionInterval);
   sessionInterval = undefined;
+  window.cancelAnimationFrame(motionFrame);
+  motionFrame = undefined;
 }
+
+// SVG geometry follows the same elapsed clock as the timer; pausing freezes both.
+function drawPerson(expansion = 0) {
+  const amount = motionPreference.matches ? 0 : expansion;
+  const spread = amount * 7;
+  halo.setAttribute('rx', String(35 + spread));
+  halo.setAttribute('ry', String(49 + amount * 4));
+  torso.setAttribute('d', `M148 100Q${132 - spread} 102 ${128 - spread} 121Q${122 - spread} 152 134 199M172 100Q${188 + spread} 102 ${192 + spread} 121Q${198 + spread} 152 186 199`);
+  leftArm.setAttribute('d', `M${130 - spread} 115Q${108 - spread} 136 ${111 - spread} 159Q122 ${177 - amount * 3} ${155 - amount * 2} ${171 - amount * 3}`);
+  rightArm.setAttribute('d', `M${190 + spread} 115Q${212 + spread} 136 ${209 + spread} 159Q198 ${177 - amount * 3} ${165 + amount * 2} ${177 - amount * 3}`);
+  belly.setAttribute('d', `M${146 - amount * 3} 151Q160 ${157 + amount * 4} ${174 + amount * 3} 151`);
+}
+
+function drawBreath(ms) {
+  const cycle = ms % 10000;
+  const progress = cycle < 4000 ? cycle / 4000 : 1 - (cycle - 4000) / 6000;
+  drawPerson((1 - Math.cos(Math.PI * progress)) / 2);
+}
+
+function animatePerson() {
+  if (sessionState !== 'running' || selectedPractice !== 'breathing' || breathingPace !== 'paced' || motionPreference.matches) return;
+  drawBreath(elapsed());
+  motionFrame = window.requestAnimationFrame(animatePerson);
+}
+motionPreference.addEventListener('change', () => {
+  window.cancelAnimationFrame(motionFrame);
+  if (motionPreference.matches) drawPerson();
+  else if (sessionState === 'running') animatePerson();
+});
 
 function finishSession(completed) {
   clearSessionClock();
   sessionState = 'finished';
   player.dataset.state = sessionState;
   orb.dataset.phase = 'idle';
+  drawPerson();
+  setText('#phase-time', '');
+  bodyZones.forEach(zone => zone.classList.remove('is-active'));
   setText('#orb-word', '쉼');
   setText('#step-label', completed ? '잠시 머물렀어요' : '오늘은 여기까지');
   instruction.textContent = completed ? practices[selectedPractice].end : '언제 멈춰도 괜찮아요. 내게 편한 만큼 쉬었으면 충분해요.';
@@ -164,10 +208,12 @@ function renderPracticeSettings() {
   document.querySelector('#duration-options').hidden = !timed;
   document.querySelector('#pace-options').hidden = !breathing;
   document.querySelector('#external-anchor').hidden = !timed;
+  document.querySelector('.motion-settings').hidden = !timed;
+  setText('#settings-summary', timed ? `${duration() / 60}분${breathing ? breathingPace === 'paced' ? ' · 4초 / 6초' : ' · 자연 호흡' : ''}` : '내 속도로');
   durationButtons.forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.duration) === duration())));
   paceButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.pace === breathingPace)));
   if (breathing) {
-    setText('#practice-intro', breathingPace === 'natural' ? '속도를 정하지 않고 평소처럼 호흡해요. 원은 호흡 속도를 지시하지 않아요.' : `4초 들이쉬고, 6초 내쉬어요. ${duration() / 10}번의 느린 호흡을 안내해요.`);
+    setText('#practice-intro', breathingPace === 'natural' ? '그림은 멈춰 있어요. 평소처럼 편안하게 호흡해요.' : `4초 들이쉬고, 6초 내쉬어요. ${duration() / 10}번의 느린 호흡을 안내해요.`);
     setText('#practice-adaptation', '처음엔 1분부터. 숫자가 부담스러우면 자연 호흡을 골라요.');
   } else if (selectedPractice === 'meditation') {
     setText('#practice-adaptation', `${duration() === 180 ? '기본 3분' : duration() === 60 ? '짧게 머무는 1분' : '여유롭게 머무는 5분'} · 알아차리기 → 호흡에 머물기 → 주의 넓히기. 각 단계는 ${duration() / 3}초예요.`);
@@ -204,6 +250,8 @@ function renderSession() {
   const practice = practices[selectedPractice];
   const isTimed = timedPractice();
   const ms = elapsed();
+  if (sessionState === 'idle') drawPerson();
+  bodyZones.forEach(zone => zone.classList.toggle('is-active', selectedPractice === 'body' && ['running', 'paused'].includes(sessionState) && Number(zone.dataset.zone) === manualStep));
   if (sessionState === 'running' && isTimed && ms >= duration() * 1000) {
     finishSession(true);
     return;
@@ -219,6 +267,7 @@ function renderSession() {
     setText('#session-detail', practice.detail);
     setText('#orb-word', practice.word);
     orb.dataset.phase = 'idle';
+    setText('#phase-time', '');
   } else if (sessionState === 'running' || sessionState === 'paused') {
     if (selectedPractice === 'breathing') {
       if (breathingPace === 'natural') {
@@ -227,10 +276,14 @@ function renderSession() {
         setText('#session-instruction', '숨의 길이를 바꾸지 않고, 지금 있는 그대로 느껴 봐요.');
         setText('#session-detail', '호흡보다 손이나 발이 닿는 감각이 편하다면 그곳에 머물러요.');
         orb.dataset.phase = 'idle';
+        drawPerson();
+        setText('#phase-time', '');
         renderControls();
         return;
       }
       const inhale = ms % 10000 < 4000;
+      setText('#phase-time', sessionState === 'paused' ? '' : `${Math.max(1, Math.ceil(((inhale ? 4000 : 10000) - ms % 10000) / 1000))}초`);
+      drawBreath(ms);
       const cycles = duration() / 10;
       setText('#step-label', `${Math.min(cycles, Math.floor(ms / 10000) + 1)} / ${cycles}번째 호흡`);
       const phase = sessionState === 'paused' ? 'paused' : inhale ? 'in' : 'out';
@@ -238,7 +291,7 @@ function renderSession() {
       setText('#orb-word', sessionState === 'paused' ? '쉼' : inhale ? '들이쉬기' : '내쉬기');
       const message = inhale ? '편안하게 숨을 들이쉬어요.' : '천천히 숨을 내쉬어요.';
       if (instruction.textContent !== message) instruction.textContent = message;
-      setText('#session-detail', '숫자에 맞추기 어렵다면 나에게 편한 호흡으로요.');
+      setText('#session-detail', '배가 부드럽게 움직이는 만큼만. 크게 쉬려고 애쓰지 않아요.');
     } else {
       const stepCount = practice.steps.length;
       const index = isTimed ? Math.min(stepCount - 1, Math.floor(ms / (duration() * 1000 / stepCount))) : manualStep;
@@ -248,6 +301,8 @@ function renderSession() {
       setText('#session-detail', detail);
       setText('#orb-word', sessionState === 'paused' ? '쉼' : word);
       orb.dataset.phase = sessionState === 'paused' ? 'paused' : 'still';
+      drawPerson();
+      setText('#phase-time', '');
     }
   }
   renderControls();
@@ -267,13 +322,26 @@ function selectPractice(kind) {
   setText('#practice-category', practice.category);
   setText('#practice-intro', practice.intro);
   setText('#visual-caption', practice.caption);
+  const visualIntros = {
+    breathing: '손을 배에 가볍게 얹고, 편하게 앉아요.',
+    meditation: '눈은 편하게 두고, 몸을 가만히 기대어요.',
+    grounding: '지금 있는 자리에서 주변을 천천히 둘러봐요.',
+    body: '그림에서 표시한 곳을 가만히 느껴봐요.',
+  };
+  setText('#motion-intro', visualIntros[kind]);
   renderPracticeSettings();
   renderEvidence();
   resetReflection();
   sessionNotice.textContent = '';
   renderSession();
 }
-practiceButtons.forEach(button => button.addEventListener('click', () => selectPractice(button.dataset.practice)));
+practiceButtons.forEach(button => button.addEventListener('click', () => {
+  selectPractice(button.dataset.practice);
+  lastPracticeTrigger = button;
+  if (!focusDialog.open) focusDialog.showModal();
+  syncModalScroll();
+  startButton.focus({ preventScroll: true });
+}));
 durationButtons.forEach(button => button.addEventListener('click', () => {
   if (['running', 'paused'].includes(sessionState)) return;
   if (selectedPractice === 'meditation') meditationDuration = Number(button.dataset.duration);
@@ -318,6 +386,7 @@ startButton.addEventListener('click', () => {
   sessionNotice.textContent = '';
   if (timedPractice()) sessionInterval = window.setInterval(renderSession, 200);
   renderSession();
+  animatePerson();
 });
 nextButton.addEventListener('click', () => {
   if (sessionState !== 'running' || timedPractice()) return;
@@ -331,28 +400,35 @@ stopButton.addEventListener('click', () => {
   finishSession(false);
 });
 
-function leaveFocus() {
-  if (!focusPlaceholder) return;
-  focusPlaceholder.replaceWith(player);
-  focusPlaceholder = undefined;
-  focusButton.setAttribute('aria-pressed', 'false');
-  focusButton.textContent = '온전히 집중하기 ⛶';
-  document.body.classList.remove('focused');
-  if (focusDialog.open) focusDialog.close();
-  focusButton.focus({ preventScroll: true });
+function syncModalScroll() {
+  document.body.classList.toggle('focused', Boolean(document.querySelector('dialog[open]')));
 }
-focusButton.addEventListener('click', () => {
-  if (focusDialog.open) { leaveFocus(); return; }
-  focusPlaceholder = document.createComment('practice-player');
-  player.replaceWith(focusPlaceholder);
-  focusDialog.append(player);
-  focusDialog.showModal();
-  document.body.classList.add('focused');
-  focusButton.setAttribute('aria-pressed', 'true');
-  focusButton.textContent = '숲으로 돌아가기 ×';
-  focusButton.focus({ preventScroll: true });
+function leaveFocus() {
+  if (focusDialog.open) focusDialog.close();
+}
+focusButton.addEventListener('click', leaveFocus);
+focusDialog.addEventListener('close', () => {
+  // A queued close event must not interrupt a dialog opened again in the meantime.
+  if (focusDialog.open) return;
+  pauseSession('잠시 멈췄어요. 다시 열면 이어서 쉴 수 있어요.');
+  stopSound();
+  syncModalScroll();
+  if (lastPracticeTrigger) lastPracticeTrigger.focus({ preventScroll: true });
 });
-focusDialog.addEventListener('close', leaveFocus);
+document.querySelector('#practice-help').addEventListener('click', () => {
+  pauseSession('안내를 보는 동안 잠시 멈췄어요. 준비되면 이어서 쉬어요.');
+  stopSound();
+  guidanceDialog.showModal();
+  syncModalScroll();
+});
+document.querySelector('#close-guidance').addEventListener('click', () => guidanceDialog.close());
+guidanceDialog.addEventListener('close', syncModalScroll);
+document.querySelector('#open-library').addEventListener('click', () => {
+  libraryDialog.showModal();
+  syncModalScroll();
+});
+document.querySelector('#close-library').addEventListener('click', () => libraryDialog.close());
+libraryDialog.addEventListener('close', syncModalScroll);
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden) return;
   pauseSession('다른 화면을 보는 동안 잠시 멈췄어요. 준비되면 이어서 쉬어요.');
@@ -531,6 +607,9 @@ function resetPage() {
   clearTimeout(leafTimer);
   leaves.replaceChildren();
   leaveFocus();
+  if (guidanceDialog.open) guidanceDialog.close();
+  if (libraryDialog.open) libraryDialog.close();
+  document.querySelector('.motion-settings').open = false;
   clearSessionClock();
   sessionState = 'idle';
   meditationDuration = 180;

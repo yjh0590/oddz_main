@@ -2,7 +2,7 @@
 (() => {
 
 registerGame(
-  {key:"hoppang", emj:"🥟", nm:"호빵찐빵", tg:"007빵식",
+  {key:"hoppang", flub:true, emj:"🥟", nm:"호빵찐빵", tg:"007빵식",
     intro:"호! 빵~ 찐~빵 대빵!",
     rules:["한 글자씩 지목하며 넘긴다: 호→빵 / 찐→빵 / 대→빵",
       "<b>내가 지목당하면</b> 다음 글자를 눌러!",
@@ -50,7 +50,7 @@ function startHoppang(){
 }
 function stopHoppang(){ haltState(HP); HP = null; }
 function nextHpRound(){
-  if(!HP || HP.over) return;
+  if(!HP || HP.over || closeCatch()) return;
   HP.round++;
   HP.combo = rndOf(HP_COMBOS);
   HP.step = 0;
@@ -99,7 +99,10 @@ function hpReaction(target){
   HP.reactNeed = meIn;
   $("hp-center").innerHTML = `조합은... <b>${comboName}</b>!! (빵 맞은 사람: <b>${HP.seats[target].name}</b>)`;
   $("msg-hp").textContent = meIn ? "너도 반응조다! [😱 으악!]" : "너는 아니다... 가만히!";
-  group.forEach((i,k) => { if(i !== 0) setTimeout(() => { if(HP && !HP.over) { bubbleSay(HP.seats[i], "으악!!", 900); hop(HP.seats[i]); } }, 250 + k*100); });
+  const odd = rndOf([1,2,3]), flub = flubRoll(odd);
+  const reactors = [1,2,3].filter(i => group.includes(i) !== (flub && i === odd));   // 틀린 콤이는 반대로 행동
+  reactors.forEach((i,k) => setTimeout(() => { if(HP && !HP.over) { bubbleSay(HP.seats[i], "으악!!", 900); hop(HP.seats[i]); } }, 250 + k*100));
+  openCatch(HP.seats[odd], flub, catchStd("msg-hp", failHoppang));
   HP.limit = Math.max(900, 2200 - 90 * HP.round);
   HP.deadline = meIn ? performance.now() + HP.limit : 0;
   HP.trapUntil = meIn ? 0 : performance.now() + 1300;

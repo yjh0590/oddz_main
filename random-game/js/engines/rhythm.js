@@ -21,7 +21,11 @@ addScreen(/*html*/ `
    리듬설정: { title, bpm, tap, word(i), pat(n), intro[16] } */
 const RGAMES = {};
 const RHYTHM_ENGINE = { start: k => startRhythm(k), stop: () => stopRhythm() };
-function registerRhythmGame(meta, cfg){ RGAMES[meta.key] = cfg; registerGame(meta, RHYTHM_ENGINE); }
+/* 리듬 게임은 콤이 실수를 🚨 버튼 대신 같은 탭 버튼으로 잡는다 (남의 차례에 탭 = 잡기) */
+function registerRhythmGame(meta, cfg){
+  meta.rules.push("콤이도 틀려! 박자를 놓치거나 <b>한 번 더 외치면</b> 그 차례 안에 탭해서 <b>잡아!</b> 못 잡으면 너도 마셔 🍺");
+  RGAMES[meta.key] = cfg; registerGame(meta, RHYTHM_ENGINE);
+}
 const BODY = ["🦵","👏","👍","👍"];
 /* 1~4개: 4박자에서 ④박부터 역순 / 5~8개: 8박자 확장(앞4박 꽉 + ⑧박부터 역순) */
 function patStd(n){
@@ -42,11 +46,11 @@ function startRhythm(gameKey){
   $("r-restart").classList.add("hidden");
   $("r-msg").textContent = "";
   R = { key: gameKey, cfg,
-    baseIv: 60000 / cfg.bpm, iv: 60000 / cfg.bpm, speed: 1,
+    baseIv: 60000 / cfg.bpm * speedK(), iv: 60000 / cfg.bpm * speedK(), speed: 1,   // 오늘의 룰 "스피드"면 빨라짐
     seats: buildSeats("table-r"), startSeat: 0,
     gb: -4, nextT: 0, countIn: 4,
-    introBeats: 16, turnIdx: -1, turnStartGb: 16, curBeats: 4,
-    events: [], failed: false, raf: 0 };
+    introBeats: continuing ? 0 : 16, turnIdx: -1,   // 한 잔 마시고 이어 할 땐 도입부 생략 turnStartGb: 16, curBeats: 4,
+    events: [], failed: false, raf: 0, flub: null };
   buildBeatRow(8);
   $("r-round").innerHTML = "준비~ 🥁";
   $("lyric").innerHTML = "&nbsp;";
@@ -86,6 +90,7 @@ function rLoop(now){
 function fireBeat(gb, st){
   if(gb < 0){
     click(gb % 2 === 0 ? 'knee' : 'clap');
+    poseAll(POSES[(gb + R.countIn) % 4]);
     $("lyric").textContent = ["쿵","짝","따","따"][(gb + R.countIn) % 4] || "";
     return;
   }
@@ -93,31 +98,38 @@ function fireBeat(gb, st){
   if(gb < R.introBeats){
     const local = gb % 8;
     click(local % 4 === 0 ? 'knee' : local % 4 === 1 ? 'clap' : 'thumb');
+    poseAll(POSES[local % 4]);
     pulseDot(local);
     $("r-round").innerHTML = "다 같이~ 🎵";
     $("lyric").textContent = R.cfg.intro[gb] === "·" ? "" : R.cfg.intro[gb];
-    R.seats.forEach(hop);
+    R.seats.forEach(p => hop(p, false));
     return;
   }
   /* 턴: 가변 길이 (4 또는 8박자) */
   if(gb >= R.turnStartGb + R.curBeats || R.turnIdx < 0){
     setupTurn(R.turnIdx + 1, st, gb);
+    if(R.failed) return;
   }
   const local = gb - R.turnStartGb;
   click(local % 4 === 0 ? 'knee' : local % 4 === 1 ? 'clap' : 'thumb');
+  poseAll(POSES[local % 4]);
   pulseDot(local);
   const evs = R.events.filter(e => e.beat === local);
   if(R.curTurn && !R.curTurn.isHuman){
     for(const ev of evs){
-      bubbleSay(R.curTurn, ev.words.join(""), R.iv*0.9);
-      click('word'); if(ev.need===2) setTimeout(()=>click('word'), R.iv*0.28);
-      markDot(ev.beat, "hit");
       ev.done = true;
+      if(ev.flub) R.flub = R.curTurn;
+      if(ev.flub === "skip"){ bubbleSay(R.curTurn, "어…?", R.iv*0.9); continue; }   // 멍때려서 박자를 놓침
+      const said = ev.flub === "extra" ? [...ev.words, ev.words[ev.words.length-1]] : ev.words;   // 한 번 더 외침
+      bubbleSay(R.curTurn, said.join(""), R.iv*0.9);
+      said.forEach((_, i) => setTimeout(() => click('word'), i * R.iv*0.28));
+      markDot(ev.beat, "hit");
     }
     if(evs.length) hop(R.curTurn);
   }
 }
 function setupTurn(turnIdx, st, gb){
+  if(R.flub){ const p = R.flub; failRhythm(R.seats[0], `${p.name}가 틀렸는데 못 잡았다!`); return personaSay(p, "missed"); }
   R.turnIdx = turnIdx;
   R.turnStartGb = gb;
   R.speed = Math.min(2.0, 1 + 0.06 * turnIdx);   // 턴당 6% 가속, 최대 2배
@@ -137,6 +149,8 @@ function setupTurn(turnIdx, st, gb){
       R.events.push({ beat:b, need, got:0, words, done:false, missed:false, t: st + b * R.iv });
     }
   });
+  if(R.events.length && flubRoll(seatIdx, R.speed))
+    rndOf(R.events).flub = R.curTurn.persona.flubKind || rndOf(["skip", "extra"]);   // 재밌는 애는 오버, 슬픈 애는 멍때림
   const spd = R.speed > 1.02 ? ` <span class="who">⚡x${R.speed.toFixed(2)}</span>` : "";
   $("r-round").innerHTML = `${n}개!${spd} <span class="who">— ${R.curTurn.name}${R.curTurn.isHuman?" (너!)":""}</span>`;
   $("lyric").innerHTML = "&nbsp;";
@@ -146,6 +160,8 @@ function setupTurn(turnIdx, st, gb){
     if(ev) d.classList.add(ev.need === 2 ? "req2" : "req");
   });
 }
+/* 모두(나 포함) 박자대로 쿵 짝 따봉 따봉 */
+function poseAll(name){ R.seats.forEach(s => pose(s.el, name)); }
 function pulseDot(local){
   document.querySelectorAll(".beat-dot").forEach((d,b) => d.classList.toggle("now", b === local));
 }
@@ -156,6 +172,7 @@ function markDot(beat, cls){
 function playerTap(){
   if(!R || R.failed) return;
   if(!R.curTurn) return;
+  if(!R.curTurn.isHuman && R.flub) return catchFlub();
   if(!R.curTurn.isHuman){
     click('fail');
     bubbleSay(R.seats[0], "앗...!", 1500);
@@ -178,7 +195,8 @@ function playerTap(){
   bubbleSay(R.seats[0], best.words.slice(0, best.got).join(""), R.iv*0.9);
   click('word');
   $("lyric").textContent = word;
-  hop(R.seats[0]);
+  hop(R.seats[0], false);
+  praise(R.seats[0], bestDist < R.iv*0.15 ? "PERFECT!" : bestDist < R.iv*0.3 ? "GREAT" : "GOOD");
   if(best.got >= best.need){ best.done = true; markDot(best.beat, "hit"); }
 }
 $("tap-btn").addEventListener("pointerdown", e => { e.preventDefault(); playerTap(); });
@@ -187,10 +205,21 @@ document.addEventListener("keydown", e => {
     e.preventDefault(); playerTap();
   }
 });
+/* 틀린 콤이를 잡음: 콤이가 마시는 동안 잠깐 쉬고, 다음 사람 차례부터 이어서 */
+function catchFlub(){
+  const p = R.flub; R.flub = null;
+  npcDrinks(p);
+  bubbleSay(R.seats[0], "걸렸다!", 1000);
+  $("r-round").innerHTML = `<b class="drink">${p.name}</b> 걸렸다! 마셔~ 🍺`;
+  R.events = [];
+  R.gb = R.turnStartGb + R.curBeats;
+  R.nextT = performance.now() + 1600;
+}
 function failRhythm(p, why, customHtml){
   if(!R || R.failed) return;
   R.failed = true;
   cancelAnimationFrame(R.raf);
+  poseAll(null);
   $("tap-btn").disabled = true;
   showLose({ key: R.key, val: Math.max(0, R.turnIdx), loser: p, msgId: "r-msg", restartId: "r-restart",
     why, html: customHtml, extra: ` · 최고 ⚡x${R.speed.toFixed(2)}` });

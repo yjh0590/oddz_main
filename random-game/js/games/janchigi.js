@@ -9,7 +9,7 @@ registerGxGame(
       "시간이 <b>점점 짧아져!</b> ⚡",
       "타이밍 놓치면 벌칙!"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"🍶 잔치기", speed:false, start(GX){ GX.data.idx=0; GX.data.dir=1; janchigiRound(GX); } }
+  /* 엔진 설정 */ { title:"🍶 잔치기", speed:false, flub:true, start(GX){ GX.data.idx=0; GX.data.dir=1; janchigiRound(GX); } }
 );
 registerGxGame(
   {key:"janchigi2", emj:"⚡", nm:"잔치기 (스피드)", tg:"방향 조작·헬",
@@ -19,7 +19,7 @@ registerGxGame(
       "반사신경 테스트 🔥",
       "타이밍 놓치면 벌칙!"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"⚡ 잔치기 (스피드)", speed:true, start(GX){ GX.data.idx=0; GX.data.dir=1; janchigiRound(GX); } }
+  /* 엔진 설정 */ { title:"⚡ 잔치기 (스피드)", speed:true, flub:true, start(GX){ GX.data.idx=0; GX.data.dir=1; janchigiRound(GX); } }
 );
 
 /* ---- 잔치기 (+ 스피드 변형) ---- */
@@ -37,17 +37,20 @@ function janchigiRound(GX){
   const baseLimit = GX.cfg.speed ? 1600 : 3200;
   const decay = GX.cfg.speed ? 40 : 90;
   if(cur===0){
-    $("gx-center").innerHTML = `네 차례! 잔을 몇 번 칠까?`;
-    $("gx-controls").innerHTML="";
-    gxBtn("탁 (진행)", () => { janchigiStep(GX,1); resolveJanchigi(GX); });
-    gxBtn("탁탁 (역방향)", () => { janchigiStep(GX,2); resolveJanchigi(GX); });
-    gxBtn("탁탁탁 (점프)", () => { janchigiStep(GX,3); resolveJanchigi(GX); });
+    $("gx-center").innerHTML = `네 차례! 잔을 쳐라 — <b>1번</b> 진행 · <b>2번</b> 역방향 · <b>3번</b> 점프`;
+    gxMash("🍶 잔 치기!", n => {
+      if(n > 3) return gxFail(`${"탁".repeat(n)}...? ${n}번은 없는 신호다!`, GX.round-1);
+      praise(GX.seats[0], ["진행!", "역방향!", "점프!"][n-1]);
+      janchigiStep(GX, n); resolveJanchigi(GX);
+    });
     gxSetTimer(Math.max(900, baseLimit-decay*GX.round), () => gxFail("타이밍을 놓쳤다!", GX.round-1));
   } else {
-    const n = rndOf([1,1,2,3]);
-    $("gx-center").innerHTML = `<b>${GX.seats[cur].name}</b>: ${"탁".repeat(n)}!`;
-    click('knee'); hop(GX.seats[cur]);
-    gxSafeNext(() => { janchigiStep(GX,n); resolveJanchigi(GX); }, Math.max(300, 700-GX.round*15));
+    let n = rndOf([1,1,2,3]);
+    gxNpc(GX, cur, flub => {
+      if(flub) n = 4;   // 4번은 없는 신호
+      $("gx-center").innerHTML = `<b>${GX.seats[cur].name}</b>: ${"탁".repeat(n)}!`;
+      click('knee'); hop(GX.seats[cur]);
+    }, () => { janchigiStep(GX, Math.min(n, 3)); resolveJanchigi(GX); }, Math.max(300, 700-GX.round*15), GX.round-1);
   }
 }
 function resolveJanchigi(GX){ gxClearTimer(); $("gx-controls").innerHTML=""; gxSafeNext(()=>janchigiRound(GX), 300); }

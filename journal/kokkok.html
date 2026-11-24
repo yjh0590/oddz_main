@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="예약이 열리면 휴대폰으로 알려 주는 웹 알림 앱을 만든 기록.">
+  <title>콕콕 예약알림 만들기 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">PJ 32 · Web App · 첫 버전</span><h1>콕콕 예약알림 만들기</h1><p class="lead">예약이 열리면 콕콕이가 바로 휴대폰을 콕 찔러 준다.</p><p class="article-date"><time datetime="2026-11-24">2026.11.24</time></p></header>
+    <section class="journal-section"><h2>새로고침 대신</h2><p>전시·공연·체험 예약은 언제 열릴지 몰라 페이지를 계속 새로고침하게 된다. 예약 페이지 주소를 등록해 두면 대신 주기적으로 확인하다가, 예약이 열리는 순간 휴대폰으로 알림을 보내는 앱을 만들었다.</p><p>조건은 고를 수 있다. “접수예정” 글자가 사라지면, “예약하기” 버튼이 생기면, 또는 페이지가 바뀌면 알린다.</p></section>
+    <section class="journal-section"><h2>앱 설치 없이 휴대폰 알림</h2><p>알림은 웹푸시로 보낸다. 안드로이드는 크롬에서 바로, 아이폰은 Safari에서 홈 화면에 추가한 뒤 알림을 받는다. 내 컴퓨터에서 직접 돌리기 때문에 개인정보가 다른 곳으로 가지 않는다.</p><p>Windows에서는 start.bat 하나로 패키지 설치, 서버 실행, cloudflared 휴대폰 주소 만들기까지 끝난다. 가족·친구와 같이 쓸 수 있게 초대 코드를 아는 사람만 새 기기를 등록하도록 했다.</p></section>
+    <section class="journal-section"><h2>조심한 부분</h2><p>남의 주소를 대신 읽어 오는 앱이라 공유기 관리 페이지 같은 내부망 주소나 그쪽으로 넘어가는 리다이렉트는 접속하지 않게 막았다. 알림 서명 키와 초대 코드, 데이터베이스는 저장소에 올리지 않는다.</p></section>
+    <section class="journal-section"><h2>24시간 돌리기</h2><p>컴퓨터가 켜져 있는 동안만 확인하기 때문에, 리눅스 서버에 올리는 setup.sh도 만들었다. 패키지 설치와 자동 실행 등록을 하고, 도메인이 있으면 HTTPS 인증서까지 자동으로 받는다. 다음에는 실제 예약 사이트에서 오래 돌려 보며 감지 조건을 다듬으려 한다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a> <a class="button" href="https://github.com/yjh0590/site-booking" target="_blank" rel="noopener noreferrer">소스 코드 보기 ↗</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

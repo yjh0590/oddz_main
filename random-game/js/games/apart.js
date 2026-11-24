@@ -17,13 +17,13 @@ function apartRound(GX){
   if(!GX||GX.over) return;
   GX.round++;
   const floor = 8 + Math.floor(Math.random()*13);
-  $("gx-center").innerHTML = `술래: "<b>${floor}층!</b>" 손을 겹쳐 쌓았다...`;
-  $("gx-controls").innerHTML = "";
-  $("msg-gx").textContent = "손을 하나씩 뺀다...";
-  gxBtn("✋ 손 빼기 시작!", () => {
-    $("gx-controls").innerHTML = "";
+  const startIdx = Math.floor(Math.random()*4);
+  const ans = (startIdx + floor - 1) % 4;
+  $("gx-center").innerHTML = `술래: "<b>${floor}층!</b>" 1층은 <b>${GX.seats[startIdx].name}</b>부터, 시계 방향(나→왼쪽→맞은편→오른쪽)으로 쌓는다`;
+  $("msg-gx").textContent = "🧮 계산해! 누가 걸릴까? 맞히면 피한다";
+  GX.seats.forEach((p,i)=>p.el.classList.toggle("turn", i===startIdx));
+  gxPredict(GX, ans, Math.max(2500, 6000 - 200*GX.round), GX.round-1, () => {
     let count = 0;
-    const startIdx = Math.floor(Math.random()*4);
     const tick = () => {
       if(!GX||GX.over) return;
       count++;
@@ -31,13 +31,12 @@ function apartRound(GX){
       GX.seats.forEach((p,i)=>p.el.classList.toggle("turn", i===idx));
       if(count >= floor){
         const loser = GX.seats[idx];
-        if(loser.isHuman) return gxFail(`${floor}층에 걸렸다!`, GX.round-1);
-        $("msg-gx").innerHTML = `<b>${loser.name}</b> 손이 걸렸다! 원샷~ 🍺`;
-        click('fail'); shakeSeat(loser);
-        gxSafeNext(()=>apartRound(GX), 1000);
+        if(loser.isHuman){ $("msg-gx").textContent = "내 손이었지만... 알고 있었지! 쏙 뺐다 😎"; click('word'); }
+        else { $("msg-gx").innerHTML = `<b>${loser.name}</b> 손이 걸렸다! 원샷~ 🍺`; npcDrinks(loser); }
+        gxSafeNext(()=>apartRound(GX), 1300);
         return;
       }
-      GX.timer = setTimeout(tick, Math.max(70, 260 - count*4));
+      GX.timer = setTimeout(tick, Math.max(60, 200 - count*4));
     };
     tick();
   });

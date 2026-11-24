@@ -5,11 +5,11 @@ registerGxGame(
   {key:"hunmin", emj:"🔤", nm:"훈민정음", tg:"단어 순발력",
     intro:"훈~민정음 훈~민정음!",
     rules:["술래가 외친 <b>자음 두 개</b>로 시작하는 단어를 대라!",
-      "칩 중에 맞는 단어를 <b>시간 안에</b> 골라야 해.",
+      "💬 <b>채팅으로 직접 쳐서</b> 답해! (예: ㄱㅂ → 가방, 고백...)",
       "이미 나온 단어, 틀린 자음 단어 = 탈락!",
       "시간이 <b>점점 짧아져!</b> ⚡"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"🔤 훈민정음", start(GX){ GX.data.used=new Set(); hunminRound(GX); } }
+  /* 엔진 설정 */ { title:"🔤 훈민정음", flub:true, start(GX){ GX.data.used=new Set(); hunminRound(GX); } }
 );
 
 /* ---- 훈민정음 ---- */
@@ -21,28 +21,43 @@ const HUNMIN_BANK = {
   "ㅇㅅ": ["의사","연습","우산"],
   "ㅎㅅ": ["학생","호수","화살"]
 };
+/* 단어의 초성 (한글이 아니면 ?) */
+const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+function choOf(w){ return [...w].map(c => { const k = c.charCodeAt(0) - 0xAC00; return k >= 0 && k < 11172 ? CHO[Math.floor(k/588)] : "?"; }).join(""); }
+/* 내 다음엔 콤이 한 명이 같은 자음으로 받는다. 틀리면 이미 나온 단어나 다른 자음 단어 */
+function hunminNpc(GX, combo){
+  const idx = rndOf([1,2,3]);
+  GX.seats.forEach((p,i)=>p.el.classList.toggle("turn", i===idx));
+  gxNpc(GX, idx, flub => {
+    const valid = HUNMIN_BANK[combo].filter(w=>!GX.data.used.has(w));
+    if(!valid.length) flub = true;
+    const trap = [...GX.data.used, ...Object.values(HUNMIN_BANK).flat().filter(w=>!HUNMIN_BANK[combo].includes(w))];
+    const w = flub ? rndOf(trap) : rndOf(valid);
+    GX.data.used.add(w);
+    $("gx-center").innerHTML = `술래: "<b>${combo}</b>!" — <b>${GX.seats[idx].name}</b>: "${w}!"`;
+    bubbleSay(GX.seats[idx], w+"!", 900); click('word'); hop(GX.seats[idx]);
+    return flub;
+  }, () => hunminRound(GX), 1100, GX.round-1);
+}
 function hunminRound(GX){
   if(!GX||GX.over) return;
   GX.round++;
   const combo = rndOf(Object.keys(HUNMIN_BANK));
   $("gx-center").innerHTML = `술래: "<b>${combo}</b>!" 엄지를 세웠다... 시작하는 단어를 외쳐라!`;
   $("gx-controls").innerHTML = "";
-  const validPool = HUNMIN_BANK[combo].filter(w=>!GX.data.used.has(w));
-  if(!validPool.length) return gxFail("이 자음으로 만들 단어가 바닥났다!", GX.round-1);
-  const trapPool = Object.values(HUNMIN_BANK).flat().filter(w=>!HUNMIN_BANK[combo].includes(w) && !GX.data.used.has(w));
-  const chips = [...validPool.slice(0,2), ...trapPool.sort(()=>Math.random()-0.5).slice(0,2)].sort(()=>Math.random()-0.5);
-  chips.forEach(w=>{
-    gxBtn(w, () => {
-      if(GX.data.used.has(w)) return gxFail(`"${w}"...는 이미 나온 단어다!`, GX.round-1);
-      if(!HUNMIN_BANK[combo].includes(w)) return gxFail(`"${w}"는 ${combo} 단어가 아니잖아!`, GX.round-1);
-      GX.data.used.add(w);
-      bubbleSay(GX.seats[0], w+"!", 900); click('word'); hop(GX.seats[0]);
-      gxClearTimer(); $("gx-controls").innerHTML="";
-      $("msg-gx").textContent = "손 잡았다! 다음 라운드~";
-      gxSafeNext(()=>hunminRound(GX), 600);
-    }, "chip");
+  $("gx-center").innerHTML = `술래: "<b>${combo}</b>!" 💬 <b>${combo}</b>로 시작하는 단어를 채팅으로 쳐!`;
+  askChat(`${combo}로 시작하는 단어 (엔터)`, raw => {
+    if(!GX || GX.over) return;
+    const w = raw.replace(/\s/g, "");
+    if(GX.data.used.has(w)) return gxFail(`"${esc(w)}"...는 이미 나온 단어다!`, GX.round-1);
+    if(w.length < 2 || !choOf(w).startsWith(combo)) return gxFail(`"${esc(w)}"는 ${combo}로 시작하지 않잖아! (${choOf(w)})`, GX.round-1);
+    GX.data.used.add(w);
+    click('word'); hop(GX.seats[0]);
+    gxClearTimer();
+    $("msg-gx").textContent = "";
+    gxSafeNext(()=>hunminNpc(GX, combo), 500);
   });
-  gxSetTimer(Math.max(1200, 3200 - 90*GX.round), () => gxFail("너무 늦었다! 손 잡혔다!", GX.round-1));
+  gxSetTimer(Math.max(4000, 7500 - 150*GX.round), () => { cancelAsk(); gxFail("너무 늦었다! 손 잡혔다!", GX.round-1); });
 }
 
 })();

@@ -2,7 +2,7 @@
 (() => {
 
 registerGame(
-  {key:"eomok", emj:"🐟", nm:"어목조동", tg:"지식·순발력",
+  {key:"eomok", flub:true, emj:"🐟", nm:"어목조동", tg:"지식·순발력",
     intro:"어! 목! 조! 동! 어목조동 어목조동!",
     rules:["[이름]+[범주]로 지목이 날아온다! 어(물고기)·목(나무)·조(새)·동(동물)",
       "<b>내가 지목당하면</b> 제한 시간 안에 맞는 단어 칩을 골라!",
@@ -53,7 +53,7 @@ function emRemain(cat){
   return r;
 }
 function nextEomok(){
-  if(!EM || EM.over) return;
+  if(!EM || EM.over || closeCatch()) return;
   EM.round++;
   const caller = EM.holder;
   const cat = rndOf(["어","목","조","동"]);
@@ -90,12 +90,18 @@ function nextEomok(){
     $("msg-em").textContent = "...";
     EM.timer = setTimeout(() => {
       if(!EM || EM.over) return;
-      const w = rndOf(emRemain(cat));
-      EM.used.add(w); EM.usedList.push(w);
+      /* 틀리면 이미 나온 단어나 다른 분류 단어 */
+      const flub = flubRoll(target, 1 + EM.round*0.03);
+      const other = ["어","목","조","동"].filter(c => c !== cat);
+      const w = !flub ? rndOf(emRemain(cat))
+        : (EM.usedList.length && Math.random() < 0.5 ? rndOf(EM.usedList) : rndOf(EOMOK_BANK[rndOf(other)].words));
+      if(!flub){ EM.used.add(w); EM.usedList.push(w); }
       bubbleSay(EM.seats[target], w + "!", 900);
       click('word'); hop(EM.seats[target]);
+      $("msg-em").textContent = `${EM.seats[target].name}: "${w}!"`;
       updateEmUsed();
-      EM.timer = setTimeout(nextEomok, 650);
+      openCatch(EM.seats[target], flub, catchStd("msg-em", failEomok, () => { clearTimeout(EM.timer); EM.timer = setTimeout(nextEomok, 1500); }));
+      EM.timer = setTimeout(nextEomok, 1000);
     }, 550);
   }
 }

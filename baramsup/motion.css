@@ -1,0 +1,83 @@
+.header-actions { display: flex; align-items: center; gap: 22px; }
+.practice-card { position: relative; }
+.practice-card::after { content: '시작해 보기'; font-size: 12px; color: #6a815d; margin-top: 18px; }
+.motion-dialog { width: min(560px,calc(100% - 40px)); max-width: 560px; max-height: calc(100svh - 40px); border: 1px solid #dce5d3; border-radius: 24px; background: #f9fbf5; }
+.motion-dialog::backdrop { background: #30413266; backdrop-filter: blur(9px); }
+.motion-dialog .practice-player { padding: 18px 32px 25px; background: radial-gradient(ellipse at 50% 30%,#f1f6e9,#fafcf7 75%); }
+.motion-dialog .player-top { gap: 12px; }
+.motion-dialog .player-top .eyebrow { display: none; }
+.motion-dialog #practice-help { font-size: 12px; padding: 8px 0; color: #839175; }
+.motion-dialog #focus-mode { margin-left: auto; font-size: 28px; line-height: 1; padding: 5px 0 5px 15px; color: #7d8f71; }
+.motion-dialog .player-layout { display: flex; flex-direction: column; gap: 0; padding: 11px 0 0; }
+.motion-dialog .practice-title-row { position: relative; width: 100%; justify-content: center; }
+.motion-dialog .practice-title-row h3 { font-family: "Batang",serif; font-size: 29px; font-weight: 400; }
+.motion-dialog .session-time { position: absolute; right: 0; font-size: 14px; }
+.motion-intro { font-size: 14px; line-height: 1.8; text-align: center; color: #859277; margin: 11px 0 0; }
+.motion-dialog .practice-visual { min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; margin: 12px 0 16px; }
+.motion-dialog .practice-orb { width: 230px; height: 210px; border-radius: 0; background: none; box-shadow: none; transform: none!important; animation: none!important; transition: none!important; }
+.person-guide { width: 100%; height: 100%; overflow: visible; }
+.person-ground { fill: #e8eddf; stroke: none; }
+.breath-halo { fill: #e2ecd7; stroke: none; opacity: .8; }
+.person-lines { stroke: #607957; stroke-width: 2.6; }
+.person-face,.person-belly { stroke-width: 1.5; }
+.body-highlights { stroke: #b1c899; stroke-width: 6; }
+.body-highlights [data-zone] { opacity: 0; }
+.body-highlights .is-active { opacity: .85; }
+.motion-phase { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 31px; margin-top: -3px; color: #5f7d4c; }
+#orb-word { font-family: "Batang",serif; font-size: 18px; }
+#phase-time { min-width: 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+.motion-dialog .visual-caption { display: none; }
+.motion-dialog .practice-guidance { display: flex; flex-direction: column; width: 100%; text-align: center; }
+.motion-dialog .step-eyebrow { font-size: 12px; margin: 0 0 8px; color: #8a997d; }
+.motion-dialog .session-instruction { font-family: inherit; font-size: 18px; min-height: 0; line-height: 1.7; margin: 0; }
+.motion-dialog .session-detail { font-size: 12px; min-height: 0; line-height: 1.8; margin: 8px 0 0; }
+.motion-dialog .session-track { margin: 19px 0 15px; }
+.motion-dialog .session-controls { justify-content: center; gap: 18px; }
+.motion-dialog .session-controls .release-button { min-width: 170px; font-size: 14px; padding: 13px 20px; margin: 0; }
+.motion-dialog .session-notice { font-size: 12px; margin: 11px 0 0; min-height: 0; }
+.motion-dialog .session-notice:empty { display: none; }
+.motion-dialog .external-anchor { align-self: center; font-size: 11px; margin-top: 15px; border: 0; color: #859776; }
+.motion-settings { order: 10; margin-top: 17px; border-top: 1px solid #e2e8d8; padding-top: 13px; text-align: left; }
+.motion-settings summary { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: #7d8e6f; cursor: pointer; list-style: none; }
+.motion-settings summary::-webkit-details-marker { display: none; }
+.motion-settings summary span { color: #97a18c; }
+.motion-settings summary:focus-visible { outline: 2px solid #729474; outline-offset: 4px; }
+.motion-settings .practice-settings { justify-content: center; }
+.motion-settings .practice-intro { font-size: 13px; }
+.motion-dialog .rest-reflection { text-align: center; }
+.motion-dialog .reflection-options { justify-content: center; }
+.modal-close { position: absolute; top: 13px; right: 18px; font-size: 28px; padding: 4px 7px; background: none; border: 0; color: #809070; }
+.library-dialog { width: min(1100px,calc(100% - 48px)); max-width: 1100px; padding: 43px 35px 30px; }
+.library-dialog .rest-library { margin: 0; }
+.library-dialog .research-card p { font-size: 14px; }
+.library-dialog .research-card .research-limit { font-size: 12px; }
+.library-dialog .video-card p { font-size: 13px; }
+.library-dialog .video-heading { align-items: start; }
+.guidance-dialog { max-width: 540px; }
+.guidance-dialog .practice-evidence-content { padding: 0; }
+.guidance-dialog h4 { font-family: "Batang",serif; font-weight: 400; font-size: 24px; line-height: 1.6; margin: 16px 0; }
+.guidance-dialog p { font-size: 14px; }
+.guidance-dialog a { font-size: 13px; color: #4c7047; text-underline-offset: 4px; }
+.guidance-dialog .practice-comfort { padding-left: 13px; border-left: 2px solid #b4c79c; font-size: 13px; margin-top: 22px; }
+@media(max-width:620px) {
+  .header-actions { gap: 12px; }
+  #open-library { font-size: 12px; padding: 7px 0; }
+  .motion-dialog { width: calc(100% - 24px); max-height: calc(100svh - 24px); border-radius: 20px; }
+  .motion-dialog .practice-player { padding: 15px 22px 20px; }
+  .motion-dialog .player-layout { padding: 8px 0 0; }
+  .motion-dialog .practice-title-row h3 { font-size: 27px; }
+  .motion-intro { font-size: 13px; }
+  .motion-dialog .practice-orb { width: 210px; height: 195px; }
+  .motion-dialog .practice-visual { margin: 8px 0 13px; }
+  .motion-dialog .session-instruction { font-size: 17px; }
+  .motion-dialog .external-anchor { font-size: 11px; }
+  .library-dialog { width: calc(100% - 24px); padding: 42px 21px 25px; }
+  .library-dialog .section-heading h2 { font-size: 22px; }
+  .library-dialog .video-heading span { font-size: 12px; }
+}
+@media(max-height:740px) {
+  .motion-dialog .practice-orb { width: 190px; height: 165px; }
+  .motion-dialog .practice-visual { margin: 0 0 8px; }
+  .motion-dialog .practice-player { padding-top: 12px; }
+  .motion-dialog .motion-intro { margin-top: 6px; }
+}

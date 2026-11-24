@@ -9,7 +9,7 @@ registerGxGame(
       "선창자와 <b>다른 동작</b>을 시간 안에 골라야 해.",
       "시간이 <b>점점 짧아져!</b> ⚡"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"🤖 메칸더 V", start(GX){ mecanderRound(GX); } }
+  /* 엔진 설정 */ { title:"🤖 메칸더 V", flub:true, start(GX){ mecanderRound(GX); } }
 );
 
 /* ---- 메칸더 V ---- */
@@ -28,7 +28,12 @@ function mecanderRound(GX){
     gxClearTimer(); $("gx-controls").innerHTML="";
     if(opt.k === g.k) return gxFail(`${g.label}! 캐스터한테 걸렸다!`, GX.round-1);
     click('word');
-    gxSafeNext(()=>mecanderRound(GX), 600);
+    const other = rndOf([1,2,3].filter(i => i !== caller));   // 다른 콤이도 피해야 한다. 틀리면 같은 동작
+    gxNpc(GX, other, flub => {
+      const o = flub ? g : rndOf(MECANDER.filter(m => m.k !== g.k));
+      bubbleSay(GX.seats[other], o.emj, 900); hop(GX.seats[other]);
+      $("msg-gx").textContent = `${GX.seats[other].name}: ${o.emj} ${o.label}`;
+    }, () => mecanderRound(GX), 900, GX.round-1);
   }, "chip"));
   gxSetTimer(Math.max(900, 2400-70*GX.round), () => gxFail("동작을 못 골랐다!", GX.round-1));
 }

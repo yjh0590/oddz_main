@@ -8,6 +8,23 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<!-- 캐릭터용 SVG 필터 (js/core.js doodleSVG·handsSVG에서 씀) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <!-- 스프레이 그림자: 흐린 덩어리 × 노이즈 → 문턱값으로 잘라 가장자리가 점점이 흩어지게 -->
+  <filter id="spray" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="b"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="7" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.6 -0.3" result="na"/>
+    <feComposite in="b" in2="na" operator="arithmetic" k2="1.4" k3="1" k4="-0.95" result="m"/>
+    <feComponentTransfer in="m" result="dots"><feFuncA type="discrete" tableValues="0 1"/></feComponentTransfer>
+    <feFlood flood-color="#1a1a1a"/>
+    <feComposite in2="dots" operator="in"/>
+  </filter>
+  <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="3" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs></svg>
 
 <!-- ① 입장 -->
 <div id="start-screen" class="screen">
@@ -64,11 +81,29 @@
   </div>
 </div>
 
+<!-- 단톡방 채팅 (js/chat.js) -->
+<div id="chat" class="hidden">
+  <div id="chat-head">💬 술자리 단톡방</div>
+  <div id="chat-log"></div>
+  <div id="chat-row"><input id="chat-input" maxlength="60" autocomplete="off" placeholder="아무 말이나 해봐 (엔터)"><button id="chat-send" class="btn-small">전송</button></div>
+</div>
+
+<!-- 해장 이벤트 (js/events.js) -->
+<div id="event-modal" class="hidden"><div id="event-card"></div></div>
+
+<!-- 취기 게이지 (js/core.js setDrunk) -->
+<div id="drunk-gauge" class="hidden"></div>
+
+<!-- 콤이 실수 잡기 버튼 (js/core.js openCatch) -->
+<button id="catch-btn" class="hidden btn-berry">🚨 걸렸다!</button>
+
 <!-- BGM 자리: <audio id="bgm" src="bgm.mp3" loop></audio> -->
 
 <!-- 공통 → 엔진 → 게임 순서로 불러온다. 게임 파일 순서 = 메뉴 순서 -->
 <script src="js/core.js"></script>
 <script src="js/sound.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/events.js"></script>
 <script src="js/engines/rhythm.js"></script>
 <script src="js/engines/generic.js"></script>
 <script src="js/games/g31.js"></script>

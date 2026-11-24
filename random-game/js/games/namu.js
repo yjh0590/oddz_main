@@ -9,18 +9,17 @@ registerGxGame(
       "내가 대상이면 다시 넘길 차례, 양옆이면 반응만!",
       "반응 늦거나 잘못하면 벌칙!"],
     recLabel: v => `${v}라운드 생존`},
-  /* 엔진 설정 */ { title:"🌳 나무게임", start(GX){ GX.data.passer=0; namuRound(GX); } }
+  /* 엔진 설정 */ { title:"🌳 나무게임", flub:true, start(GX){ GX.data.passer=0; namuRound(GX); } }
 );
 
 /* ---- 나무게임 ---- */
 function namuRound(GX){
-  if(!GX||GX.over) return;
+  if(!GX||GX.over||closeCatch()) return;
   GX.round++;
   const from = GX.data.passer;
   if(from===0){
     $("gx-center").innerHTML = `네 차례! (합장) "휘이 하아!" 누구에게 보낼까?`;
-    $("gx-controls").innerHTML="";
-    [1,2,3].forEach(i=>gxBtn(`🌳 ${GX.seats[i].name}`, ()=>namuPass(GX,0,i)));
+    gxAim(i => namuPass(GX, 0, i), "🌳 누구 쪽으로 내리칠까?");
     gxSetTimer(Math.max(1200,3000-80*GX.round), () => gxFail("너무 오래 고민했다!", GX.round-1));
   } else {
     gxSafeNext(() => namuPass(GX, from, gxPickTarget(from)), 800);
@@ -35,7 +34,10 @@ function namuPass(GX, from, target){
   const meIn = group.includes(0);
   const iAmTarget = target===0;
   gxSafeNext(() => {
-    group.forEach((i,k)=>{ if(i!==0) setTimeout(()=>{ if(GX&&!GX.over){ bubbleSay(GX.seats[i],"휘이 하아!",900); hop(GX.seats[i]); } }, k*100); });
+    const odd = rndOf([1,2,3].filter(i => i !== from)), flub = flubRoll(odd);
+    const reactors = [1,2,3].filter(i => i !== from && group.includes(i) !== (flub && i === odd));   // 틀린 콤이는 반대로 행동
+    reactors.forEach((i,k)=>setTimeout(()=>{ if(GX&&!GX.over){ bubbleSay(GX.seats[i],"휘이 하아!",900); hop(GX.seats[i]); } }, k*100));
+    gxCatch(GX, odd, flub, GX.round-1);
     if(meIn){
       $("msg-gx").textContent = "다 같이 반응! [🪓 휘이 하아!]";
       gxBtn("🪓 휘이 하아!", () => {
