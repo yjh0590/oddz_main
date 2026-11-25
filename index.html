@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>oddz — 심심하면 만드는 것들</title>
-<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
 <meta property="og:title" content="oddz — 심심하면 만드는 것들">
-<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:url" content="https://oddz.click/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
@@ -261,13 +261,13 @@
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
 <link rel="stylesheet" href="assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="assets/oddz-shelf.css?v=20261125-detail2">
+<link rel="stylesheet" href="assets/oddz-shelf.css?v=20261125-size">
 <script src="assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
 <link rel="stylesheet" href="assets/fonts/nanum-pen-script/font.css">
-<link rel="stylesheet" href="assets/oddz-home.css?v=20261125-banner">
+<link rel="stylesheet" href="assets/oddz-home.css?v=20261125-clean">
 <script src="assets/oddz-shelf.js?v=20261125-drag2" defer></script>
-<script src="assets/home-motion.js?v=20261111" defer></script>
+<script src="assets/home-motion.js?v=20261125-clean" defer></script>
 <style id="home-skin">
 /* 반짝이: 반딧불이를 담은 유리병 같은 현황판, 밤하늘 위 유리 카드 */
 :root{
@@ -278,10 +278,7 @@
   --board-shadow:0 30px 70px -30px rgba(10,6,20,.8), inset 0 1px 0 rgba(255,255,255,.08);
   --card-bg:rgba(34,25,52,.34); --card-line:rgba(243,234,217,.14); --card-radius:20px;
 }
-.hero-board::before{content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
-  background:radial-gradient(120% 60% at 85% 0%,rgba(143,227,208,.16),transparent 60%)}
-.hero-board__num{text-shadow:0 0 18px rgba(143,227,208,.35)}
-main > .hero.has-board h1{font-size:clamp(2.6rem,5.4vw,4.4rem)}
+
 #work .oddz-catalog .oddz-project-card.entry{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 #work .oddz-catalog .oddz-project-card.entry:hover{background:rgba(54,40,82,.44)}
 #work .oddz-catalog .oddz-project-card .entry-no{font-size:.7rem;color:var(--dusk-peach);opacity:.85;padding-top:0}
@@ -329,7 +326,7 @@ h1 em{ animation:emGlow 6s ease-in-out infinite; }
 /* 채집 노트의 손글씨 메모: 나눔손글씨 펜 (assets/fonts/nanum-pen-script) */
 .hero-desc{ font-family:"Nanum Pen Script",cursive; font-size:1.6rem; line-height:1.4; color:var(--dusk-peach); transform:rotate(-1.5deg); transform-origin:0 50%; }
 .section-head p,footer p{ font-family:"Nanum Pen Script",cursive; font-size:1.35rem; line-height:1.4; }
-.hero-board__sub{ font-family:"Nanum Pen Script",cursive; font-size:1.15rem; letter-spacing:0; font-weight:400; color:var(--dusk-peach); }
+
 #work .oddz-catalog .oddz-stage-intro{ font:400 1.2rem/1.4 "Nanum Pen Script",cursive; color:var(--dusk-peach); }
 @media (prefers-reduced-motion:reduce){ h1 em,.firefly::after{ animation:none; } }
 @media (max-width:760px){ .moon{ left:auto; right:8vw; } }
@@ -349,7 +346,7 @@ nav > a, header .theme-picker summary{ font-family:'Hahmlet',serif; font-weight:
 .cta{ font-family:"Nanum Pen Script",cursive; font-size:1.55rem; font-weight:400; border-bottom:0; padding-bottom:8px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%238fe3d0' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x left bottom / 40px 8px; }
 .cta:hover{ background-position:20px 100%; }
-.hero-board__title{ font-family:'Hahmlet',serif; font-weight:700; }
+
 .section-head h2{ width:fit-content; padding-bottom:10px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8' viewBox='0 0 40 8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%238fe3d0' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x left bottom / 40px 8px; }
 #work .oddz-catalog .oddz-filter{ font-family:'Hahmlet',serif; font-weight:500; font-size:.84rem; }
 #work .oddz-catalog .oddz-filter[aria-pressed=true]{ font-weight:700; }

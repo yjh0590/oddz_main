@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>비눗방울 극장 · oddz</title>
-<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
 <meta property="og:title" content="oddz — 심심하면 만드는 것들">
-<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:url" content="https://oddz.click/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
@@ -228,13 +228,13 @@
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-detail2">
+<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-size">
 <script src="../assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="../assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
 <link rel="stylesheet" href="../assets/fonts/cafe24-ssurround/font.css">
-<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-banner">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-clean">
 <script src="../assets/oddz-shelf.js?v=20261125-drag2" defer></script>
-<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/home-motion.js?v=20261125-clean" defer></script>
 <style id="home-skin">
 /* 비눗방울: 무대 조명 아래 둥근 프로그램 카드, 무지갯빛 방울 번호 */
 :root{
@@ -245,19 +245,7 @@
   --board-shadow:0 30px 70px -30px rgba(10,4,20,.9),inset 0 1px 0 rgba(255,255,255,.12);
   --card-bg:var(--panel); --card-line:var(--panel-line); --card-radius:26px;
 }
-.hero-board::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
-  background:linear-gradient(135deg,var(--bubble-blue),var(--bubble-lav),var(--bubble-pink));opacity:.45;
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
-.hero-board__title{font-weight:400}
-.hero-board__num{font-weight:400}
-.hero-board__stage{border-radius:20px}
-.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--gold-bright);text-shadow:0 0 16px rgba(232,196,104,.5)}
-.hero-board__stage[data-stage="doing"] .hero-board__bar{background:var(--bubble-pink)}
-.hero-board__stage[data-stage="next"] .hero-board__bar{background:var(--bubble-blue)}
-.hero-board__stage[data-stage="someday"] .hero-board__bar{background:var(--bubble-lav)}
-.hero-board__bar{border-radius:0 3px 3px 0}
-.hero-board__item{border-radius:18px}
-.hero-board__chips li::before{background:radial-gradient(circle at 30% 30%,#fff,var(--bubble-pink) 60%)}
+
 #work .oddz-catalog .oddz-filter[aria-pressed=true]{background:linear-gradient(135deg,var(--bubble-blue),var(--bubble-lav) 50%,var(--bubble-pink));border-color:transparent}
 #work .oddz-catalog .oddz-search input{border-radius:99px;padding-inline:18px}
 #work .oddz-catalog .oddz-stage-head h3{font-weight:400!important}
@@ -272,8 +260,8 @@
 /* ===== 비눗방울 v2: 비눗방울 쇼 무대 ===== */
 @property --ang{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
 :root{ --round:'Fredoka','Cafe24 Ssurround',sans-serif; --velvet:#5a1f3f; --velvet-dark:#2e0f22; --home-display:'Cafe24 Ssurround',sans-serif; }
-h1,.section-head h2,.hero-board__title,#work .oddz-catalog .oddz-stage-head h3,#work .oddz-catalog .oddz-project-card h3{ font-weight:400!important; letter-spacing:-.01em; }
-.hero-board__num,.hero-board__total,#work .oddz-catalog .oddz-stage-count,#work .oddz-catalog .oddz-stage-en,
+h1,.section-head h2,#work .oddz-catalog .oddz-stage-head h3,#work .oddz-catalog .oddz-project-card h3{ font-weight:400!important; letter-spacing:-.01em; }
+#work .oddz-catalog .oddz-stage-count,#work .oddz-catalog .oddz-stage-en,
 #work .oddz-catalog .oddz-project-card .bubble-tag,.tag-label{ font-family:var(--round); font-weight:600; }
 
 /* 무대: 위 주름막, 양옆 벨벳 막, 훑고 지나가는 조명 두 개 */
@@ -345,9 +333,9 @@ h1{ text-shadow:0 4px 0 #6d3f93,0 8px 18px rgba(10,4,20,.55); }
 h1 em{ text-shadow:0 4px 0 #9a6a1f,0 0 26px rgba(232,196,104,.45); }
 nav a, header .theme-picker summary, .cta, #work .oddz-catalog .oddz-filter, #work .oddz-catalog .oddz-search-label,
 #work .oddz-catalog .oddz-project-card .project-action, #work .oddz-catalog .oddz-project-details summary,
-#work .oddz-catalog .oddz-stage-intro, #work .oddz-catalog .oddz-project-fact, .hero-board__sub, .hero-board__chips li, .hero-board__name{
+#work .oddz-catalog .oddz-stage-intro, #work .oddz-catalog .oddz-project-fact{
   font-family:'Hakgyoansim Dunggeunmiso',sans-serif; }
-.cta, nav a, #work .oddz-catalog .oddz-filter, #work .oddz-catalog .oddz-project-card .project-action, .hero-board__name{ font-weight:700; }
+.cta, nav a, #work .oddz-catalog .oddz-filter, #work .oddz-catalog .oddz-project-card .project-action{ font-weight:700; }
 #work .oddz-catalog .oddz-project-card .oddz-project-desc{ font-size:.95rem; }
 #work .oddz-catalog .oddz-project-card .oddz-project-date{ font-family:var(--round)!important; letter-spacing:.04em; }
 /* 극장 간판: 전구가 차례로 깜박이는 테두리 */

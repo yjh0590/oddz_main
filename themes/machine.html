@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>톱니바퀴 공장 · oddz</title>
-<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
 <meta property="og:title" content="oddz — 심심하면 만드는 것들">
-<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:url" content="https://oddz.click/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
@@ -283,13 +283,13 @@
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-detail2">
+<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-size">
 <script src="../assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="../assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
 <link rel="stylesheet" href="../assets/fonts/paperlogy/font.css">
-<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-banner">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-clean">
 <script src="../assets/oddz-shelf.js?v=20261125-drag2" defer></script>
-<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/home-motion.js?v=20261125-clean" defer></script>
 <style id="home-skin">
 /* 기계: 리벳 박힌 계기판과 경고 줄무늬 */
 :root{
@@ -299,21 +299,7 @@
   --board-shadow:0 8px 0 rgba(0,0,0,.35), 0 30px 60px -30px rgba(0,0,0,.8);
   --card-bg:var(--steel-800); --card-line:var(--steel-600); --card-radius:8px;
 }
-.hero-board{padding-top:34px;-webkit-backdrop-filter:none;backdrop-filter:none}
-.hero-board::before{content:'';position:absolute;left:0;right:0;top:0;height:12px;border-radius:9px 9px 0 0;
-  background:repeating-linear-gradient(135deg,var(--safety-yellow) 0 10px,var(--steel-900) 10px 20px);opacity:.9}
-.hero-board::after{content:'';position:absolute;right:10px;bottom:10px;width:6px;height:6px;border-radius:50%;
-  background:var(--rivet);box-shadow:0 0 0 2px var(--steel-800),0 0 0 3px var(--steel-600)}
-.hero-board__title{font-size:1.15rem}
-.hero-board__title::before{content:'';display:inline-block;width:8px;height:8px;margin-right:9px;border-radius:50%;
-  background:#5fd36a;box-shadow:0 0 8px 2px rgba(95,211,106,.6);vertical-align:2px}
-.hero-board__total,.hero-board__label,.hero-board__meta,.hero-board__sub{font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
-.hero-board__stage{background:var(--steel-900);border-radius:6px}
-.hero-board__num{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:1.65rem;color:var(--paper)}
-.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--safety-yellow);text-shadow:0 0 12px rgba(245,185,33,.45)}
-.hero-board__bar{height:4px;background:repeating-linear-gradient(90deg,var(--safety-yellow) 0 4px,transparent 4px 6px)}
-.hero-board__chips li{border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--steel-900)}
-.hero-board__chips li::before{border-radius:1px;background:var(--hazard-orange)}
+
 #work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{border-radius:4px;font-family:'JetBrains Mono',monospace}
 #work .oddz-catalog .oddz-stage-count{border-radius:4px;font-family:'JetBrains Mono',monospace}
 #work .oddz-catalog .oddz-project-card .part-tag{width:auto;height:auto;padding:4px 8px;border-radius:4px;font-size:.66rem;background:var(--steel-900)}
@@ -322,8 +308,8 @@
 /* ===== 기계 v2: 공장 제어반 ===== */
 :root{ --home-display:'Paperlogy',sans-serif; --steel-hi:#2b3137; }
 h1,.section-head h2{ font-weight:900; letter-spacing:-.02em; }
-.hero-board__num,#work .oddz-catalog .oddz-stage-count,.hero-board__total{ font-family:'Chakra Petch','JetBrains Mono',monospace; font-weight:600; }
-.hero-board__title{ font-family:'Paperlogy',sans-serif; font-weight:700; font-size:1.15rem; }
+#work .oddz-catalog .oddz-stage-count{ font-family:'Chakra Petch','JetBrains Mono',monospace; font-weight:600; }
+
 #work .oddz-catalog .oddz-stage-head h3{ font-weight:900!important; letter-spacing:-.02em; }
 #work .oddz-catalog .oddz-project-card h3{ font-family:'Paperlogy',sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:-.02em; }
 #work .oddz-catalog .oddz-project-card .entry-cat{ font-family:'Chakra Petch',monospace; font-weight:600; }
@@ -397,7 +383,7 @@ nav a, header .theme-picker summary{ font-family:'Paperlogy',sans-serif; font-we
 .wordmark{ font-family:'Paperlogy',sans-serif; font-weight:900; letter-spacing:-.01em; }
 #work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-project-card .project-action{ font-family:'Paperlogy',sans-serif; font-weight:700; letter-spacing:0; }
 #work .oddz-catalog .oddz-project-card .oddz-project-date{ font-family:'Chakra Petch',monospace!important; font-weight:600!important; letter-spacing:.06em; }
-.hero-board__name{ font-family:'Paperlogy',sans-serif; font-weight:700; }
+
 /* 공장 벽에 스텐실로 찍은 큰 글자 */
 main{ --stencil:clamp(6rem,15vw,13rem); }
 main::before{ content:'ODDZ'; position:absolute; z-index:-1; top:560px; left:24vw; pointer-events:none;

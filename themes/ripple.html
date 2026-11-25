@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>물방울 수면 · oddz</title>
-<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
 <meta property="og:title" content="oddz — 심심하면 만드는 것들">
-<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:url" content="https://oddz.click/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
@@ -192,13 +192,13 @@
 <style>:root{--picker-bg:rgba(6,58,82,.75);--picker-menu:#0a4a63;--picker-text:#e9fdff;--picker-line:rgba(255,255,255,.34);--picker-hover:rgba(159,243,255,.16);--picker-accent:#9ff3ff}</style>
 <link rel="stylesheet" href="../assets/theme-switcher.css">
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-detail2">
+<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-size">
 <script src="../assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="../assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
-<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-banner">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-clean">
 <script src="../assets/oddz-shelf.js?v=20261125-drag2" defer></script>
-<script src="../assets/home-motion.js?v=20261111" defer></script>
-<script src="../assets/ripple-water.js?v=20261125-fx" defer></script>
+<script src="../assets/home-motion.js?v=20261125-clean" defer></script>
+<script src="../assets/ripple-water.js?v=20261125-clean" defer></script>
 <style id="home-skin">
 /* 물방울 수면: 현황판·카드·필터 모두 리퀴드 글라스 */
 :root{
@@ -211,26 +211,9 @@
   --card-line:rgba(255,255,255,.28); --card-radius:26px;
 }
 /* 물이 움직임을 맡으므로, 프레임이 느린 기기에서도 내용이 늘 보이도록 등장 효과는 쓰지 않는다 */
-.hero-board{ animation:none; }
+
 .motion-reveal #work .oddz-project-card:not(.is-in){ opacity:1; }
 .motion-reveal #work .oddz-project-card.is-in{ animation:none; }
-.hero-board{ isolation:isolate; -webkit-backdrop-filter:blur(18px) saturate(160%); backdrop-filter:blur(18px) saturate(160%); }
-.hero-board::before{ content:''; position:absolute; inset:1px; border-radius:inherit; pointer-events:none; z-index:-1;
-  background:radial-gradient(220px circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.18),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.22),transparent 30%); }
-.hero-board__title{ font:italic 400 1.6rem/1 var(--font-wave); letter-spacing:.01em; }
-.hero-board__total,.hero-board__sub,.hero-board__label,.hero-board__name,.hero-board__chips li{ font-family:var(--font-kr); }
-.hero-board__name{ font-weight:400; }
-.hero-board__stage{ border-radius:22px; background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.22);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.45); transition:transform .4s cubic-bezier(.25,1.8,.45,1),border-color .2s; }
-.hero-board__stage:hover{ transform:scale(1.05,.96); }
-.hero-board__stage:active{ transform:scale(.95,1.04); }
-.hero-board__num{ font:italic 400 2.2rem/1 var(--font-wave); color:var(--foam); }
-.hero-board__stage[data-stage="done"] .hero-board__num{ color:var(--sun); text-shadow:0 0 18px rgba(159,243,255,.5); }
-.hero-board__bar{ height:3px; border-radius:3px; background:linear-gradient(90deg,var(--aqua),var(--sun)); }
-.hero-board__chips li{ border-radius:99px; background:rgba(255,255,255,.08); }
-.hero-board__chips li::before{ width:7px; height:9px; border-radius:0; background:var(--sun);
-  clip-path:path('M3.5 0C5.3 2.8 7 5 7 6.2a3.5 3.5 0 0 1-7 0C0 5 1.7 2.8 3.5 0Z'); vertical-align:0; }
-.hero-board__item{ border-radius:16px; }
 
 #work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{
   font-family:var(--font-kr); color:var(--foam); background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.03));

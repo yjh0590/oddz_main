@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>노을 모험가 길드 · oddz</title>
-<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
 <meta property="og:title" content="oddz — 심심하면 만드는 것들">
-<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:url" content="https://oddz.click/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
@@ -257,13 +257,13 @@
 .catalog .entry .project-action::after { content:''; position:absolute; inset:0; }
 </style>
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-detail2">
+<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-size">
 <script src="../assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="../assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
 <link rel="stylesheet" href="../assets/fonts/nanum-brush-script/font.css">
-<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-banner">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-clean">
 <script src="../assets/oddz-shelf.js?v=20261125-drag2" defer></script>
-<script src="../assets/home-motion.js?v=20261111" defer></script>
+<script src="../assets/home-motion.js?v=20261125-clean" defer></script>
 <style id="home-skin">
 /* 게임·노을: 금테 두른 모험 일지 */
 :root{
@@ -274,19 +274,7 @@
   --board-shadow:0 0 0 4px rgba(18,24,27,.35),0 30px 60px -28px rgba(0,0,0,.7);
   --card-bg:rgba(18,24,27,.74); --card-line:var(--ink-line); --card-radius:4px;
 }
-.hero-board::before,.hero-board::after{content:'';position:absolute;width:18px;height:18px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);pointer-events:none}
-.hero-board::before{top:-2px;left:-2px}
-.hero-board::after{bottom:-2px;right:-2px;transform:rotate(180deg)}
-.hero-board__head{justify-content:center;flex-direction:column;align-items:center;gap:2px;padding-bottom:14px;border-bottom:1px solid var(--board-line)}
-.hero-board__title{font-weight:900;font-size:1.2rem;color:var(--gold-bright)}
-.hero-board__title::before,.hero-board__title::after{content:'◆';font-size:.5em;margin:0 10px;color:var(--gold);vertical-align:4px}
-.hero-board__total{font-family:'JetBrains Mono',monospace;letter-spacing:.08em}
-.hero-board__stage{border-radius:2px}
-.hero-board__num{font-weight:900}
-.hero-board__sub{font-family:'JetBrains Mono',monospace;color:var(--gold);letter-spacing:.1em}
-.hero-board__item{border-radius:2px}
-.hero-board__chips li{border-radius:2px}
-.hero-board__chips li::before{border-radius:0;transform:rotate(45deg);background:var(--gold-bright)}
+
 #work .oddz-catalog .oddz-filter,#work .oddz-catalog .oddz-search input{border-radius:3px}
 #work .oddz-catalog .oddz-stage-head h3{font-weight:900!important}
 #work .oddz-catalog .oddz-project-card .rune-tag{width:38px;height:38px}
@@ -299,9 +287,8 @@
   --parch:#f3e6c8; --parch-edge:#dcc694; --ink-brown:#3b2a1a; --ink-mid:#5e4a32; --seal:#8e2219; --home-display:var(--brush); }
 h1{ font-family:var(--brush); font-weight:400; letter-spacing:-.01em; }
 .section-head h2,#work .oddz-catalog .oddz-stage-head h3{ font-family:var(--brush)!important; font-weight:400!important; }
-.tag-label,.hero-board__sub,.hero-board__total{ font-family:var(--fell); letter-spacing:.12em; }
-.hero-board__title{ font-family:var(--brush); font-weight:400; font-size:1.35rem; }
-.hero-board__num{ font-family:var(--fell); font-weight:400; font-size:1.9rem; }
+.tag-label{ font-family:var(--fell); letter-spacing:.12em; }
+
 #work .oddz-catalog .oddz-stage-en{ font-family:var(--fell); letter-spacing:.16em; opacity:.8; }
 
 /* 지는 해: 스크롤할수록 내려가고 하늘이 어두워진다 */
@@ -363,7 +350,7 @@ h1{ font-family:var(--brush); font-weight:400; letter-spacing:-.01em; }
 .section-head h2,#work .oddz-catalog .oddz-stage-head h3{ font-family:"Nanum Brush Script",var(--brush)!important; letter-spacing:0; }
 .section-head h2{ font-size:clamp(2.2rem,4vw,3rem); }
 #work .oddz-catalog .oddz-stage-head h3{ font-size:30px!important; }
-.hero-board__title{ font-family:"Nanum Brush Script",var(--brush); font-size:1.8rem; line-height:1; }
+
 @media (prefers-reduced-motion:reduce){ .bird,.bird svg{ animation:none; } .birds{ display:none; } }
 @media (max-width:760px){ .sun{ left:auto; right:-46px; top:10vh; width:130px; height:130px; opacity:.85; } }
 </style>
@@ -383,8 +370,7 @@ h1 em{ display:inline-block; padding-bottom:14px; background:url("data:image/svg
 nav a, header .theme-picker summary{ font-family:'MaruBuri',serif; font-weight:600; }
 .cta{ font-family:'MaruBuri',serif; font-weight:700; }
 .hero-desc{ font-family:'MaruBuri',serif; font-size:1.08rem; }
-.hero-board__name{ font-family:'MaruBuri',serif; font-weight:700; }
-.hero-board__meta{ font-family:var(--fell); letter-spacing:.04em; }
+
 #work .oddz-catalog .oddz-filter{ font-family:'MaruBuri',serif; font-weight:600; }
 #work .oddz-catalog .oddz-project-card .oddz-project-desc{ font-family:'MaruBuri',serif; font-size:.95rem; line-height:1.8; }
 #work .oddz-catalog .oddz-project-card .oddz-project-date{ font:400 .9rem/1.4 var(--fell)!important; letter-spacing:.06em; }

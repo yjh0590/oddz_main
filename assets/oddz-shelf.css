@@ -536,6 +536,29 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
 [data-oddz-theme=game-sunset] .oddz-shelf__banner::after{opacity:.4;background:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px)}
 [data-oddz-theme=oz] .oddz-shelf__banner{background:var(--board-bg)}
 
+
+/* ---------- 카드 크기: 모든 배너를 톱니바퀴만 한 크기로 ----------
+   배너는 왼쪽 칸 가운데에 놓고, 높이(--card-scale × 칸 높이)와 가로세로비(--card-ar)로 크기를 정한다.
+   칸을 꽉 채우는 모양(깃발·신전 등)은 작게, 둥근 모양(방울·꽃)은 조금 크게 잡아 눈에 보이는 크기를 맞춘다. */
+.oddz-shelf__stage>.oddz-shelf__frame{justify-self:center;align-self:center;height:calc(100% * var(--card-scale,.86));width:auto;max-width:100%;aspect-ratio:var(--card-ar,.86)}
+[data-oddz-theme=machine] .oddz-shelf{--card-scale:.94;--card-ar:1}
+[data-oddz-theme=sparkle] .oddz-shelf{--card-scale:.9;--card-ar:.8}
+[data-oddz-theme=game-water] .oddz-shelf{--card-scale:.86;--card-ar:.9}
+[data-oddz-theme=game-sunset] .oddz-shelf{--card-scale:.84;--card-ar:.8}
+[data-oddz-theme=bubbles] .oddz-shelf{--card-scale:.94;--card-ar:1}
+[data-oddz-theme=ink] .oddz-shelf{--card-scale:.9;--card-ar:.96}
+[data-oddz-theme=fog] .oddz-shelf{--card-scale:.86;--card-ar:.8}
+[data-oddz-theme=sand] .oddz-shelf{--card-scale:.84;--card-ar:.92}
+[data-oddz-theme=magnet] .oddz-shelf{--card-scale:.86;--card-ar:.86}
+[data-oddz-theme=cloth] .oddz-shelf{--card-scale:.82;--card-ar:1.02}
+[data-oddz-theme=ripple] .oddz-shelf{--card-scale:.92;--card-ar:.82}
+[data-oddz-theme=olympus] .oddz-shelf{--card-scale:.84;--card-ar:.9}
+[data-oddz-theme=hum] .oddz-shelf{--card-scale:.92;--card-ar:1}
+[data-oddz-theme=oz] .oddz-shelf{--card-scale:.94;--card-ar:.78}
+@media (max-width:820px){
+  .oddz-shelf__stage>.oddz-shelf__frame{height:auto;width:min(100%,420px);aspect-ratio:auto;justify-self:center}
+}
+
 @media (prefers-reduced-motion:reduce){
   .oddz-shelf *,.oddz-shelf *::before,.oddz-shelf *::after{animation:none!important;transition:none!important}
 }

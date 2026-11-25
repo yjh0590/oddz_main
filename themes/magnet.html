@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>자석 실험대 · oddz</title>
-<meta name="description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
 <meta property="og:title" content="oddz — 심심하면 만드는 것들">
-<meta property="og:description" content="oddz — 심심하면 만드는 것들. 직접 만든 웹사이트, 크롬 확장프로그램, Windows 앱과 개발일지를 모아 둔 곳.">
+<meta property="og:description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:url" content="https://oddz.click/">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary">
@@ -71,16 +71,16 @@
 <style>:root{--picker-bg:#23272d;--picker-menu:#23272d;--picker-text:#e8ebef;--picker-line:rgba(255,255,255,.2);--picker-hover:rgba(224,72,59,.15);--picker-accent:#e0483b}</style>
 <link rel="stylesheet" href="../assets/theme-switcher.css">
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-detail2">
+<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-size">
 <script src="../assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="../assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
-<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-banner">
+<link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-clean">
 <script src="../assets/oddz-shelf.js?v=20261125-drag2" defer></script>
-<script src="../assets/home-motion.js?v=20261111" defer></script>
-<script src="../assets/magnet-field.js?v=20261125-fx" defer></script>
+<script src="../assets/home-motion.js?v=20261125-clean" defer></script>
+<script src="../assets/magnet-field.js?v=20261125-clean" defer></script>
 <style id="home-skin">
 /* 배경 시뮬레이션이 움직임을 맡는다. 느린 기기에서도 내용이 늘 보이도록 등장 효과는 끈다(oddz-home.css 뒤에 와야 이긴다). */
-.hero-board{animation:none}
+
 .motion-reveal #work .oddz-project-card:not(.is-in){opacity:1}
 .motion-reveal #work .oddz-project-card.is-in{animation:none}
 :root{--home-display:var(--fd);--home-text:var(--fg);--home-muted:var(--muted);--home-accent:var(--accent);--home-on-accent:var(--on-accent);--home-line:var(--line);--board-line:var(--line);--card-line:var(--line)}
@@ -89,16 +89,11 @@
 #work .oddz-catalog .oddz-stage-head{text-shadow:0 0 6px var(--bg),0 0 14px var(--bg)}
 #work .oddz-catalog .oddz-stage-intro,#work .section-head p{width:fit-content;max-width:100%;padding:3px 9px;margin-left:-9px;border-radius:4px;background:rgba(23,25,29,.88)}
 #work .oddz-catalog .oddz-project-card h3{font-size:1.28rem}
-.hero-board__title,.hero-board__num{font-family:var(--fd);font-weight:400}
+
 :root{--metal:repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 2px),linear-gradient(160deg,#2f343b,#22262c);
   --board-bg:var(--metal);--board-radius:8px;--board-chip-bg:rgba(0,0,0,.25);--board-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 24px 50px -24px rgba(0,0,0,.9);
   --card-bg:var(--metal);--card-radius:8px}
-.hero-board{-webkit-backdrop-filter:none;backdrop-filter:none}
-.hero-board__title{font-size:1.25rem;letter-spacing:.2em}
-.hero-board__title::before{content:'N';margin-right:8px;padding:2px 6px;border-radius:3px;background:var(--accent);font:700 .7rem/1 var(--mono);letter-spacing:0;vertical-align:3px}
-.hero-board__num{font-family:var(--mono);font-weight:700}
-.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--accent)}
-.hero-board__total,.hero-board__meta,.hero-board__sub{font-family:var(--mono)}
+
 #work .oddz-catalog .oddz-project-card.entry{box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 36px -24px rgba(0,0,0,.9)}
 #work .oddz-catalog .oddz-project-card .entry-no{padding:4px 8px;border-radius:4px;color:#fff;font:700 .68rem/1 var(--mono);background:linear-gradient(90deg,var(--accent) 50%,var(--s) 50%)}
 #work .oddz-catalog .oddz-project-card.pending .entry-no{background:linear-gradient(90deg,#5b6068 50%,#3d4249 50%)}

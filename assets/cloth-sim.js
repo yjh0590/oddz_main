@@ -81,32 +81,13 @@
     for (const p of pts) if (p.pin) { ctx.fillStyle = '#8a6a3f'; ctx.fillRect(p.x - 3, -6, 6, 16); ctx.fillStyle = '#5a4428'; ctx.fillRect(p.x - 3, 3, 6, 2); }
   }
 
-  // ---------- 매달린 현황판 ----------
-  const board = () => document.querySelector('.hero-board');
-  let angle = 0, av = 0, stretch = 0, sv = 0, drag = null;
-  function swing(t) {
-    const b = board(); if (!b) return;
-    const target = drag ? drag.angle : wind * 1.6 * Math.sin(t * 0.0012);
-    const tStretch = drag ? drag.stretch : 0;
-    av = (av + (target - angle) * 0.06) * 0.9; angle += av;
-    sv = (sv + (tStretch - stretch) * 0.12) * 0.78; stretch += sv;
-    b.style.transform = `rotate(${angle.toFixed(3)}deg) scaleY(${(1 + stretch).toFixed(4)})`;
-  }
-
   build(); draw();
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { build(); draw(); }, 200); });
   if (still) return;
 
   const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]');
   addEventListener('pointerdown', (e) => {
-    if (e.button > 0) return;
-    const b = board();
-    if (b && b.contains(e.target) && !interactive(e.target)) {
-      const r = b.getBoundingClientRect();
-      drag = { ox: e.clientX, oy: e.clientY, cx: r.left + r.width / 2, top: r.top, angle: 0, stretch: 0 };
-      b.setPointerCapture?.(e.pointerId); return;
-    }
-    if (interactive(e.target)) return;
+    if (e.button > 0 || interactive(e.target)) return;
     let best = -1, bd = 60;
     // 천은 페이지 맨 위에 붙어 있어 페이지 좌표로 잡는다
     for (let i = COLS; i < pts.length; i++) { const d = Math.hypot(pts[i].x - e.pageX, pts[i].y - e.pageY); if (d < bd) { bd = d; best = i; } }
@@ -114,18 +95,13 @@
   });
   addEventListener('pointermove', (e) => {
     if (grab) { grab.x = e.pageX; grab.y = e.pageY; }
-    if (drag) {
-      drag.angle = Math.max(-14, Math.min(14, (e.clientX - drag.ox) * -0.08));
-      drag.stretch = Math.max(-0.02, Math.min(0.08, (e.clientY - drag.oy) / 900));
-    }
   }, { passive: true });
-  const release = () => { grab = null; drag = null; };
+  const release = () => { grab = null; };
   addEventListener('pointerup', release); addEventListener('pointercancel', release);
 
   let last = 0;
   function frame(now) {
     if (now - last > 30) { step(now); draw(); last = now; }
-    swing(now);
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);

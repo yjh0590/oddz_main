@@ -1,4 +1,4 @@
-/* oddz 홈 공통 레이아웃 (반짝이·기계·물빛·노을·비눗방울).
+/* oddz 홈 공통 레이아웃 (12개 테마 홈).
    오즈·종이 공작은 이 파일을 불러오지 않는다.
    색과 글꼴은 각 테마 파일의 :root 토큰(--board-*, --card-*, --home-*)으로 정한다. */
 
@@ -23,81 +23,8 @@
 /* ---------- 머리글·히어로를 같은 폭으로 ---------- */
 body > header{max-width:var(--home-max);margin-inline:auto}
 
-main > .hero.has-board{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(320px,430px);
-  column-gap:clamp(36px,6vw,96px);
-  align-content:center;
-  max-width:var(--home-max);
-  min-height:0;
-  margin-inline:auto;
-  padding:clamp(56px,11vh,120px) 6vw clamp(40px,6vh,72px);
-}
-main > .hero.has-board > *{grid-column:1;justify-self:start}
 /* 한글 제목이 글자 단위로 끊기지 않게 (예: "채집해 / 요.") */
 main > .hero h1,#work > .section-head h2{word-break:keep-all;text-wrap:balance}
-main > .hero.has-board > .hero-board{
-  grid-column:2;grid-row:1 / span 6;
-  align-self:center;justify-self:stretch;
-}
-
-/* ---------- 작업 현황판 ---------- */
-.hero-board{
-  position:relative;
-  padding:22px 22px 20px;
-  border:1px solid var(--board-line);
-  border-radius:var(--board-radius);
-  background:var(--board-bg);
-  box-shadow:var(--board-shadow);
-  color:var(--home-text);
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  animation:boardIn .7s cubic-bezier(.2,.7,.2,1) both .15s;
-}
-@keyframes boardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.hero-board__head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px}
-.hero-board__title{font-family:var(--home-display);font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
-.hero-board__total{font-size:.74rem;font-weight:600;color:var(--home-muted);font-variant-numeric:tabular-nums}
-
-.hero-board__stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.hero-board__stage{
-  position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;
-  min-width:0;padding:11px 10px 14px;
-  border:1px solid var(--board-line);border-radius:calc(var(--board-radius) * .55);
-  background:var(--board-chip-bg);color:inherit;font:inherit;text-align:left;cursor:pointer;overflow:hidden;
-  transition:border-color .2s,transform .2s;
-}
-.hero-board__stage:hover{border-color:var(--home-accent);transform:translateY(-2px)}
-.hero-board__stage:focus-visible{outline:2px solid var(--home-accent);outline-offset:2px}
-.hero-board__num{font-family:var(--home-display);font-size:1.7rem;line-height:1;font-weight:700;font-variant-numeric:tabular-nums}
-.hero-board__stage[data-stage="done"] .hero-board__num{color:var(--home-accent)}
-.hero-board__label{font-size:.68rem;font-weight:600;color:var(--home-muted);white-space:nowrap;letter-spacing:-.02em}
-.hero-board__bar{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--share) * 100%);background:var(--home-accent);opacity:.75}
-.hero-board__stage:not([data-stage="done"]) .hero-board__bar{opacity:.35}
-
-.hero-board__section{margin-top:18px;padding-top:16px;border-top:1px dashed var(--board-line)}
-.hero-board__sub{margin:0 0 10px;font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--home-muted)}
-.hero-board__recent{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.hero-board__item{
-  display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;
-  padding:7px 8px;margin:0 -8px;border-radius:calc(var(--board-radius) * .5);
-  color:inherit;text-decoration:none;transition:background .18s;
-}
-.hero-board__item img{width:40px;height:40px;object-fit:contain;border-radius:22%}
-.hero-board__item>.hero-board__text:first-child{grid-column:1/3}
-a.hero-board__item:hover{background:var(--board-chip-bg)}
-a.hero-board__item:focus-visible{outline:2px solid var(--home-accent);outline-offset:1px}
-.hero-board__text{display:flex;flex-direction:column;gap:2px;min-width:0}
-.hero-board__name{font-size:.92rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hero-board__meta{font-size:.72rem;color:var(--home-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hero-board__go{color:var(--home-accent);font-size:.9rem;transition:transform .18s}
-a.hero-board__item:hover .hero-board__go{transform:translateX(3px)}
-.hero-board__chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.hero-board__chips li{
-  font-size:.78rem;font-weight:600;padding:6px 11px;
-  border:1px solid var(--board-line);border-radius:99px;background:var(--board-chip-bg);
-}
-.hero-board__chips li::before{content:'';display:inline-block;width:6px;height:6px;margin-right:7px;border-radius:50%;background:var(--home-accent);vertical-align:2px;animation:boardPulse 2.2s ease-in-out infinite}
-@keyframes boardPulse{50%{opacity:.25}}
 
 /* ---------- 만든 것들: 제목과 목록을 같은 폭에 ---------- */
 main > #work{max-width:var(--home-max);margin-inline:auto;padding:clamp(32px,6vh,72px) 6vw clamp(24px,4vh,48px);scroll-margin-top:12px}
@@ -187,16 +114,10 @@ body > footer{max-width:var(--home-max);margin-inline:auto}
 @keyframes cardIn{from{opacity:0;transform:translateY(22px)}}
 
 /* ---------- 좁은 화면 ---------- */
-@media (max-width:960px){
-  main > .hero.has-board{grid-template-columns:minmax(0,1fr);min-height:0;padding-top:11vh}
-  main > .hero.has-board > .hero-board{grid-column:1;grid-row:auto;margin-top:44px;max-width:560px}
-}
 @media (max-width:760px){
   #work .oddz-catalog .oddz-stage-list{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:560px){
-  .hero-board{padding:18px 16px 16px}
-  .hero-board__stages{grid-template-columns:repeat(2,minmax(0,1fr))}
   :root{--card-pad:18px}
   #work .oddz-catalog .oddz-project-card.entry{grid-template-columns:44px minmax(0,1fr);column-gap:14px}
   #work .oddz-catalog .oddz-project-card>.oddz-project-icon{width:44px;height:44px}
@@ -204,6 +125,5 @@ body > footer{max-width:var(--home-max);margin-inline:auto}
   #work .oddz-catalog .oddz-project-card.pending>.oddz-project-icon{width:34px;height:34px}
 }
 @media (prefers-reduced-motion:reduce){
-  .hero-board,.hero-board__chips li::before{animation:none}
   #work .oddz-catalog .oddz-project-card>.oddz-project-icon{transition:none}
 }

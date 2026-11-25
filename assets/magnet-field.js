@@ -26,7 +26,7 @@
   // 자석 목록: {x, y, mx, my} (mx, my는 자기 모멘트)
   function collect(t) {
     sources = [];
-    const board = document.querySelector('.hero-board');
+    const board = document.querySelector('.oddz-shelf__frame');
     if (board) { const r = board.getBoundingClientRect(); if (r.bottom > 0 && r.top < H) sources.push({ x: r.left + r.width / 2, y: r.top + r.height / 2, mx: 0, my: -9e5 }); }
     for (const card of document.querySelectorAll('#work .oddz-project-card:not([hidden])')) {
       const r = card.getBoundingClientRect();

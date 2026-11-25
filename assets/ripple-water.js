@@ -75,7 +75,7 @@
   }
 
   // ---------- 물방울이 튈 때 주변이 떨림 ----------
-  const shakeTargets = '.oddz-project-card:not([hidden]), .hero-board, .cta, .tag-label, .oddz-filter, main > .hero h1, .section-head h2, .ripple-hint';
+  const shakeTargets = '.oddz-project-card:not([hidden]), .oddz-shelf__frame, .cta, .tag-label, .oddz-filter, main > .hero h1, .section-head h2, .ripple-hint';
   function trembleAround(cx, cy, power) {
     const reach = 380 + power * 260;
     for (const el of document.querySelectorAll(shakeTargets)) {
