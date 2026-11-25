@@ -34,7 +34,7 @@ function hunminNpc(GX, combo){
     const trap = [...GX.data.used, ...Object.values(HUNMIN_BANK).flat().filter(w=>!HUNMIN_BANK[combo].includes(w))];
     const w = flub ? rndOf(trap) : rndOf(valid);
     GX.data.used.add(w);
-    $("gx-center").innerHTML = `술래: "<b>${combo}</b>!" — <b>${GX.seats[idx].name}</b>: "${w}!"`;
+    $("gx-center").innerHTML = `술래: "<b>${combo}</b>!" — <b>${GX.seats[idx].name}</b>: "${esc(w)}!"`;
     bubbleSay(GX.seats[idx], w+"!", 900); click('word'); hop(GX.seats[idx]);
     return flub;
   }, () => hunminRound(GX), 1100, GX.round-1);

@@ -1,0 +1,18 @@
+# 비밀 값: 이 저장소는 전부 공개되므로 키·비밀번호가 든 파일은 절대 올리지 않는다
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.db
+*.sqlite
+*-credentials.json
+service-account*.json
+
+# 작업 중 임시 파일
+drafts/
+node_modules/
+.DS_Store
+Thumbs.db

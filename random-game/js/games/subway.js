@@ -118,7 +118,7 @@ function useStation(name){
   SB.used.add(normStation(name));
   SB.usedList.push(name);
   const recent = SB.usedList.slice(-12);
-  $("sub-used").innerHTML = "나온 역: " + recent.map((s,i) => i === recent.length-1 ? `<b>${s}</b>` : s).join(" → ");
+  $("sub-used").innerHTML = "나온 역: " + recent.map((s,i) => i === recent.length-1 ? `<b>${esc(s)}</b>` : esc(s)).join(" → ");
 }
 function playerSubway(){
   if(!SB || SB.over) return;
