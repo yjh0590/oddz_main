@@ -98,6 +98,14 @@
   addEventListener('pointerup', () => { pouring = false; });
   addEventListener('pointercancel', () => { pouring = false; });
 
+  // 진열대 목록을 드래그하는 동안 목록 쪽에서 모래가 잠깐 쏟아진다
+  let dragStop = 0;
+  addEventListener('oddz:shelf-drag', ({ detail: d }) => {
+    pouring = true; px = d.x; py = d.y;
+    clearTimeout(dragStop);
+    dragStop = setTimeout(() => { pouring = false; }, d.step ? 260 : 140);
+  });
+
   let last = 0;
   function frame(now) {
     if (now - last > 33) {

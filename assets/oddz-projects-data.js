@@ -1,5 +1,6 @@
 /* oddz — 프로젝트 공통 데이터 (PJ 번호는 최초 기록 순서, 같은 날은 만든 순서)
  * 이 파일만 수정하면 모든 테마(홈 14개)의 카드와 필터가 함께 업데이트됩니다.
+ * app/appLabel: 사이트·다운로드가 있으면 카드와 진열대 버튼이 url(상세·개발일지) 대신 여기로 바로 간다.
  * 주의: 사실확인이 필요한 기록 날짜는 dateBasis 참고.
  * 소개 페이지가 없는 카드는 url에 개발일지(/journal/…)를 연결합니다.
  */
@@ -84,7 +85,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/enrollment.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.05.04",
-    "dateBasis": "개발일지"
+    "dateBasis": "개발일지",
+    "app": "https://inu-sugangshinchoeng.vercel.app/",
+    "appLabel": "연습 사이트 열기"
   },
   {
     "id": "pj-05",
@@ -104,7 +107,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/diary.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.05.04",
-    "dateBasis": "개발일지"
+    "dateBasis": "개발일지",
+    "app": "https://github.com/yjh0590/oddz_main/releases/download/diary-v1.0.0/oddz-diary-setup-1.0.0.exe",
+    "appLabel": "설치 파일 받기"
   },
   {
     "id": "pj-06",
@@ -165,7 +170,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/todays-lecture.html?theme=sparkle",
     "link": "다운로드·사용법",
     "date": "2026.07",
-    "dateBasis": "월만 확인"
+    "dateBasis": "월만 확인",
+    "app": "/downloads/oddz-todays-lecture-v0.2.7.zip",
+    "appLabel": "확장프로그램 받기"
   },
   {
     "id": "pj-09",
@@ -185,7 +192,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/random-game.html",
     "link": "게임 하기",
     "date": "2026.07.30",
-    "dateBasis": "개발일지"
+    "dateBasis": "개발일지",
+    "app": "/random-game/",
+    "appLabel": "게임 하기"
   },
   {
     "id": "pj-10",
@@ -227,7 +236,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/subway.html",
     "link": "앱 열기",
     "date": "2026.08.12",
-    "dateBasis": "개발일지"
+    "dateBasis": "개발일지",
+    "app": "https://yjh0590.github.io/Where-should-I-go-Subway-version/",
+    "appLabel": "앱 열기"
   },
   {
     "id": "pj-12",
@@ -247,7 +258,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/document-macro.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.09.22",
-    "dateBasis": "개발일지"
+    "dateBasis": "개발일지",
+    "app": "/downloads/hwpx-document-split-v17.zip",
+    "appLabel": "매크로 받기"
   },
   {
     "id": "pj-13",
@@ -303,7 +316,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/transcript-guide.html?theme=bubbles",
     "link": "사용 가이드",
     "date": "2026.09.23",
-    "dateBasis": "최초 제작 대화"
+    "dateBasis": "최초 제작 대화",
+    "app": "https://study.oddz.click/",
+    "appLabel": "웹 가이드 열기"
   },
   {
     "id": "pj-16",
@@ -361,7 +376,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/if-world.html?theme=sparkle",
     "link": "프로젝트 보기",
     "date": "2026.10.12",
-    "dateBasis": "개발 대화"
+    "dateBasis": "개발 대화",
+    "app": "https://lotto.oddz.click/",
+    "appLabel": "게임 시작하기"
   },
   {
     "id": "pj-19",
@@ -382,7 +399,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "date": "2026.10.14",
     "dateBasis": "개발 대화",
     "url": "/projects/companion.html",
-    "link": "페이지 키우기"
+    "link": "페이지 키우기",
+    "app": "/companion/",
+    "appLabel": "페이지 키우기"
   },
   {
     "id": "pj-20",
@@ -458,7 +477,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/cmd-toolbox.html?theme=sparkle",
     "link": "다운로드·사용법",
     "date": "2026.11.08",
-    "dateBasis": "GitHub Release v1.0.0"
+    "dateBasis": "GitHub Release v1.0.0",
+    "app": "https://github.com/yjh0590/CmdToolbox/releases/download/v1.0.0/CmdToolbox-v1.0.0.zip",
+    "appLabel": "프로그램 받기"
   },
   {
     "id": "pj-24",
@@ -479,7 +500,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/journal/ticketing.html",
     "link": "개발일지",
     "date": "2026.10.23",
-    "dateBasis": "아이디어 제안 (첫 버전 2026.11.07~08)"
+    "dateBasis": "아이디어 제안 (첫 버전 2026.11.07~08)",
+    "app": "https://ticketing-practice-murex.vercel.app/",
+    "appLabel": "연습하러 가기"
   },
   {
     "id": "pj-25",
@@ -502,7 +525,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/sseuk-ssak.html",
     "link": "다운로드·사용법",
     "date": "2026.11.11",
-    "dateBasis": "성능 개선·포터블 ZIP 및 개발일지 업데이트"
+    "dateBasis": "성능 개선·포터블 ZIP 및 개발일지 업데이트",
+    "app": "/downloads/Sseuk-Ssak-v0.7.18-Portable-Windows-x64.zip",
+    "appLabel": "프로그램 받기"
   },
   {
     "id": "pj-26",
@@ -524,7 +549,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/motion-shelf.html",
     "link": "사이트 열기",
     "date": "2026.11.10",
-    "dateBasis": "저장소 커밋 기록"
+    "dateBasis": "저장소 커밋 기록",
+    "app": "https://motion.oddz.click/",
+    "appLabel": "사이트 열기"
   },
   {
     "id": "pj-27",
@@ -545,7 +572,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/butterfly-effect.html",
     "link": "사이트·개발일지",
     "date": "2026.11.15",
-    "dateBasis": "기획·구현 및 첫 공개 기록"
+    "dateBasis": "기획·구현 및 첫 공개 기록",
+    "app": "/butterfly/",
+    "appLabel": "나비효과 만들기"
   },
   {
     "id": "pj-28",
@@ -566,7 +595,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/wagle.html",
     "link": "데모 체험하기",
     "date": "2026.11.16",
-    "dateBasis": "첫 구현·테스트 및 oddz 공개 데모 연결"
+    "dateBasis": "첫 구현·테스트 및 oddz 공개 데모 연결",
+    "app": "/wagle/",
+    "appLabel": "데모 체험하기"
   },
   {
     "id": "pj-29",
@@ -587,7 +618,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/agora.html",
     "link": "사이트·개발일지",
     "date": "2026.11.21",
-    "dateBasis": "개발일지 첫 공개"
+    "dateBasis": "개발일지 첫 공개",
+    "app": "/agora/",
+    "appLabel": "AGORA 열기"
   },
   {
     "id": "pj-30",
@@ -608,7 +641,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/projects/baramsup.html",
     "link": "숲 열기",
     "date": "2026.11.23",
-    "dateBasis": "저장소 첫 커밋"
+    "dateBasis": "저장소 첫 커밋",
+    "app": "/baramsup/",
+    "appLabel": "숲 열기"
   },
   {
     "id": "pj-31",
@@ -735,7 +770,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/journal/itda.html",
     "link": "작업 기록",
     "date": "2026.10.08",
-    "dateBasis": "저장소 첫 커밋"
+    "dateBasis": "저장소 첫 커밋",
+    "app": "https://itda.ink/",
+    "appLabel": "ITDA 사이트 열기"
   },
   {
     "id": "pj-37",
@@ -779,7 +816,9 @@ window.ODDZ_PROJECTS = Object.freeze([
     "url": "/journal/gonunghada.html",
     "link": "작업 기록",
     "date": "2026.11.12",
-    "dateBasis": "작업 저장소 첫 기록"
+    "dateBasis": "작업 저장소 첫 기록",
+    "app": "https://www.youtube.com/@goneunghada",
+    "appLabel": "채널 보기"
   },
   {
     "id": "pj-39",

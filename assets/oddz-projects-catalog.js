@@ -49,6 +49,15 @@
     url.searchParams.set('theme',theme==='oz'?'oz':theme);
     return url.href;
   };
+  // 바로가기(app): 이 사이트 안 경로나 https 주소만. 내려받는 파일이면 download, 바깥 사이트면 새 탭
+  const appFor=(item)=>{
+    if(typeof item.app!=='string')return null;
+    const local=/^\/[a-z0-9._/-]+$/i.test(item.app);
+    if(!local&&!/^https:\/\//.test(item.app))return null;
+    const url=new URL(item.app,location.origin);
+    const file=/\.(zip|exe|msi|dmg)$/i.test(url.pathname);
+    return {href:url.href,file,external:url.origin!==location.origin&&!file};
+  };
   const iconFor=(item)=>{
     // Local project icons only (assets/icons/*.png).
     if(typeof item.icon!=='string'||!/^\/assets\/icons\/[a-z0-9-]+\.png$/.test(item.icon))return null;
@@ -94,10 +103,13 @@
     const lower=mk('div','oddz-project-lower');
     // The card has exactly one accessible full-surface action. A separately
     // stacked <details> control remains interactive above that surface.
-    const href=item.url?urlFor(item.url):null;
+    // 사이트·다운로드가 있으면 카드 전체가 그리로 가고, 상세·개발일지는 '자세히' 링크로 따로 둔다
+    const app=appFor(item);
+    const detail=item.url?urlFor(item.url):null;
+    const href=app?app.href:detail;
     if(href){
-      const action=mk('span',oz?'entry-link':'project-action',item.link||'프로젝트 보기');
-      action.append(mk('span','oddz-outbound','↗'));
+      const action=mk('span',oz?'entry-link':'project-action',app?(item.appLabel||'열기'):(item.link||'프로젝트 보기'));
+      action.append(mk('span','oddz-outbound',app&&app.file?'↓':'↗'));
       action.setAttribute('aria-hidden','true');
       lower.append(action);
     }
@@ -108,13 +120,21 @@
       if(!value)continue;
       const row=mk('div','oddz-project-fact');row.append(mk('dt','',label),mk('dd','',value));dl.append(row);
     }
-    details.append(summary,dl);lower.append(details);main.append(lower);
+    details.append(summary,dl);
+    if(app&&detail){
+      const more=mk('a','oddz-project-more',item.url.startsWith('/journal/')?'개발일지':'자세히');
+      more.href=detail;lower.append(more);
+    }
+    lower.append(details);main.append(lower);
     card.append(main);
     const surface=mk(href?'a':'button','oddz-card-surface');
-    surface.setAttribute('aria-label',href?item.name+' 상세 페이지 열기':item.name+' 계획과 진행 내용 펼치기');
-    surface.setAttribute('title',href?'프로젝트 상세 페이지 열기':'계획과 진행 내용 펼치기');
+    const verb=app?(item.appLabel||'열기'):'상세 페이지 열기';
+    surface.setAttribute('aria-label',href?item.name+' '+verb:item.name+' 계획과 진행 내용 펼치기');
+    surface.setAttribute('title',href?verb:'계획과 진행 내용 펼치기');
     if(href){
       surface.href=href;
+      if(app&&app.external){surface.target='_blank';surface.rel='noopener noreferrer';}
+      if(app&&app.file&&app.href.startsWith(location.origin))surface.download='';
     }else{
       surface.type='button';
       surface.setAttribute('aria-expanded','false');

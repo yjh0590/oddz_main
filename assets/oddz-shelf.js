@@ -23,15 +23,12 @@
     olympus: '올림포스에 오른 것'
   }[theme] || '완성한 것';
 
-  const dateKey = (d) => {
-    const [y = 0, m = 0, day = 0] = String(d || '').match(/\d+/g) || [];
-    return Number(y) * 10000 + Number(m) * 100 + Number(day);
-  };
   // 웹 밖의 작업(공모전·영상·게임 등, kind: 'craft')은 완성/만드는 중이 아니라 '작업' 탭에 따로 모은다
-  const newest = (a, b) => dateKey(b.date) - dateKey(a.date);
+  // PJ 번호 오름차순(작은 번호가 위). 작품 목록 전체 보기 화면과 같은 순서
+  const byNumber = (a, b) => parseInt(a.no.slice(3), 10) - parseInt(b.no.slice(3), 10);
   const isCraft = (p) => p.kind === 'craft';
-  const byStage = (key) => data.filter((p) => p.stage === key && !isCraft(p)).sort(newest);
-  const sets = { done: byStage('done'), doing: byStage('doing'), craft: data.filter(isCraft).sort(newest) };
+  const byStage = (key) => data.filter((p) => p.stage === key && !isCraft(p)).sort(byNumber);
+  const sets = { done: byStage('done'), doing: byStage('doing'), craft: data.filter(isCraft).sort(byNumber) };
   if (!sets.done.length) return;
   let shown = sets.done;
 
@@ -41,6 +38,15 @@
     const url = new URL(p.url, location.origin);
     if (url.pathname.startsWith('/projects/')) url.searchParams.set('theme', theme);
     return url.href;
+  };
+  // 바로가기(app): 이 사이트 안 경로나 https 주소만. 내려받는 파일이면 download, 바깥 사이트면 새 탭
+  const appOf = (p) => {
+    if (typeof p.app !== 'string') return null;
+    const local = /^\/[a-z0-9._/-]+$/i.test(p.app);
+    if (!local && !/^https:\/\//.test(p.app)) return null;
+    const url = new URL(p.app, location.origin);
+    const file = /\.(zip|exe|msi|dmg)$/i.test(url.pathname);
+    return { href: url.href, file, external: url.origin !== location.origin && !file };
   };
   const icon = (p) => (typeof p.icon === 'string' && /^\/assets\/icons\/[a-z0-9-]+\.png$/.test(p.icon) ? new URL(p.icon, location.origin).href : '');
   const mk = (tag, cls, text) => {
@@ -143,9 +149,18 @@
     if (sub) title.append(mk('span', 'oddz-shelf__sub', sub));
     head.append(mk('span', 'oddz-shelf__tag', p.no), title);
     const actions = mk('div', 'oddz-shelf__actions');
-    const go = mk('a', 'oddz-shelf__btn', (p.link || '보기') + ' ↗');
-    go.href = link(p);
+    // 사이트·다운로드가 있으면 큰 버튼은 그리로, 상세·개발일지는 옆의 작은 링크로
+    const app = appOf(p);
+    const go = mk('a', 'oddz-shelf__btn', app ? `${p.appLabel || '열기'} ${app.file ? '↓' : '↗'}` : `${p.link || '보기'} ↗`);
+    go.href = app ? app.href : link(p);
+    if (app?.external) { go.target = '_blank'; go.rel = 'noopener noreferrer'; }
+    if (app?.file && app.href.startsWith(location.origin)) go.download = '';
     actions.append(go);
+    if (app && p.url) {
+      const more = mk('a', 'oddz-shelf__detail', p.url.startsWith('/journal/') ? '개발일지' : '자세히');
+      more.href = link(p);
+      actions.append(more);
+    }
     banner.replaceChildren(mk('span', 'oddz-shelf__halo'), big, head, mk('p', 'oddz-shelf__desc', firstSentence(p.desc)), actions);
     items.forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
     count.textContent = `${i + 1} / ${shown.length}`;
@@ -186,6 +201,20 @@
       shelf.style.setProperty('--spin', `${spin.toFixed(1)}deg`);
       shelf.style.setProperty('--drift', `${spin.toFixed(1)}px`);
     };
+    // 배경 효과(먹·물결·모래·김·자기장·깃발)에 드래그를 알린다: 목록 옆 한 점, 속도, 한 칸 넘어갔는지
+    let lastSignal = 0, lastIndex = -1;
+    const signal = () => {
+      const now = performance.now();
+      if (now - lastSignal < 45) return;
+      lastSignal = now;
+      const r = list.getBoundingClientRect();
+      const row = getComputedStyle(list).flexDirection === 'row';
+      const x = row ? r.left + r.width / 2 - vel * r.width * 0.35 : r.left - 24;
+      const y = row ? r.top - 16 : r.top + r.height / 2 - vel * r.height * 0.35;
+      const step = current !== lastIndex && lastIndex !== -1;
+      lastIndex = current;
+      dispatchEvent(new CustomEvent('oddz:shelf-drag', { detail: { x, y, vel, step } }));
+    };
     const tick = () => {
       vel *= 0.9;
       paint();
@@ -198,6 +227,7 @@
       spin += d * 0.5;
       vel = Math.max(-1, Math.min(1, vel * 0.6 + d / 40));
       paint();
+      signal();
       if (!loop) loop = requestAnimationFrame(tick);
     }, { passive: true });
   }

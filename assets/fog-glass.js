@@ -114,6 +114,15 @@
   addEventListener('pointermove', (e) => { if (!down) return; rub(lx, ly, e.clientX, e.clientY); lx = e.clientX; ly = e.clientY; }, { passive: true });
   addEventListener('pointerup', () => { down = false; });
   addEventListener('pointercancel', () => { down = false; });
+  // 진열대 목록을 드래그하면 목록 옆 창의 김이 그 길을 따라 닦인다
+  let fx = -1, fy = -1, ft = 0;
+  addEventListener('oddz:shelf-drag', ({ detail: d }) => {
+    const now = performance.now();
+    if (now - ft > 250) { fx = d.x; fy = d.y; }
+    ft = now;
+    rub(fx, fy, d.x, d.y);
+    fx = d.x; fy = d.y;
+  });
 
   if (still) return;
   let last = 0;

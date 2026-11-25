@@ -175,3 +175,7 @@ html[data-oddz-theme="oz"] #work .oddz-catalog .oddz-project-card .oddz-project-
   #work .oddz-catalog .oddz-project-card>.oddz-project-icon{top:16px;right:16px;width:44px;height:44px}
   #work .oddz-catalog .oddz-project-card.has-icon .oddz-project-main{padding-right:56px}
 }
+
+/* 2026-11-25: 바로가기가 있는 카드의 '자세히'·'개발일지' 링크. 카드 덮개 링크 위로 올려 따로 누를 수 있게 한다. */
+#work .oddz-catalog .oddz-project-card .oddz-project-more{position:relative;z-index:3;font:700 12px/1.55 'Pretendard Variable','Pretendard',sans-serif;color:inherit;opacity:.8;text-decoration:underline;text-underline-offset:3px}
+#work .oddz-catalog .oddz-project-card .oddz-project-more:hover{opacity:1}

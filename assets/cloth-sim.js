@@ -11,7 +11,7 @@
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const COLS = 40, ROWS = 9;
   const STRIPES = [[44, 62, 107], [239, 232, 219], [239, 232, 219], [181, 69, 47], [239, 232, 219], [239, 232, 219]];
-  let W, H, pts, cons, sx, sy, grab = null, wind = 0;
+  let W, H, pts, cons, sx, sy, grab = null, wind = 0, gust = 0;
 
   function build() {
     W = innerWidth; H = innerHeight; const dpr = Math.min(2, devicePixelRatio || 1);
@@ -35,7 +35,8 @@
   }
 
   function step(t) {
-    wind = 0.5 + 0.5 * Math.sin(t * 0.0007) * Math.sin(t * 0.00031 + 2);
+    wind = 0.5 + 0.5 * Math.sin(t * 0.0007) * Math.sin(t * 0.00031 + 2) + gust;
+    gust *= 0.95;
     for (let i = 0; i < pts.length; i++) {
       const p = pts[i];
       if (p.pin) { p.x = p.pin.x; p.y = p.pin.y; p.z = 0; continue; }
@@ -97,6 +98,8 @@
     if (grab) { grab.x = e.pageX; grab.y = e.pageY; }
   }, { passive: true });
   const release = () => { grab = null; };
+  // 진열대 목록을 드래그하는 세기만큼 돌풍이 분다
+  addEventListener('oddz:shelf-drag', ({ detail: d }) => { gust = Math.min(1.8, gust + Math.abs(d.vel) * 0.6 + (d.step ? 0.6 : 0)); });
   addEventListener('pointerup', release); addEventListener('pointercancel', release);
 
   let last = 0;

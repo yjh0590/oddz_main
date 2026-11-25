@@ -118,6 +118,13 @@
     if (!e.target.closest('input, textarea, select')) splash(e.clientX, e.clientY);
   }, { passive: true });
 
+  // 진열대 목록을 드래그하면 목록 가장자리에 물결이 일고, 한 칸 넘어갈 때마다 물방울이 튄다
+  addEventListener('oddz:shelf-drag', ({ detail: d }) => {
+    if (still) return;
+    drop(d.x, d.y, 3, 0.8 + Math.abs(d.vel) * 1.2);
+    if (d.step) { drop(d.x, d.y, 5, 2.2); splash(d.x, d.y); }
+  });
+
   let lastTrail = 0, slow = false;
   addEventListener('pointermove', (e) => {
     if (still || slow || e.pointerType !== 'mouse') return;

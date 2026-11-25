@@ -125,6 +125,17 @@
     else if (e.pointerType === 'mouse') stroke(e.clientX, e.clientY, vx * 0.25, vy * 0.25, 0); // 물만 휘젓기
   }, { passive: true });
 
+  // 진열대 목록을 드래그하면 목록 옆으로 붓이 지나간다
+  let bx = -1, by = -1, bt = 0;
+  addEventListener('oddz:shelf-drag', ({ detail: d }) => {
+    const now = performance.now();
+    if (now - bt > 250) { bx = d.x; by = d.y; }
+    bt = now;
+    stroke(d.x, d.y, (d.x - bx) / CELL * 0.6, (d.y - by) / CELL * 0.6, 0.9);
+    bx = d.x; by = d.y;
+    if (d.step) drop(d.x, d.y, 4 + Math.random() * 2, 2.2, 1.6);
+  });
+
   let last = 0, nextDrop = performance.now() + 3500;
   function frame(now) {
     if (now >= nextDrop) {

@@ -273,3 +273,6 @@ html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card.has-icon .ent
   html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card > .oddz-project-icon { top: var(--space-lg); right: var(--space-lg); width: 2.75rem; height: 2.75rem; }
   html[data-oddz-theme="hum"] #work .oddz-catalog .oddz-project-card.has-icon .entry-meta { padding-right: 3.5rem; }
 }
+
+/* 2026-11-25: 바로가기가 있는 카드의 '자세히'·'개발일지' 링크를 카드 덮개 위로 */
+#work .oddz-catalog .oddz-project-card .oddz-project-more { position: relative; z-index: 3; font-weight: 700; font-size: var(--text-xs); color: var(--color-ink-2); text-decoration: underline; text-underline-offset: 3px; }

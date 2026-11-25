@@ -600,6 +600,13 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
   html.oddz-has-shelf:not(.oddz-view-work) .oddz-shelf__more{margin-top:14px}
 }
 
+
+/* 바로가기 버튼 옆의 '자세히'·'개발일지' 작은 링크 */
+.oddz-shelf__actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 14px}
+.oddz-shelf__detail{font-size:clamp(.72rem,2.5cqmin,.86rem);font-weight:600;color:var(--home-muted);text-decoration:underline;text-underline-offset:3px}
+.oddz-shelf__detail:hover{color:var(--home-text)}
+@media (max-width:820px){.oddz-shelf__btn{width:auto}}
+
 @media (prefers-reduced-motion:reduce){
   .oddz-shelf *,.oddz-shelf *::before,.oddz-shelf *::after{animation:none!important;transition:none!important}
 }

@@ -92,6 +92,15 @@
     if (!(e.target.closest && e.target.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]'))) { polarity *= -1; flipAt = performance.now(); }
   }, { passive: true });
   addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse') cursor = null; });
+  // 진열대 목록을 드래그하면 목록 쪽에 자석이 생기고, 드래그 방향이 바뀌면 극이 뒤집힌다
+  let release = 0;
+  addEventListener('oddz:shelf-drag', ({ detail: d }) => {
+    cursor = { x: d.x, y: d.y };
+    const dir = d.vel >= 0 ? 1 : -1;
+    if (dir !== polarity && Math.abs(d.vel) > 0.15) { polarity = dir; flipAt = performance.now(); }
+    clearTimeout(release);
+    release = setTimeout(() => { cursor = null; }, 900);
+  });
 
   let last = 0, tick = 0;
   function frame(now) {
