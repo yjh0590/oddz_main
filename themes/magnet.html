@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>자석 실험대 · oddz</title>
+<title>자기장 · oddz</title>
 <meta name="description" content="심심할 때 만든 웹 앱·도구·게임과 개발일지.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="oddz">
@@ -71,11 +71,11 @@
 <style>:root{--picker-bg:#23272d;--picker-menu:#23272d;--picker-text:#e8ebef;--picker-line:rgba(255,255,255,.2);--picker-hover:rgba(224,72,59,.15);--picker-accent:#e0483b}</style>
 <link rel="stylesheet" href="../assets/theme-switcher.css">
 <link rel="stylesheet" href="../assets/oddz-projects-catalog.css?v=20261112">
-<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-size">
+<link rel="stylesheet" href="../assets/oddz-shelf.css?v=20261125-icon">
 <script src="../assets/oddz-projects-data.js?v=20261124-done" defer></script>
 <script src="../assets/oddz-projects-catalog.js?v=20261123-journal" defer></script>
 <link rel="stylesheet" href="../assets/oddz-home.css?v=20261125-clean">
-<script src="../assets/oddz-shelf.js?v=20261125-drag2" defer></script>
+<script src="../assets/oddz-shelf.js?v=20261125-icon" defer></script>
 <script src="../assets/home-motion.js?v=20261125-clean" defer></script>
 <script src="../assets/magnet-field.js?v=20261125-clean" defer></script>
 <style id="home-skin">
@@ -116,20 +116,20 @@
       <details class="theme-picker">
         <summary>테마</summary>
         <div class="theme-picker__list" aria-label="사이트 테마">
-          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 채집 노트</a>
-          <a href="machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니바퀴 공장</a>
+          <a href="../index.html" data-theme-path=""><span class="theme-picker__swatch" style="--swatch:#8fe3d0" aria-hidden="true"></span>반딧불 밤</a>
+          <a href="machine.html" data-theme-path="themes/machine.html"><span class="theme-picker__swatch" style="--swatch:#F5B921" aria-hidden="true"></span>톱니 공방</a>
           <a href="game-water.html" data-theme-path="themes/game-water.html"><span class="theme-picker__swatch" style="--swatch:#8FE8F2" aria-hidden="true"></span>폭포 던전</a>
-          <a href="game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 모험가 길드</a>
-          <a href="bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울 극장</a>
-          <a href="oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>오즈 ✦</a>
-          <a href="hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 공작</a>
-          <a href="olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스 신전</a>
-          <a href="ripple.html" data-theme-path="themes/ripple.html"><span class="theme-picker__swatch" style="--swatch:#3cc8d8" aria-hidden="true"></span>물방울 수면</a>
-          <a href="ink.html" data-theme-path="themes/ink.html"><span class="theme-picker__swatch" style="--swatch:#1d1b19" aria-hidden="true"></span>먹물 화선지</a>
-          <a href="fog.html" data-theme-path="themes/fog.html"><span class="theme-picker__swatch" style="--swatch:#9db4cc" aria-hidden="true"></span>김 서린 창</a>
-          <a href="sand.html" data-theme-path="themes/sand.html"><span class="theme-picker__swatch" style="--swatch:#d9a463" aria-hidden="true"></span>사막 모래언덕</a>
-          <a href="magnet.html" data-theme-path="themes/magnet.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#e0483b" aria-hidden="true"></span>자석 실험대</a>
-          <a href="cloth.html" data-theme-path="themes/cloth.html"><span class="theme-picker__swatch" style="--swatch:#2c3e6b" aria-hidden="true"></span>바람 부는 깃발</a>
+          <a href="game-sunset.html" data-theme-path="themes/game-sunset.html"><span class="theme-picker__swatch" style="--swatch:#F0C97A" aria-hidden="true"></span>노을 길드</a>
+          <a href="bubbles.html" data-theme-path="themes/bubbles.html"><span class="theme-picker__swatch" style="--swatch:#F5A9C9" aria-hidden="true"></span>비눗방울</a>
+          <a href="oz.html" data-theme-path="themes/oz.html"><span class="theme-picker__swatch" style="--swatch:#4c9983" aria-hidden="true"></span>에메랄드 길</a>
+          <a href="hum.html" data-theme-path="themes/hum.html"><span class="theme-picker__swatch" style="--swatch:#ecd43c" aria-hidden="true"></span>종이 정원</a>
+          <a href="olympus.html" data-theme-path="themes/olympus.html"><span class="theme-picker__swatch" style="--swatch:#5b97cb" aria-hidden="true"></span>올림포스</a>
+          <a href="ripple.html" data-theme-path="themes/ripple.html"><span class="theme-picker__swatch" style="--swatch:#3cc8d8" aria-hidden="true"></span>맑은 물결</a>
+          <a href="ink.html" data-theme-path="themes/ink.html"><span class="theme-picker__swatch" style="--swatch:#1d1b19" aria-hidden="true"></span>수묵</a>
+          <a href="fog.html" data-theme-path="themes/fog.html"><span class="theme-picker__swatch" style="--swatch:#9db4cc" aria-hidden="true"></span>비 오는 창</a>
+          <a href="sand.html" data-theme-path="themes/sand.html"><span class="theme-picker__swatch" style="--swatch:#d9a463" aria-hidden="true"></span>모래 언덕</a>
+          <a href="magnet.html" data-theme-path="themes/magnet.html" aria-current="page"><span class="theme-picker__swatch" style="--swatch:#e0483b" aria-hidden="true"></span>자기장</a>
+          <a href="cloth.html" data-theme-path="themes/cloth.html"><span class="theme-picker__swatch" style="--swatch:#2c3e6b" aria-hidden="true"></span>바람 깃발</a>
         </div>
       </details>
     </nav>

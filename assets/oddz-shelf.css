@@ -559,6 +559,20 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
   .oddz-shelf__stage>.oddz-shelf__frame{height:auto;width:min(100%,420px);aspect-ratio:auto;justify-self:center}
 }
 
+
+/* ---------- 아이콘 크기: 틀과 안쪽 그림 모두 한 단계 작게 ----------
+   그림은 타일 테두리 안쪽 원만 남기고(clip-path) 틀보다 작게 두고, 남는 틀 여백은 같은 PNG를 크게 확대한 타일 바탕색으로 채운다. */
+.oddz-shelf__emblem>span{display:grid;place-items:center;background:var(--icon,none) 12% 50% / 3000% no-repeat var(--emblem-bg,#eef4f1)}
+.oddz-shelf__emblem img,.oddz-shelf__list img{width:var(--glyph,92%);height:auto;margin:0;clip-path:circle(41% at 50% 50%)}
+[data-oddz-theme=game-water] .oddz-shelf__emblem>span,[data-oddz-theme=ink] .oddz-shelf__emblem>span,[data-oddz-theme=olympus] .oddz-shelf__emblem>span{background-image:none}
+.oddz-shelf__icon.oddz-shelf__emblem{width:clamp(78px,7.5vw,100px)}
+.oddz-shelf__list .oddz-shelf__emblem{width:46px}
+.oddz-shelf__list button{grid-template-columns:46px minmax(0,1fr)}
+@media (max-width:820px){
+  .oddz-shelf__icon.oddz-shelf__emblem{width:54px}
+  .oddz-shelf__list button{grid-template-columns:1fr}
+}
+
 @media (prefers-reduced-motion:reduce){
   .oddz-shelf *,.oddz-shelf *::before,.oddz-shelf *::after{animation:none!important;transition:none!important}
 }

@@ -47,12 +47,14 @@
     return n;
   };
 
-  // 아이콘 PNG에는 네모 타일이 그려져 있어서, 그림을 키워 타일 테두리를 밖으로 밀어내고 테마 모양 틀(CSS --emblem)에 담는다
+  // 아이콘 PNG에는 네모 타일이 그려져 있어서, 타일 테두리 안쪽 원만 잘라 테마 모양 틀(CSS --emblem)에 담는다
   const emblem = (p, cls) => {
     const outer = mk('span', 'oddz-shelf__emblem' + (cls ? ' ' + cls : ''));
     const inner = mk('span');
     const img = mk('img');
     img.src = icon(p); img.alt = ''; img.decoding = 'async';
+    // 틀 여백은 아이콘 타일의 바탕색으로 채운다 (CSS가 이 그림을 크게 확대해 타일 안쪽 한 점을 비춘다)
+    if (img.src) inner.style.setProperty('--icon', `url("${img.src}")`);
     inner.append(img);
     outer.append(inner);
     return outer;
