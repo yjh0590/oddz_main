@@ -16,6 +16,7 @@
   const stageDefs=[
     {key:'done',title:'완성',english:'COMPLETED',note:'만들어 공개했거나 실행할 수 있는 형태로 완성한 프로젝트'},
     {key:'doing',title:'진행 중',english:'IN PROGRESS',note:'프로토타입을 제작하거나 기능을 개선하는 프로젝트'},
+    {key:'craft',title:'작업',english:'BEYOND THE WEB',note:'공모전·영상·게임처럼 웹 밖에서 한 작업'},
     {key:'next',title:'끝나면 할 것',english:'UP NEXT',note:'다음에 착수할 후보 프로젝트'},
     {key:'someday',title:'언젠가 할 것',english:'SOMEDAY',note:'장기적으로 보관해 두고 발전시킬 아이디어'}
   ];
@@ -71,9 +72,10 @@
     const e=mk('div','rune-tag');e.innerHTML='<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#D8A94A" stroke-width="6"/></svg>';
     e.append(mk('span','',digits));return e;
   }
+  const groupOf=(item)=>item.kind==='craft'?'craft':item.stage;
   function makeItem(item,index){
     const card=mk('article','entry oddz-project-card'+(item.stage==='next'||item.stage==='someday'?' pending':''));
-    card.id=item.id;card.dataset.stage=item.stage;
+    card.id=item.id;card.dataset.stage=groupOf(item);
     card.dataset.search=[item.no,item.name,item.desc,item.type,...(item.tags||[])].join(' ').toLocaleLowerCase('ko-KR');
     if(oz){
       const sample=sceneSamples[index%Math.max(1,sceneSamples.length)];
@@ -162,7 +164,7 @@
     head.append(title,sub,count);group.append(head);
     group.append(mk('p','oddz-stage-intro',voice?voice[1]:st.note));
     const list=mk('div','oddz-stage-list');
-    source.filter(x=>x.stage===st.key).sort((a,b)=>parseInt(a.no.slice(3))-parseInt(b.no.slice(3))).forEach((x,i)=>{
+    source.filter(x=>groupOf(x)===st.key).sort((a,b)=>parseInt(a.no.slice(3))-parseInt(b.no.slice(3))).forEach((x,i)=>{
       const index=source.findIndex(y=>y.id===x.id);
       const c=makeItem(x,index);list.append(c);rendered.push(c);
     });
