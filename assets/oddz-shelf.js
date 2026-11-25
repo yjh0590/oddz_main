@@ -219,16 +219,22 @@
   list.addEventListener('keydown', (e) => {
     const d = { ArrowUp: -1, ArrowLeft: -1, ArrowDown: 1, ArrowRight: 1 }[e.key];
     if (d) { e.preventDefault(); go(current + d); items[current].focus({ preventScroll: true }); }
-  });  // 휠 한 번에 한 칸: 신호가 0.16초 안에 이어지면(트랙패드·빠른 휠) 하나의 동작으로 보고 한 칸만 넘긴다
-  let lastWheel = 0;
+  });  // 휠·트랙패드: 굴린 양이 40px 쌓이면 한 칸, 계속 굴리면 0.18초마다 한 칸씩 이어서 넘긴다.
+  // 휠 한 칸(보통 100px)은 정확히 한 칸, 길게 밀면 가볍게 여러 칸.
+  let wheelSum = 0, lastStep = 0, lastWheel = 0;
   list.addEventListener('wheel', (e) => {
     const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
     if (!d || e.ctrlKey) return;
     e.preventDefault();
     const now = performance.now();
-    const continuing = now - lastWheel < 160;
+    if (now - lastWheel > 250 || Math.sign(d) !== Math.sign(wheelSum)) wheelSum = 0;
     lastWheel = now;
-    if (!continuing) go(current + Math.sign(d));
+    wheelSum += e.deltaMode === 1 ? d * 40 : d;
+    if (Math.abs(wheelSum) >= 40 && now - lastStep >= 180) {
+      lastStep = now;
+      go(current + Math.sign(wheelSum));
+      wheelSum = 0;
+    }
   }, { passive: false });
 
   banner.addEventListener('pointermove', (e) => {
@@ -270,11 +276,13 @@
     const sync = () => {
       const id = decodeURIComponent(location.hash.slice(1));
       const target = id && document.getElementById(id);
-      const showWork = !!target && work.contains(target);
+      // 바닥글(연락처)은 진열대 화면에서 숨기므로, '연락'을 누르면 작품 목록 화면의 바닥글로 보낸다
+      const showWork = !!target && (work.contains(target) || target.id === 'contact');
       if (showWork !== root.classList.contains('oddz-view-work')) {
         root.classList.toggle('oddz-view-work', showWork);
-        if (target === work || !showWork) scrollTo(0, 0);
-        else target.scrollIntoView();
+        // 화면을 바꾼 직후라 부드러운 스크롤 대신 바로 이동한다
+        if (target === work || !showWork) scrollTo({ top: 0, behavior: 'instant' });
+        else target.scrollIntoView({ block: 'start', behavior: 'instant' });
       }
     };
     addEventListener('hashchange', sync);
