@@ -219,7 +219,18 @@
   list.addEventListener('keydown', (e) => {
     const d = { ArrowUp: -1, ArrowLeft: -1, ArrowDown: 1, ArrowRight: 1 }[e.key];
     if (d) { e.preventDefault(); go(current + d); items[current].focus({ preventScroll: true }); }
-  });
+  });  // 휠 한 번에 한 칸: 신호가 0.16초 안에 이어지면(트랙패드·빠른 휠) 하나의 동작으로 보고 한 칸만 넘긴다
+  let lastWheel = 0;
+  list.addEventListener('wheel', (e) => {
+    const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if (!d || e.ctrlKey) return;
+    e.preventDefault();
+    const now = performance.now();
+    const continuing = now - lastWheel < 160;
+    lastWheel = now;
+    if (!continuing) go(current + Math.sign(d));
+  }, { passive: false });
+
   banner.addEventListener('pointermove', (e) => {
     const r = banner.getBoundingClientRect();
     banner.style.setProperty('--mx', `${e.clientX - r.left}px`);

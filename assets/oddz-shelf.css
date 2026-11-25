@@ -39,7 +39,7 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
   overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;
   -webkit-mask:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
 .oddz-shelf__list::-webkit-scrollbar{display:none}
-.oddz-shelf__list li{flex:none;height:var(--item-h);display:flex;align-items:center;scroll-snap-align:center}
+.oddz-shelf__list li{flex:none;height:var(--item-h);display:flex;align-items:center;scroll-snap-align:center;scroll-snap-stop:always}
 .oddz-shelf__list button{all:unset;box-sizing:border-box;position:relative;width:100%;display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center;
   padding:12px 14px 12px 22px;border:1px solid transparent;border-radius:var(--card-radius);cursor:pointer;opacity:.45;transform:scale(.9);
   transition:opacity .35s,transform .35s,background .35s,border-color .35s}
@@ -141,7 +141,7 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
   .oddz-shelf__side{flex-direction:row}
   .oddz-shelf__arrow,.oddz-shelf__count{display:none}
   .oddz-shelf__list{flex-direction:row;gap:4px;padding:6px 2px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-mask:none;mask:none}
-  .oddz-shelf__list li{width:78px;height:auto;scroll-snap-align:start}
+  .oddz-shelf__list li{width:78px;height:auto;scroll-snap-align:start;scroll-snap-stop:always}
   .oddz-shelf__list button{grid-template-columns:1fr;justify-items:center;gap:8px;padding:10px 4px 8px;text-align:center;transform:none}
   .oddz-shelf__list button[aria-current=true]::before{display:none}
   .oddz-shelf__list strong{white-space:normal;font-size:.74rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}

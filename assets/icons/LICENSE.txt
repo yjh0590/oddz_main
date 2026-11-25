@@ -1,14 +1,21 @@
 assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
 
 직접 만든 앱 아이콘
-  pj-27.png  어쩔 수 없었어 (직접 작성한 pj-27.svg를 PNG로 렌더링)
+  pj-27.png  어쩔 수 없었어 (직접 작성한 pj-27.svg 선화를 그라데이션 타일 위에 흰 선으로 렌더링)
   pj-08.png  오늘의 강의 (assets/todays-lecture-icon.png)
   pj-11.png  내리는 문 (앱 icon-192.png)
   pj-23.png  명령어 도구함 (CmdToolbox app.ico)
   pj-25.png  쓱-싹 (assets/sseuk-ssak.ico)
 
-나머지는 Microsoft Fluent Emoji (Flat)(https://github.com/microsoft/fluentui-emoji) 그림을
+완성 작품(pj-04·05·10·12·15·18·24·26·30·33·34)은 Microsoft Fluent Emoji (Color) 그림을
+그라데이션 타일에 얹어 PNG로 만든 것 (@iconify-json/fluent-emoji 1.2.6에서 가져옴, MIT)
+  pj-04 graduation-cap · pj-05 notebook-with-decorative-cover · pj-10 crescent-moon · pj-12 file-folder
+  pj-15 studio-microphone · pj-18 slot-machine · pj-24 admission-tickets · pj-26 magic-wand
+  pj-30 deciduous-tree · pj-33 desktop-computer · pj-34 headphone
+
+그 밖의 작품은 Microsoft Fluent Emoji (Flat)(https://github.com/microsoft/fluentui-emoji) 그림을
 옅은 색 타일에 얹어 PNG로 만든 것 (@iconify-json/fluent-emoji-flat 1.2.6에서 가져옴)
+  (아래 목록 중 완성 작품 번호는 위의 Color 그림으로 바뀜)
   pj-01 page-facing-up · pj-02 victory-hand · pj-03 keyboard · pj-04 graduation-cap
   pj-05 notebook-with-decorative-cover · pj-06 bottle-with-popping-cork · pj-07 ice · pj-09 game-die
   pj-10 jar · pj-12 card-index-dividers · pj-13 hot-beverage · pj-14 open-book
