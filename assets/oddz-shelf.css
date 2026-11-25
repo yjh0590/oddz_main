@@ -573,6 +573,22 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
   .oddz-shelf__list button{grid-template-columns:1fr}
 }
 
+
+/* ---------- 배너 크기에 맞춰 내용 줄이기 (잘림 방지) ----------
+   배너를 크기 컨테이너로 두고 아이콘·제목·소개·버튼·간격을 배너의 짧은 변(cqmin)에 비례시킨다.
+   화면이 낮거나 좁아 배너가 작아져도 내용이 실루엣의 안전 여백 안에 들어간다. 최댓값은 기존 크기 그대로다. */
+.oddz-shelf__banner{container-type:size}
+[data-oddz-theme] .oddz-shelf__banner{gap:clamp(6px,3.2cqmin,18px)}
+[data-oddz-theme] .oddz-shelf__head{gap:clamp(4px,2.2cqmin,12px)}
+[data-oddz-theme] .oddz-shelf__icon.oddz-shelf__emblem{width:clamp(44px,18cqmin,100px)}
+[data-oddz-theme] .oddz-shelf__banner h2{font-size:clamp(1.1rem,calc(7.4cqmin * var(--title-scale,1)),calc(2.7rem * var(--title-scale,1)))}
+[data-oddz-theme] .oddz-shelf__desc{font-size:min(var(--note-size,1.02rem),calc(3.4cqmin * var(--note-scale,1)));max-width:min(30ch,100%)}
+[data-oddz-theme] .oddz-shelf__tag{font-size:clamp(.56rem,1.9cqmin,.72rem)}
+[data-oddz-theme] .oddz-shelf__btn{padding:clamp(7px,2.3cqmin,12px) clamp(12px,4.2cqmin,22px);font-size:clamp(.74rem,2.9cqmin,.94rem)}
+[data-oddz-theme] .oddz-shelf__actions{margin-top:clamp(0px,1.8cqmin,10px)}
+[data-oddz-theme=ink] .oddz-shelf{--title-scale:1.15}
+[data-oddz-theme=game-sunset] .oddz-shelf__banner .oddz-shelf__tag{width:clamp(34px,10cqmin,54px);height:clamp(34px,10cqmin,54px)}
+
 @media (prefers-reduced-motion:reduce){
   .oddz-shelf *,.oddz-shelf *::before,.oddz-shelf *::after{animation:none!important;transition:none!important}
 }
