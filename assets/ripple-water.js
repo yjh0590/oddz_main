@@ -109,9 +109,10 @@
     setTimeout(() => s.remove(), 1100);
   }
 
-  // 링크·버튼·입력칸을 누를 때는 그 동작을 방해하지 않고 물결만 일으킨다.
+  // 카드·버튼·입력칸 같은 UI 위에서는 물결을 일으키지 않는다 (누르는 동작과 겹치지 않게).
+  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]');
   addEventListener('pointerdown', (e) => {
-    if (still || e.button > 0) return;
+    if (still || e.button > 0 || interactive(e.target)) return;
     drop(e.clientX, e.clientY, 5, 2.4);
     trembleAround(e.clientX, e.clientY, 1);
     if (!e.target.closest('input, textarea, select')) splash(e.clientX, e.clientY);

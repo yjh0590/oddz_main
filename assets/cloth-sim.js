@@ -97,7 +97,7 @@
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { build(); draw(); }, 200); });
   if (still) return;
 
-  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label');
+  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]');
   addEventListener('pointerdown', (e) => {
     if (e.button > 0) return;
     const b = board();

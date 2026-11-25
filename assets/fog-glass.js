@@ -100,7 +100,7 @@
 
   // 누른 채 문지르기: 김을 닦고 그 자리 작은 방울도 닦인다
   let down = false, lx = 0, ly = 0;
-  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label');
+  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]');
   function rub(x0, y0, x1, y1) {
     const n = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0) / 8));
     for (let i = 1; i <= n; i++) wipe(x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n, 44, 0.5);

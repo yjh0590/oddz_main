@@ -111,7 +111,7 @@
   if (still) return;
 
   let down = false, lx = 0, ly = 0;
-  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label');
+  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]');
   addEventListener('pointerdown', (e) => {
     if (e.button > 0 || interactive(e.target)) return;
     down = true; lx = e.clientX; ly = e.clientY;

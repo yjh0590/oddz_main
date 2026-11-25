@@ -89,7 +89,7 @@
   document.documentElement.addEventListener('mouseleave', () => { cursor = null; });
   addEventListener('pointerdown', (e) => {
     cursor = { x: e.clientX, y: e.clientY };
-    if (!(e.target.closest && e.target.closest('a, button, input, summary, select, textarea, label'))) { polarity *= -1; flipAt = performance.now(); }
+    if (!(e.target.closest && e.target.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]'))) { polarity *= -1; flipAt = performance.now(); }
   }, { passive: true });
   addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse') cursor = null; });
 

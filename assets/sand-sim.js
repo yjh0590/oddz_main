@@ -92,7 +92,7 @@
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 200); });
   if (still) return;
 
-  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label');
+  const interactive = (t) => t.closest && t.closest('a, button, input, summary, select, textarea, label, header, .oddz-shelf__stage, .oddz-project-card, .entry, [data-fx-off]');
   addEventListener('pointerdown', (e) => { if (e.button > 0 || interactive(e.target)) return; pouring = true; px = e.clientX; py = e.clientY; }, { passive: true });
   addEventListener('pointermove', (e) => { px = e.clientX; py = e.clientY; }, { passive: true });
   addEventListener('pointerup', () => { pouring = false; });
