@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="PC와 닌텐도 스위치가 함께 쓰는 스피커의 소리를 버튼 한 번으로 바꾸는 도구를 만든 기록.">
+  <title>스피커 전환 만들기 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">PJ 34 · Desktop Tool · 첫 버전</span><h1>스피커 전환 만들기</h1><p class="lead">스피커는 한 쌍인데 소리를 내는 기기는 둘이다.</p><p class="article-date"><time datetime="2026-11-21">2026.11.21</time></p></header>
+    <section class="journal-section"><h2>섞여 나오는 소리</h2><p>PC와 닌텐도 스위치 2가 스피커 한 쌍을 같이 쓴다. 이 스피커에는 입력을 고르는 버튼도, 리모컨도 없어서 꽂힌 소리가 전부 섞여 나오고, 스위치 볼륨은 밖에서 조절할 방법이 없다. 게임할 때 PC 알림 소리가 끼어들거나 그 반대가 되기 일쑤였다.</p></section>
+    <section class="journal-section"><h2>소리를 PC로 모으기</h2><p>스위치 소리를 스피커가 아니라 PC 라인입력으로 받기로 했다. Windows 기본 기능으로 들으면 PC 볼륨을 내릴 때 스위치 소리도 같이 꺼져서, 무료 가상 믹서인 Voicemeeter로 PC 소리와 스위치 소리를 서로 다른 채널로 나눴다. 이제 PC가 두 소리를 각각 켜고 끌 수 있다.</p></section>
+    <section class="journal-section"><h2>버튼 한 번</h2><p>PC에서 작은 Node.js 서버가 Voicemeeter의 채널 음소거를 바꾼다. 둘 다 듣기, PC만, 스위치만 세 가지 프리셋을 주소 하나씩으로 열어 두고, Stream Deck 버튼과 휴대폰 리모컨 화면이 그 주소를 부르기만 한다. 그래서 버튼을 어디에 두든 결과가 같다. 휴대폰 화면은 3초마다 지금 상태를 다시 읽어 온다.</p></section>
+    <section class="journal-section"><h2>켜 두기</h2><p>매번 서버를 켜지 않도록 콘솔 창 없이 실행하는 스크립트를 만들어 시작프로그램에 넣었다. 소리가 두 번 겹쳐 나오는 설정처럼 처음에 헷갈렸던 부분은 문제 해결 안내로 따로 정리해 두었다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

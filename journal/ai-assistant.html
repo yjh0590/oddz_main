@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="오늘 일정과 관심 뉴스, 예약 상태를 아침마다 한 번에 알려 주는 AI 비서를 만드는 기록.">
+  <title>AI 비서 만들기 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">PJ 35 · Web App · AI · 만드는 중</span><h1>AI 비서 만들기</h1><p class="lead">아침에 앱 세 개를 열어 보던 일을 알림 하나로 줄인다.</p><p class="article-date"><time datetime="2026-11-25">2026.11.25</time></p></header>
+    <section class="journal-section"><h2>아침의 세 군데</h2><p>아침마다 캘린더에서 오늘 일정을 보고, 뉴스를 훑고, 콕콕 예약알림에 걸어 둔 예약이 열렸는지 확인했다. 매일 같은 순서로 세 곳을 돌기에 한 화면에 모아 아침에 한 번 알려 주는 비서를 만들고 있다.</p></section>
+    <section class="journal-section"><h2>한 화면에 모으는 것</h2><p>오늘의 캘린더 일정, 관심 키워드에 맞는 최근 뉴스 세 건, 콕콕 예약알림이 지켜보는 항목의 상태를 모은다. 뉴스는 등록해 둔 RSS에서 키워드로 고르고, 원하면 AI로 한국어 요약을 붙인다. 콕콕의 데이터는 읽기 전용으로만 열어 원래 앱에 영향을 주지 않는다.</p></section>
+    <section class="journal-section"><h2>휴대폰으로 아침 알림</h2><p>매일 아침 7시 30분에 브리핑을 만들어 휴대폰에 웹푸시로 보낸다. 아이폰은 홈 화면에 추가해 앱처럼 열고, 브리핑은 한국어로 읽어 주기도 한다. 그 시각에 컴퓨터가 꺼져 있었으면 두 시간 안에 다시 켰을 때 늦게라도 만들어 보낸다.</p></section>
+    <section class="journal-section"><h2>조심한 부분과 다음</h2><p>내 컴퓨터에서 도는 개인용이라 처음 접속할 때 접속 코드를 입력해야 열리고, 캘린더 비밀번호 같은 값은 저장소에 올리지 않는 설정 파일에만 둔다. 다음에는 매일 아침 직접 써 보면서 브리핑에 넣을 것과 뺄 것을 다듬으려 한다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

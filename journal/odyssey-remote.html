@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="아이폰으로 모니터 입력과 밝기를 바꾸는 리모컨을 만든 기록.">
+  <title>오디세이 리모컨 만들기 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">PJ 33 · Desktop Tool · 첫 버전</span><h1>오디세이 리모컨 만들기</h1><p class="lead">게임하려고 일어나서 모니터 버튼을 더듬는 일을 그만두기로 했다.</p><p class="article-date"><time datetime="2026-11-08">2026.11.08</time></p></header>
+    <section class="journal-section"><h2>모니터 버튼 대신</h2><p>모니터 하나에 PC와 닌텐도 스위치를 같이 연결해 두고 쓴다. 화면을 바꿀 때마다 모니터 뒤쪽의 작은 버튼으로 메뉴를 열어야 해서, 아이폰으로 입력 전환과 밝기 조절을 하는 리모컨을 만들었다.</p></section>
+    <section class="journal-section"><h2>모니터에 직접 말 걸기</h2><p>모니터는 DDC/CI라는 방식으로 케이블을 통해 밝기나 입력 같은 설정을 받을 수 있다. Windows의 모니터 제어 기능을 부르는 작은 C# 명령줄 프로그램을 만들어, 입력을 DisplayPort(PC)와 HDMI(스위치) 사이에서 바꾸고 밝기를 0~50 사이로 맞추게 했다.</p></section>
+    <section class="journal-section"><h2>아이폰 리모컨</h2><p>PC에서 Node.js 서버가 이 프로그램을 대신 실행하고, 같은 Wi-Fi에 있는 아이폰은 웹 페이지 버튼으로 서버에 요청만 보낸다. Safari에서 홈 화면에 추가하면 주소창 없는 앱처럼 열리고, 버튼을 누를 때 짧은 진동도 준다. 밝기는 슬라이더와 ±5 버튼, 야간·표준·최대 세 가지 프리셋으로 맞춘다.</p></section>
+    <section class="journal-section"><h2>되돌아오는 안전장치</h2><p>스위치 화면으로 넘긴 뒤 PC 화면으로 돌아오지 못하면 리모컨을 다시 띄울 방법이 없다. 그래서 처음 시험할 때 쓰도록, 스위치 화면으로 넘겼다가 5초 뒤 자동으로 PC 화면으로 돌아오는 테스트 모드를 넣었다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a> <a class="button" href="https://github.com/yjh0590/odyssey-remote" target="_blank" rel="noopener noreferrer">소스 코드 보기 ↗</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

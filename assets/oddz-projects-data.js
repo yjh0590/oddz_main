@@ -464,20 +464,22 @@ window.ODDZ_PROJECTS = Object.freeze([
     "id": "pj-24",
     "no": "PJ 24",
     "icon": "/assets/icons/pj-24.png",
-    "stage": "someday",
-    "type": "Practice Game",
-    "name": "콘서트 티켓팅 연습장",
-    "desc": "공연장 좌석 선택을 실제 티켓팅처럼 반복 연습하는 웹 시뮬레이터.",
-    "feat": "좌석 선택 속도 측정과 인기 구역 연습",
-    "current": "시뮬레이션 방식과 확장 기능 구상 단계",
-    "next": "가상의 좌석표로 속도 측정 프로토타입 구현",
+    "stage": "done",
+    "type": "Web App",
+    "name": "첫열 · 티켓팅 연습",
+    "desc": "공연·스포츠·기차·영화·수강신청 등 예매처 36곳의 예매 흐름을 그대로 따라 하며 좌석 확보 시간을 재는 연습 앱.",
+    "feat": "예매처별 단계·결제 흐름, 실제 공연장·야구장 단순 배치도 21곳, 난이도 3단계와 대기열·보안문자",
+    "current": "첫 버전 완성 · 36개 예매처와 실제 장소 배치도",
+    "next": "추후 업데이트 · 기록 비교와 배포",
     "tags": [
       "티켓팅",
       "연습",
       "시뮬레이션"
     ],
+    "url": "/journal/ticketing.html",
+    "link": "개발일지",
     "date": "2026.10.23",
-    "dateBasis": "아이디어 제안"
+    "dateBasis": "아이디어 제안 (첫 버전 2026.11.07~08)"
   },
   {
     "id": "pj-25",
@@ -649,5 +651,68 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "개발일지",
     "date": "2026.11.24",
     "dateBasis": "저장소 첫 커밋"
+  },
+  {
+    "id": "pj-33",
+    "no": "PJ 33",
+    "icon": "/assets/icons/pj-33.png",
+    "stage": "done",
+    "type": "Desktop Tool",
+    "name": "오디세이 리모컨",
+    "desc": "아이폰을 리모컨 삼아 모니터의 입력(PC ↔ 닌텐도 스위치)과 밝기를 소파에서 바꾸는 도구.",
+    "feat": "DDC/CI로 모니터 입력 전환·밝기 조절, 홈 화면에 추가하는 아이폰용 웹 리모컨, 5초 뒤 PC로 돌아오는 안전 테스트",
+    "current": "첫 버전 완성 · C# 모니터 제어 프로그램과 Node.js 서버",
+    "next": "추후 업데이트 · 다른 모니터 모델 지원",
+    "tags": [
+      "리모컨",
+      "모니터",
+      "아이폰"
+    ],
+    "url": "/journal/odyssey-remote.html",
+    "link": "개발일지",
+    "date": "2026.11.08",
+    "dateBasis": "저장소 첫 커밋"
+  },
+  {
+    "id": "pj-34",
+    "no": "PJ 34",
+    "icon": "/assets/icons/pj-34.png",
+    "stage": "done",
+    "type": "Desktop Tool",
+    "name": "스피커 전환",
+    "desc": "PC와 닌텐도 스위치가 함께 쓰는 스피커에서 어느 쪽 소리를 들을지 버튼 한 번으로 바꾸는 도구.",
+    "feat": "Stream Deck 버튼과 휴대폰 리모컨, 둘 다·PC만·스위치만 세 가지 프리셋, 가상 믹서로 소리 채널 분리",
+    "current": "첫 버전 완성 · 시작프로그램 자동 실행",
+    "next": "추후 업데이트 · 볼륨 세밀 조절",
+    "tags": [
+      "오디오",
+      "Stream Deck",
+      "리모컨"
+    ],
+    "url": "/journal/speaker-switch.html",
+    "link": "개발일지",
+    "date": "2026.11.21",
+    "dateBasis": "저장소 첫 커밋"
+  },
+  {
+    "id": "pj-35",
+    "no": "PJ 35",
+    "icon": "/assets/icons/pj-35.png",
+    "stage": "doing",
+    "type": "Web App · AI",
+    "name": "AI 비서",
+    "desc": "오늘 일정과 관심 뉴스, 콕콕 예약 상태를 한 화면에 모아 아침마다 휴대폰으로 알려 주는 개인 비서.",
+    "feat": "캘린더 일정·관심 뉴스 요약·예약 상태 한 화면, 아침 7시 30분 웹푸시, 한국어로 읽어 주기",
+    "current": "첫 버전 제작 중 · 브리핑 화면과 휴대폰 알림",
+    "next": "매일 아침 써 보며 브리핑 구성 다듬기",
+    "tags": [
+      "AI",
+      "알림",
+      "일정"
+    ],
+    "url": "/journal/ai-assistant.html",
+    "link": "개발일지",
+    "date": "2026.11.25",
+    "dateBasis": "작업 파일 날짜"
   }
 ]);

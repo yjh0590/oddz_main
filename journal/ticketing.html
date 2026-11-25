@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="예매처 36곳의 예매 흐름을 그대로 연습하는 티켓팅 연습 앱을 만든 기록.">
+  <title>첫열 · 티켓팅 연습 만들기 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">PJ 24 · Web App · 첫 버전</span><h1>첫열 · 티켓팅 연습 만들기</h1><p class="lead">진짜 예매 날에 손이 먼저 움직이도록, 예매창을 미리 몇 번이고 눌러 본다.</p><p class="article-date"><time datetime="2026-11-08">2026.11.08</time></p></header>
+    <section class="journal-section"><h2>예매처마다 다른 순서</h2><p>콘서트 예매는 몇 초 차이로 끝나는데, 예매처마다 날짜·좌석·할인·결제 순서가 조금씩 달라서 처음 쓰는 곳에서는 늘 헤맨다. 그래서 예매 흐름만 따로 떼어 연습하는 앱을 만들었다.</p><p>공연, 야구, 축구, 기차, 고속버스, 항공, 영화, 시설 예약, 시험 접수, 수강신청, 응모까지 예매처 36곳의 단계를 각각 구현했다. 구역 패널이 왼쪽에 있는지 오른쪽에 있는지, 쿠폰 단계가 있는지, 앱형 창인지 같은 차이도 살렸다.</p></section>
+    <section class="journal-section"><h2>실제 장소 배치도</h2><p>연습 설정에서 공연장이나 경기장을 고르면 그 장소의 배치도로 연습한다. 공개 자료에 나온 전체 모양·층 구성·좌석 등급 이름만 참고해, 구역과 작은 좌석을 SVG로 단순하게 다시 그렸다. 기본 연습용 아레나·볼파크·극장은 가상 장소다.</p></section>
+    <section class="journal-section"><h2>난이도와 기록</h2><p>쌩초보·일반인·매크로급 세 단계로 대기열 인원, 좌석이 사라지는 속도, 결제 실패 확률이 달라진다. 대기열·보안문자·붙은 좌석만 고르기도 켜고 끌 수 있다. 가상 결제까지 마치면 좌석을 잡기까지 걸린 시간과 전체 시간, 실패 횟수를 보여 주고 최근 30회를 브라우저에 남긴다.</p></section>
+    <section class="journal-section"><h2>조심한 부분</h2><p>실제 예매 화면을 그대로 베낀 것이 아니라 공개 안내를 바탕으로 단계와 버튼 동작만 다시 만든 연습장이다. 실제 개인정보를 입력받지 않고, 실제 결제나 예매처로 가는 요청도 보내지 않는다. 대기열·가격·유지 시간도 모두 연습용 값이다.</p><p>예매처 36곳 흐름 전체를 브라우저에서 끝까지 눌러 보는 자동 검사와 좌석·가격 계산 테스트를 함께 만들어, 예매처를 늘릴 때마다 돌려 본다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
