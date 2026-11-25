@@ -8,6 +8,8 @@
   if (!hero || !Array.isArray(data)) return;
 
   const theme = document.documentElement.dataset.oddzTheme || 'sparkle';
+  // 테마 단어(데이터 파일의 ODDZ_STAGE_WORDS): 완성·만드는 중·작업을 테마 세계관에 맞춘다
+  const words = { done: '완성', doing: '만드는 중', craft: '작업', ...(window.ODDZ_STAGE_WORDS || {})[theme] };
     const copy = {
     sparkle: '최근 채집한 것',
     machine: '출고 완료',
@@ -90,7 +92,7 @@
   const tabs = mk('div', 'oddz-shelf__tabs');
   tabs.setAttribute('role', 'group');
   tabs.setAttribute('aria-label', '보여 줄 단계');
-  for (const [key, label] of [['done', '완성'], ['doing', '만드는 중'], ['craft', '작업']]) {
+  for (const [key, label] of [['done', words.done], ['doing', words.doing], ['craft', words.craft]]) {
     if (!sets[key].length) continue;
     const t = mk('button', '', label);
     t.type = 'button';
@@ -124,7 +126,7 @@
   stage.append(frame, side);
 
   const more = mk('div', 'oddz-shelf__more');
-  more.append(mk('span', '', `완성 ${sets.done.length}개 · 만드는 중 ${sets.doing.length}개 · 작업 ${sets.craft.length}개 · 전체 ${data.length}개`));
+  more.append(mk('span', '', `${words.done} ${sets.done.length} · ${words.doing} ${sets.doing.length} · ${words.craft} ${sets.craft.length} · 전체 ${data.length}개`));
   const all = mk('a', '', '작품 목록 전체 보기 →');
   all.href = '#work';
   more.append(all);
@@ -147,7 +149,7 @@
     const [main, sub] = splitName(p.name);
     const title = mk('h2', '', main);
     if (sub) title.append(mk('span', 'oddz-shelf__sub', sub));
-    head.append(mk('span', 'oddz-shelf__tag', p.no), title);
+    head.append(mk('span', 'oddz-shelf__tag', p.stage === 'doing' ? `${p.no} · ${words.doing}` : p.no), title);
     const actions = mk('div', 'oddz-shelf__actions');
     // 사이트·다운로드가 있으면 큰 버튼은 그리로, 상세·개발일지는 옆의 작은 링크로
     const app = appOf(p);

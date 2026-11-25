@@ -843,3 +843,92 @@ window.ODDZ_PROJECTS = Object.freeze([
     "dateBasis": "작업 저장소 첫 기록"
   }
 ]);
+
+/* 테마별 목차 단어: 구조(완성·만드는 중·작업·구상)는 같고 단어만 테마 세계관에 맞춘다.
+ * 진열대 탭·요약 줄과 작품 목록 필터·묶음 제목·카드 상태가 함께 쓴다. 없는 테마는 기본 단어. */
+window.ODDZ_STAGE_WORDS = {
+  "sparkle": {
+    "done": "담은 빛",
+    "doing": "깜박이는 중",
+    "craft": "들판 밖",
+    "plan": "찾아볼 곳"
+  },
+  "machine": {
+    "done": "출고",
+    "doing": "가동 중",
+    "craft": "외주",
+    "plan": "설계도"
+  },
+  "game-water": {
+    "done": "클리어",
+    "doing": "공략 중",
+    "craft": "숨은 방",
+    "plan": "잠긴 층"
+  },
+  "game-sunset": {
+    "done": "완수",
+    "doing": "의뢰 중",
+    "craft": "특별 의뢰",
+    "plan": "게시판"
+  },
+  "bubbles": {
+    "done": "상연작",
+    "doing": "리허설",
+    "craft": "특별 무대",
+    "plan": "대본"
+  },
+  "oz": {
+    "done": "도착",
+    "doing": "벽돌길 위",
+    "craft": "샛길",
+    "plan": "갈림길"
+  },
+  "hum": {
+    "done": "꽃핀 것",
+    "doing": "자라는 중",
+    "craft": "화분 밖",
+    "plan": "씨앗"
+  },
+  "olympus": {
+    "done": "신전에 오름",
+    "doing": "빚는 중",
+    "craft": "영웅담",
+    "plan": "신탁"
+  },
+  "ripple": {
+    "done": "떠오름",
+    "doing": "번지는 중",
+    "craft": "물가 밖",
+    "plan": "가라앉은 것"
+  },
+  "ink": {
+    "done": "낙관",
+    "doing": "붓질 중",
+    "craft": "화첩 밖",
+    "plan": "밑그림"
+  },
+  "fog": {
+    "done": "또렷한 글",
+    "doing": "마르는 중",
+    "craft": "창밖",
+    "plan": "김 서린 자리"
+  },
+  "sand": {
+    "done": "발굴",
+    "doing": "쌓는 중",
+    "craft": "오아시스",
+    "plan": "신기루"
+  },
+  "magnet": {
+    "done": "붙음",
+    "doing": "끌려오는 중",
+    "craft": "자기장 밖",
+    "plan": "먼 극"
+  },
+  "cloth": {
+    "done": "다 마름",
+    "doing": "꿰매는 중",
+    "craft": "깃발 밖",
+    "plan": "천 뭉치"
+  }
+};

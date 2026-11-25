@@ -448,8 +448,6 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
 [data-oddz-theme=game-water] .oddz-shelf__tabs,[data-oddz-theme=game-water] .oddz-shelf__tabs button{border-radius:0}
 [data-oddz-theme=game-water] .oddz-shelf__tabs button[aria-pressed=true]::before{content:"▶";font-size:.6rem}
 [data-oddz-theme=oz] .oddz-shelf__tabs{border-width:1.5px;border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
-/* 만드는 중 작품은 번호 꼬리표에 표시 */
-.oddz-shelf[data-stage=doing] .oddz-shelf__tag::after{content:" · 만드는 중"}
 @media (max-width:820px){
   .oddz-shelf__side{flex-wrap:wrap}
   .oddz-shelf__tabs{flex-basis:100%;margin:0}
@@ -606,6 +604,12 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
 .oddz-shelf__detail{font-size:clamp(.72rem,2.5cqmin,.86rem);font-weight:600;color:var(--home-muted);text-decoration:underline;text-underline-offset:3px}
 .oddz-shelf__detail:hover{color:var(--home-text)}
 @media (max-width:820px){.oddz-shelf__btn{width:auto}}
+
+
+/* 탭: 테마 단어 길이가 달라도 줄 안에 들어가게 글자 길이만큼 나눠 갖는다 */
+.oddz-shelf__tabs{gap:4px}
+.oddz-shelf__tabs button{flex:1 1 auto;min-width:0;padding:9px 8px}
+[data-oddz-theme=sand] .oddz-shelf__tabs button{font-family:var(--note-font,inherit);font-weight:700}
 
 @media (prefers-reduced-motion:reduce){
   .oddz-shelf *,.oddz-shelf *::before,.oddz-shelf *::after{animation:none!important;transition:none!important}

@@ -13,13 +13,17 @@
   let theme=oz?'oz':(known.find(k=>path.includes('/'+k+'.html')||selectedTheme.endsWith('/'+k+'.html'))||'sparkle');
   document.documentElement.setAttribute('data-oddz-theme',theme);
   const isSubpath=theme!=='sparkle';
+  // 목차: 실제로 만든 것(완성·만드는 중·작업)을 먼저, 아직 시작하지 않은 아이디어(구상)를 맨 끝에
+  // 테마 단어(데이터 파일의 ODDZ_STAGE_WORDS). 없으면 기본 단어
+  const words=(window.ODDZ_STAGE_WORDS||{})[theme]||{};
   const stageDefs=[
-    {key:'done',title:'완성',english:'COMPLETED',note:'만들어 공개했거나 실행할 수 있는 형태로 완성한 프로젝트'},
-    {key:'doing',title:'진행 중',english:'IN PROGRESS',note:'프로토타입을 제작하거나 기능을 개선하는 프로젝트'},
-    {key:'craft',title:'작업',english:'BEYOND THE WEB',note:'공모전·영상·게임처럼 웹 밖에서 한 작업'},
-    {key:'next',title:'끝나면 할 것',english:'UP NEXT',note:'다음에 착수할 후보 프로젝트'},
-    {key:'someday',title:'언젠가 할 것',english:'SOMEDAY',note:'장기적으로 보관해 두고 발전시킬 아이디어'}
+    {key:'done',title:words.done||'완성',english:'COMPLETED',note:'만들어 공개했거나 실행할 수 있는 형태로 완성한 프로젝트'},
+    {key:'doing',title:words.doing||'만드는 중',english:'IN PROGRESS',note:'프로토타입을 제작하거나 기능을 개선하는 프로젝트'},
+    {key:'craft',title:words.craft||'작업',english:'BEYOND THE WEB',note:'공모전·영상·게임처럼 웹 밖에서 한 작업'},
+    {key:'plan',title:words.plan||'구상',english:'IDEAS',note:'다음 차례로 만들 것과 언젠가 해 볼 아이디어'}
   ];
+  // 카드 안 상태 글자 (구상 안에서도 다음 차례와 언젠가를 구분)
+  const statusLabel={done:words.done||'완성',doing:words.doing||'만드는 중',next:'다음 차례',someday:'언젠가'};
   // 테마별 말투: 단계 제목(완성 등)은 필터와 맞춰 그대로 두고, 영문 표시와 설명만 바꾼다. [영문, 설명]
   const stageVoice={
     sparkle:{done:['IN THE JAR','불이 켜진 채로 병에 담아 둔 것'],doing:['GLOWING','지금 손바닥 위에서 깜박이는 것'],next:['NEXT FIELD','다음에 잡으러 갈 자리'],someday:['SOMEDAY','언젠가 들판에서 찾아볼 것']},
@@ -81,10 +85,11 @@
     const e=mk('div','rune-tag');e.innerHTML='<svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#D8A94A" stroke-width="6"/></svg>';
     e.append(mk('span','',digits));return e;
   }
-  const groupOf=(item)=>item.kind==='craft'?'craft':item.stage;
+  const groupOf=(item)=>item.kind==='craft'?'craft':(item.stage==='next'||item.stage==='someday')?'plan':item.stage;
   function makeItem(item,index){
     const card=mk('article','entry oddz-project-card'+(item.stage==='next'||item.stage==='someday'?' pending':''));
-    card.id=item.id;card.dataset.stage=groupOf(item);
+    // data-stage는 원래 단계(테마 배지가 씀), data-group은 목차 묶음(필터가 씀)
+    card.id=item.id;card.dataset.stage=item.stage;card.dataset.group=groupOf(item);
     card.dataset.search=[item.no,item.name,item.desc,item.type,...(item.tags||[])].join(' ').toLocaleLowerCase('ko-KR');
     if(oz){
       const sample=sceneSamples[index%Math.max(1,sceneSamples.length)];
@@ -95,7 +100,7 @@
     const meta=mk('div','entry-meta');
     meta.append(mk('span','entry-cat',item.type));
     if(theme==='sparkle')meta.append(mk('span','dot-sep'));
-    meta.append(mk('span','entry-status',stageDefs.find(s=>s.key===item.stage).title));
+    meta.append(mk('span','entry-status',statusLabel[item.stage]||item.stage));
     const title=mk('h3','',item.name);
     const when=mk('p','oddz-project-date',item.date||'기록 날짜 미확인');
     const description=mk('p','oddz-project-desc',item.desc);
@@ -178,13 +183,13 @@
     const group=mk('section','oddz-project-stage');group.dataset.stage=st.key;
     const head=mk('div','oddz-stage-head');
     const title=mk('h3','',st.title);
-    const voice=(stageVoice[theme]||{})[st.key];
+    const voice=(stageVoice[theme]||{})[st.key==='plan'?'next':st.key];
     const sub=mk('span','oddz-stage-en',voice?voice[0]:st.english);
     const count=mk('span','oddz-stage-count','');
     head.append(title,sub,count);group.append(head);
     group.append(mk('p','oddz-stage-intro',voice?voice[1]:st.note));
     const list=mk('div','oddz-stage-list');
-    source.filter(x=>groupOf(x)===st.key).sort((a,b)=>parseInt(a.no.slice(3))-parseInt(b.no.slice(3))).forEach((x,i)=>{
+    source.filter(x=>groupOf(x)===st.key).sort((a,b)=>(a.stage==='someday')-(b.stage==='someday')||parseInt(a.no.slice(3))-parseInt(b.no.slice(3))).forEach((x,i)=>{
       const index=source.findIndex(y=>y.id===x.id);
       const c=makeItem(x,index);list.append(c);rendered.push(c);
     });
@@ -206,7 +211,7 @@
     let n=0;
     rendered.forEach(card=>{
       const searchBlob=card.dataset.search;
-      const show=(filter==='all'||card.dataset.stage===filter)&&(!q||searchBlob.includes(q));
+      const show=(filter==='all'||card.dataset.group===filter)&&(!q||searchBlob.includes(q));
       card.hidden=!show;if(show)n++;
     });
     [...groups.children].forEach(group=>{

@@ -90,7 +90,7 @@ main > #work{max-width:var(--home-max);margin-inline:auto;padding:clamp(32px,6vh
 }
 
 /* ---------- 아직 시작 안 한 것: 낮고 촘촘한 줄 ---------- */
-#work .oddz-catalog .oddz-project-stage:is([data-stage="next"],[data-stage="someday"]) .oddz-stage-list{gap:10px}
+#work .oddz-catalog .oddz-project-stage:is([data-stage="plan"],[data-stage="next"],[data-stage="someday"]) .oddz-stage-list{gap:10px}
 #work .oddz-catalog .oddz-project-card.pending{
   grid-template-columns:38px minmax(0,1fr);column-gap:14px;padding:16px 18px;opacity:1;
   background:transparent;border-style:dashed;
