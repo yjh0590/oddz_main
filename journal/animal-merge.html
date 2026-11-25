@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="동물을 합쳐 적을 막는 모바일 디펜스 게임의 전투 시제품을 만든 기록.">
+  <title>동물 합체 디펜스 · 작업 기록 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="index.html">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro"><span class="eyebrow">PJ 37 · Game · Unity · 전투 시제품</span><h1>동물 합체 디펜스 (가제)</h1><p class="lead">처음으로 웹이 아닌 게임 엔진에서, 혼자 끝까지 만들 수 있는 크기의 게임을 고르고 있다.</p><p class="article-date"><time datetime="2026-11-21">2026.11.21</time></p></header>
+    <section class="journal-section"><h2>작게 시작하기</h2><p>같은 단계의 동물 두 마리를 합치면 다음 단계로 확정 진화하고, 그 동물들로 몰려오는 적을 막는 세로 화면 디펜스 게임이다. 한 판은 4~5분, 인터넷 없이 하는 PvE. 혼자 만드는 게임이라 소환, 합체 타이밍, 배치 세 가지에만 집중한 작은 판부터 만들기로 했다.</p></section>
+    <section class="journal-section"><h2>규칙부터 숫자로</h2><p>처음 룰북 초안에서는 비어 있던 항목이 많았다. 두 번째 설계서에서 체력, 공격력, 소환 비용, 적이 나오는 순서 같은 미정 항목을 모두 숫자로 정했다. 숫자는 테스트 전 가설이라, 모든 규칙 값을 설정 파일 한 곳에 모아 두고 플레이해 보며 바꾸기 쉽게 했다.</p></section>
+    <section class="journal-section"><h2>엔진과 규칙 나누기</h2><p>유니티 6으로 만들지만, 전투 규칙은 유니티에 기대지 않는 순수 C#으로 따로 떼었다. 덕분에 합체·진화·피해 계산을 에디터를 열지 않고도 테스트로 바로 확인한다. 화면, 드래그 입력, 연출은 그 위에 얹었다.</p></section>
+    <section class="journal-section"><h2>지금과 다음</h2><p>지금은 유니티 에디터에서 한 판을 처음부터 끝까지 플레이할 수 있는 전투 시제품이다. 그래픽은 아직 임시 도형이다. 다음은 첫 플레이 테스트 체크리스트대로 직접 해 보고, 안드로이드 휴대폰에 올려 보는 것이다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a> <a class="button" href="https://github.com/yjh0590/game-idea" target="_blank" rel="noopener noreferrer">소스 코드 보기 ↗</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

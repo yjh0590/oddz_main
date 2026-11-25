@@ -16,6 +16,7 @@ assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
   pj-24 ticket · pj-26 sparkles · pj-30 wind
   pj-31 calendar-heart · pj-32 bell-ring
   pj-33 monitor-smartphone · pj-34 speaker · pj-35 bot
+  pj-36 store · pj-37 gamepad-2 · pj-38 video · pj-39 presentation
 
 Lucide 라이선스 원문:
 

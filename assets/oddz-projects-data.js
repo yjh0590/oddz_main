@@ -714,5 +714,93 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "개발일지",
     "date": "2026.11.25",
     "dateBasis": "작업 파일 날짜"
+  },
+  {
+    "id": "pj-36",
+    "no": "PJ 36",
+    "icon": "/assets/icons/pj-36.png",
+    "stage": "done",
+    "kind": "craft",
+    "type": "Contest · Web",
+    "name": "ITDA · 맛&멋 상권 안내",
+    "desc": "지역 상권 공모전을 위해 만든 상권 안내 웹. 손님은 층별 점포 지도와 거리 사진으로 가게를 찾고, 점주는 직접 홍보를 올린다.",
+    "feat": "층별 점포 지도와 상권 거리 사진, 점주 하루 3회 직접 홍보 게시, 관리자 승인과 대시보드, 사용자별 가이드북",
+    "current": "v5.1 · 층 선택 지도와 관리자 디자인 개편",
+    "next": "추후 업데이트 · 실제 점포 사진 채우기",
+    "tags": [
+      "공모전",
+      "상권",
+      "지도"
+    ],
+    "url": "/journal/itda.html",
+    "link": "작업 기록",
+    "date": "2026.10.08",
+    "dateBasis": "저장소 첫 커밋"
+  },
+  {
+    "id": "pj-37",
+    "no": "PJ 37",
+    "icon": "/assets/icons/pj-37.png",
+    "stage": "doing",
+    "kind": "craft",
+    "type": "Game · Unity",
+    "name": "동물 합체 디펜스",
+    "desc": "같은 동물 둘을 합쳐 다음 단계로 진화시키며 몰려오는 적을 막는 세로 화면 모바일 디펜스 게임.",
+    "feat": "한 판 4~5분 오프라인 PvE, 합체 확정 진화, 소환·합체 타이밍·배치 중심 전투, 엔진과 분리한 전투 규칙 테스트",
+    "current": "전투 시제품 · 유니티에서 한 판을 끝까지 플레이",
+    "next": "첫 플레이 테스트와 Android 빌드",
+    "tags": [
+      "게임",
+      "Unity",
+      "디펜스"
+    ],
+    "url": "/journal/animal-merge.html",
+    "link": "작업 기록",
+    "date": "2026.11.11",
+    "dateBasis": "저장소 첫 커밋"
+  },
+  {
+    "id": "pj-38",
+    "no": "PJ 38",
+    "icon": "/assets/icons/pj-38.png",
+    "stage": "doing",
+    "kind": "craft",
+    "type": "YouTube",
+    "name": "고능하다",
+    "desc": "판단의 함정, 노력과 성과의 함정처럼 생각해 볼 거리를 윤리 주제로 풀어내는 유튜브 채널.",
+    "feat": "주제마다 롱폼 1편과 쇼츠 8편, 기획·자료·대본·음성·편집까지 직접 만드는 제작 흐름",
+    "current": "연재 중 · 롱폼 3편, 쇼츠 24편",
+    "next": "매주 목요일 오전 9시 새 편 공개",
+    "tags": [
+      "유튜브",
+      "영상",
+      "윤리"
+    ],
+    "url": "/journal/gonunghada.html",
+    "link": "작업 기록",
+    "date": "2026.11.12",
+    "dateBasis": "작업 저장소 첫 기록"
+  },
+  {
+    "id": "pj-39",
+    "no": "PJ 39",
+    "icon": "/assets/icons/pj-39.png",
+    "stage": "doing",
+    "kind": "craft",
+    "type": "Contest",
+    "name": "공모전 출품 모음",
+    "desc": "지역 상권 페스티벌, 전공 이야기 포스터, 웹사이트 버그 찾기, 홍보 문구, 교통 앱 아이디어까지 공모전 출품 준비를 모은 곳.",
+    "feat": "공모전마다 기획 초안·준비 일정·원고·제출 확인을 문서로 정리",
+    "current": "출품 준비와 정리 중",
+    "next": "새 공모전이 열리면 이어서 추가",
+    "tags": [
+      "공모전",
+      "기획",
+      "포스터"
+    ],
+    "url": "/journal/contests.html",
+    "link": "작업 기록",
+    "date": "2026.11.16",
+    "dateBasis": "작업 저장소 첫 기록"
   }
 ]);

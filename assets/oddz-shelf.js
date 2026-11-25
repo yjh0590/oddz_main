@@ -1,4 +1,4 @@
-// 홈 진열대: 왼쪽 큰 배너 + 오른쪽 세로 목록. 목록 위 탭으로 '완성 / 만드는 중'을 고르고, 목록 가운데에 온 작품이 배너에 뜬다.
+// 홈 진열대: 왼쪽 큰 배너 + 오른쪽 세로 목록. 목록 위 탭으로 '완성 / 만드는 중 / 작업'을 고르고, 목록 가운데에 온 작품이 배너에 뜬다.
 // 색·재질·모서리는 각 테마의 --board-*, --card-*, --home-* 토큰을 따르고, 테마별 모양·장식·모션은 oddz-shelf.css에 있다.
 // oddz-projects-catalog.js 다음에 defer로 불러야 테마 이름(data-oddz-theme)이 정해져 있다.
 (() => {
@@ -27,8 +27,11 @@
     const [y = 0, m = 0, day = 0] = String(d || '').match(/\d+/g) || [];
     return Number(y) * 10000 + Number(m) * 100 + Number(day);
   };
-  const byStage = (key) => data.filter((p) => p.stage === key).sort((a, b) => dateKey(b.date) - dateKey(a.date));
-  const sets = { done: byStage('done'), doing: byStage('doing') };
+  // 웹 밖의 작업(공모전·영상·게임 등, kind: 'craft')은 완성/만드는 중이 아니라 '작업' 탭에 따로 모은다
+  const newest = (a, b) => dateKey(b.date) - dateKey(a.date);
+  const isCraft = (p) => p.kind === 'craft';
+  const byStage = (key) => data.filter((p) => p.stage === key && !isCraft(p)).sort(newest);
+  const sets = { done: byStage('done'), doing: byStage('doing'), craft: data.filter(isCraft).sort(newest) };
   if (!sets.done.length) return;
   let shown = sets.done;
 
@@ -81,7 +84,7 @@
   const tabs = mk('div', 'oddz-shelf__tabs');
   tabs.setAttribute('role', 'group');
   tabs.setAttribute('aria-label', '보여 줄 단계');
-  for (const [key, label] of [['done', '완성'], ['doing', '만드는 중']]) {
+  for (const [key, label] of [['done', '완성'], ['doing', '만드는 중'], ['craft', '작업']]) {
     if (!sets[key].length) continue;
     const t = mk('button', '', label);
     t.type = 'button';
@@ -115,7 +118,7 @@
   stage.append(frame, side);
 
   const more = mk('div', 'oddz-shelf__more');
-  more.append(mk('span', '', `완성 ${sets.done.length}개 · 만드는 중 ${sets.doing.length}개 · 전체 ${data.length}개`));
+  more.append(mk('span', '', `완성 ${sets.done.length}개 · 만드는 중 ${sets.doing.length}개 · 작업 ${sets.craft.length}개 · 전체 ${data.length}개`));
   const all = mk('a', '', '작품 목록 전체 보기 →');
   all.href = '#work';
   more.append(all);

@@ -437,7 +437,7 @@ main > .hero.has-shelf{position:absolute!important;width:1px!important;height:1p
 
 /* ---------- 단계 탭: 완성 / 만드는 중 (목록 열 위) ---------- */
 .oddz-shelf__tabs{display:flex;flex:none;gap:6px;width:100%;margin:0 0 4px;padding:4px;border:1px solid var(--board-line);border-radius:calc(var(--card-radius) + 6px);background:var(--board-bg)}
-.oddz-shelf__tabs button{all:unset;box-sizing:border-box;flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 12px;border-radius:var(--card-radius);cursor:pointer;
+.oddz-shelf__tabs button{all:unset;box-sizing:border-box;flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 8px;white-space:nowrap;border-radius:var(--card-radius);cursor:pointer;
   font-family:var(--title-font,inherit);font-weight:700;font-size:.92rem;color:var(--home-muted);transition:background .25s,color .25s}
 .oddz-shelf__tabs button span{min-width:1.6em;padding:1px 6px;border-radius:999px;background:color-mix(in srgb,currentColor 16%,transparent);font:700 .72rem/1.5 ui-monospace,monospace;text-align:center}
 .oddz-shelf__tabs button:hover{color:var(--home-text)}
