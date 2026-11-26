@@ -163,7 +163,21 @@
       more.href = link(p);
       actions.append(more);
     }
-    banner.replaceChildren(mk('span', 'oddz-shelf__halo'), big, head, mk('p', 'oddz-shelf__desc', firstSentence(p.desc)), actions);
+    // 소개는 첫 문장만 두 줄로. 잘리거나 뒷문장이 있으면 글 밑 '더보기'로 전체를 펼친다 (펼치면 그림은 잠시 숨김)
+    const full = String(p.desc || ''), short = firstSentence(full);
+    const desc = mk('p', 'oddz-shelf__desc', short);
+    const more = mk('button', 'oddz-shelf__expand', '더보기');
+    more.type = 'button';
+    more.setAttribute('aria-expanded', 'false');
+    more.addEventListener('click', () => {
+      const open = banner.classList.toggle('is-open');
+      desc.textContent = open ? full : short;
+      more.textContent = open ? '접기' : '더보기';
+      more.setAttribute('aria-expanded', String(open));
+    });
+    banner.classList.remove('is-open');
+    banner.replaceChildren(mk('span', 'oddz-shelf__halo'), big, head, desc, more, actions);
+    more.hidden = full === short && desc.scrollHeight <= desc.clientHeight + 1;
     items.forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
     count.textContent = `${i + 1} / ${shown.length}`;
   };

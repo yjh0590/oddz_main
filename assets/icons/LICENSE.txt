@@ -7,46 +7,6 @@ assets/icons — 프로젝트 카드·상세 페이지 아이콘 (128×128 PNG)
   pj-23.png  명령어 도구함 (CmdToolbox app.ico)
   pj-25.png  쓱-싹 (assets/sseuk-ssak.ico)
 
-완성 작품(pj-04·05·10·12·15·18·24·26·30·33·34)은 Microsoft Fluent Emoji (Color) 그림을
-그라데이션 타일에 얹어 PNG로 만든 것 (@iconify-json/fluent-emoji 1.2.6에서 가져옴, MIT)
-  pj-04 graduation-cap · pj-05 notebook-with-decorative-cover · pj-10 crescent-moon · pj-12 file-folder
-  pj-15 studio-microphone · pj-18 slot-machine · pj-24 admission-tickets · pj-26 magic-wand
-  pj-30 deciduous-tree · pj-33 desktop-computer · pj-34 headphone
-
-그 밖의 작품은 Microsoft Fluent Emoji (Flat)(https://github.com/microsoft/fluentui-emoji) 그림을
-옅은 색 타일에 얹어 PNG로 만든 것 (@iconify-json/fluent-emoji-flat 1.2.6에서 가져옴)
-  (아래 목록 중 완성 작품 번호는 위의 Color 그림으로 바뀜)
-  pj-01 page-facing-up · pj-02 victory-hand · pj-03 keyboard · pj-04 graduation-cap
-  pj-05 notebook-with-decorative-cover · pj-06 bottle-with-popping-cork · pj-07 ice · pj-09 game-die
-  pj-10 jar · pj-12 card-index-dividers · pj-13 hot-beverage · pj-14 open-book
-  pj-15 memo · pj-16 magnifying-glass-tilted-right · pj-17 globe-showing-asia-australia · pj-18 money-bag
-  pj-19 seedling · pj-20 hatching-chick · pj-21 stopwatch · pj-22 crossed-swords
-  pj-24 ticket · pj-26 sparkles · pj-30 leaf-fluttering-in-wind · pj-31 spiral-calendar
-  pj-32 bell · pj-33 desktop-computer · pj-34 speaker-high-volume · pj-35 robot
-  pj-36 convenience-store · pj-37 front-facing-baby-chick · pj-38 brain · pj-39 trophy
-
-Fluent Emoji 라이선스 원문:
-
-MIT License
-
-Copyright (c) Microsoft Corporation.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-PJ 28: Original Wagle speech-bubble logo, created for oddz (2026).
+그 밖의 작품 아이콘(pj-01~07·09·10·12~22·24·26·30~39)은 이 사이트를 위해 직접 그린 SVG를
+128px PNG로 렌더링한 것입니다. 각 작품 내용(문서·가위바위보·시간표·물병 등)을 그라데이션 타일 위에
+흰 주 도형과 강조색으로 그렸고, 외부 아이콘 세트는 쓰지 않았습니다.

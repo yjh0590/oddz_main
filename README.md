@@ -14,7 +14,7 @@
 | `projects/` | 프로젝트별 소개·다운로드·사용법 |
 | `journal/` | 개발일지. 목록과 각 일지 상단에 해당 카드 번호(`PJ 08 · …`)를 붙입니다. 모든 개발일지가 카드와 짝을 이룹니다. PJ 번호는 최초 기록 순서이고, 새 프로젝트는 맨 뒤 번호를 받습니다. 번호를 바꾸면 `assets/icons/pj-번호.png`, `assets/oz-spectacles.js`의 키, 상세·개발일지의 `PJ 번호`, 정적 대체 목록이 있는 테마 HTML을 함께 고치세요. |
 | `assets/oddz-projects-data.js` | 모든 테마가 함께 쓰는 프로젝트 목록 데이터 |
-| `assets/icons/` | 프로젝트 카드·상세 페이지 아이콘(`pj-번호.png`, 128px, Microsoft Fluent Emoji 그림·직접 만든 앱 아이콘). 출처와 라이선스는 `assets/icons/LICENSE.txt` |
+| `assets/icons/` | 프로젝트 카드·상세 페이지 아이콘(`pj-번호.png`, 128px, 직접 그린 작품 아이콘·직접 만든 앱 아이콘). 출처와 라이선스는 `assets/icons/LICENSE.txt` |
 | `assets/` | 공용 CSS·JS·이미지 |
 | `downloads/` | 배포 ZIP |
 | `butterfly/`, `wagle/`, `agora/` | 프로젝트 공개 실행본(아래 참고) |
