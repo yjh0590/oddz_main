@@ -13,7 +13,11 @@
     fog: '../themes/fog.html',
     sand: '../themes/sand.html',
     magnet: '../themes/magnet.html',
-    cloth: '../themes/cloth.html'
+    cloth: '../themes/cloth.html',
+    cinema: '../themes/cinema.html',
+    amusement: '../themes/amusement.html',
+    circus: '../themes/circus.html',
+    elements: '../themes/elements.html'
   };
   const requested = new URLSearchParams(location.search).get('theme');
   let theme = 'sparkle';

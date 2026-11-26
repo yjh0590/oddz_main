@@ -108,3 +108,16 @@ html[data-theme="hum"] .journal-pager__link { border-style: solid; border-radius
   :root[data-polish] .journal-card__meta { grid-row:auto; flex-direction:row; flex-wrap:wrap; align-items:baseline; gap:4px 12px; border-right:0; padding-right:0; margin-bottom:10px; }
   :root[data-polish] :is(.journal-card__title,.journal-card__summary,.journal-card__arrow) { grid-column:1; }
 }
+
+/* Section shortcuts and short notes on the journal index. */
+.journal-jump { display:flex; flex-wrap:wrap; gap:9px; margin:24px 0 0; }
+.journal-jump a { display:inline-flex; align-items:center; min-height:44px; padding:6px 15px; border:1px solid var(--line); border-radius:24px; color:var(--paper); text-decoration:none; }
+.journal-jump a:hover { border-color:var(--mint); color:var(--mint); }
+.journal-group[id] { scroll-margin-top:20px; }
+.journal-note-intro { color:var(--muted); word-break:keep-all; }
+.journal-notes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.journal-note { padding:20px; border:1px solid var(--line); border-radius:var(--radius,12px); background:var(--panel,transparent); }
+.journal-note h3 { margin:0 0 8px; font-size:1.12rem; line-height:1.45; word-break:keep-all; }
+.journal-note p { margin:0 0 12px; color:var(--muted); line-height:1.65; word-break:keep-all; }
+.journal-note a { color:var(--mint); text-underline-offset:4px; }
+@media (max-width:600px) { .journal-notes { grid-template-columns:1fr; } }

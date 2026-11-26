@@ -9,7 +9,7 @@
   const path=window.location.pathname;
   const selectedTheme=document.querySelector('.theme-picker [aria-current="page"]')?.dataset.themePath||'';
   const oz=!!work.querySelector('.catalog-group')&&!!document.querySelector('.postcard');
-  const known=['ripple','olympus','hum','machine','game-water','game-sunset','bubbles','ink','fog','sand','magnet','cloth'];
+  const known=['ripple','olympus','hum','machine','game-water','game-sunset','bubbles','ink','fog','sand','magnet','cloth','cinema','amusement','circus','elements'];
   let theme=oz?'oz':(known.find(k=>path.includes('/'+k+'.html')||selectedTheme.endsWith('/'+k+'.html'))||'sparkle');
   document.documentElement.setAttribute('data-oddz-theme',theme);
   const isSubpath=theme!=='sparkle';
@@ -74,7 +74,7 @@
     const digits=item.no.replace('PJ ','');
     if(theme==='oz')return mk('div','number',item.no);
     if(theme==='olympus'){const e=mk('div','roman-tag','PJ · '+roman(parseInt(digits,10)||0));e.title=item.no;return e;}
-    if(['sparkle','hum','ripple','ink','fog','sand','magnet','cloth'].includes(theme))return mk('div','entry-no',item.no);
+    if(['sparkle','hum','ripple','ink','fog','sand','magnet','cloth','cinema','amusement','circus','elements'].includes(theme))return mk('div','entry-no',item.no);
     if(theme==='machine')return mk('div','part-tag',item.no);
     if(theme==='bubbles')return mk('div','bubble-tag',item.no);
     if(theme==='game-water'){

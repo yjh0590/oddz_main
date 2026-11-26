@@ -66,7 +66,7 @@ header{border-bottom:1.5px solid var(--ink)}
 .theme-menu{position:relative}
 .theme-menu summary{list-style:none;border-color:var(--rule)}
 .theme-menu summary::-webkit-details-marker{display:none}
-.theme-options{position:absolute;z-index:20;right:0;top:calc(100% + 8px);width:170px;background:var(--paper);padding:6px;border:1.5px solid var(--ink);border-radius:4px}
+.theme-options{position:absolute;z-index:20;right:0;top:calc(100% + 8px);width:170px;max-height:min(60vh,480px);overflow-y:auto;background:var(--paper);padding:6px;border:1.5px solid var(--ink);border-radius:4px}
 .theme-options a{display:block;padding:9px 11px;text-decoration:none;font-size:13px;color:var(--ink-2)}
 .theme-options a:hover{background:#f1e8cd}.theme-options a[aria-current="page"]{color:var(--ink);font-weight:800;text-decoration:underline;text-underline-offset:4px}
 
@@ -210,7 +210,7 @@ html.oz-specs #work .oddz-catalog .secret{display:block}
 <nav class="nav-links" aria-label="주 메뉴">
 <a href="#work">프로젝트</a><a href="../journal/index.html?theme=sparkle">개발일지</a><a href="#contact">연락</a>
 <details class="theme-menu"><summary>테마 ▾</summary><div class="theme-options">
-<a href="../index.html">반딧불 밤</a><a href="machine.html">톱니 공방</a><a href="game-water.html">폭포 던전</a><a href="game-sunset.html">노을 길드</a><a href="bubbles.html">비눗방울</a><a href="oz.html" aria-current="page">에메랄드 길</a><a href="hum.html">종이 정원</a><a href="olympus.html">올림포스</a><a href="ripple.html">맑은 물결</a><a href="ink.html">수묵</a><a href="fog.html">비 오는 창</a><a href="sand.html">모래 언덕</a><a href="magnet.html">자기장</a><a href="cloth.html">바람 깃발</a><a href="ink.html">수묵</a><a href="fog.html">비 오는 창</a><a href="sand.html">모래 언덕</a><a href="magnet.html">자기장</a><a href="cloth.html">바람 깃발</a>
+<a href="../index.html" data-theme-path="">반딧불 밤</a><a href="machine.html" data-theme-path="themes/machine.html">톱니 공방</a><a href="game-water.html" data-theme-path="themes/game-water.html">폭포 던전</a><a href="game-sunset.html" data-theme-path="themes/game-sunset.html">노을 길드</a><a href="bubbles.html" data-theme-path="themes/bubbles.html">비눗방울</a><a href="oz.html" data-theme-path="themes/oz.html" aria-current="page">에메랄드 길</a><a href="hum.html" data-theme-path="themes/hum.html">종이 정원</a><a href="olympus.html" data-theme-path="themes/olympus.html">올림포스</a><a href="ripple.html" data-theme-path="themes/ripple.html">맑은 물결</a><a href="ink.html" data-theme-path="themes/ink.html">수묵</a><a href="fog.html" data-theme-path="themes/fog.html">비 오는 창</a><a href="sand.html" data-theme-path="themes/sand.html">모래 언덕</a><a href="magnet.html" data-theme-path="themes/magnet.html">자기장</a><a href="cloth.html" data-theme-path="themes/cloth.html">바람 깃발</a><a href="cinema.html" data-theme-path="themes/cinema.html">영화관</a><a href="amusement.html" data-theme-path="themes/amusement.html">놀이공원</a><a href="circus.html" data-theme-path="themes/circus.html">서커스</a><a href="elements.html" data-theme-path="themes/elements.html">원소 세계</a>
 </div></details></nav></div></header>
 <main>
 <section class="hero wrap"><div><p class="hero-kicker">oddz · dev journal · oz edition</p>
@@ -291,6 +291,6 @@ html.oz-specs #work .oddz-catalog .secret{display:block}
 <div class="wrap footer-inner">
 <a class="wordmark" href="../index.html">odd<span class="z">z</span><span class="star">✦</span></a><p>오늘도 심심해서 뭘 만듭니다.</p><a class="contact-link" href="mailto:yjh0590@naver.com">yjh0590@naver.com</a></div>
 <div class="bricks" aria-hidden="true"></div></footer>
-<script src="../assets/oz-menu.js"></script>
+<script src="../assets/theme-switcher.js?v=20261126"></script>
 <script src="../assets/oz-spectacles.js?v=20261123-renumber"></script>
 </body></html>

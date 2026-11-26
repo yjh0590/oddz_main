@@ -16,7 +16,11 @@
       'themes/fog.html',
       'themes/sand.html',
       'themes/magnet.html',
-      'themes/cloth.html'
+      'themes/cloth.html',
+      'themes/cinema.html',
+      'themes/amusement.html',
+      'themes/circus.html',
+      'themes/elements.html'
     ];
     if (allowed.includes(saved)) location.replace(new URL(saved + location.hash, location.href));
   } catch (_) { /* Stay on the default design when storage is unavailable. */ }

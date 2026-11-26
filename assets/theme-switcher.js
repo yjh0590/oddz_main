@@ -1,6 +1,6 @@
 (() => {
   const storageKey = 'oddz-theme';
-  const picker = document.querySelector('.theme-picker');
+  const picker = document.querySelector('.theme-picker, .theme-menu');
   if (!picker) return;
   for (const link of picker.querySelectorAll('a[data-theme-path]')) {
     link.addEventListener('click', (event) => {

@@ -350,3 +350,9 @@ html[data-theme="cloth"] :is(h1,h2,.journal-card__title) { font-family:'Gaegu',c
 html[data-theme="cloth"] :is(.lead,.info p,.info li,.journal-section p,.journal-section li) { font-family:'Gowun Dodum',sans-serif; }
 :root[data-polish][data-theme="cloth"] .info { outline:1.5px dashed rgba(44,62,107,.3); outline-offset:-8px; }
 html[data-theme="cloth"] .button { outline:2px dashed rgba(244,239,228,.6); outline-offset:-6px; }
+
+/* Carry the illustrated home palette into project pages and the journal. */
+:root[data-polish][data-theme="cinema"] { --paper:#fff1dd; --muted:#e3bfc1; --mint:#f9cb7c; --bg:#180d14; --bg-art:radial-gradient(ellipse at 72% 3%,#672638,transparent 65%); --panel:#29151e; --panel-strong:#20101a; --button-text:#261522; --button-hover:#ffe1a8; }
+:root[data-polish][data-theme="amusement"] { color-scheme:light; --paper:#29234b; --muted:#575077; --mint:#6840a1; --line:#6c4a8a48; --bg:#fff4df; --bg-art:radial-gradient(ellipse at 72% 3%,#ffc9bd,transparent 65%); --panel:#fffaf0; --panel-strong:#ffeacd; --button-text:#fffaf0; --button-hover:#563081; }
+:root[data-polish][data-theme="circus"] { --paper:#fff2df; --muted:#e4bfcf; --mint:#ffce77; --bg:#240c27; --bg-art:radial-gradient(ellipse at 72% 3%,#741c50,transparent 65%); --panel:#381437; --panel-strong:#290d2b; --button-text:#261229; --button-hover:#ffe1aa; }
+:root[data-polish][data-theme="elements"] { --paper:#effaf3; --muted:#bfd6d3; --mint:#a8edd5; --bg:#091a24; --bg-art:radial-gradient(ellipse at 72% 3%,#154b56,transparent 65%); --panel:#122832; --panel-strong:#0e222b; --button-text:#0d2430; --button-hover:#cbffe6; }
