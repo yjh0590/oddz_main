@@ -1,0 +1,16 @@
+{
+  "name": "oddz",
+  "short_name": "oddz",
+  "description": "만든 것들을 모아 두는 작업실",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#221934",
+  "theme_color": "#221934",
+  "lang": "ko",
+  "icons": [
+    { "src": "/assets/app-icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/app-icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

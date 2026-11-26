@@ -19,6 +19,7 @@
 | `downloads/` | 배포 ZIP |
 | `butterfly/`, `wagle/`, `agora/` | 프로젝트 공개 실행본(아래 참고) |
 | `404.html`, `robots.txt`, `sitemap.xml`, `favicon.ico` | 없는 주소 안내, 검색엔진 설정, 아이콘이 없는 페이지의 기본 아이콘 |
+| `manifest.webmanifest`, `assets/app-icon-*.png`, `assets/apple-touch-icon.png` | 휴대폰 홈 화면·PC 앱 설치 정보와 아이콘. 홈 14개 페이지의 `<head>`에서 연결합니다. 서비스 워커는 두지 않아 설치한 앱도 늘 최신 사이트를 불러옵니다. |
 
 ## 수정할 때 확인할 것
 
