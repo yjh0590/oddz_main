@@ -848,7 +848,7 @@ window.ODDZ_PROJECTS = Object.freeze([
     "icon": "/assets/icons/pj-40.png",
     "stage": "done",
     "type": "Web App",
-    "name": "컴활 실행 순서 시각화",
+    "name": "컴활 실기 도우미",
     "date": "2026.11.27",
     "desc": "Excel 수식과 Access 쿼리가 처리되는 순서를 색과 표로 보여 주는 컴활 실기 연습 도구.",
     "feat": "Excel 수식·서식·분석과 Access 쿼리 실습, 단계별 재생과 채점",
