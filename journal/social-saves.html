@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="YouTube와 Instagram에 쌓인 항목을 읽고, 정리할 대상을 검토한 뒤 실행하는 Chrome 확장을 만들었다.">
+  <title>SNS 좋아요·저장 정리 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="../journal/">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro">
+      <span class="eyebrow">PJ 41 · Chrome Extension · v0.1.5</span>
+      <div class="project-title"><img src="../assets/icons/pj-41.png" width="72" height="72" alt=""><h1>SNS 좋아요·저장 정리</h1></div>
+      <p class="lead">쌓인 저장 목록을 한곳에서 골라 정리하기</p>
+      <p class="article-date"><time datetime="2026-11-27">2026.11.27</time></p>
+    </header>
+    <section class="journal-section"><h2>목록을 펼쳐 한눈에 보기</h2><p>좋아요와 저장을 누를 때는 한 번이면 되는데, 쌓인 걸 다시 살펴볼 때는 사이트마다 위치부터 찾아야 했다. 로그인한 탭에서 목록을 읽고 제목·채널명·작성자로 검색하거나 주제별로 묶어 보도록 했다.</p></section>
+    <section class="journal-section"><h2>선택하고 검토한 뒤 실행</h2><p>정리 대상과 개수를 확인 화면에 먼저 보여 준다. YouTube 재생목록은 대상 목록에 추가된 걸 확인한 항목만 원래 목록에서 뺀다. 작업이 끝나면 항목별 결과를 보고 정리 내역을 CSV로 내려받을 수 있다.</p></section>
+    <section class="journal-section"><h2>중복 북마크와 ZIP 배포</h2><p>Chrome 북마크에 같은 주소가 여러 번 저장된 경우 남길 항목을 고를 수 있게 했다. v0.1.5는 압축을 풀고 Chrome의 개발자 모드에서 직접 설치할 수 있다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a> <a class="button" href="../projects/social-saves.html">설치 방법 보기 ↗</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>

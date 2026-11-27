@@ -29,6 +29,9 @@
     'pj-03': { note: '한 줄로 적어 둔 생각. 구현까지 간 기록은 없다.', links: [journal('keyboard')] },
     'pj-10': { note: '처음 돈을 주고 산 도메인. oddments에서 이름을 따왔다.', links: [journal('oddz')] },
     'pj-25': { note: 'v0.6.1 아이콘 → v0.6.2 둥근 카드 → v0.7 HTML·CSS 화면 → v0.7.1 Chrome 앱 창.', links: [journal('sseuk-ssak')] },
+    'pj-40': { note: '정답 셀만 보면 놓치기 쉬운 계산 순서를, 한 단계씩 멈춰서 볼 수 있게 했다.', links: [journal('computer-skills')] },
+    'pj-41': { note: '쌓인 저장 목록에서 먼저 정리 대상을 골라 확인하는 흐름을 만들었다.', links: [journal('social-saves')] },
+    'pj-42': { note: '다시 만들어 볼 요리를 찾기 쉽게, 링크와 짧은 메모를 모으려는 구상이다.', links: [journal('recipe-links')] },
   };
 
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };

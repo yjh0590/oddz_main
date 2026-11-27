@@ -185,3 +185,10 @@ body.in-site>:not(.site-view):not(dialog):not(.toast){display:none}
 .sp[data-site=daangn] .sp-logo{font-family:Jua,'Gowun Dodum',sans-serif;font-weight:400;font-size:22px;letter-spacing:0}
 .sp[data-site=x],.sp[data-site=threads]{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic',sans-serif}
 .sp[data-site=threads] .sp-logo{font-weight:800;letter-spacing:-.5px}
+
+/* 구라 버튼 */
+.composer-bottom{flex-wrap:wrap}
+.gura-button{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 12px;font-size:11px;color:#777;white-space:nowrap;transition:background .2s,color .2s,border-color .2s}
+.gura-button:hover{border-color:var(--accent);color:var(--accent)}
+.gura-button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+@media(max-width:500px){.gura-button{font-size:10px;padding:9px 10px}}

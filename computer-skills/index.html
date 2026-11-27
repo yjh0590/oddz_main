@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="icon" href="../assets/icons/pj-40.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>컴활 실행 순서 시각화</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
+<style>
+  /* 색: 엑셀 = 초록, 액세스 = 자주. body[data-mode]가 바뀌면 강조색 전체가 바뀜 */
+  :root {
+    --bg: #f6f7f5; --fg: #1d1d1f; --muted: #6b6b70; --card: #fff; --line: #dcdcd8; --head: #efefec;
+    --ok: #d8f1dc; --no: #f8dada; --mark: #ffe27a;
+    --excel: #217346; --access: #a4373a;
+    --accent: var(--excel); --accent-strong: #185c37; --tint: #edf6f0; --tint-line: #cde4d6;
+  }
+  body[data-mode="access"] { --accent: var(--access); --accent-strong: #7f2629; --tint: #faeeee; --tint-line: #ecd0d1; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151618; --fg: #ececee; --muted: #9a9aa2; --card: #212226; --line: #3a3b40; --head: #2a2b30;
+      --ok: #1f4429; --no: #4f2425; --mark: #7a6312;
+      --excel: #3fa56f; --access: #d0676a;
+      --accent-strong: #7fd1a3; --tint: #17241c; --tint-line: #284434;
+    }
+    body[data-mode="access"] { --accent-strong: #f0a0a2; --tint: #2a1819; --tint-line: #4a2a2c; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--fg); font: 15px/1.6 "Noto Sans KR", system-ui, "Malgun Gothic", sans-serif; letter-spacing: -0.01em;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 16%, var(--bg)) 0, var(--bg) 360px) no-repeat, var(--bg); }
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+
+  /* 머리말: 왼쪽 제목, 오른쪽 탭 */
+  .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-bottom: 18px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .logo { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--accent); color: #fff;
+    font: 800 22px/1 "Noto Sans KR", system-ui, sans-serif; box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 40%, transparent); transition: background .2s; }
+  .brand .logo::before { content: "X"; }
+  body[data-mode="access"] .brand .logo::before { content: "A"; }
+  h1 { font-size: 1.45rem; font-weight: 800; margin: 0; letter-spacing: -0.03em; line-height: 1.2; }
+  .brand p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+
+  /* 버튼 */
+  button { font: inherit; font-weight: 500; padding: 7px 15px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--card); color: var(--fg); cursor: pointer; box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+    transition: transform .08s, box-shadow .15s, background .15s, border-color .15s, color .15s; }
+  button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-strong); transform: translateY(-1px);
+    box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 22%, transparent); }
+  button:active:not(:disabled) { transform: translateY(0); box-shadow: none; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button:disabled { opacity: .4; cursor: default; box-shadow: none; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  button.primary:hover:not(:disabled) { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; }
+  button.soft { background: color-mix(in srgb, var(--accent) 10%, var(--card)); border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); color: var(--accent-strong); }
+  input, textarea { font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 7px 10px; }
+  input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
+  .mono { font-family: ui-monospace, Consolas, monospace; }
+
+  /* 엑셀/액세스 탭: 각자 고유 색 */
+  .tabs { display: grid; grid-template-columns: repeat(2, minmax(190px, 1fr)); gap: 6px; padding: 6px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 2px 10px rgba(0, 0, 0, .05); }
+  .tabs button { display: grid; grid-template-columns: 36px 1fr; align-items: center; column-gap: 12px; text-align: left;
+    border: 0; box-shadow: none; border-radius: 13px; padding: 10px 16px 10px 10px; color: var(--fg); }
+  .tabs .ic { grid-row: span 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; color: #fff;
+    font: 800 17px/1 "Noto Sans KR", system-ui, sans-serif; }
+  .tabs [data-mode="excel"] .ic { background: var(--excel); }
+  .tabs [data-mode="access"] .ic { background: var(--access); }
+  .tabs b { font-size: 15px; font-weight: 700; line-height: 1.25; }
+  .tabs small { font-size: 12px; color: var(--muted); line-height: 1.3; }
+  .tabs button:hover:not(:disabled) { transform: none; box-shadow: none; background: color-mix(in srgb, var(--accent) 7%, var(--card)); color: var(--fg); }
+  .tabs button[aria-pressed="true"], .tabs button[aria-pressed="true"]:hover:not(:disabled) { background: var(--accent); color: #fff;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .tabs button[aria-pressed="true"] small { color: rgba(255, 255, 255, .82); }
+  .tabs button[aria-pressed="true"] .ic { background: rgba(255, 255, 255, .22); }
+  @media (max-width: 520px) { .tabs { grid-template-columns: 1fr 1fr; width: 100%; } .tabs button { grid-template-columns: 1fr; } .tabs .ic { display: none; } }
+
+  /* 문제 푸는 창 */
+  .pane { background: var(--tint); border: 1px solid var(--tint-line); border-top: 5px solid var(--accent); border-radius: 16px; padding: 14px 18px 18px; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0; }
+  /* 유형: 같은 폭 타일 격자 / 문제 목록: 번호 배지가 붙은 같은 폭 카드 격자 */
+  #plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 6px; margin: 8px 0 12px; }
+  #plist button { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 10px; font-size: 13px; text-align: left; min-width: 0; }
+  #plist button span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #plist button[aria-pressed="true"] .num { background: rgba(255, 255, 255, .25); color: #fff; }
+  #aExamples button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--card)); box-shadow: inset 4px 0 0 var(--accent); }
+  #aExamples button[aria-pressed="true"] .num { background: var(--accent); color: #fff; }
+  .seg button[aria-pressed="true"], .seg button[aria-pressed="true"]:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* 동작 버튼: 왼쪽 = 풀기, 오른쪽 = 다른 문제 */
+  .actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  .actions .group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .actions button { min-width: 120px; padding: 9px 16px; }
+
+  /* 붙어 있는 버튼 묶음 (재생 조작) */
+  .joined { display: inline-flex; border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
+  .joined button { border-radius: 0; box-shadow: none; margin-left: -1px; min-width: 84px; }
+  .joined button:first-child { border-radius: 12px 0 0 12px; margin-left: 0; }
+  .joined button:last-child { border-radius: 0 12px 12px 0; }
+  .joined button:hover:not(:disabled) { transform: none; box-shadow: none; position: relative; z-index: 1; }
+
+  /* 액세스: 왼쪽 예제 카드 목록, 오른쪽 예시 데이터 */
+  .accessBody { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start; margin-top: 14px; }
+  .accessBody .card { margin: 0; }
+  .accessBody h2, .practice h2 { font-size: 1rem; margin: 0 0 8px; }
+  #aExamples { display: grid; gap: 8px; }
+  #aExamples button { display: flex; align-items: flex-start; gap: 10px; text-align: left; padding: 10px 12px; border-radius: 12px; }
+  #aExamples b { display: block; font-size: 14px; }
+  #aExamples code { display: block; margin-top: 2px; font: 12px/1.5 ui-monospace, Consolas, monospace; color: var(--muted); white-space: normal; }
+  #aExamples button:hover:not(:disabled) code { color: inherit; }
+  .num { flex: none; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; font-size: 12px; font-weight: 700;
+    background: color-mix(in srgb, var(--accent) 12%, var(--card)); color: var(--accent-strong); }
+  @media (max-width: 860px) { .accessBody { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .actions button { min-width: 0; flex: 1; } }
+  #error { color: #d33; font-weight: 600; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 600; }
+  .hint { color: var(--muted); font-size: 13px; margin: 4px 0; }
+  .practice h2 { font-size: 1rem; margin: 8px 0 0; }
+  #pq { margin: 0 0 4px; font-weight: 600; }
+  #feedback { margin: 6px 0 0; color: var(--muted); }
+  #feedback.ok { color: #1f9d55; font-weight: 600; }
+  #feedback.no { color: #d33; font-weight: 600; }
+  #grid td.cf input { color: #e03131; font-weight: 700; font-style: italic; }
+  #grid td.filter { background: color-mix(in srgb, #1f9d55 22%, transparent); }
+  #grid td.filter input { font-weight: 700; }
+  #concepts h3 { font-size: .95rem; margin: 0 0 8px; }
+  .concept { display: flex; flex-wrap: wrap; gap: 4px 12px; padding: 6px 8px; border-radius: 8px; border-left: 4px solid transparent; }
+  .concept code { font-weight: 700; min-width: 16em; }
+  .concept span { flex: 1; min-width: 14em; }
+  .concept em { color: var(--muted); font-style: normal; }
+  .concept.now { background: color-mix(in srgb, var(--c) 14%, transparent); border-left-color: var(--c); }
+
+  /* 수식 입력줄 */
+  .fxbar { display: flex; gap: 6px; align-items: center; margin: 10px 0; }
+  #cellName { min-width: 52px; text-align: center; font-weight: 700; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--head); }
+  #fx { flex: 1; min-width: 0; }
+
+  /* 시트 */
+  .gridWrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  #grid { border-collapse: collapse; font-size: 13px; }
+  #grid th { background: var(--head); color: var(--muted); font-weight: 500; padding: 2px 6px; border: 1px solid var(--line); min-width: 28px; }
+  #grid td { border: 1px solid var(--line); padding: 0; position: relative; transition: background .3s; }
+  #grid input { width: 84px; border: 0; border-radius: 0; padding: 4px 6px; background: transparent; font-size: 13px; }
+  #grid input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+  #grid td.formula input { color: var(--accent); }
+  #grid td.ref { background: color-mix(in srgb, var(--c) 16%, transparent); box-shadow: inset 0 0 0 2px var(--c); }
+  #grid td.active { background: color-mix(in srgb, var(--c) 50%, transparent); animation: pulse .9s ease-in-out infinite alternate; }
+  #grid td.target { box-shadow: inset 0 0 0 2px var(--fg); }
+  #grid td.target input { font-weight: 700; }
+  #grid td.filled { background: var(--c); animation: land .5s ease-out; }
+  #grid td.filled input { color: #fff; }
+  @keyframes pulse { to { background: color-mix(in srgb, var(--c) 75%, transparent); } }
+  @keyframes land { from { transform: translateY(-24px); opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+  /* 단계 블록 + 상세 */
+  /* 단계 버튼: 같은 폭 격자 */
+  #blocks { list-style: none; padding: 0; margin: 20px 0 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; counter-reset: step; }
+  #blocks li { counter-increment: step; display: flex; min-width: 0; }
+  #blocks button { flex: 1; min-width: 0; font: 13px ui-monospace, Consolas, monospace; text-align: left; border-radius: 10px;
+    transition: background .4s, border-color .4s; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #blocks button::before { content: counter(step) ". "; opacity: .7; }
+  #blocks .done { background: color-mix(in srgb, var(--c, var(--accent)) 22%, var(--card)); }
+  #blocks .now, #blocks .now:hover:not(:disabled) { background: var(--c, var(--accent)); border-color: var(--c, var(--accent)); color: #fff; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  #pos { color: var(--muted); margin-left: auto; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-top: 12px; overflow-x: auto; }
+  #view .expr { font: 1.2rem/1.8 ui-monospace, Consolas, monospace; }
+  .ref { color: var(--c); }
+  mark { background: color-mix(in srgb, var(--c, var(--mark)) 30%, transparent); box-shadow: 0 0 0 2px var(--c, var(--mark)); color: inherit; border-radius: 4px; padding: 1px 3px; }
+  #note { margin: 0 0 10px; font-weight: 600; }
+  #view table { border-collapse: collapse; }
+  #view th, #view td { border: 1px solid var(--line); padding: 4px 12px; text-align: left; }
+  #view th { background: var(--bg); }
+  tr.ok td { background: var(--ok); }
+  tr.no td { background: var(--no); text-decoration: line-through; color: var(--muted); }
+  tr.cur td { outline: 2px solid var(--accent); outline-offset: -2px; }
+  /* Excel 화면: 수식 문제 / 작업 문제 */
+  #excelPane[data-view="task"] .formula-only, #excelPane[data-view="formula"] .task-only { display: none !important; }
+  .sec { padding: 2px 6px; border-radius: 6px; } .sec.on { background: color-mix(in srgb, var(--accent) 22%, transparent); box-shadow: 0 0 0 2px var(--accent); }
+  .fmt-out { font: 18px ui-monospace, Consolas, monospace; margin: 10px 0 0; }
+  /* Access 연습 */
+  .area { margin: 10px 0 4px; }
+  .area h3 { font-size: 12px; font-weight: 700; color: var(--muted); margin: 0 0 6px; letter-spacing: .02em; }
+  .area .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .area .grid button { padding: 9px 8px; border-radius: 12px; font-size: 14px; font-weight: 600; }
+  .plist { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 6px; margin: 8px 0 12px; }
+  .plist button { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 10px; font-size: 13px; text-align: left; min-width: 0; }
+  .plist button span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .plist button[aria-pressed="true"] .num { background: rgba(255, 255, 255, .25); color: #fff; }
+  .pq { margin: 0 0 6px; font-weight: 600; }
+  .src { width: 100%; font: 15px/1.5 ui-monospace, Consolas, monospace; resize: vertical; }
+  .feedback { margin: 6px 0 0; color: var(--muted); }
+  .feedback.ok { color: #1f9d55; font-weight: 600; }
+  .feedback.no { color: #d33; font-weight: 600; }
+  .quiz { display: grid; gap: 8px; }
+  .quiz label { display: grid; grid-template-columns: 9em 1fr; gap: 10px; align-items: center; font-weight: 600; }
+  .quiz select { font: inherit; padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
+  #aDb summary { margin-bottom: 8px; }
+  #aDbTabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  table.dbt { border-collapse: collapse; font-size: 13px; }
+  table.dbt th, table.dbt td { border: 1px solid var(--line); padding: 4px 10px; text-align: left; white-space: nowrap; }
+  table.dbt th { background: var(--bg); }
+  table.dbt .extra { background: color-mix(in srgb, var(--accent) 8%, transparent); font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+  table.dbt td.calc { background: color-mix(in srgb, var(--accent) 12%, transparent); font-weight: 600; }
+  table.dbt td.chg { background: color-mix(in srgb, #f08c00 22%, transparent); }
+  table.dbt tr.del td { background: var(--no); text-decoration: line-through; color: var(--muted); }
+  table.dbt tr.new td { background: var(--ok); font-weight: 600; }
+  table.dbt tr.g0 td { background: color-mix(in srgb, #2f6fde 12%, transparent); } table.dbt tr.g1 td { background: color-mix(in srgb, #1f9d55 12%, transparent); }
+  table.dbt tr.g2 td { background: color-mix(in srgb, #8e44ad 12%, transparent); } table.dbt tr.g3 td { background: color-mix(in srgb, #d9480f 12%, transparent); }
+  table.dbt tr.g4 td { background: color-mix(in srgb, #00838f 12%, transparent); } table.dbt tr.g5 td { background: color-mix(in srgb, #b7791f 12%, transparent); }
+  ul.hv { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+  ul.hv li { padding: 4px 8px; border-radius: 6px; } ul.hv li.ok { background: var(--ok); } ul.hv li.no { background: var(--no); text-decoration: line-through; }
+  .param { display: flex; flex-wrap: wrap; gap: 10px; }
+  .dlg { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; min-width: 220px; background: var(--card); box-shadow: 0 4px 14px rgba(0, 0, 0, .12); }
+  .dlg-t { font-size: 12px; color: var(--muted); margin-bottom: 4px; } .dlg-in { margin-top: 6px; border: 1px solid var(--accent); border-radius: 6px; padding: 3px 8px; font-weight: 700; }
+  table.mask { border-collapse: collapse; font: 15px ui-monospace, Consolas, monospace; margin-top: 6px; }
+  table.mask th { font: 12px "Noto Sans KR", sans-serif; color: var(--muted); padding: 2px 8px; text-align: right; }
+  table.mask td { border: 1px solid var(--line); min-width: 30px; text-align: center; padding: 4px; }
+  table.mask td.ok { background: var(--ok); } table.mask td.no { background: var(--no); color: #d33; font-weight: 700; } table.mask td.lit { color: var(--muted); }
+  ol.proc { margin: 0; padding-left: 1.4em; display: grid; gap: 4px; }
+  ol.proc li { padding: 4px 8px; border-radius: 8px; } ol.proc li.done { color: var(--muted); }
+  ol.proc li.now { background: color-mix(in srgb, var(--accent) 14%, transparent); font-weight: 700; border-left: 4px solid var(--accent); }
+  .verdict { font-weight: 700; margin-left: 6px; } .verdict.ok { color: #1f9d55; } .verdict.no { color: #d33; }
+  p.agg { margin: 0 0 6px; }
+</style>
+</head>
+<body data-mode="excel">
+<main>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"></span>
+      <div>
+        <h1>컴활 실행 순서 시각화</h1>
+        <p>식이 어떤 순서로 계산되는지 한 단계씩 보며 실기를 연습합니다</p>
+      </div>
+    </div>
+    <nav class="tabs" aria-label="과목">
+      <button type="button" data-mode="excel" aria-pressed="true"><span class="ic" aria-hidden="true">X</span><b>Excel</b><small>스프레드시트 실무</small></button>
+      <button type="button" data-mode="access" aria-pressed="false"><span class="ic" aria-hidden="true">A</span><b>Access</b><small>데이터베이스 실무</small></button>
+    </nav>
+  </header>
+
+  <section id="excelPane" class="pane" data-view="formula">
+    <section class="practice">
+      <h2>유형별 연습</h2>
+      <div id="types"></div>
+      <p id="typeInfo" class="hint formula-only"></p>
+      <p id="tTypeInfo" class="hint task-only"></p>
+      <div class="seg formula-only" id="plist" role="group" aria-label="문제 목록"></div>
+      <div class="seg plist task-only" id="tPlist" role="group" aria-label="문제 목록"></div>
+      <div id="pcard" class="card formula-only" hidden>
+        <p id="pq"></p>
+        <div class="actions">
+          <div class="group">
+            <button type="button" id="check" class="primary">✓ 정답 확인</button>
+            <button type="button" id="solve" class="soft">풀이 보기 ▶</button>
+          </div>
+          <div class="group">
+            <button type="button" id="shuffle">🔀 숫자 바꾸기</button>
+            <button type="button" id="similar">유사문제 →</button>
+          </div>
+        </div>
+        <p id="feedback" aria-live="polite"></p>
+      </div>
+      <div id="tCard" class="card task-only">
+        <p id="tQ" class="pq"></p>
+        <div id="tParams" class="hint"></div>
+        <label for="tSrc" hidden>답안 입력</label>
+        <textarea id="tSrc" class="mono src" rows="2" spellcheck="false"></textarea>
+        <div id="tQuiz" class="quiz" hidden></div>
+        <div class="actions">
+          <div class="group">
+            <button type="button" id="tCheck" class="primary">✓ 정답 확인</button>
+            <button type="button" id="tSolve" class="soft">풀이 보기 ▶</button>
+            <button type="button" id="tRun">내 답 실행</button>
+          </div>
+          <div class="group">
+            <button type="button" id="tSimilar">유사문제 →</button>
+          </div>
+        </div>
+        <p id="tFeedback" class="feedback" aria-live="polite"></p>
+      </div>
+      <p id="notFormula" class="hint formula-only"></p>
+    </section>
+    <div class="fxbar formula-only">
+      <span id="cellName" class="mono">A1</span>
+      <label for="fx" hidden>수식 입력줄</label>
+      <input id="fx" class="mono" spellcheck="false" placeholder="=SUM(B2:D2)">
+      <button type="button" id="runX" class="primary">실행 ▶</button>
+    </div>
+    <div class="gridWrap formula-only"><table id="grid"></table></div>
+  </section>
+
+  <section id="accessPane" class="pane" hidden>
+    <section class="practice">
+      <h2>유형별 연습</h2>
+      <div id="aTypes"></div>
+      <p id="aTypeInfo" class="hint"></p>
+      <div class="seg plist" id="aPlist" role="group" aria-label="문제 목록"></div>
+      <div id="aCard" class="card">
+        <p id="aQ" class="pq"></p>
+        <div id="aParams" class="hint"></div>
+        <label for="aSrc" hidden>답안 입력</label>
+        <textarea id="aSrc" class="mono src" rows="3" spellcheck="false"></textarea>
+        <div id="aQuiz" class="quiz" hidden></div>
+        <div class="actions">
+          <div class="group">
+            <button type="button" id="aCheck" class="primary">✓ 정답 확인</button>
+            <button type="button" id="aSolve" class="soft">풀이 보기 ▶</button>
+            <button type="button" id="aRun">내 답 실행</button>
+          </div>
+          <div class="group">
+            <button type="button" id="aSimilar">유사문제 →</button>
+          </div>
+        </div>
+        <p id="aFeedback" class="feedback" aria-live="polite"></p>
+      </div>
+    </section>
+    <details id="aDb" class="card">
+      <summary>🗄 데이터베이스 보기 (학과 · 학생 · 과목 · 수강)</summary>
+      <div class="seg" id="aDbTabs" role="group" aria-label="테이블"></div>
+      <div id="aDbView"></div>
+    </details>
+  </section>
+
+  <p id="error" role="alert" hidden></p>
+
+  <section id="viz" hidden>
+    <ol id="blocks"></ol>
+    <div class="controls">
+      <div class="joined" role="group" aria-label="재생 조작">
+        <button type="button" id="first">⏮ 처음</button>
+        <button type="button" id="prev">◀ 이전</button>
+        <button type="button" id="play" class="primary">▶ 재생</button>
+        <button type="button" id="next">다음 ▶</button>
+      </div>
+      <span id="pos"></span>
+    </div>
+    <div class="card" aria-live="polite"><p id="note"></p><div id="view"></div></div>
+    <div id="concepts" class="card"></div>
+  </section>
+</main>
+<script src="engine.js"></script>
+<script src="data.js"></script>
+<script src="data-access.js"></script>
+<script src="data-excel-tasks.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

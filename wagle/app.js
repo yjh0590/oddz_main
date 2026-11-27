@@ -1,9 +1,10 @@
-import { communities, samples, demoReactions, demoPost } from './community.js';
+import { communities, samples, demoReactions, demoPost } from './community.js?v=20261127';
 import { renderPage, renderComment, layoutOf } from './sites.js';
 
 const $ = id => document.getElementById(id);
 let site = null; // 한 번에 한 사이트만 선택. 처음엔 미선택(흑백).
 let mode = 'opinion';
+let gura = false; // 구라 버튼: 켜면 글을 길고 허세 가득하게 지어낸다
 let busy = false;
 let sort = 'latest';
 let currentThread = null;
@@ -76,12 +77,12 @@ function renderSuggestions() {
     return button;
   }));
   // 시점에 따라 입력창 문구가 바뀐다: 1인칭은 내 얘기, 3인칭은 "내 얘기는 아닌데…"로 시작하는 친구 얘기.
-  $('compose-hint').textContent = mode === 'diary' ? '주인공은 ‘친구’. 아무도 모를 거예요.' : '주인공은 나. 익명이니까, 편하게.';
+  $('compose-hint').textContent = gura ? '구라 ON. 주제만 던지면 없는 얘기까지 지어서 길게 써요.' : mode === 'diary' ? '주인공은 ‘친구’. 아무도 모를 거예요.' : '주인공은 나. 익명이니까, 편하게.';
   if (!busy) $('submit-button').textContent = submitLabel();
   $('opinion').placeholder = mode === 'diary' ? '내 얘기는 아닌데… (예: 친구가 단톡방에 전 애인 욕을 했는데 전 애인도 그 방에 있었대)' : '오늘 엘리베이터에서 팀장님 앞에서 방귀 뀌었는데, 이거 퇴사 사유임?';
 }
 
-const submitLabel = () => mode === 'diary' ? '친구 얘기로 올리기 ↗' : '내 시점으로 올리기 ↗';
+const submitLabel = () => gura ? '구라 풀기 ↗' : mode === 'diary' ? '친구 얘기로 올리기 ↗' : '내 시점으로 올리기 ↗';
 
 function updateCount() { $('char-count').textContent = $('opinion').value.length; }
 
@@ -139,6 +140,7 @@ function setBusy(value) {
   $('submit-button').disabled = value;
   $('submit-button').textContent = value ? '올리는 중…' : submitLabel();
   $('opinion').disabled = value;
+  $('gura-button').disabled = value;
   $('regenerate').disabled = value;
   $('regenerate').hidden = value;
   $('new-story').disabled = value;
@@ -151,7 +153,7 @@ function setBusy(value) {
 }
 
 async function generate(payload) {
-  if (!serverAvailable) return { post: demoPost(payload.text, payload.communities[0], payload.mode), reactions: demoReactions(payload.text, payload.communities, payload.mode), demo: true };
+  if (!serverAvailable) return { post: demoPost(payload.text, payload.communities[0], payload.mode, payload.gura), reactions: demoReactions(payload.text, payload.communities, payload.mode, payload.gura), demo: true };
   const response = await fetch('/api/reactions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), signal: AbortSignal.timeout(65000) });
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || '반응을 불러오지 못했어요. 잠시 후 다시 시도해주세요.');
@@ -162,7 +164,7 @@ async function submit(payload) {
   if (busy) return;
   $('error-message').hidden = true;
   const previous = currentThread;
-  currentThread = { id: crypto.randomUUID(), text: payload.text, mode: payload.mode, communities: payload.communities, reactions: [], createdAt: Date.now(), demo: true };
+  currentThread = { id: crypto.randomUUID(), text: payload.text, mode: payload.mode, communities: payload.communities, gura: !!payload.gura, reactions: [], createdAt: Date.now(), demo: true };
   showThread();
   setBusy(true);
   try {
@@ -194,7 +196,7 @@ $('opinion-form').addEventListener('submit', event => {
   const text = $('opinion').value.trim();
   if (!text) { toast('먼저 이야기를 한 줄 적어주세요.'); $('opinion').focus(); return; }
   if (!site) { toast('먼저 이야기할 사이트를 골라주세요.'); return; }
-  submit({ text, communities: [site], mode });
+  submit({ text, communities: [site], mode, gura });
 });
 $('opinion').addEventListener('input', updateCount);
 $('opinion').addEventListener('keydown', event => {
@@ -212,7 +214,12 @@ $('thread-section').addEventListener('click', event => {
   document.querySelectorAll('.sort-button').forEach(b => { b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', String(b === button)); });
   renderReactions();
 });
-$('regenerate').addEventListener('click', () => { if (currentThread) submit({ text: currentThread.text, communities: currentThread.communities, mode: currentThread.mode }); });
+$('regenerate').addEventListener('click', () => { if (currentThread) submit({ text: currentThread.text, communities: currentThread.communities, mode: currentThread.mode, gura: !!currentThread.gura }); });
+$('gura-button').addEventListener('click', () => {
+  gura = !gura;
+  $('gura-button').setAttribute('aria-pressed', String(gura));
+  renderSuggestions();
+});
 $('back-home').addEventListener('click', leaveSite);
 addEventListener('popstate', () => { if (location.hash !== '#site') document.body.classList.remove('in-site'); });
 $('new-story').addEventListener('click', () => {

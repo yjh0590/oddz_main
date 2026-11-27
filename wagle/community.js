@@ -277,7 +277,7 @@ const fillKeyword = (line, k) => line.replace('{k}는', k + (batchim(k) ? '은' 
 
 const shuffle = list => { const a = [...list]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-export function demoReactions(text, selected, mode = 'opinion') {
+export function demoReactions(text, selected, mode = 'opinion', gura = false) {
   const perCommunity = selected.length === 1 ? 6 : 3;
   const offset = Math.floor(Math.random() * 100);
   const q = Array.from(text).slice(0, 20).join('') + (Array.from(text).length > 20 ? '…' : '');
@@ -288,6 +288,7 @@ export function demoReactions(text, selected, mode = 'opinion') {
   const replyRow = 1 + offset % (perCommunity - 1);
   const roastRow = (replyRow + 1) % perCommunity;
   const friendRow = (replyRow + 2) % perCommunity;
+  const guraRow = mode === 'diary' ? (replyRow + 3) % perCommunity : friendRow;
   return Array.from({ length: perCommunity }, (_, row) => selected.map((id, i) => {
     const c = communities.find(c => c.id === id);
     const j = row + offset + i;
@@ -298,6 +299,7 @@ export function demoReactions(text, selected, mode = 'opinion') {
     const reply = row === replyRow;
     const body = reply ? rebutLines[id][j % 3]
       : mode === 'diary' && row === friendRow ? friendLines[id]
+      : gura && row === guraRow ? guraComments[toneOf(id)][j % 3]
       : row === roastRow ? roastLines[id][j % 3]
         : (pool.shift() ?? pick(voices[id], j)).replace('{q}', q); // 쓴 댓글은 빼서 중복 방지
     return { community: id, nickname: c.nick(j), text: body, likes: Math.floor(Math.random() * 70) + 1, replyTo: reply ? (row - 1) * selected.length + i : -1 };
@@ -352,9 +354,42 @@ const posts = {
   },
 };
 
-export function demoPost(text, id, mode = 'opinion') {
-  const t = mode === 'diary' ? text.trim().replace(/^내 얘기는 아닌데[,.…\s]*/, '') : text.trim();
-  const q = Array.from(t.split('\n')[0]).slice(0, 40).join('');
+// 구라 버튼: 주제에 없는 디테일과 억지 전개를 덧붙여 길게 부풀린다.
+const politeSites = ['pann', 'daangn', 'momcafe'];
+const guraLines = {
+  casual: [
+    '근데 여기서 끝이 아니었음.',
+    '갑자기 옆에 있던 사람이 "저기… 혹시 그 유명한 분 아니세요?" 이러는 거임.',
+    '그 순간 정전이 됐고, 비상등 아래서 다들 나만 쳐다봄.',
+    '알고 보니 그 자리에 엄마 친구 아들이 있었음. 그것도 세 명이나.',
+    '다음 날 아침 동네 전체 단톡방에 내 얘기가 돌고 있었음.',
+    '심지어 지나가던 강아지까지 나를 보고 고개를 절레절레 흔듦.',
+    '그때 창밖으로 비둘기 떼가 날아오르면서 분위기가 완전 영화가 됨.',
+    '반전은, 이게 3년 전 점집에서 이미 예언된 일이었다는 거임.',
+  ],
+  polite: [
+    '그런데 여기서 끝이 아니었어요.',
+    '갑자기 옆에 계시던 분이 "혹시… 그 유명한 분 아니세요?" 하시는 거예요.',
+    '그 순간 정전이 됐고, 비상등 아래서 모두가 저만 쳐다봤어요.',
+    '알고 보니 그 자리에 저희 엄마 친구 아드님이 계셨어요. 그것도 세 분이나요.',
+    '다음 날 아침 아파트 단톡방에 제 얘기가 돌고 있더라고요.',
+    '심지어 지나가던 강아지까지 저를 보고 고개를 젓더라고요.',
+    '그때 창밖으로 비둘기 떼가 날아오르는데 정말 드라마 같았어요.',
+    '반전은, 이게 3년 전 점집에서 이미 들었던 얘기였다는 거예요.',
+  ],
+  ending: { casual: '…여기까지 실화임. 아마도.', polite: '…여기까지 실화예요. 아마도요.' },
+};
+const guraComments = {
+  casual: ['이거 소설이잖아 ㅋㅋㅋ 작가님 다음 화 언제?', '중간부터 판타지 장르로 바뀜 ㅋㅋ', '주작이어도 재밌으니 추천 박음'],
+  polite: ['이거 소설 아니에요? ㅋㅋ 재밌게 읽었어요', '중간부터 너무 드라마 같아요ㅋㅋ', '주작이어도 재밌네요 ㅎㅎ 다음 편 기다릴게요'],
+};
+const toneOf = id => politeSites.includes(id) ? 'polite' : 'casual';
+
+export function demoPost(text, id, mode = 'opinion', gura = false) {
+  const plain = mode === 'diary' ? text.trim().replace(/^내 얘기는 아닌데[,.…\s]*/, '') : text.trim();
+  const tone = toneOf(id);
+  const t = gura ? `${plain}\n\n${shuffle(guraLines[tone]).slice(0, 4).join('\n')}\n\n${guraLines.ending[tone]}` : plain;
+  const q = Array.from(plain.split('\n')[0]).slice(0, 40).join('');
   const [title, body] = posts[id][mode](t, q);
   return { title, body };
 }
@@ -363,5 +398,6 @@ export function validateInput(body) {
   if (!body || typeof body.text !== 'string' || !body.text.trim() || body.text.length > 500) return '이야기는 1~500자로 입력해주세요.';
   if (!Array.isArray(body.communities) || !body.communities.length || body.communities.length > communities.length || new Set(body.communities).size !== body.communities.length || body.communities.some(id => !communities.some(c => c.id === id))) return '커뮤니티를 1개 이상 선택해주세요.';
   if (!['opinion', 'diary'].includes(body.mode)) return '올바른 이야기 모드를 선택해주세요.';
+  if (body.gura !== undefined && typeof body.gura !== 'boolean') return '구라 버튼 값이 올바르지 않아요.';
   return null;
 }

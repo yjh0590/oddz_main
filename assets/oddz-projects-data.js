@@ -183,7 +183,7 @@ window.ODDZ_PROJECTS = Object.freeze([
     "name": "랜덤게임 모음집",
     "desc": "짧게 즐길 수 있는 여러 게임을 한곳에 모으는 웹 프로젝트.",
     "feat": "가벼운 미니게임을 목록에서 선택해 즐기는 구성",
-    "current": "콤이 셋 성격·실수 잡기·취기 게이지·단톡방 채팅 추가, 게임 규칙 검수 중",
+    "current": "원탁 게임 개선과 별도 MT 술게임 예습 프로토타입",
     "next": "게임 간 이동과 개별 게임 완성도 개선",
     "tags": [
       "미니게임",
@@ -227,7 +227,7 @@ window.ODDZ_PROJECTS = Object.freeze([
     "desc": "사용자가 어느 방향을 바라보더라도 다음 역의 하차 문 방향을 안내하는 웹앱.",
     "feat": "지하철 운행 정보와 휴대폰 방향 센서를 조합한 안내",
     "current": "서울 1~9호선 자동 추적 버전 공개, 문 방향 현장 기록 수집 중",
-    "next": "방향 회전의 부드러움·센서 보정·실제 환경 테스트",
+    "next": "PC 가상 주행 미리보기 실험과 실제 환경 테스트",
     "tags": [
       "지하철",
       "센서",
@@ -366,7 +366,7 @@ window.ODDZ_PROJECTS = Object.freeze([
     "name": "IF 세계 · 만약에 로또에 당첨된다면?",
     "desc": "한국의 경제·사회·역사적 사건 속에서 선택하며 삶을 시뮬레이션하는 웹 게임.",
     "feat": "시대별 사건·소득·주거·투자·인생 선택과 결과",
-    "current": "공개된 버전이 있으며 초보자·전문가 모드 등 개선 논의 진행",
+    "current": "공개 버전 운영 중 · 별도 브랜치에서 첫 화면과 시작 흐름 단순화",
     "next": "초보자 모드와 능력치·사건 분기 고도화",
     "tags": [
       "경제",
@@ -537,8 +537,8 @@ window.ODDZ_PROJECTS = Object.freeze([
     "type": "Web",
     "name": "Motion Shelf · 웹 모션 모음",
     "desc": "복사해서 바로 쓰는 웹 모션·UI 요소 모음. 요소마다 AI에게 줄 프롬프트와 코드가 함께 있다.",
-    "feat": "모션·UI 요소 400여 종, 요소별 프롬프트·코드 복사, 프롬프트 쓰는 법, 모션 용어 사전, 레퍼런스 사이트",
-    "current": "motion.oddz.click 배포",
+    "feat": "9개 카테고리에 모션·UI 요소 900종, 요소별 프롬프트·코드 복사, 모션 용어 사전",
+    "current": "카테고리별 100종씩 총 900종 · 영어 정식 명칭 정리",
     "next": "요소 추가와 카테고리 정리",
     "tags": [
       "모션",
@@ -584,8 +584,8 @@ window.ODDZ_PROJECTS = Object.freeze([
     "type": "Web · AI",
     "name": "와글 · AI 커뮤니티",
     "desc": "같은 의견에 쏟아지는 일곱 가지 분위기의 가상 커뮤니티 반응을 구경하는 사이트.",
-    "feat": "분위기 다중 선택, 의견·AI 일상 모드, 순차 댓글, 공감·정렬, 내 이야기 기록",
-    "current": "공개 데모 배포 · 실제 AI는 서버 API 키 설정 후 사용 가능",
+    "feat": "분위기 다중 선택, 의견·AI 일상 모드, 순차 댓글, 공감·정렬, 내 이야기 기록 · 주제를 과장된 이야기로 바꾸는 구라 버튼",
+    "current": "공개 데모에 구라 버튼 추가 · 글과 댓글은 가상",
     "next": "추후 업데이트 · 실제 AI 서버 배포와 커뮤니티별 반응 다양성 개선",
     "tags": [
       "AI",
@@ -735,11 +735,11 @@ window.ODDZ_PROJECTS = Object.freeze([
     "icon": "/assets/icons/pj-35.png",
     "stage": "doing",
     "type": "Web App · AI",
-    "name": "AI 비서",
-    "desc": "오늘 일정과 관심 뉴스, 콕콕 예약 상태를 한 화면에 모아 아침마다 휴대폰으로 알려 주는 개인 비서.",
-    "feat": "캘린더 일정·관심 뉴스 요약·예약 상태 한 화면, 아침 7시 30분 웹푸시, 한국어로 읽어 주기",
-    "current": "첫 버전 제작 중 · 브리핑 화면과 휴대폰 알림",
-    "next": "매일 아침 써 보며 브리핑 구성 다듬기",
+    "name": "AI 비서 · 카이온",
+    "desc": "일정·뉴스·예약을 알려 주고, 음성으로 대화하는 개인용 AI 비서.",
+    "feat": "아침 브리핑·웹푸시, 일·주·월 캘린더, 캐릭터별 목소리, 인천대 LMS 연동",
+    "current": "음성 대화와 호칭 설정 추가 · LMS 내보내기 v0.4.0의 6시간 자동 전송",
+    "next": "음성 대화와 자동 전송을 일상에서 써 보며 다듬기",
     "tags": [
       "AI",
       "알림",
@@ -841,6 +841,73 @@ window.ODDZ_PROJECTS = Object.freeze([
     "link": "작업 기록",
     "date": "2026.11.16",
     "dateBasis": "작업 저장소 첫 기록"
+  },
+  {
+    "id": "pj-40",
+    "no": "PJ 40",
+    "icon": "/assets/icons/pj-40.png",
+    "stage": "done",
+    "type": "Web App",
+    "name": "컴활 실행 순서 시각화",
+    "date": "2026.11.27",
+    "desc": "Excel 수식과 Access 쿼리가 처리되는 순서를 색과 표로 보여 주는 컴활 실기 연습 도구.",
+    "feat": "Excel 수식·서식·분석과 Access 쿼리 실습, 단계별 재생과 채점",
+    "current": "Excel·Access 연습과 단계별 재생 웹 데모",
+    "next": "더 다양한 문제에서 중간 결과 확인",
+    "tags": [
+      "컴활",
+      "Excel",
+      "Access"
+    ],
+    "url": "/projects/computer-skills.html",
+    "link": "프로젝트 보기",
+    "dateBasis": "개발 및 배포 기록",
+    "app": "/computer-skills/",
+    "appLabel": "웹 데모 열기"
+  },
+  {
+    "id": "pj-41",
+    "no": "PJ 41",
+    "icon": "/assets/icons/pj-41.png",
+    "stage": "done",
+    "type": "Chrome Extension",
+    "name": "SNS 좋아요·저장 정리",
+    "date": "2026.11.27",
+    "desc": "YouTube 좋아요·재생목록과 Instagram 저장 게시물, Chrome 중복 북마크를 정리하는 확장.",
+    "feat": "검색·분류·선택 검토, 재생목록 이동, Chrome 중복 북마크 검사와 CSV 내보내기",
+    "current": "Chrome 확장 프로그램 v0.1.5 ZIP",
+    "next": "사이트 화면이 바뀔 때 목록 읽기와 정리 동작 점검",
+    "tags": [
+      "Chrome",
+      "YouTube",
+      "Instagram"
+    ],
+    "url": "/projects/social-saves.html",
+    "link": "프로젝트 보기",
+    "dateBasis": "개발 및 배포 기록",
+    "app": "/downloads/social-saves-organizer-v0.1.5.zip",
+    "appLabel": "확장 ZIP 받기"
+  },
+  {
+    "id": "pj-42",
+    "no": "PJ 42",
+    "icon": "/assets/icons/pj-42.png",
+    "stage": "someday",
+    "type": "Web App",
+    "name": "자취 레시피 링크 보관함",
+    "date": "2026.11.26",
+    "desc": "Instagram과 YouTube에서 찾아 둔 자취 요리 레시피를 링크로 모아 두는 웹앱 구상.",
+    "feat": "요리 이름·짧은 메모·원본 링크와 플랫폼·요리 종류 필터",
+    "current": "첫 버전 범위를 README에 정리",
+    "next": "링크 등록·목록·필터가 있는 첫 화면 만들기",
+    "tags": [
+      "요리",
+      "링크",
+      "구상"
+    ],
+    "url": "/journal/recipe-links.html",
+    "link": "개발일지",
+    "dateBasis": "첫 버전 구상 기록"
   }
 ]);
 

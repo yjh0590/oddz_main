@@ -6,7 +6,7 @@
   <url><loc>https://oddz.click/projects/diary.html</loc></url>
   <url><loc>https://oddz.click/projects/document-macro.html</loc></url>
   <url><loc>https://oddz.click/projects/enrollment.html</loc></url>
-  <url><loc>https://oddz.click/projects/if-world.html</loc></url>
+  <url><loc>https://oddz.click/projects/if-world.html</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://oddz.click/projects/kmooc.html</loc></url>
   <url><loc>https://oddz.click/projects/sseuk-ssak.html</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://oddz.click/projects/todays-lecture.html</loc></url>
@@ -17,27 +17,27 @@
   <url><loc>https://oddz.click/journal/cube.html</loc></url>
   <url><loc>https://oddz.click/journal/diary.html</loc></url>
   <url><loc>https://oddz.click/journal/enrollment.html</loc></url>
-  <url><loc>https://oddz.click/journal/if-world.html</loc></url>
-  <url><loc>https://oddz.click/journal/index.html</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://oddz.click/journal/if-world.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/journal/index.html</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://oddz.click/journal/keyboard.html</loc></url>
   <url><loc>https://oddz.click/journal/kmooc.html</loc></url>
   <url><loc>https://oddz.click/journal/lms-script.html</loc></url>
   <url><loc>https://oddz.click/journal/macro.html</loc></url>
   <url><loc>https://oddz.click/journal/oddz.html</loc></url>
   <url><loc>https://oddz.click/journal/pdf-experiment.html</loc></url>
-  <url><loc>https://oddz.click/journal/random-games.html</loc></url>
+  <url><loc>https://oddz.click/journal/random-games.html</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://oddz.click/journal/rock-paper-scissors.html</loc></url>
   <url><loc>https://oddz.click/journal/sseuk-ssak.html</loc><lastmod>2026-11-11</lastmod></url>
-  <url><loc>https://oddz.click/journal/subway.html</loc></url>
+  <url><loc>https://oddz.click/journal/subway.html</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://oddz.click/journal/todays-lecture.html</loc></url>
   <url><loc>https://oddz.click/journal/transcript-guide.html</loc></url>
   <url><loc>https://oddz.click/butterfly/</loc></url>
   <url><loc>https://oddz.click/projects/butterfly-effect.html</loc></url>
   <url><loc>https://oddz.click/journal/butterfly-effect.html</loc></url>
-  <url><loc>https://oddz.click/projects/wagle.html</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://oddz.click/projects/wagle.html</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://oddz.click/wagle/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://oddz.click/projects/agora.html</loc><lastmod>2026-11-23</lastmod></url>
-  <url><loc>https://oddz.click/projects/random-game.html</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://oddz.click/projects/random-game.html</loc><lastmod>2026-11-27</lastmod></url>
   <url><loc>https://oddz.click/random-game/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://oddz.click/projects/subway.html</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://oddz.click/projects/companion.html</loc><lastmod>2026-11-24</lastmod></url>
@@ -49,9 +49,19 @@
   <url><loc>https://oddz.click/journal/ticketing.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://oddz.click/journal/odyssey-remote.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://oddz.click/journal/speaker-switch.html</loc><lastmod>2026-11-25</lastmod></url>
-  <url><loc>https://oddz.click/journal/ai-assistant.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://oddz.click/journal/ai-assistant.html</loc><lastmod>2026-11-26</lastmod></url>
   <url><loc>https://oddz.click/journal/itda.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://oddz.click/journal/animal-merge.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://oddz.click/journal/gonunghada.html</loc><lastmod>2026-11-25</lastmod></url>
   <url><loc>https://oddz.click/journal/contests.html</loc><lastmod>2026-11-25</lastmod></url>
+  <url><loc>https://oddz.click/computer-skills/</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/random-game/mt-prep.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/projects/computer-skills.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/projects/social-saves.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/projects/motion-shelf.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/journal/computer-skills.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/journal/social-saves.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/journal/recipe-links.html</loc><lastmod>2026-11-26</lastmod></url>
+  <url><loc>https://oddz.click/journal/wagle.html</loc><lastmod>2026-11-27</lastmod></url>
+  <url><loc>https://oddz.click/journal/motion-shelf.html</loc><lastmod>2026-11-11</lastmod></url>
 </urlset>

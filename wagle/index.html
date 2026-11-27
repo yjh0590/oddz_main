@@ -9,8 +9,8 @@
   <meta name="description" content="내 생각 하나에 쏟아지는 가지각색의 반응. 국내 대형 커뮤니티 말투로 보는 AI 반응, 와글.">
   <title>와글 — 내 생각에, 세상이 와글와글</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css">
-  <script type="module" src="./app.js"></script>
+  <link rel="stylesheet" href="./styles.css?v=20261127">
+  <script type="module" src="./app.js?v=20261127"></script>
 </head>
 <body>
   <header class="site-header">
@@ -36,7 +36,7 @@
         <div class="compose-tabs" role="group" aria-label="이야기 종류"><button type="button" data-mode="opinion" class="compose-tab active" aria-pressed="true"><span>☷</span> 1인칭 주인공 시점</button><button type="button" data-mode="diary" class="compose-tab" aria-pressed="false"><span>✧</span> 3인칭 관찰자 시점</button></div>
         <label class="sr-only" for="opinion">커뮤니티에 던질 이야기</label>
         <textarea id="opinion" maxlength="500" placeholder="오늘 엘리베이터에서 팀장님 앞에서 방귀 뀌었는데, 이거 퇴사 사유임?" rows="3"></textarea>
-        <div class="composer-bottom"><div class="input-meta"><span class="anonymous-icon">◉</span> <span id="compose-hint">주인공은 나. 익명이니까, 편하게.</span><span class="char-count"><span id="char-count">0</span> / 500</span></div><button type="submit" id="submit-button" class="primary-button">내 시점으로 올리기 ↗</button></div>
+        <div class="composer-bottom"><div class="input-meta"><span class="anonymous-icon">◉</span> <span id="compose-hint">주인공은 나. 익명이니까, 편하게.</span><span class="char-count"><span id="char-count">0</span> / 500</span></div><button type="button" id="gura-button" class="gura-button" aria-pressed="false" title="켜면 주제만 던져도 없는 얘기까지 지어내 길게 써요">🤥 구라 버튼</button><button type="submit" id="submit-button" class="primary-button">내 시점으로 올리기 ↗</button></div>
       </form>
       <div class="suggestions"><span>이런 이야기는 어때요?</span><div id="suggestion-buttons"></div></div>
 

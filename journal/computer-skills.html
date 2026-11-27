@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Excel 수식과 Access 쿼리의 중간 결과를 한 단계씩 펼쳐 보는 컴활 실기 연습 도구를 만들었다.">
+  <title>컴활 실행 순서 시각화 · 개발일지 · oddz</title>
+  <script src="../assets/project-theme.js?v=20261112"></script>
+  <link rel="stylesheet" href="../assets/project-detail.css?v=20261112">
+  <link rel="stylesheet" href="journal.css?v=20261111">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <header><a class="wordmark" data-home-link="top" href="../index.html">odd<span>z</span></a><nav><a data-home-link="work" href="../index.html#work">프로젝트</a> <a data-journal-index href="../journal/">개발일지</a></nav></header>
+  <main><article class="journal-article">
+    <header class="journal-intro">
+      <span class="eyebrow">PJ 40 · Web App · 실기 연습</span>
+      <div class="project-title"><img src="../assets/icons/pj-40.png" width="72" height="72" alt=""><h1>컴활 실행 순서 시각화</h1></div>
+      <p class="lead">정답이 나오기 전 표가 어떻게 바뀌는지</p>
+      <p class="article-date"><time datetime="2026-11-27">2026.11.27</time></p>
+    </header>
+    <section class="journal-section"><h2>수식 안쪽부터 펼치기</h2><p>컴활을 공부하면서 정답 수식은 볼 수 있는데, 어디부터 계산되고 어떤 셀이 영향을 받는지는 한눈에 들어오지 않았다. Excel 수식을 안쪽부터 풀어 색을 입히고, 조건부 서식은 마지막에 참이 된 행을 표에 표시했다.</p></section>
+    <section class="journal-section"><h2>Access 쿼리와 Excel 실기 연습</h2><p>Access는 예제 데이터베이스에서 조건을 거르고, 묶고, 집계할 때마다 중간 표를 보여 준다. Excel 쪽은 함수 연습에서 셀 서식·피벗 테이블·목표값 찾기 같은 실기 작업으로 넓혔다. 답을 제출해 채점하거나, 숫자를 바꿔 같은 유형을 다시 풀 수 있다.</p></section>
+    <section class="journal-section"><h2>브라우저에서 바로 연습</h2><p>키 입력 없이 예제와 실기 연습을 시작할 수 있게 웹 데모를 묶었다. 수식과 쿼리 계산은 브라우저 안에서 실행된다.</p></section>
+    <div class="end-links"><a data-journal-index href="index.html">← 다른 개발일지</a> <a class="button" href="../computer-skills/">웹 데모 열기 ↗</a></div>
+  </article></main>
+  <footer>oddz · 심심하면 만들어요.</footer>
+</body>
+</html>
